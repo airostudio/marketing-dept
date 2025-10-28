@@ -1,0 +1,28 @@
+{
+  "name": "ai-marketing-department",
+  "version": "1.0.0",
+  "description": "AI-powered marketing and sales department with 8 personified AI workers and beautiful web dashboard",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python3 -m http.server 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/airostudio/marketing-dept.git"
+  },
+  "keywords": [
+    "ai",
+    "marketing",
+    "sales",
+    "automation",
+    "dashboard",
+    "agents",
+    "jasper",
+    "zoominfo",
+    "intercom",
+    "analytics"
+  ],
+  "author": "AI Marketing Department",
+  "license": "MIT"
+}
