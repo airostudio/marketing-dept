@@ -1,0 +1,131 @@
+{
+  "id": "sage-the-send-timer",
+  "name": "Sage",
+  "fullName": "Sage the Send Timer",
+  "emoji": "⏰",
+  "avatar": "/assets/avatars/sage.svg",
+  "department": "Email Marketing",
+  "role": "Email Optimization Specialist",
+  "personality": "Wise, patient, and timing-obsessed. Sage knows exactly when your audience is most likely to engage and never sends an email at the wrong time.",
+  "status": "active",
+  "aiPlatform": {
+    "name": "Seventh Sense",
+    "url": "https://www.theseventhsense.com",
+    "apiKey": "SEVENTH_SENSE_API_KEY"
+  },
+  "capabilities": [
+    "Send-time optimization",
+    "Engagement prediction",
+    "Behavioral pattern analysis",
+    "Email frequency optimization",
+    "Individual recipient timing",
+    "Campaign performance boost",
+    "Deliverability improvement",
+    "A/B test timing"
+  ],
+  "metrics": {
+    "emailsOptimizedToday": 2500,
+    "averageOpenRateImprovement": "+38%",
+    "engagementScore": 94,
+    "timesSaved": "12 hours",
+    "campaignsOptimized": 15,
+    "recipientsAnalyzed": 45000
+  },
+  "currentTasks": [
+    {
+      "id": "task-201",
+      "title": "Optimize Q4 newsletter send times",
+      "status": "in_progress",
+      "progress": 80,
+      "recipients": 25000,
+      "scheduledSend": "2025-10-29T14:30:00Z",
+      "estimatedImpact": "+42% open rate"
+    },
+    {
+      "id": "task-202",
+      "title": "Analyze engagement patterns - West Coast",
+      "status": "in_progress",
+      "progress": 55,
+      "dataPoints": 15000,
+      "dueDate": "2025-10-28"
+    },
+    {
+      "id": "task-203",
+      "title": "Set up drip campaign timing",
+      "status": "queued",
+      "progress": 0,
+      "dueDate": "2025-10-29"
+    }
+  ],
+  "recentOptimizations": [
+    {
+      "campaign": "Weekly Product Update",
+      "recipients": 12000,
+      "baselineOpenRate": 18,
+      "optimizedOpenRate": 31,
+      "improvement": "+72%",
+      "timestamp": "2025-10-28T08:00:00Z"
+    },
+    {
+      "campaign": "Customer Nurture Email 3",
+      "recipients": 5500,
+      "baselineOpenRate": 22,
+      "optimizedOpenRate": 35,
+      "improvement": "+59%",
+      "timestamp": "2025-10-27T14:30:00Z"
+    },
+    {
+      "campaign": "Product Launch Announcement",
+      "recipients": 18000,
+      "baselineOpenRate": 15,
+      "optimizedOpenRate": 28,
+      "improvement": "+87%",
+      "timestamp": "2025-10-26T11:15:00Z"
+    }
+  ],
+  "insights": [
+    {
+      "type": "best-send-time",
+      "segment": "Enterprise customers",
+      "recommendation": "Tuesday-Thursday, 10am-2pm EST",
+      "confidence": 92
+    },
+    {
+      "type": "frequency",
+      "segment": "Engaged subscribers",
+      "recommendation": "Increase from weekly to bi-weekly",
+      "confidence": 88
+    },
+    {
+      "type": "engagement-pattern",
+      "segment": "West Coast users",
+      "recommendation": "Delay sends by 3 hours",
+      "confidence": 95
+    }
+  ],
+  "workingHours": {
+    "timezone": "UTC",
+    "availability": "24/7",
+    "preferredHours": "Timing is everything!"
+  },
+  "integrations": [
+    "HubSpot",
+    "Marketo",
+    "Eloqua",
+    "Salesforce Marketing Cloud",
+    "Mailchimp"
+  ],
+  "settings": {
+    "learningMode": "continuous",
+    "sendWindow": "24-hours",
+    "timezoneOptimization": true,
+    "minSampleSize": 1000,
+    "confidenceThreshold": 85
+  },
+  "quotes": [
+    "Perfect timing makes all the difference!",
+    "I know when they'll open your email!",
+    "Patience yields the best engagement!",
+    "Every recipient has their perfect moment!"
+  ]
+}

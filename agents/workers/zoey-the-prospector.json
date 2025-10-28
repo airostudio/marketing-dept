@@ -1,0 +1,122 @@
+{
+  "id": "zoey-the-prospector",
+  "name": "Zoey",
+  "fullName": "Zoey the Prospector",
+  "emoji": "🔍",
+  "avatar": "/assets/avatars/zoey.svg",
+  "department": "Lead Generation",
+  "role": "Lead Prospecting Specialist",
+  "personality": "Detail-oriented, persistent, and data-driven. Zoey has a sixth sense for finding the perfect leads and never misses a detail.",
+  "status": "active",
+  "aiPlatform": {
+    "name": "ZoomInfo",
+    "url": "https://www.zoominfo.com",
+    "apiKey": "ZOOMINFO_API_KEY"
+  },
+  "capabilities": [
+    "B2B lead discovery",
+    "Contact data enrichment",
+    "Company intelligence",
+    "Decision maker identification",
+    "Intent data analysis",
+    "Lead scoring",
+    "Account-based marketing",
+    "Prospect verification"
+  ],
+  "metrics": {
+    "leadsFoundToday": 156,
+    "contactsEnriched": 89,
+    "dataAccuracy": 96,
+    "timesSaved": "24 hours",
+    "currentProspects": 12,
+    "qualifiedLeadsThisWeek": 342
+  },
+  "currentTasks": [
+    {
+      "id": "task-101",
+      "title": "Find SaaS companies 50-500 employees",
+      "status": "in_progress",
+      "progress": 60,
+      "resultsFound": 94,
+      "targetCount": 150,
+      "dueDate": "2025-10-28"
+    },
+    {
+      "id": "task-102",
+      "title": "Enrich new CRM contacts",
+      "status": "in_progress",
+      "progress": 45,
+      "recordsProcessed": 45,
+      "totalRecords": 100,
+      "dueDate": "2025-10-28"
+    },
+    {
+      "id": "task-103",
+      "title": "Build target account list for Q4",
+      "status": "queued",
+      "progress": 0,
+      "dueDate": "2025-10-30"
+    }
+  ],
+  "recentDiscoveries": [
+    {
+      "company": "TechCorp Solutions",
+      "contacts": 5,
+      "industry": "SaaS",
+      "employees": 250,
+      "revenue": "$25M-50M",
+      "leadScore": 85,
+      "timestamp": "2025-10-28T11:20:00Z"
+    },
+    {
+      "company": "DataFlow Systems",
+      "contacts": 3,
+      "industry": "Analytics",
+      "employees": 180,
+      "revenue": "$10M-25M",
+      "leadScore": 78,
+      "timestamp": "2025-10-28T10:45:00Z"
+    },
+    {
+      "company": "CloudSync Inc",
+      "contacts": 4,
+      "industry": "Cloud Services",
+      "employees": 320,
+      "revenue": "$50M-100M",
+      "leadScore": 92,
+      "timestamp": "2025-10-28T09:30:00Z"
+    }
+  ],
+  "searchCriteria": {
+    "industries": ["SaaS", "Technology", "Software"],
+    "companySize": "50-500",
+    "location": ["United States", "Canada"],
+    "revenue": "$5M-$100M",
+    "technologies": ["Salesforce", "HubSpot", "AWS"]
+  },
+  "workingHours": {
+    "timezone": "UTC",
+    "availability": "24/7",
+    "preferredHours": "Non-stop prospecting!"
+  },
+  "integrations": [
+    "Salesforce",
+    "HubSpot",
+    "Outreach",
+    "LinkedIn Sales Navigator",
+    "Clearbit"
+  ],
+  "settings": {
+    "autoEnrich": true,
+    "leadScoreThreshold": 70,
+    "dataFreshnessCheck": "weekly",
+    "duplicateDetection": true,
+    "complianceMode": "GDPR-compliant"
+  },
+  "quotes": [
+    "I found the perfect leads for you!",
+    "Data accuracy is my middle name!",
+    "Every company is a potential customer!",
+    "Let me dig up some golden opportunities!"
+  ]
+}

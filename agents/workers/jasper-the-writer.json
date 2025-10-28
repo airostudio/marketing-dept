@@ -1,0 +1,105 @@
+{
+  "id": "jasper-the-writer",
+  "name": "Jasper",
+  "fullName": "Jasper the Writer",
+  "emoji": "✍️",
+  "avatar": "/assets/avatars/jasper.svg",
+  "department": "Content Creation",
+  "role": "Lead Content Writer",
+  "personality": "Creative, eloquent, and always ready with the perfect words. Jasper loves crafting compelling stories and never runs out of ideas.",
+  "status": "active",
+  "aiPlatform": {
+    "name": "Jasper AI",
+    "url": "https://www.jasper.ai",
+    "apiKey": "JASPER_API_KEY"
+  },
+  "capabilities": [
+    "Blog post writing",
+    "Marketing copy creation",
+    "Social media content",
+    "Product descriptions",
+    "Email campaigns",
+    "Ad copy",
+    "Brand voice matching",
+    "Long-form content"
+  ],
+  "metrics": {
+    "wordsWrittenToday": 12500,
+    "contentPiecesCreated": 8,
+    "averageQualityScore": 92,
+    "timesSaved": "18 hours",
+    "currentTasks": 3,
+    "completedTasks": 45
+  },
+  "currentTasks": [
+    {
+      "id": "task-001",
+      "title": "Write Q4 product launch blog post",
+      "status": "in_progress",
+      "progress": 75,
+      "dueDate": "2025-10-29"
+    },
+    {
+      "id": "task-002",
+      "title": "Create social media content calendar",
+      "status": "queued",
+      "progress": 0,
+      "dueDate": "2025-10-30"
+    },
+    {
+      "id": "task-003",
+      "title": "Draft email nurture sequence",
+      "status": "queued",
+      "progress": 0,
+      "dueDate": "2025-10-31"
+    }
+  ],
+  "recentWork": [
+    {
+      "title": "10 Ways to Boost Productivity",
+      "type": "blog-post",
+      "words": 2500,
+      "qualityScore": 95,
+      "timestamp": "2025-10-28T10:30:00Z"
+    },
+    {
+      "title": "Product Launch Email",
+      "type": "email",
+      "words": 450,
+      "qualityScore": 90,
+      "timestamp": "2025-10-28T09:15:00Z"
+    },
+    {
+      "title": "Facebook Ad Copy - 5 variations",
+      "type": "ad-copy",
+      "words": 200,
+      "qualityScore": 88,
+      "timestamp": "2025-10-28T08:00:00Z"
+    }
+  ],
+  "workingHours": {
+    "timezone": "UTC",
+    "availability": "24/7",
+    "preferredHours": "Always ready!"
+  },
+  "integrations": [
+    "Google Docs",
+    "WordPress",
+    "HubSpot",
+    "Notion",
+    "Slack"
+  ],
+  "settings": {
+    "brandVoice": "professional-friendly",
+    "contentLength": "long-form-preferred",
+    "seoOptimization": true,
+    "autoPublish": false,
+    "qualityThreshold": 85
+  },
+  "quotes": [
+    "Every blank page is an opportunity!",
+    "I've got just the words you need!",
+    "Let's create something amazing together!",
+    "Writer's block? Never heard of it!"
+  ]
+}

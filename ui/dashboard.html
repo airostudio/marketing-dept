@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Marketing Department Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>🤖 AI Marketing Dept</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="#overview" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="#workers" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>AI Workers</span>
+                </a>
+                <a href="#analytics" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="#tasks" class="nav-item">
+                    <i class="fas fa-tasks"></i>
+                    <span>Tasks</span>
+                </a>
+                <a href="#settings" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="avatar">👤</div>
+                    <div class="user-details">
+                        <p class="user-name">Admin</p>
+                        <p class="user-role">Marketing Director</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h2>Dashboard Overview</h2>
+                <div class="header-actions">
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        New Task
+                    </button>
+                </div>
+            </header>
+
+            <!-- Stats Overview -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="stat-content">
+                        <p class="stat-label">Active AI Workers</p>
+                        <h3 class="stat-value">8 / 8</h3>
+                        <p class="stat-change positive">
+                            <i class="fas fa-check-circle"></i> All systems operational
+                        </p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-content">
+                        <p class="stat-label">Tasks Completed Today</p>
+                        <h3 class="stat-value">247</h3>
+                        <p class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> +32% vs yesterday
+                        </p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-content">
+                        <p class="stat-label">Revenue Impact</p>
+                        <h3 class="stat-value">$45.2K</h3>
+                        <p class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> +18% this week
+                        </p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <p class="stat-label">Time Saved</p>
+                        <h3 class="stat-value">89 hrs</h3>
+                        <p class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> This week
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Workers Grid -->
+            <section class="workers-section">
+                <h2>Your AI Workers</h2>
+                <div class="workers-grid">
+                    <!-- Jasper -->
+                    <div class="worker-card" data-worker="jasper">
+                        <div class="worker-header">
+                            <div class="worker-avatar">✍️</div>
+                            <div class="worker-info">
+                                <h3>Jasper</h3>
+                                <p class="worker-role">Content Creation</p>
+                            </div>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <div class="worker-stats">
+                            <div class="worker-stat">
+                                <span class="stat-label">Words Written</span>
+                                <span class="stat-value">12.5K</span>
+                            </div>
+                            <div class="worker-stat">
+                                <span class="stat-label">Quality Score</span>
+                                <span class="stat-value">92/100</span>
+                            </div>
+                        </div>
+                        <div class="worker-progress">
+                            <div class="progress-info">
+                                <span>Current Task: Q4 Blog Post</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <button class="btn-view" onclick="viewWorker('jasper')">View Details</button>
+                    </div>
+
+                    <!-- Zoey -->
+                    <div class="worker-card" data-worker="zoey">
+                        <div class="worker-header">
+                            <div class="worker-avatar">🔍</div>
+                            <div class="worker-info">
+                                <h3>Zoey</h3>
+                                <p class="worker-role">Lead Generation</p>
+                            </div>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <div class="worker-stats">
+                            <div class="worker-stat">
+                                <span class="stat-label">Leads Found</span>
+                                <span class="stat-value">156</span>
+                            </div>
+                            <div class="worker-stat">
+                                <span class="stat-label">Accuracy</span>
+                                <span class="stat-value">96%</span>
+                            </div>
+                        </div>
+                        <div class="worker-progress">
+                            <div class="progress-info">
+                                <span>Finding SaaS Companies</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <button class="btn-view" onclick="viewWorker('zoey')">View Details</button>
+                    </div>
+
+                    <!-- Sage -->
+                    <div class="worker-card" data-worker="sage">
+                        <div class="worker-header">
+                            <div class="worker-avatar">⏰</div>
+                            <div class="worker-info">
+                                <h3>Sage</h3>
+                                <p class="worker-role">Email Marketing</p>
+                            </div>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <div class="worker-stats">
+                            <div class="worker-stat">
+                                <span class="stat-label">Emails Optimized</span>
+                                <span class="stat-value">2.5K</span>
+                            </div>
+                            <div class="worker-stat">
+                                <span class="stat-label">Open Rate Boost</span>
+                                <span class="stat-value">+38%</span>
+                            </div>
+                        </div>
+                        <div class="worker-progress">
+                            <div class="progress-info">
+                                <span>Q4 Newsletter Timing</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <button class="btn-view" onclick="viewWorker('sage')">View Details</button>
+                    </div>
+
+                    <!-- Smarta -->
+                    <div class="worker-card" data-worker="smarta">
+                        <div class="worker-header">
+                            <div class="worker-avatar">🎯</div>
+                            <div class="worker-info">
+                                <h3>Smarta</h3>
+                                <p class="worker-role">Social Advertising</p>
+                            </div>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <div class="worker-stats">
+                            <div class="worker-stat">
+                                <span class="stat-label">Ad Spend</span>
+                                <span class="stat-value">$8.5K</span>
+                            </div>
+                            <div class="worker-stat">
+                                <span class="stat-label">ROAS</span>
+                                <span class="stat-value">5.2:1</span>
+                            </div>
+                        </div>
+                        <div class="worker-progress">
+                            <div class="progress-info">
+                                <span>12 Active Campaigns</span>
+                                <span>Optimizing</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill pulse" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <button class="btn-view" onclick="viewWorker('smarta')">View Details</button>
+                    </div>
+
+                    <!-- Dynamo -->
+                    <div class="worker-card" data-worker="dynamo">
+                        <div class="worker-header">
+                            <div class="worker-avatar">🎨</div>
+                            <div class="worker-info">
+                                <h3>Dynamo</h3>
+                                <p class="worker-role">Personalization</p>
+                            </div>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <div class="worker-stats">
+                            <div class="worker-stat">
+                                <span class="stat-label">Visitors</span>
+                                <span class="stat-value">15.6K</span>
+                            </div>
+                            <div class="worker-stat">
+                                <span class="stat-label">Conv. Lift</span>
+                                <span class="stat-value">+42%</span>
+                            </div>
+                        </div>
+                        <div class="worker-progress">
+                            <div class="progress-info">
+                                <span>8 Active Experiences</span>
+                                <span>Running</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill pulse" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <button class="btn-view" onclick="viewWorker('dynamo')">View Details</button>
+                    </div>
+
+                    <!-- Analyzer -->
+                    <div class="worker-card" data-worker="analyzer">
+                        <div class="worker-header">
+                            <div class="worker-avatar">📊</div>
+                            <div class="worker-info">
+                                <h3>Analyzer</h3>
+                                <p class="worker-role">Analytics</p>
+                            </div>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <div class="worker-stats">
+                            <div class="worker-stat">
+                                <span class="stat-label">Sessions</span>
+                                <span class="stat-value">12.4K</span>
+                            </div>
+                            <div class="worker-stat">
+                                <span class="stat-label">Insights</span>
+                                <span class="stat-value">15</span>
+                            </div>
+                        </div>
+                        <div class="worker-progress">
+                            <div class="progress-info">
+                                <span>Q4 Traffic Analysis</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        <button class="btn-view" onclick="viewWorker('analyzer')">View Details</button>
+                    </div>
+
+                    <!-- Surfy -->
+                    <div class="worker-card" data-worker="surfy">
+                        <div class="worker-header">
+                            <div class="worker-avatar">🏄</div>
+                            <div class="worker-info">
+                                <h3>Surfy</h3>
+                                <p class="worker-role">SEO Optimization</p>
+                            </div>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <div class="worker-stats">
+                            <div class="worker-stat">
+                                <span class="stat-label">Pages Optimized</span>
+                                <span class="stat-value">8</span>
+                            </div>
+                            <div class="worker-stat">
+                                <span class="stat-label">Avg Score</span>
+                                <span class="stat-value">87/100</span>
+                            </div>
+                        </div>
+                        <div class="worker-progress">
+                            <div class="progress-info">
+                                <span>AI Marketing Article</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <button class="btn-view" onclick="viewWorker('surfy')">View Details</button>
+                    </div>
+
+                    <!-- Chatty -->
+                    <div class="worker-card" data-worker="chatty">
+                        <div class="worker-header">
+                            <div class="worker-avatar">💬</div>
+                            <div class="worker-info">
+                                <h3>Chatty</h3>
+                                <p class="worker-role">Customer Support</p>
+                            </div>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <div class="worker-stats">
+                            <div class="worker-stat">
+                                <span class="stat-label">Conversations</span>
+                                <span class="stat-value">245</span>
+                            </div>
+                            <div class="worker-stat">
+                                <span class="stat-label">Auto-Resolved</span>
+                                <span class="stat-value">77%</span>
+                            </div>
+                        </div>
+                        <div class="worker-progress">
+                            <div class="progress-info">
+                                <span>8 Active Chats</span>
+                                <span>Helping</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill pulse" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <button class="btn-view" onclick="viewWorker('chatty')">View Details</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity -->
+            <section class="activity-section">
+                <h2>Recent Activity</h2>
+                <div class="activity-feed">
+                    <div class="activity-item">
+                        <div class="activity-icon">✍️</div>
+                        <div class="activity-content">
+                            <p><strong>Jasper</strong> completed blog post "10 Ways to Boost Productivity"</p>
+                            <span class="activity-time">5 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">🔍</div>
+                        <div class="activity-content">
+                            <p><strong>Zoey</strong> found 94 qualified leads matching your ICP</p>
+                            <span class="activity-time">12 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">🎯</div>
+                        <div class="activity-content">
+                            <p><strong>Smarta</strong> optimized budget allocation, saving $2.3K</p>
+                            <span class="activity-time">23 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">📊</div>
+                        <div class="activity-content">
+                            <p><strong>Analyzer</strong> detected traffic anomaly: Reddit spike +450%</p>
+                            <span class="activity-time">45 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">🏄</div>
+                        <div class="activity-content">
+                            <p><strong>Surfy</strong> improved content score from 68 to 91 (+34%)</p>
+                            <span class="activity-time">1 hour ago</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

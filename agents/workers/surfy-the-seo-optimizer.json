@@ -1,0 +1,206 @@
+{
+  "id": "surfy-the-seo-optimizer",
+  "name": "Surfy",
+  "fullName": "Surfy the SEO Optimizer",
+  "emoji": "🏄",
+  "avatar": "/assets/avatars/surfy.svg",
+  "department": "SEO & Search Optimization",
+  "role": "SEO Optimization Specialist",
+  "personality": "Meticulous, ranking-obsessed, and algorithm-savvy. Surfy rides the waves of search engine algorithms and always finds ways to climb the rankings.",
+  "status": "active",
+  "aiPlatform": {
+    "name": "Surfer SEO",
+    "url": "https://www.surferseo.com",
+    "apiKey": "SURFER_SEO_API_KEY"
+  },
+  "capabilities": [
+    "Content optimization",
+    "Keyword research",
+    "SERP analysis",
+    "On-page SEO",
+    "Content scoring",
+    "Competitor analysis",
+    "Rank tracking",
+    "Content planning"
+  ],
+  "metrics": {
+    "pagesOptimizedToday": 8,
+    "averageContentScore": 87,
+    "keywordsTracked": 245,
+    "topRankings": 34,
+    "organicTrafficGrowth": "+42%",
+    "backlinksGained": 18,
+    "domainAuthority": 52
+  },
+  "currentTasks": [
+    {
+      "id": "task-601",
+      "title": "Optimize 'AI Marketing Tools' article",
+      "status": "in_progress",
+      "progress": 75,
+      "currentScore": 72,
+      "targetScore": 85,
+      "keyword": "AI marketing tools",
+      "currentRank": 12,
+      "targetRank": 5
+    },
+    {
+      "id": "task-602",
+      "title": "Research keywords for Q4 content",
+      "status": "in_progress",
+      "progress": 60,
+      "keywordsFound": 45,
+      "targetKeywords": 75,
+      "dueDate": "2025-10-29"
+    },
+    {
+      "id": "task-603",
+      "title": "Audit homepage SEO",
+      "status": "queued",
+      "progress": 0,
+      "dueDate": "2025-10-30"
+    }
+  ],
+  "recentOptimizations": [
+    {
+      "page": "/blog/content-marketing-strategy",
+      "keyword": "content marketing strategy",
+      "beforeScore": 68,
+      "afterScore": 91,
+      "improvement": "+34%",
+      "rankBefore": 18,
+      "rankAfter": 6,
+      "timestamp": "2025-10-28T10:00:00Z"
+    },
+    {
+      "page": "/features/automation",
+      "keyword": "marketing automation tools",
+      "beforeScore": 72,
+      "afterScore": 88,
+      "improvement": "+22%",
+      "rankBefore": 15,
+      "rankAfter": 8,
+      "timestamp": "2025-10-27T14:30:00Z"
+    },
+    {
+      "page": "/blog/seo-guide-2025",
+      "keyword": "SEO guide",
+      "beforeScore": 65,
+      "afterScore": 92,
+      "improvement": "+42%",
+      "rankBefore": 22,
+      "rankAfter": 4,
+      "timestamp": "2025-10-26T09:15:00Z"
+    }
+  ],
+  "topKeywords": [
+    {
+      "keyword": "marketing automation",
+      "position": 3,
+      "searchVolume": 12000,
+      "difficulty": 65,
+      "traffic": 2400,
+      "trend": "up"
+    },
+    {
+      "keyword": "email marketing tools",
+      "position": 5,
+      "searchVolume": 8900,
+      "difficulty": 58,
+      "traffic": 1200,
+      "trend": "up"
+    },
+    {
+      "keyword": "content marketing tips",
+      "position": 7,
+      "searchVolume": 6500,
+      "difficulty": 52,
+      "traffic": 890,
+      "trend": "stable"
+    },
+    {
+      "keyword": "SEO optimization",
+      "position": 12,
+      "searchVolume": 15000,
+      "difficulty": 72,
+      "traffic": 450,
+      "trend": "up"
+    }
+  ],
+  "competitorAnalysis": [
+    {
+      "competitor": "competitor-a.com",
+      "domainAuthority": 68,
+      "organicKeywords": 15600,
+      "organicTraffic": "245K/month",
+      "commonKeywords": 89,
+      "gaps": 156
+    },
+    {
+      "competitor": "competitor-b.com",
+      "domainAuthority": 72,
+      "organicKeywords": 18200,
+      "organicTraffic": "312K/month",
+      "commonKeywords": 102,
+      "gaps": 178
+    },
+    {
+      "competitor": "competitor-c.com",
+      "domainAuthority": 55,
+      "organicKeywords": 8900,
+      "organicTraffic": "124K/month",
+      "commonKeywords": 67,
+      "gaps": 94
+    }
+  ],
+  "opportunities": [
+    {
+      "type": "keyword-gap",
+      "title": "147 keywords competitors rank for but you don't",
+      "priority": "high",
+      "potentialTraffic": "+15K monthly visitors",
+      "effort": "medium"
+    },
+    {
+      "type": "low-hanging-fruit",
+      "title": "23 keywords ranking 11-20 ready to push to page 1",
+      "priority": "high",
+      "potentialTraffic": "+5K monthly visitors",
+      "effort": "low"
+    },
+    {
+      "type": "content-decay",
+      "title": "12 pages lost rankings - need refresh",
+      "priority": "medium",
+      "potentialTraffic": "+3K monthly visitors",
+      "effort": "medium"
+    }
+  ],
+  "workingHours": {
+    "timezone": "UTC",
+    "availability": "24/7",
+    "preferredHours": "Always optimizing!"
+  },
+  "integrations": [
+    "Google Search Console",
+    "WordPress",
+    "Google Docs",
+    "Jasper AI",
+    "Ahrefs",
+    "SEMrush"
+  ],
+  "settings": {
+    "autoScoring": true,
+    "targetScore": 85,
+    "contentLength": "comprehensive",
+    "keywordDensity": "natural",
+    "updateFrequency": "monthly",
+    "competitorTracking": 5
+  },
+  "quotes": [
+    "Let's ride this ranking wave to the top!",
+    "I see opportunities in every SERP!",
+    "Content score 90+ or bust!",
+    "Watch me optimize our way to page one!"
+  ]
+}

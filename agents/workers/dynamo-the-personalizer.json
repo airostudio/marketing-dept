@@ -1,0 +1,174 @@
+{
+  "id": "dynamo-the-personalizer",
+  "name": "Dynamo",
+  "fullName": "Dynamo the Personalizer",
+  "emoji": "🎨",
+  "avatar": "/assets/avatars/dynamo.svg",
+  "department": "Personalization",
+  "role": "Experience Optimization Lead",
+  "personality": "Creative, adaptive, and visitor-focused. Dynamo sees every visitor as unique and crafts personalized experiences that convert.",
+  "status": "active",
+  "aiPlatform": {
+    "name": "Dynamic Yield",
+    "url": "https://www.dynamicyield.com",
+    "apiKey": "DYNAMIC_YIELD_API_KEY"
+  },
+  "capabilities": [
+    "Web personalization",
+    "Mobile app personalization",
+    "Email personalization",
+    "Product recommendations",
+    "A/B testing",
+    "Multi-variate testing",
+    "Behavioral targeting",
+    "Cross-channel experiences"
+  ],
+  "metrics": {
+    "activeExperiences": 8,
+    "visitorsPersonalized": 15600,
+    "conversionLift": "+42%",
+    "averageOrderValue": "+28%",
+    "testRunning": 5,
+    "testCompleted": 23,
+    "revenue Impact": "$45,200"
+  },
+  "currentExperiences": [
+    {
+      "id": "exp-401",
+      "name": "Homepage Hero - Industry Based",
+      "type": "personalization",
+      "status": "active",
+      "audience": "First-time visitors by industry",
+      "variants": 5,
+      "conversions": 245,
+      "lift": "+38%",
+      "confidence": 98
+    },
+    {
+      "id": "exp-402",
+      "name": "Pricing Page - Company Size",
+      "type": "ab-test",
+      "status": "active",
+      "audience": "Pricing page visitors",
+      "variants": 2,
+      "conversions": 89,
+      "lift": "+24%",
+      "confidence": 95
+    },
+    {
+      "id": "exp-403",
+      "name": "Product Recommendations",
+      "type": "ai-recommendations",
+      "status": "active",
+      "audience": "Product page visitors",
+      "variants": 1,
+      "conversions": 567,
+      "lift": "+55%",
+      "confidence": 99
+    }
+  ],
+  "recentWins": [
+    {
+      "test": "Checkout Button Color",
+      "winner": "Variant B - Green CTA",
+      "lift": "+18%",
+      "visitors": 8500,
+      "decision": "Deployed to 100%",
+      "timestamp": "2025-10-28T09:30:00Z"
+    },
+    {
+      "test": "Email Capture Popup Timing",
+      "winner": "Variant C - 30 second delay",
+      "lift": "+32%",
+      "visitors": 12000,
+      "decision": "Deployed to 100%",
+      "timestamp": "2025-10-27T15:20:00Z"
+    },
+    {
+      "test": "Product Page Layout",
+      "winner": "Variant A - Gallery left",
+      "lift": "+22%",
+      "visitors": 6800,
+      "decision": "Deployed to 100%",
+      "timestamp": "2025-10-26T11:00:00Z"
+    }
+  ],
+  "segments": [
+    {
+      "name": "Enterprise Visitors",
+      "size": 2400,
+      "conversionRate": 4.2,
+      "avgOrderValue": "$25,000",
+      "personalizations": 3
+    },
+    {
+      "name": "Small Business",
+      "size": 8900,
+      "conversionRate": 3.1,
+      "avgOrderValue": "$2,500",
+      "personalizations": 2
+    },
+    {
+      "name": "Returning Customers",
+      "size": 5600,
+      "conversionRate": 8.5,
+      "avgOrderValue": "$8,400",
+      "personalizations": 4
+    },
+    {
+      "name": "Cart Abandoners",
+      "size": 3200,
+      "conversionRate": 2.8,
+      "avgOrderValue": "$4,100",
+      "personalizations": 2
+    }
+  ],
+  "channels": [
+    {
+      "name": "Website",
+      "experiences": 12,
+      "visitors": 45000,
+      "conversionLift": "+38%"
+    },
+    {
+      "name": "Mobile App",
+      "experiences": 5,
+      "visitors": 18000,
+      "conversionLift": "+42%"
+    },
+    {
+      "name": "Email",
+      "experiences": 8,
+      "recipients": 35000,
+      "engagementLift": "+28%"
+    }
+  ],
+  "workingHours": {
+    "timezone": "UTC",
+    "availability": "24/7",
+    "preferredHours": "Always personalizing!"
+  },
+  "integrations": [
+    "Google Analytics",
+    "Segment",
+    "Salesforce",
+    "Shopify",
+    "WordPress",
+    "Marketo",
+    "Amplitude"
+  ],
+  "settings": {
+    "autoPersonalization": true,
+    "minSampleSize": 5000,
+    "confidenceLevel": 95,
+    "testDuration": "auto",
+    "fallbackExperience": "default",
+    "crossChannel": true
+  },
+  "quotes": [
+    "Every visitor deserves a personal touch!",
+    "Let me craft the perfect experience!",
+    "One size fits none - personalization wins!",
+    "Watch conversions soar with personalization!"
+  ]
+}
