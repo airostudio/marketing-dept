@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Details - AI Marketing Department</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>🤖 AI Marketing Dept</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="dashboard.html#workers" class="nav-item active">
+                    <i class="fas fa-users"></i>
+                    <span>AI Workers</span>
+                </a>
+                <a href="#analytics" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="#tasks" class="nav-item">
+                    <i class="fas fa-tasks"></i>
+                    <span>Tasks</span>
+                </a>
+                <a href="#settings" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="avatar">👤</div>
+                    <div class="user-details">
+                        <p class="user-name">Admin</p>
+                        <p class="user-role">Marketing Director</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content detail-page">
+            <div class="breadcrumb">
+                <a href="dashboard.html">← Back to Dashboard</a>
+            </div>
+
+            <!-- Worker Header -->
+            <div class="detail-header" id="workerHeader">
+                <div class="detail-avatar" id="workerAvatar">✍️</div>
+                <div class="detail-info">
+                    <h1 id="workerName">Loading...</h1>
+                    <p class="detail-role" id="workerRole"></p>
+                    <p class="detail-personality" id="workerPersonality"></p>
+                    <div class="quote-box">
+                        <i class="fas fa-quote-left"></i>
+                        <span id="workerQuote"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Overview -->
+            <section class="stats-grid" id="metricsGrid">
+                <!-- Dynamically loaded metrics -->
+            </section>
+
+            <!-- Main Grid -->
+            <div class="detail-grid">
+                <!-- Left Column -->
+                <div class="detail-left">
+                    <!-- Current Tasks -->
+                    <div class="tasks-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-tasks"></i>
+                            Current Tasks
+                        </h3>
+                        <div id="tasksList">
+                            <!-- Dynamically loaded tasks -->
+                        </div>
+                    </div>
+
+                    <!-- Recent Work -->
+                    <div class="tasks-section" style="margin-top: 1.5rem;">
+                        <h3 class="section-title">
+                            <i class="fas fa-history"></i>
+                            Recent Work
+                        </h3>
+                        <div id="recentWorkList">
+                            <!-- Dynamically loaded recent work -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="detail-right">
+                    <!-- Status -->
+                    <div class="settings-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-info-circle"></i>
+                            Status
+                        </h3>
+                        <div class="status-info">
+                            <div class="status-item">
+                                <span class="label">Status</span>
+                                <span class="status-badge active" id="workerStatus">Active</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="label">Availability</span>
+                                <span class="value" id="workerAvailability">24/7</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="label">Department</span>
+                                <span class="value" id="workerDepartment"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Platform -->
+                    <div class="settings-section" style="margin-top: 1.5rem;">
+                        <h3 class="section-title">
+                            <i class="fas fa-microchip"></i>
+                            AI Platform
+                        </h3>
+                        <div class="platform-info" id="platformInfo">
+                            <!-- Dynamically loaded platform info -->
+                        </div>
+                    </div>
+
+                    <!-- Capabilities -->
+                    <div class="settings-section" style="margin-top: 1.5rem;">
+                        <h3 class="section-title">
+                            <i class="fas fa-star"></i>
+                            Capabilities
+                        </h3>
+                        <div class="capabilities-list" id="capabilitiesList">
+                            <!-- Dynamically loaded capabilities -->
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="settings-section" style="margin-top: 1.5rem;">
+                        <h3 class="section-title">
+                            <i class="fas fa-bolt"></i>
+                            Quick Actions
+                        </h3>
+                        <div class="action-buttons">
+                            <button class="btn-action" onclick="assignTask()">
+                                <i class="fas fa-plus"></i>
+                                Assign Task
+                            </button>
+                            <button class="btn-action" onclick="viewSettings()">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </button>
+                            <button class="btn-action" onclick="viewAnalytics()">
+                                <i class="fas fa-chart-bar"></i>
+                                Analytics
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="worker.js"></script>
+</body>
+</html>

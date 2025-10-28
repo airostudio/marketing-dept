@@ -1,0 +1,205 @@
+{
+  "id": "analyzer-the-insight-finder",
+  "name": "Analyzer",
+  "fullName": "Analyzer the Insight Finder",
+  "emoji": "📊",
+  "avatar": "/assets/avatars/analyzer.svg",
+  "department": "Analytics",
+  "role": "Data Analytics Specialist",
+  "personality": "Curious, methodical, and insight-hungry. Analyzer loves diving into data and surfacing actionable insights that drive business decisions.",
+  "status": "active",
+  "aiPlatform": {
+    "name": "Google Analytics",
+    "url": "https://analytics.google.com",
+    "apiKey": "GOOGLE_ANALYTICS_KEY"
+  },
+  "capabilities": [
+    "Traffic analysis",
+    "Conversion tracking",
+    "User behavior analysis",
+    "Attribution modeling",
+    "Predictive analytics",
+    "Anomaly detection",
+    "Custom reporting",
+    "Real-time monitoring"
+  ],
+  "metrics": {
+    "sessionsToday": 12450,
+    "conversionsToday": 89,
+    "conversionRate": "3.2%",
+    "bounceRate": "42%",
+    "avgSessionDuration": "3m 45s",
+    "insightsGenerated": 15,
+    "anomaliesDetected": 2
+  },
+  "currentAnalyses": [
+    {
+      "id": "analysis-501",
+      "title": "Q4 Traffic Trends Analysis",
+      "status": "in_progress",
+      "progress": 70,
+      "dataRange": "Oct 1 - Oct 28",
+      "insights": 12,
+      "dueDate": "2025-10-29"
+    },
+    {
+      "id": "analysis-502",
+      "title": "Conversion Funnel Drop-off Analysis",
+      "status": "in_progress",
+      "progress": 45,
+      "dataRange": "Last 30 days",
+      "insights": 5,
+      "dueDate": "2025-10-28"
+    },
+    {
+      "id": "analysis-503",
+      "title": "Marketing Channel Attribution",
+      "status": "queued",
+      "progress": 0,
+      "dataRange": "Last 90 days",
+      "dueDate": "2025-10-30"
+    }
+  ],
+  "recentInsights": [
+    {
+      "type": "opportunity",
+      "title": "Mobile conversion rate 40% lower than desktop",
+      "description": "Mobile users have high engagement but drop off at checkout. Recommend mobile checkout optimization.",
+      "impact": "high",
+      "recommendedAction": "Optimize mobile checkout flow",
+      "potentialLift": "+$15K monthly revenue",
+      "timestamp": "2025-10-28T11:00:00Z"
+    },
+    {
+      "type": "anomaly",
+      "title": "Blog traffic spike from Reddit",
+      "description": "Traffic from Reddit increased 450% yesterday. Post about 'AI Marketing Tools' went viral.",
+      "impact": "medium",
+      "recommendedAction": "Create more Reddit-optimized content",
+      "potentialLift": "+2K monthly visitors",
+      "timestamp": "2025-10-28T09:30:00Z"
+    },
+    {
+      "type": "trend",
+      "title": "Organic search traffic growing 15% MoM",
+      "description": "SEO efforts paying off. Long-tail keywords driving qualified traffic.",
+      "impact": "high",
+      "recommendedAction": "Continue SEO content strategy",
+      "potentialLift": "+5K monthly visitors",
+      "timestamp": "2025-10-28T08:00:00Z"
+    }
+  ],
+  "trafficSources": [
+    {
+      "source": "Organic Search",
+      "sessions": 45000,
+      "conversions": 890,
+      "conversionRate": "2.0%",
+      "revenue": "$89,000",
+      "trend": "+15%"
+    },
+    {
+      "source": "Direct",
+      "sessions": 28000,
+      "conversions": 1120,
+      "conversionRate": "4.0%",
+      "revenue": "$112,000",
+      "trend": "+5%"
+    },
+    {
+      "source": "Paid Search",
+      "sessions": 18000,
+      "conversions": 720,
+      "conversionRate": "4.0%",
+      "revenue": "$72,000",
+      "trend": "+8%"
+    },
+    {
+      "source": "Social Media",
+      "sessions": 12000,
+      "conversions": 360,
+      "conversionRate": "3.0%",
+      "revenue": "$36,000",
+      "trend": "+22%"
+    },
+    {
+      "source": "Email",
+      "sessions": 8500,
+      "conversions": 510,
+      "conversionRate": "6.0%",
+      "revenue": "$51,000",
+      "trend": "+12%"
+    }
+  ],
+  "topPages": [
+    {
+      "page": "/pricing",
+      "views": 8900,
+      "uniqueViews": 6700,
+      "avgTime": "2m 30s",
+      "exitRate": "35%",
+      "conversions": 234
+    },
+    {
+      "page": "/features",
+      "views": 7200,
+      "uniqueViews": 5800,
+      "avgTime": "3m 15s",
+      "exitRate": "42%",
+      "conversions": 156
+    },
+    {
+      "page": "/blog/ai-marketing-guide",
+      "views": 5600,
+      "uniqueViews": 4900,
+      "avgTime": "4m 45s",
+      "exitRate": "48%",
+      "conversions": 78
+    }
+  ],
+  "alerts": [
+    {
+      "severity": "medium",
+      "title": "Bounce rate increased 8% on mobile",
+      "description": "Mobile bounce rate jumped from 42% to 50% today",
+      "timestamp": "2025-10-28T10:15:00Z"
+    },
+    {
+      "severity": "low",
+      "title": "Checkout page load time slow",
+      "description": "Average page load time: 4.2s (target: <3s)",
+      "timestamp": "2025-10-28T09:45:00Z"
+    }
+  ],
+  "workingHours": {
+    "timezone": "UTC",
+    "availability": "24/7",
+    "preferredHours": "Always analyzing!"
+  },
+  "integrations": [
+    "Google Analytics 4",
+    "Google Search Console",
+    "Google Tag Manager",
+    "Looker Studio",
+    "BigQuery",
+    "Salesforce",
+    "HubSpot"
+  ],
+  "settings": {
+    "dataRetention": "14-months",
+    "samplingThreshold": "500K sessions",
+    "anomalyDetection": true,
+    "alertThresholds": {
+      "trafficDrop": "-20%",
+      "conversionDrop": "-15%",
+      "bounceRateIncrease": "+10%"
+    },
+    "reportingFrequency": "daily"
+  },
+  "quotes": [
+    "The data tells a story - let me decode it!",
+    "I found something interesting in the numbers!",
+    "Every metric is a clue to improvement!",
+    "Let's turn insights into action!"
+  ]
+}

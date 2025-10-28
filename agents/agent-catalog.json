@@ -1,0 +1,546 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-10-28",
+  "catalog": {
+    "contentCreation": {
+      "agents": [
+        {
+          "name": "Jasper AI",
+          "type": "content-generation",
+          "url": "https://www.jasper.ai",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "integrations": ["Chrome", "API", "Zapier"],
+          "capabilities": [
+            "blog-posts",
+            "social-media-copy",
+            "product-descriptions",
+            "ad-copy",
+            "email-content"
+          ]
+        },
+        {
+          "name": "Copy.ai",
+          "type": "content-generation",
+          "url": "https://www.copy.ai",
+          "apiAvailable": true,
+          "pricing": "freemium",
+          "integrations": ["API", "Zapier"],
+          "capabilities": [
+            "marketing-copy",
+            "blog-ideas",
+            "social-media",
+            "email-copy"
+          ]
+        },
+        {
+          "name": "Writesonic",
+          "type": "content-generation",
+          "url": "https://www.writesonic.com",
+          "apiAvailable": true,
+          "pricing": "freemium",
+          "integrations": ["API", "Chrome Extension"],
+          "capabilities": [
+            "articles",
+            "landing-pages",
+            "ads",
+            "product-descriptions"
+          ]
+        },
+        {
+          "name": "Rytr",
+          "type": "content-generation",
+          "url": "https://rytr.me",
+          "apiAvailable": true,
+          "pricing": "freemium",
+          "capabilities": [
+            "emails",
+            "social-posts",
+            "blog-content"
+          ]
+        },
+        {
+          "name": "Ink for All",
+          "type": "seo-content",
+          "url": "https://inkforall.com",
+          "apiAvailable": false,
+          "pricing": "subscription",
+          "capabilities": [
+            "seo-optimization",
+            "content-scoring",
+            "audience-engagement"
+          ]
+        }
+      ]
+    },
+    "leadGeneration": {
+      "agents": [
+        {
+          "name": "Clearbit",
+          "type": "data-enrichment",
+          "url": "https://www.clearbit.com",
+          "apiAvailable": true,
+          "pricing": "enterprise",
+          "integrations": ["Salesforce", "HubSpot", "Marketo", "API"],
+          "capabilities": [
+            "lead-enrichment",
+            "company-data",
+            "prospect-intelligence"
+          ]
+        },
+        {
+          "name": "LeadGenius",
+          "type": "lead-prospecting",
+          "url": "https://www.leadgenius.com",
+          "apiAvailable": true,
+          "pricing": "custom",
+          "capabilities": [
+            "lead-sourcing",
+            "lead-qualification",
+            "custom-lists"
+          ]
+        },
+        {
+          "name": "Hunter.io",
+          "type": "email-finder",
+          "url": "https://hunter.io",
+          "apiAvailable": true,
+          "pricing": "freemium",
+          "integrations": ["Chrome Extension", "API", "Salesforce"],
+          "capabilities": [
+            "email-finding",
+            "email-verification",
+            "domain-search"
+          ]
+        },
+        {
+          "name": "ZoomInfo",
+          "type": "b2b-database",
+          "url": "https://www.zoominfo.com",
+          "apiAvailable": true,
+          "pricing": "enterprise",
+          "integrations": ["Salesforce", "HubSpot", "Outreach"],
+          "capabilities": [
+            "contact-database",
+            "company-intelligence",
+            "intent-data"
+          ]
+        },
+        {
+          "name": "UpLead",
+          "type": "b2b-database",
+          "url": "https://www.uplead.com",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "integrations": ["Salesforce", "HubSpot", "API"],
+          "capabilities": [
+            "lead-database",
+            "email-verification",
+            "technographic-data"
+          ]
+        }
+      ]
+    },
+    "emailMarketing": {
+      "agents": [
+        {
+          "name": "Seventh Sense",
+          "type": "send-time-optimization",
+          "url": "https://www.theseventhsense.com",
+          "apiAvailable": false,
+          "pricing": "subscription",
+          "integrations": ["HubSpot", "Marketo", "Eloqua"],
+          "capabilities": [
+            "send-time-optimization",
+            "engagement-prediction"
+          ]
+        },
+        {
+          "name": "Phrasee",
+          "type": "copy-optimization",
+          "url": "https://www.phrasee.co",
+          "apiAvailable": true,
+          "pricing": "enterprise",
+          "integrations": ["Various ESP platforms"],
+          "capabilities": [
+            "subject-line-generation",
+            "body-copy-optimization",
+            "language-optimization"
+          ]
+        },
+        {
+          "name": "Mailchimp",
+          "type": "email-platform",
+          "url": "https://www.mailchimp.com",
+          "apiAvailable": true,
+          "pricing": "freemium",
+          "integrations": ["1000+ integrations"],
+          "capabilities": [
+            "email-campaigns",
+            "automation",
+            "analytics",
+            "segmentation"
+          ]
+        },
+        {
+          "name": "Sendinblue",
+          "type": "email-platform",
+          "url": "https://www.sendinblue.com",
+          "apiAvailable": true,
+          "pricing": "freemium",
+          "integrations": ["WordPress", "Shopify", "API"],
+          "capabilities": [
+            "email-marketing",
+            "sms-marketing",
+            "automation",
+            "crm"
+          ]
+        },
+        {
+          "name": "Moosend",
+          "type": "email-platform",
+          "url": "https://www.moosend.com",
+          "apiAvailable": true,
+          "pricing": "freemium",
+          "capabilities": [
+            "email-automation",
+            "segmentation",
+            "personalization"
+          ]
+        }
+      ]
+    },
+    "socialMedia": {
+      "agents": [
+        {
+          "name": "Smartly.io",
+          "type": "ad-automation",
+          "url": "https://www.smartly.io",
+          "apiAvailable": true,
+          "pricing": "enterprise",
+          "integrations": ["Facebook", "Instagram", "Pinterest", "TikTok", "Snapchat"],
+          "capabilities": [
+            "ad-automation",
+            "creative-optimization",
+            "budget-optimization"
+          ]
+        },
+        {
+          "name": "Adext AI",
+          "type": "ad-automation",
+          "url": "https://www.adext.ai",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "integrations": ["Google Ads", "Facebook Ads"],
+          "capabilities": [
+            "audience-optimization",
+            "budget-allocation",
+            "campaign-automation"
+          ]
+        },
+        {
+          "name": "Cortex",
+          "type": "social-optimization",
+          "url": "https://www.meetcortex.com",
+          "apiAvailable": true,
+          "pricing": "custom",
+          "capabilities": [
+            "image-analysis",
+            "performance-insights",
+            "content-recommendations"
+          ]
+        },
+        {
+          "name": "Replai",
+          "type": "ad-automation",
+          "url": "https://www.replai.com",
+          "apiAvailable": false,
+          "pricing": "subscription",
+          "integrations": ["Facebook Ads", "Google Ads"],
+          "capabilities": [
+            "campaign-automation",
+            "roi-optimization"
+          ]
+        }
+      ]
+    },
+    "analytics": {
+      "agents": [
+        {
+          "name": "PaveAI",
+          "type": "insights-generation",
+          "url": "https://www.paveai.com",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "integrations": ["Google Analytics"],
+          "capabilities": [
+            "automated-insights",
+            "trend-analysis",
+            "recommendations"
+          ]
+        },
+        {
+          "name": "MonkeyLearn",
+          "type": "text-analysis",
+          "url": "https://www.monkeylearn.com",
+          "apiAvailable": true,
+          "pricing": "freemium",
+          "integrations": ["API", "Zapier", "Google Sheets"],
+          "capabilities": [
+            "sentiment-analysis",
+            "keyword-extraction",
+            "text-classification"
+          ]
+        },
+        {
+          "name": "Wootric",
+          "type": "cx-management",
+          "url": "https://www.wootric.com",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "capabilities": [
+            "nps-tracking",
+            "sentiment-analysis",
+            "feedback-analysis"
+          ]
+        },
+        {
+          "name": "Google Analytics",
+          "type": "web-analytics",
+          "url": "https://analytics.google.com",
+          "apiAvailable": true,
+          "pricing": "free",
+          "capabilities": [
+            "traffic-analysis",
+            "conversion-tracking",
+            "user-behavior",
+            "predictive-metrics"
+          ]
+        },
+        {
+          "name": "Hotjar",
+          "type": "behavior-analytics",
+          "url": "https://www.hotjar.com",
+          "apiAvailable": true,
+          "pricing": "freemium",
+          "capabilities": [
+            "heatmaps",
+            "session-recordings",
+            "surveys",
+            "feedback"
+          ]
+        }
+      ]
+    },
+    "seo": {
+      "agents": [
+        {
+          "name": "Surfer SEO",
+          "type": "content-optimization",
+          "url": "https://www.surferseo.com",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "integrations": ["Google Docs", "WordPress", "Jasper"],
+          "capabilities": [
+            "content-scoring",
+            "serp-analysis",
+            "keyword-research"
+          ]
+        },
+        {
+          "name": "Frase",
+          "type": "content-research",
+          "url": "https://www.frase.io",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "integrations": ["Google Docs", "WordPress"],
+          "capabilities": [
+            "content-briefs",
+            "question-research",
+            "seo-optimization"
+          ]
+        },
+        {
+          "name": "Clearscope",
+          "type": "content-optimization",
+          "url": "https://www.clearscope.io",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "integrations": ["Google Docs", "WordPress"],
+          "capabilities": [
+            "content-grading",
+            "keyword-research",
+            "competitive-analysis"
+          ]
+        },
+        {
+          "name": "SEMrush",
+          "type": "seo-suite",
+          "url": "https://www.semrush.com",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "integrations": ["Google Analytics", "Google Search Console"],
+          "capabilities": [
+            "keyword-research",
+            "site-audit",
+            "backlink-analysis",
+            "competitor-research"
+          ]
+        },
+        {
+          "name": "Moz",
+          "type": "seo-suite",
+          "url": "https://www.moz.com",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "capabilities": [
+            "rank-tracking",
+            "link-building",
+            "site-audit",
+            "keyword-research"
+          ]
+        }
+      ]
+    },
+    "customerSupport": {
+      "agents": [
+        {
+          "name": "Ada",
+          "type": "chatbot",
+          "url": "https://www.ada.support",
+          "apiAvailable": true,
+          "pricing": "custom",
+          "integrations": ["Zendesk", "Salesforce", "Slack"],
+          "capabilities": [
+            "automated-support",
+            "multilingual",
+            "no-code-builder"
+          ]
+        },
+        {
+          "name": "Intercom",
+          "type": "customer-messaging",
+          "url": "https://www.intercom.com",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "integrations": ["1000+ integrations"],
+          "capabilities": [
+            "live-chat",
+            "chatbots",
+            "product-tours",
+            "email"
+          ]
+        },
+        {
+          "name": "Drift",
+          "type": "conversational-marketing",
+          "url": "https://www.drift.com",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "integrations": ["Salesforce", "Marketo", "HubSpot"],
+          "capabilities": [
+            "live-chat",
+            "chatbots",
+            "meeting-scheduling",
+            "email"
+          ]
+        },
+        {
+          "name": "Zendesk",
+          "type": "support-platform",
+          "url": "https://www.zendesk.com",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "integrations": ["1000+ apps"],
+          "capabilities": [
+            "ticketing",
+            "chatbots",
+            "knowledge-base",
+            "analytics"
+          ]
+        },
+        {
+          "name": "Kustomer",
+          "type": "crm-support",
+          "url": "https://www.kustomer.com",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "capabilities": [
+            "omnichannel-support",
+            "automation",
+            "customer-timeline"
+          ]
+        }
+      ]
+    },
+    "personalization": {
+      "agents": [
+        {
+          "name": "Mutiny",
+          "type": "website-personalization",
+          "url": "https://www.mutiny.com",
+          "apiAvailable": true,
+          "pricing": "custom",
+          "integrations": ["Salesforce", "HubSpot", "Marketo"],
+          "capabilities": [
+            "web-personalization",
+            "abm",
+            "conversion-optimization"
+          ]
+        },
+        {
+          "name": "Personyze",
+          "type": "personalization-platform",
+          "url": "https://www.personyze.com",
+          "apiAvailable": true,
+          "pricing": "subscription",
+          "capabilities": [
+            "web-personalization",
+            "product-recommendations",
+            "email-personalization"
+          ]
+        },
+        {
+          "name": "Dynamic Yield",
+          "type": "experience-optimization",
+          "url": "https://www.dynamicyield.com",
+          "apiAvailable": true,
+          "pricing": "enterprise",
+          "capabilities": [
+            "personalization",
+            "ab-testing",
+            "recommendations",
+            "cross-channel"
+          ]
+        },
+        {
+          "name": "Optimizely",
+          "type": "experimentation",
+          "url": "https://www.optimizely.com",
+          "apiAvailable": true,
+          "pricing": "custom",
+          "integrations": ["Major platforms"],
+          "capabilities": [
+            "ab-testing",
+            "personalization",
+            "feature-flags",
+            "analytics"
+          ]
+        },
+        {
+          "name": "Algolia",
+          "type": "search-api",
+          "url": "https://www.algolia.com",
+          "apiAvailable": true,
+          "pricing": "freemium",
+          "capabilities": [
+            "search",
+            "personalization",
+            "recommendations",
+            "analytics"
+          ]
+        }
+      ]
+    }
+  }
+}

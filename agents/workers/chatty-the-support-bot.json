@@ -1,0 +1,194 @@
+{
+  "id": "chatty-the-support-bot",
+  "name": "Chatty",
+  "fullName": "Chatty the Support Bot",
+  "emoji": "💬",
+  "avatar": "/assets/avatars/chatty.svg",
+  "department": "Customer Support",
+  "role": "Customer Support Specialist",
+  "personality": "Friendly, helpful, and infinitely patient. Chatty loves helping customers and never gets tired of answering questions.",
+  "status": "active",
+  "aiPlatform": {
+    "name": "Intercom",
+    "url": "https://www.intercom.com",
+    "apiKey": "INTERCOM_API_KEY"
+  },
+  "capabilities": [
+    "Live chat support",
+    "Automated responses",
+    "Ticket management",
+    "Knowledge base search",
+    "Sentiment analysis",
+    "Multi-language support",
+    "Proactive messaging",
+    "Customer data lookup"
+  ],
+  "metrics": {
+    "conversationsToday": 245,
+    "autoResolved": 189,
+    "autoResolutionRate": "77%",
+    "averageResponseTime": "12 seconds",
+    "satisfactionScore": 4.7,
+    "activeChats": 8,
+    "ticketsResolved": 156
+  },
+  "currentConversations": [
+    {
+      "id": "conv-701",
+      "customer": "Sarah Johnson",
+      "topic": "Billing question",
+      "status": "active",
+      "sentiment": "neutral",
+      "messages": 3,
+      "startTime": "2025-10-28T11:45:00Z",
+      "assignedTo": "bot"
+    },
+    {
+      "id": "conv-702",
+      "customer": "Mike Chen",
+      "topic": "Feature request",
+      "status": "active",
+      "sentiment": "positive",
+      "messages": 2,
+      "startTime": "2025-10-28T11:42:00Z",
+      "assignedTo": "bot"
+    },
+    {
+      "id": "conv-703",
+      "customer": "Emma Davis",
+      "topic": "Technical issue - urgent",
+      "status": "escalated",
+      "sentiment": "frustrated",
+      "messages": 5,
+      "startTime": "2025-10-28T11:38:00Z",
+      "assignedTo": "agent-sarah"
+    }
+  ],
+  "recentInteractions": [
+    {
+      "customer": "John Smith",
+      "topic": "Password reset",
+      "resolution": "Auto-resolved",
+      "duration": "45 seconds",
+      "satisfaction": 5,
+      "timestamp": "2025-10-28T11:30:00Z"
+    },
+    {
+      "customer": "Lisa Williams",
+      "topic": "Pricing inquiry",
+      "resolution": "Auto-resolved with link to pricing page",
+      "duration": "1m 20s",
+      "satisfaction": 5,
+      "timestamp": "2025-10-28T11:15:00Z"
+    },
+    {
+      "customer": "Tom Anderson",
+      "topic": "Integration help",
+      "resolution": "Escalated to technical support",
+      "duration": "2m 10s",
+      "satisfaction": 4,
+      "timestamp": "2025-10-28T11:00:00Z"
+    }
+  ],
+  "topIssues": [
+    {
+      "category": "Password & Login",
+      "count": 45,
+      "autoResolved": 43,
+      "avgResolutionTime": "1m 15s"
+    },
+    {
+      "category": "Billing & Pricing",
+      "count": 38,
+      "autoResolved": 35,
+      "avgResolutionTime": "1m 45s"
+    },
+    {
+      "category": "How-to Questions",
+      "count": 52,
+      "autoResolved": 48,
+      "avgResolutionTime": "2m 30s"
+    },
+    {
+      "category": "Technical Issues",
+      "count": 28,
+      "autoResolved": 15,
+      "avgResolutionTime": "5m 20s"
+    },
+    {
+      "category": "Feature Requests",
+      "count": 22,
+      "autoResolved": 18,
+      "avgResolutionTime": "1m 50s"
+    }
+  ],
+  "knowledgeBase": {
+    "articles": 156,
+    "categories": 12,
+    "views": 8900,
+    "helpfulVotes": 2340,
+    "topArticles": [
+      {
+        "title": "Getting Started Guide",
+        "views": 1200,
+        "helpful": 95
+      },
+      {
+        "title": "How to Reset Your Password",
+        "views": 890,
+        "helpful": 92
+      },
+      {
+        "title": "Billing and Subscription FAQ",
+        "views": 780,
+        "helpful": 88
+      }
+    ]
+  },
+  "performance": {
+    "thisWeek": {
+      "conversations": 1680,
+      "autoResolved": 1290,
+      "escalations": 145,
+      "satisfaction": 4.7
+    },
+    "lastWeek": {
+      "conversations": 1540,
+      "autoResolved": 1140,
+      "escalations": 168,
+      "satisfaction": 4.6
+    },
+    "improvement": "+12% auto-resolution"
+  },
+  "workingHours": {
+    "timezone": "UTC",
+    "availability": "24/7/365",
+    "preferredHours": "Always here to help!"
+  },
+  "integrations": [
+    "Slack",
+    "Salesforce",
+    "HubSpot",
+    "Zendesk",
+    "Jira",
+    "Google Analytics",
+    "Stripe"
+  ],
+  "settings": {
+    "autoResponse": true,
+    "workingHours": "24/7",
+    "escalationRules": {
+      "sentiment": "negative",
+      "keywords": ["urgent", "angry", "cancel"],
+      "unansweredTime": "5 minutes"
+    },
+    "languages": ["en", "es", "fr", "de"],
+    "responseDelay": "instant"
+  },
+  "quotes": [
+    "How can I help you today?",
+    "I'm here 24/7 - never taking a break!",
+    "Let me find that answer for you!",
+    "Happy customers are my favorite!"
+  ]
+}

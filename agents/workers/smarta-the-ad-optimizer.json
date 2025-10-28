@@ -1,0 +1,151 @@
+{
+  "id": "smarta-the-ad-optimizer",
+  "name": "Smarta",
+  "fullName": "Smarta the Ad Optimizer",
+  "emoji": "🎯",
+  "avatar": "/assets/avatars/smarta.svg",
+  "department": "Social Media & Advertising",
+  "role": "Social Advertising Manager",
+  "personality": "Strategic, fast-paced, and results-driven. Smarta optimizes ad campaigns in real-time and always finds ways to improve ROAS.",
+  "status": "active",
+  "aiPlatform": {
+    "name": "Smartly.io",
+    "url": "https://www.smartly.io",
+    "apiKey": "SMARTLY_API_KEY"
+  },
+  "capabilities": [
+    "Multi-platform ad automation",
+    "Creative optimization",
+    "Budget optimization",
+    "Audience targeting",
+    "A/B testing at scale",
+    "Real-time bidding",
+    "Cross-channel campaigns",
+    "Performance analytics"
+  ],
+  "metrics": {
+    "adSpendToday": "$8,450",
+    "roasAverage": "5.2:1",
+    "conversionsToday": 156,
+    "impressions": 425000,
+    "ctr": "3.2%",
+    "activeCampaigns": 12,
+    "budgetSaved": "$2,340"
+  },
+  "currentCampaigns": [
+    {
+      "id": "camp-301",
+      "name": "Q4 Product Launch - Facebook",
+      "platform": "Facebook",
+      "status": "active",
+      "budget": "$500/day",
+      "spent": "$365",
+      "roas": "6.1:1",
+      "conversions": 45,
+      "optimizationStatus": "Performing above target"
+    },
+    {
+      "id": "camp-302",
+      "name": "Brand Awareness - Instagram",
+      "platform": "Instagram",
+      "status": "active",
+      "budget": "$300/day",
+      "spent": "$280",
+      "roas": "4.8:1",
+      "conversions": 28,
+      "optimizationStatus": "Adjusting audience targeting"
+    },
+    {
+      "id": "camp-303",
+      "name": "Retargeting - Multi-platform",
+      "platform": "Facebook, Instagram, Pinterest",
+      "status": "active",
+      "budget": "$400/day",
+      "spent": "$395",
+      "roas": "7.2:1",
+      "conversions": 62,
+      "optimizationStatus": "Scaling budget +20%"
+    }
+  ],
+  "recentOptimizations": [
+    {
+      "action": "Budget reallocation",
+      "campaign": "Q4 Product Launch",
+      "change": "Shifted $200 from underperforming ad set to top performer",
+      "impact": "+15% conversions",
+      "timestamp": "2025-10-28T11:45:00Z"
+    },
+    {
+      "action": "Audience expansion",
+      "campaign": "Brand Awareness",
+      "change": "Added lookalike audience based on converters",
+      "impact": "+22% reach, +8% CTR",
+      "timestamp": "2025-10-28T10:20:00Z"
+    },
+    {
+      "action": "Creative rotation",
+      "campaign": "Retargeting",
+      "change": "Paused low-performing creative, doubled winning variant",
+      "impact": "+18% conversions",
+      "timestamp": "2025-10-28T09:10:00Z"
+    }
+  ],
+  "platforms": [
+    {
+      "name": "Facebook",
+      "status": "connected",
+      "spend": "$3,200",
+      "roas": "5.8:1",
+      "campaigns": 5
+    },
+    {
+      "name": "Instagram",
+      "status": "connected",
+      "spend": "$2,100",
+      "roas": "4.9:1",
+      "campaigns": 4
+    },
+    {
+      "name": "Pinterest",
+      "status": "connected",
+      "spend": "$1,800",
+      "roas": "4.2:1",
+      "campaigns": 2
+    },
+    {
+      "name": "TikTok",
+      "status": "connected",
+      "spend": "$1,350",
+      "roas": "5.5:1",
+      "campaigns": 1
+    }
+  ],
+  "workingHours": {
+    "timezone": "UTC",
+    "availability": "24/7",
+    "preferredHours": "Always optimizing!"
+  },
+  "integrations": [
+    "Facebook Business Manager",
+    "Instagram Ads",
+    "Pinterest Ads",
+    "TikTok Ads",
+    "Snapchat Ads",
+    "Google Analytics",
+    "Shopify"
+  ],
+  "settings": {
+    "autoOptimization": true,
+    "bidStrategy": "target-roas",
+    "minRoas": 3.5,
+    "budgetPacing": "even",
+    "creativeTesting": "always-on",
+    "pauseThreshold": "roas < 2.0"
+  },
+  "quotes": [
+    "Let's scale that ROAS!",
+    "I see optimization opportunities everywhere!",
+    "Every dollar should work harder!",
+    "Watch me turn impressions into conversions!"
+  ]
+}
