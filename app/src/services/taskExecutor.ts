@@ -44,7 +44,7 @@ export async function executeTask(taskId: string, workerId: string): Promise<Tas
 }
 
 // Individual task executors for each worker
-async function executeContentTask(taskId: string): Promise<TaskResult> {
+async function executeContentTask(_taskId: string): Promise<TaskResult> {
   // In production, this would call Jasper AI API
   // For now, simulate successful completion
   return {
@@ -57,7 +57,7 @@ async function executeContentTask(taskId: string): Promise<TaskResult> {
   }
 }
 
-async function executeLeadGenTask(taskId: string): Promise<TaskResult> {
+async function executeLeadGenTask(_taskId: string): Promise<TaskResult> {
   return {
     success: true,
     data: {
@@ -68,7 +68,7 @@ async function executeLeadGenTask(taskId: string): Promise<TaskResult> {
   }
 }
 
-async function executeEmailTask(taskId: string): Promise<TaskResult> {
+async function executeEmailTask(_taskId: string): Promise<TaskResult> {
   return {
     success: true,
     data: {
@@ -78,7 +78,7 @@ async function executeEmailTask(taskId: string): Promise<TaskResult> {
   }
 }
 
-async function executeSocialAdsTask(taskId: string): Promise<TaskResult> {
+async function executeSocialAdsTask(_taskId: string): Promise<TaskResult> {
   return {
     success: true,
     data: {
@@ -89,7 +89,7 @@ async function executeSocialAdsTask(taskId: string): Promise<TaskResult> {
   }
 }
 
-async function executePersonalizationTask(taskId: string): Promise<TaskResult> {
+async function executePersonalizationTask(_taskId: string): Promise<TaskResult> {
   return {
     success: true,
     data: {
@@ -100,7 +100,7 @@ async function executePersonalizationTask(taskId: string): Promise<TaskResult> {
   }
 }
 
-async function executeAnalyticsTask(taskId: string): Promise<TaskResult> {
+async function executeAnalyticsTask(_taskId: string): Promise<TaskResult> {
   return {
     success: true,
     data: {
@@ -111,7 +111,7 @@ async function executeAnalyticsTask(taskId: string): Promise<TaskResult> {
   }
 }
 
-async function executeSeoTask(taskId: string): Promise<TaskResult> {
+async function executeSeoTask(_taskId: string): Promise<TaskResult> {
   return {
     success: true,
     data: {
@@ -122,7 +122,7 @@ async function executeSeoTask(taskId: string): Promise<TaskResult> {
   }
 }
 
-async function executeSupportTask(taskId: string): Promise<TaskResult> {
+async function executeSupportTask(_taskId: string): Promise<TaskResult> {
   return {
     success: true,
     data: {

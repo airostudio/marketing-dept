@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle, XCircle, Loader, ArrowRight, ArrowLeft, Sparkles } from 'lucide-react'
+import { CheckCircle, Loader, ArrowRight, ArrowLeft, Sparkles } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import toast from 'react-hot-toast'
 
@@ -92,7 +92,6 @@ export default function SetupWizard() {
 
   const currentPlatform = platforms[step]
   const isLastStep = step === platforms.length - 1
-  const canProceed = verifiedApis.includes(currentPlatform.id) || apiCredentials[currentPlatform.id as keyof typeof apiCredentials]
 
   const handleVerify = async () => {
     const apiKey = apiCredentials[currentPlatform.id as keyof typeof apiCredentials]
