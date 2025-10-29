@@ -1,57 +1,32 @@
 {
-  "version": 2,
-  "name": "ai-marketing-department",
-  "builds": [
-    {
-      "src": "**/*.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "**/*.css",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "**/*.js",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "**/*.json",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "**/*.md",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/dashboard",
-      "dest": "/ui/dashboard.html"
-    },
-    {
-      "src": "/ui/(.*)",
-      "dest": "/ui/$1"
-    },
-    {
-      "src": "/agents/(.*)",
-      "dest": "/agents/$1"
-    },
-    {
-      "src": "/departments/(.*)",
-      "dest": "/departments/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
-  "public": true,
+  "buildCommand": "cd app && npm install && npm run build",
+  "outputDirectory": "app/dist",
+  "installCommand": "cd app && npm install",
+  "framework": null,
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/app",
+      "destination": "/app/index.html"
+    },
+    {
+      "source": "/app/:path*",
+      "destination": "/app/:path*"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/index.html",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/ui/dashboard.html",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -71,11 +46,11 @@
       ]
     },
     {
-      "source": "/ui/(.*)",
+      "source": "/app/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "value": "public, max-age=3600"
         }
       ]
     }
