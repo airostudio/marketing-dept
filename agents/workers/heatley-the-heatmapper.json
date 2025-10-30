@@ -1,0 +1,133 @@
+{
+  "id": "heatley-the-heatmapper",
+  "name": "Heatley",
+  "fullName": "Heatley the Heatmapper",
+  "emoji": "🔥",
+  "avatar": "/assets/avatars/heatley.svg",
+  "department": "Analytics",
+  "role": "User Experience Analyst",
+  "personality": "Visual, intuitive, and user-obsessed. Heatley sees exactly what users do on your site and reveals the hidden patterns that numbers alone can't show.",
+  "status": "active",
+  "aiPlatform": {
+    "name": "Hotjar",
+    "url": "https://www.hotjar.com",
+    "apiKey": "HOTJAR_API_KEY",
+    "tier": "free"
+  },
+  "capabilities": [
+    "Heatmap generation",
+    "Session recordings",
+    "Conversion funnel analysis",
+    "Form analytics",
+    "Feedback polls",
+    "User surveys",
+    "Behavior tracking",
+    "Click tracking",
+    "Scroll depth analysis"
+  ],
+  "metrics": {
+    "sessionsRecordedToday": 487,
+    "heatmapsGenerated": 12,
+    "insightsDiscovered": 23,
+    "timesSaved": "15 hours",
+    "currentAnalyses": 3,
+    "completedReports": 38
+  },
+  "currentTasks": [
+    {
+      "id": "task-heat-001",
+      "title": "Analyze checkout page abandonment",
+      "status": "in_progress",
+      "progress": 65,
+      "dueDate": "2025-10-30"
+    },
+    {
+      "id": "task-heat-002",
+      "title": "Generate homepage heatmap report",
+      "status": "in_progress",
+      "progress": 40,
+      "dueDate": "2025-10-30"
+    },
+    {
+      "id": "task-heat-003",
+      "title": "Review user feedback from surveys",
+      "status": "queued",
+      "progress": 0,
+      "dueDate": "2025-10-31"
+    }
+  ],
+  "recentAnalyses": [
+    {
+      "title": "Product Page Interaction Analysis",
+      "type": "heatmap",
+      "sessions": 2500,
+      "keyInsight": "Users ignore CTA above fold, focus on product images",
+      "impactScore": 94,
+      "timestamp": "2025-10-28T16:45:00Z"
+    },
+    {
+      "title": "Signup Form Abandonment Study",
+      "type": "form-analysis",
+      "sessions": 850,
+      "keyInsight": "85% drop-off at credit card field",
+      "impactScore": 97,
+      "timestamp": "2025-10-28T14:20:00Z"
+    },
+    {
+      "title": "Mobile Navigation Heatmap",
+      "type": "click-tracking",
+      "sessions": 1200,
+      "keyInsight": "Hamburger menu overlooked, users scroll extensively",
+      "impactScore": 88,
+      "timestamp": "2025-10-28T11:00:00Z"
+    }
+  ],
+  "insights": [
+    {
+      "type": "heatmap-finding",
+      "page": "Homepage",
+      "finding": "Hero CTA has only 12% click rate, image below has 68%",
+      "recommendation": "Move CTA below hero image or add secondary CTA",
+      "confidence": 95
+    },
+    {
+      "type": "session-recording",
+      "page": "Pricing",
+      "finding": "Users switch between tabs 4-5 times before deciding",
+      "recommendation": "Add comparison table and feature highlights",
+      "confidence": 91
+    },
+    {
+      "type": "survey-response",
+      "segment": "Churned users",
+      "finding": "73% cite confusing navigation as primary issue",
+      "recommendation": "Simplify menu structure and add search",
+      "confidence": 89
+    }
+  ],
+  "workingHours": {
+    "timezone": "UTC",
+    "availability": "24/7",
+    "preferredHours": "Always watching!"
+  },
+  "integrations": [
+    "Google Analytics",
+    "Slack",
+    "Zapier",
+    "Segment",
+    "Shopify"
+  ],
+  "settings": {
+    "recordingSampleRate": 10,
+    "heatmapUpdateFrequency": "daily",
+    "privacyMode": "enabled",
+    "minSessionLength": 30,
+    "feedbackTriggers": "exit-intent"
+  },
+  "quotes": [
+    "I see what your users see!",
+    "The heatmap never lies!",
+    "Let me show you what's really happening!",
+    "User behavior tells the real story!"
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "id": "casey-the-copywriter",
+  "name": "Casey",
+  "fullName": "Casey the Copywriter",
+  "emoji": "📝",
+  "avatar": "/assets/avatars/casey.svg",
+  "department": "Content Creation",
+  "role": "AI Copywriter",
+  "personality": "Fast, efficient, and incredibly versatile. Casey thrives on quick turnarounds and loves experimenting with different writing styles.",
+  "status": "active",
+  "aiPlatform": {
+    "name": "Copy.ai",
+    "url": "https://www.copy.ai",
+    "apiKey": "COPYAI_API_KEY",
+    "tier": "free"
+  },
+  "capabilities": [
+    "Marketing copy",
+    "Sales emails",
+    "Product descriptions",
+    "Social media posts",
+    "Blog outlines",
+    "Ad headlines",
+    "Website copy",
+    "Video scripts"
+  ],
+  "metrics": {
+    "wordsWrittenToday": 8200,
+    "contentPiecesCreated": 24,
+    "averageQualityScore": 88,
+    "timesSaved": "12 hours",
+    "currentTasks": 2,
+    "completedTasks": 67
+  },
+  "currentTasks": [
+    {
+      "id": "task-casey-001",
+      "title": "Generate 20 Instagram captions",
+      "status": "in_progress",
+      "progress": 60,
+      "dueDate": "2025-10-30"
+    },
+    {
+      "id": "task-casey-002",
+      "title": "Write product descriptions for new line",
+      "status": "queued",
+      "progress": 0,
+      "dueDate": "2025-10-31"
+    }
+  ],
+  "recentWork": [
+    {
+      "title": "50 Email Subject Lines",
+      "type": "email-subjects",
+      "words": 250,
+      "qualityScore": 90,
+      "timestamp": "2025-10-28T14:20:00Z"
+    },
+    {
+      "title": "Landing Page Hero Copy",
+      "type": "website-copy",
+      "words": 180,
+      "qualityScore": 87,
+      "timestamp": "2025-10-28T13:45:00Z"
+    },
+    {
+      "title": "TikTok Video Scripts x5",
+      "type": "video-script",
+      "words": 320,
+      "qualityScore": 89,
+      "timestamp": "2025-10-28T12:30:00Z"
+    }
+  ],
+  "workingHours": {
+    "timezone": "UTC",
+    "availability": "24/7",
+    "preferredHours": "Always online!"
+  },
+  "integrations": [
+    "Shopify",
+    "WordPress",
+    "HubSpot",
+    "Zapier",
+    "Chrome Extension"
+  ],
+  "settings": {
+    "brandVoice": "conversational",
+    "contentLength": "short-form-optimized",
+    "seoOptimization": true,
+    "autoSave": true,
+    "qualityThreshold": 80
+  },
+  "quotes": [
+    "Need copy? I'm on it in seconds!",
+    "Let's make every word count!",
+    "Fast, fresh, and ready to convert!",
+    "I speak fluent conversion!"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "ai-marketing-department",
+  "version": "2.0.0",
+  "description": "AI-powered marketing and sales department with 8 personified AI workers and React app",
+  "main": "index.html",
+  "scripts": {
+    "dev": "cd app && npm run dev",
+    "build": "cd app && npm install && npm run build",
+    "preview": "cd app && npm run preview",
+    "static": "python -m http.server 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/airostudio/marketing-dept.git"
+  },
+  "keywords": [
+    "ai",
+    "marketing",
+    "sales",
+    "automation",
+    "dashboard",
+    "react",
+    "typescript",
+    "agents"
+  ],
+  "author": "AI Marketing Department",
+  "license": "MIT"
+}

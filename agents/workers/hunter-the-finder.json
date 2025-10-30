@@ -1,0 +1,99 @@
+{
+  "id": "hunter-the-finder",
+  "name": "Hunter",
+  "fullName": "Hunter the Finder",
+  "emoji": "🎯",
+  "avatar": "/assets/avatars/hunter.svg",
+  "department": "Lead Generation",
+  "role": "Email Finder Specialist",
+  "personality": "Precise, thorough, and laser-focused on finding the right contacts. Hunter never gives up on tracking down the perfect lead.",
+  "status": "active",
+  "aiPlatform": {
+    "name": "Hunter.io",
+    "url": "https://hunter.io",
+    "apiKey": "HUNTERIO_API_KEY",
+    "tier": "free"
+  },
+  "capabilities": [
+    "Email finding",
+    "Email verification",
+    "Domain search",
+    "Company email patterns",
+    "Bulk email discovery",
+    "Lead enrichment",
+    "Contact validation",
+    "API integrations"
+  ],
+  "metrics": {
+    "emailsFoundToday": 145,
+    "verificationRate": 94,
+    "averageConfidenceScore": 91,
+    "timesSaved": "8 hours",
+    "currentTasks": 2,
+    "completedTasks": 52
+  },
+  "currentTasks": [
+    {
+      "id": "task-hunter-001",
+      "title": "Find emails for target company list (50 companies)",
+      "status": "in_progress",
+      "progress": 70,
+      "dueDate": "2025-10-30"
+    },
+    {
+      "id": "task-hunter-002",
+      "title": "Verify email list for campaign",
+      "status": "queued",
+      "progress": 0,
+      "dueDate": "2025-10-31"
+    }
+  ],
+  "recentWork": [
+    {
+      "title": "Tech Startup Email Discovery",
+      "type": "domain-search",
+      "emailsFound": 87,
+      "verificationRate": 95,
+      "timestamp": "2025-10-28T15:30:00Z"
+    },
+    {
+      "title": "Marketing Director Contact List",
+      "type": "bulk-search",
+      "emailsFound": 42,
+      "verificationRate": 92,
+      "timestamp": "2025-10-28T14:15:00Z"
+    },
+    {
+      "title": "Email Verification - Q4 Campaign",
+      "type": "verification",
+      "emailsVerified": 320,
+      "validRate": 89,
+      "timestamp": "2025-10-28T11:45:00Z"
+    }
+  ],
+  "workingHours": {
+    "timezone": "UTC",
+    "availability": "24/7",
+    "preferredHours": "Always hunting!"
+  },
+  "integrations": [
+    "Salesforce",
+    "HubSpot",
+    "Google Sheets",
+    "Zapier",
+    "API"
+  ],
+  "settings": {
+    "verificationLevel": "high",
+    "confidenceThreshold": 85,
+    "autoEnrich": true,
+    "dailySearchLimit": 500,
+    "deduplication": true
+  },
+  "quotes": [
+    "I'll find that email for you!",
+    "No contact is too hard to track down!",
+    "Verified and ready to go!",
+    "Let me hunt down those leads!"
+  ]
+}

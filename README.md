@@ -43,6 +43,40 @@ This repository contains a complete organizational structure for building a mode
 
 **Quick start**: `python -m http.server 8000` then visit `http://localhost:8000/ui/dashboard.html`
 
+## 🚀 React Application (NEW!)
+
+**Full-featured React app with real API integrations and task management!**
+
+👉 **[View React App Documentation](./app/README.md)**
+
+### Features
+- ✅ **Setup Wizard** - Multi-step onboarding for API credentials
+- 📊 **Live Dashboard** - Real-time metrics and worker status
+- 📋 **Task Manager** - Create and assign tasks to workers
+- 🤖 **Worker Pages** - Detailed views for each AI worker
+- ⚙️ **Settings** - Manage API keys and configurations
+- 🎨 **Modern UI** - Built with React, TypeScript, and Tailwind CSS
+
+### Quick Start
+
+```bash
+cd app
+npm install
+npm run dev
+```
+
+Visit `http://localhost:3000` to start the setup wizard!
+
+### What It Does
+
+1. **Setup**: Enter API keys for Jasper AI, ZoomInfo, Intercom, etc.
+2. **Verify**: Automatically tests connections to each platform
+3. **Create Tasks**: Assign work to your AI workers
+4. **Watch**: Monitor real-time progress as tasks execute
+5. **Manage**: View results, adjust settings, track performance
+
+**[See Full React App Guide →](./app/README.md)**
+
 ## Quick Start
 
 **New here?** Start with the [Getting Started Guide](./setup/GETTING_STARTED.md)
