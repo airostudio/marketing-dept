@@ -3,11 +3,14 @@ import { persist } from 'zustand/middleware'
 
 export interface ApiCredentials {
   jasperAi?: string
+  copyAi?: string
   zoomInfo?: string
-  seventhSense?: string
+  hunterIo?: string
+  mailchimp?: string
   smartlyIo?: string
   dynamicYield?: string
   googleAnalytics?: string
+  hotjar?: string
   surferSeo?: string
   intercom?: string
 }
@@ -84,6 +87,16 @@ export const useStore = create<Store>()(
           metrics: {}
         },
         {
+          id: 'casey',
+          name: 'Casey',
+          emoji: '📝',
+          role: 'AI Copywriter',
+          department: 'Content Creation',
+          platform: 'Copy.ai',
+          status: 'idle',
+          metrics: {}
+        },
+        {
           id: 'zoey',
           name: 'Zoey',
           emoji: '🔍',
@@ -94,12 +107,22 @@ export const useStore = create<Store>()(
           metrics: {}
         },
         {
+          id: 'hunter',
+          name: 'Hunter',
+          emoji: '🎯',
+          role: 'Email Finder Specialist',
+          department: 'Lead Generation',
+          platform: 'Hunter.io',
+          status: 'idle',
+          metrics: {}
+        },
+        {
           id: 'sage',
           name: 'Sage',
           emoji: '⏰',
-          role: 'Email Optimization Specialist',
+          role: 'Email Campaign Manager',
           department: 'Email Marketing',
-          platform: 'Seventh Sense',
+          platform: 'Mailchimp',
           status: 'idle',
           metrics: {}
         },
@@ -130,6 +153,16 @@ export const useStore = create<Store>()(
           role: 'Data Analytics Specialist',
           department: 'Analytics',
           platform: 'Google Analytics',
+          status: 'idle',
+          metrics: {}
+        },
+        {
+          id: 'heatley',
+          name: 'Heatley',
+          emoji: '🔥',
+          role: 'User Experience Analyst',
+          department: 'Analytics',
+          platform: 'Hotjar',
           status: 'idle',
           metrics: {}
         },

@@ -15,8 +15,12 @@ export async function executeTask(taskId: string, workerId: string): Promise<Tas
     switch (workerId) {
       case 'jasper':
         return await executeContentTask(taskId)
+      case 'casey':
+        return await executeCopyAiTask(taskId)
       case 'zoey':
         return await executeLeadGenTask(taskId)
+      case 'hunter':
+        return await executeHunterIoTask(taskId)
       case 'sage':
         return await executeEmailTask(taskId)
       case 'smarta':
@@ -25,6 +29,8 @@ export async function executeTask(taskId: string, workerId: string): Promise<Tas
         return await executePersonalizationTask(taskId)
       case 'analyzer':
         return await executeAnalyticsTask(taskId)
+      case 'heatley':
+        return await executeHotjarTask(taskId)
       case 'surfy':
         return await executeSeoTask(taskId)
       case 'chatty':
@@ -129,6 +135,42 @@ async function executeSupportTask(_taskId: string): Promise<TaskResult> {
       conversationsHandled: 24,
       autoResolved: 18,
       satisfactionScore: 4.8
+    }
+  }
+}
+
+async function executeCopyAiTask(_taskId: string): Promise<TaskResult> {
+  // In production, this would call Copy.ai API
+  return {
+    success: true,
+    data: {
+      copiesGenerated: 25,
+      variations: 5,
+      avgEngagementScore: 88
+    }
+  }
+}
+
+async function executeHunterIoTask(_taskId: string): Promise<TaskResult> {
+  // In production, this would call Hunter.io API
+  return {
+    success: true,
+    data: {
+      emailsFound: 87,
+      emailsVerified: 82,
+      confidenceScore: 94
+    }
+  }
+}
+
+async function executeHotjarTask(_taskId: string): Promise<TaskResult> {
+  // In production, this would call Hotjar API
+  return {
+    success: true,
+    data: {
+      heatmapsGenerated: 3,
+      sessionsRecorded: 245,
+      insightsDiscovered: 12
     }
   }
 }

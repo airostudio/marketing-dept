@@ -5,23 +5,25 @@
   "emoji": "⏰",
   "avatar": "/assets/avatars/sage.svg",
   "department": "Email Marketing",
-  "role": "Email Optimization Specialist",
-  "personality": "Wise, patient, and timing-obsessed. Sage knows exactly when your audience is most likely to engage and never sends an email at the wrong time.",
+  "role": "Email Campaign Manager",
+  "personality": "Wise, patient, and timing-obsessed. Sage knows exactly when your audience is most likely to engage and creates campaigns that convert.",
   "status": "active",
   "aiPlatform": {
-    "name": "Seventh Sense",
-    "url": "https://www.theseventhsense.com",
-    "apiKey": "SEVENTH_SENSE_API_KEY"
+    "name": "Mailchimp",
+    "url": "https://mailchimp.com",
+    "apiKey": "MAILCHIMP_API_KEY",
+    "tier": "free"
   },
   "capabilities": [
+    "Email campaign creation",
+    "Audience segmentation",
+    "A/B testing",
+    "Automated workflows",
     "Send-time optimization",
-    "Engagement prediction",
-    "Behavioral pattern analysis",
-    "Email frequency optimization",
-    "Individual recipient timing",
-    "Campaign performance boost",
-    "Deliverability improvement",
-    "A/B test timing"
+    "Template design",
+    "Analytics & reporting",
+    "List management",
+    "Landing pages"
   ],
   "metrics": {
     "emailsOptimizedToday": 2500,

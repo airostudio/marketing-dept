@@ -12,7 +12,18 @@ const platforms = [
     description: 'AI content generation platform',
     worker: 'Jasper - Content Creation',
     docsUrl: 'https://docs.jasper.ai/api',
-    placeholder: 'sk-jasper-...'
+    placeholder: 'sk-jasper-...',
+    tier: 'Premium'
+  },
+  {
+    id: 'copyAi',
+    name: 'Copy.ai',
+    emoji: '📝',
+    description: 'AI copywriting assistant (Free tier)',
+    worker: 'Casey - Content Creation',
+    docsUrl: 'https://www.copy.ai/api',
+    placeholder: 'copyai-api-key-...',
+    tier: 'Free'
   },
   {
     id: 'zoomInfo',
@@ -21,16 +32,28 @@ const platforms = [
     description: 'B2B lead intelligence platform',
     worker: 'Zoey - Lead Generation',
     docsUrl: 'https://api-docs.zoominfo.com',
-    placeholder: 'zoominfo-api-key-...'
+    placeholder: 'zoominfo-api-key-...',
+    tier: 'Premium'
   },
   {
-    id: 'seventhSense',
-    name: 'Seventh Sense',
+    id: 'hunterIo',
+    name: 'Hunter.io',
+    emoji: '🎯',
+    description: 'Email finder & verifier (Free tier)',
+    worker: 'Hunter - Lead Generation',
+    docsUrl: 'https://hunter.io/api-documentation',
+    placeholder: 'hunter-api-key-...',
+    tier: 'Free'
+  },
+  {
+    id: 'mailchimp',
+    name: 'Mailchimp',
     emoji: '⏰',
-    description: 'Email send-time optimization',
+    description: 'Email marketing platform (Free tier)',
     worker: 'Sage - Email Marketing',
-    docsUrl: 'https://theseventhsense.com/api',
-    placeholder: '7s-api-key-...'
+    docsUrl: 'https://mailchimp.com/developer/',
+    placeholder: 'mailchimp-api-key-...',
+    tier: 'Free'
   },
   {
     id: 'smartlyIo',
@@ -54,10 +77,21 @@ const platforms = [
     id: 'googleAnalytics',
     name: 'Google Analytics',
     emoji: '📊',
-    description: 'Web analytics platform',
+    description: 'Web analytics platform (Free)',
     worker: 'Analyzer - Analytics',
     docsUrl: 'https://developers.google.com/analytics',
-    placeholder: 'UA-XXXXXXXXX-X or G-XXXXXXXXXX'
+    placeholder: 'UA-XXXXXXXXX-X or G-XXXXXXXXXX',
+    tier: 'Free'
+  },
+  {
+    id: 'hotjar',
+    name: 'Hotjar',
+    emoji: '🔥',
+    description: 'Heatmaps & session recordings (Free tier)',
+    worker: 'Heatley - Analytics',
+    docsUrl: 'https://help.hotjar.com/hc/en-us/articles/115011639927',
+    placeholder: 'hotjar-site-id-...',
+    tier: 'Free'
   },
   {
     id: 'surferSeo',
@@ -66,7 +100,8 @@ const platforms = [
     description: 'SEO content optimization',
     worker: 'Surfy - SEO Optimization',
     docsUrl: 'https://docs.surferseo.com/api',
-    placeholder: 'surfer-api-key-...'
+    placeholder: 'surfer-api-key-...',
+    tier: 'Premium'
   },
   {
     id: 'intercom',
