@@ -1,0 +1,38 @@
+<svg width="400" height="100" viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Circle logo -->
+  <circle cx="50" cy="50" r="45" fill="url(#logoGradient)"/>
+
+  <!-- M letter in circle -->
+  <path d="M 30 35 L 30 65 M 30 35 L 42.5 52.5 L 55 35 L 55 65"
+        stroke="white"
+        stroke-width="5"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- AI dots -->
+  <circle cx="62" cy="32" r="3" fill="white" opacity="0.8"/>
+  <circle cx="68" cy="38" r="2" fill="white" opacity="0.6"/>
+  <circle cx="64" cy="44" r="2.5" fill="white" opacity="0.7"/>
+
+  <!-- Text -->
+  <text x="110" y="45" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="url(#textGradient)">
+    AI Marketing
+  </text>
+  <text x="110" y="70" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#718096">
+    Department
+  </text>
+</svg>

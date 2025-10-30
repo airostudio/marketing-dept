@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="0; url=/ui/dashboard.html">
+    <link rel="icon" type="image/svg+xml" href="/ui/assets/icon.svg">
     <title>AI Marketing Department - Redirecting...</title>
     <style>
         body {
@@ -18,6 +19,16 @@
         }
         .loader {
             text-align: center;
+        }
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
         .spinner {
             width: 50px;
@@ -47,8 +58,8 @@
 </head>
 <body>
     <div class="loader">
-        <div class="spinner"></div>
-        <h1>🤖 AI Marketing Department</h1>
+        <img src="/ui/assets/icon.svg" alt="AI Marketing Department" class="logo-img">
+        <h1>AI Marketing Department</h1>
         <p>Redirecting to dashboard...</p>
         <p><small>If not redirected, <a href="/ui/dashboard.html">click here</a></small></p>
     </div>

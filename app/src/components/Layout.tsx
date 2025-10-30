@@ -28,8 +28,12 @@ export default function Layout({ children }: LayoutProps) {
       {/* Sidebar */}
       <aside className="fixed left-0 top-0 h-screen w-64 gradient-primary text-white p-6 overflow-y-auto">
         <div className="mb-8">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="text-3xl">🤖</span>
+          <Link to="/" className="flex items-center gap-3">
+            <img
+              src="/assets/icon.svg"
+              alt="AI Marketing Department"
+              className="w-12 h-12 rounded-lg"
+            />
             <div>
               <h1 className="text-xl font-bold">AI Marketing</h1>
               <p className="text-sm text-white/80">Department</p>
