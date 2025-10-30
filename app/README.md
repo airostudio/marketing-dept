@@ -6,13 +6,14 @@ A fully functional React application for managing your AI-powered marketing depa
 
 ### ✅ Setup Wizard
 - Beautiful multi-step onboarding flow
-- API credential verification for all 8 platforms
+- API credential verification for all 11 platforms
 - Progress tracking and validation
 - Skip and return later functionality
+- Free tier platform support
 
 ### 🎨 Interactive Dashboard
 - Real-time metrics and KPIs
-- 8 personified AI workers with status tracking
+- 11 personified AI workers with status tracking
 - Activity feed with live updates
 - Performance analytics
 
@@ -21,6 +22,7 @@ A fully functional React application for managing your AI-powered marketing depa
 - Real-time task execution and progress tracking
 - Priority levels and status management
 - Automatic worker allocation
+- Support for both free and premium platforms
 
 ### 👤 Worker Detail Pages
 - Individual worker profiles
@@ -69,16 +71,22 @@ npm run preview
 
 ### API Platforms
 
-The app supports 8 AI platforms:
+The app supports 11 AI platforms - 5 with free tiers! 🎉
 
-1. **Jasper AI** - Content creation
-2. **ZoomInfo** - Lead generation
-3. **Seventh Sense** - Email optimization
-4. **Smartly.io** - Social advertising
-5. **Dynamic Yield** - Personalization
-6. **Google Analytics** - Analytics
-7. **Surfer SEO** - SEO optimization
-8. **Intercom** - Customer support
+**FREE TIER PLATFORMS:**
+1. **Copy.ai** ✨ - AI copywriting assistant
+2. **Hunter.io** ✨ - Email finder & verification
+3. **Mailchimp** ✨ - Email marketing automation
+4. **Google Analytics** ✨ - Web analytics (Forever free)
+5. **Hotjar** ✨ - Heatmaps & session recordings
+
+**PREMIUM PLATFORMS:**
+6. **Jasper AI** - Advanced content creation
+7. **ZoomInfo** - B2B lead intelligence
+8. **Smartly.io** - Social advertising automation
+9. **Dynamic Yield** - Personalization engine
+10. **Surfer SEO** - SEO content optimization
+11. **Intercom** - Customer support
 
 ### Environment Variables
 
