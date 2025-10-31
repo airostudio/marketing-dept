@@ -1,7 +1,15 @@
+import { useState } from 'react'
 import { workers } from './data/workers'
+import SiteEditor from './editor/SiteEditor'
 import './index.css'
 
 function App() {
+  const [showEditor, setShowEditor] = useState(false)
+
+  if (showEditor) {
+    return <SiteEditor />
+  }
+
   return (
     <div className="app">
       <header className="header">
@@ -12,6 +20,12 @@ function App() {
         <p>
           5 powerful AI workers to supercharge your marketing - all with free tiers!
         </p>
+        <button
+          onClick={() => setShowEditor(true)}
+          className="editor-launch-btn"
+        >
+          🎨 Launch Website Editor
+        </button>
       </header>
 
       <div className="workers-grid">
