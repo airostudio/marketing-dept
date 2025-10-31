@@ -56,6 +56,31 @@ fetch('https://api.copy.ai/api/workflow/{workflow_id}', {
 })
 ```
 
+## Setting Up Workflows (IMPORTANT!)
+
+Copy.ai works through **Workflows**, not direct API calls. You need to:
+
+1. **Create or install workflows** in your Copy.ai account
+2. **Get the Workflow ID** for each workflow
+3. **Use that ID in API calls**
+
+📖 **[Complete Workflows Setup Guide](./COPYAI_WORKFLOWS_GUIDE.md)**
+
+This guide covers:
+- How to access workflows in Copy.ai
+- Using pre-built templates (EASIEST)
+- Creating custom workflows
+- Getting workflow IDs
+- Testing workflows
+- API integration examples
+
+**Quick version:**
+1. Log into https://app.copy.ai
+2. Go to "Workflows" in sidebar
+3. Browse templates and click "Try this"
+4. Copy the Workflow ID from the URL
+5. Use it in your API calls!
+
 ## What Casey Can Do with Copy.ai
 
 With the Copy.ai API integrated, Casey can:
