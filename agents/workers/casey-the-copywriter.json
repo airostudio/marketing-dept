@@ -9,10 +9,10 @@
   "personality": "Fast, efficient, and incredibly versatile. Casey thrives on quick turnarounds and loves experimenting with different writing styles.",
   "status": "active",
   "aiPlatform": {
-    "name": "Copy.ai",
-    "url": "https://www.copy.ai",
-    "apiKey": "COPYAI_API_KEY",
-    "tier": "free"
+    "name": "Rytr AI",
+    "url": "https://app.rytr.me",
+    "apiKey": "90ECPFOACTFO2KE2LPHZR",
+    "tier": "unlimited"
   },
   "capabilities": [
     "Marketing copy",
