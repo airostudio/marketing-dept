@@ -8,41 +8,44 @@ This guide shows you how to set up all 5 free-tier AI workers:
 
 | Worker | Platform | Free Tier Limit | Setup Time |
 |--------|----------|-----------------|------------|
-| 📝 **Casey** | Copy.ai | 2,000 words/month | 5 min |
+| 📝 **Casey** | Rytr.me | 10,000 characters/month | 3 min |
 | 🎯 **Hunter** | Hunter.io | 50 searches/month | 3 min |
 | 📧 **Sage** | Mailchimp | 500 contacts | 10 min |
 | 📊 **Analyzer** | Google Analytics | Unlimited | 15 min |
 | 🔥 **Heatley** | Hotjar | 35 sessions/day | 10 min |
 
-**Total Setup Time: ~45 minutes** for complete AI marketing stack!
+**Total Setup Time: ~35 minutes** for complete AI marketing stack!
 
 ---
 
-## 1. 📝 Casey - Copy.ai (AI Copywriter)
+## 1. 📝 Casey - Rytr.me (AI Copywriter)
 
 ### What You Get Free
-- 2,000 words per month
-- 90+ copywriting tools
-- Blog wizard
-- Email & social templates
+- 10,000 characters per month
+- 40+ use cases & templates
+- 30+ languages
+- 20+ tones of voice
+- Plagiarism checker
 
 ### Setup Steps
 
-1. **Sign Up**: https://www.copy.ai
+1. **Sign Up**: https://rytr.me
 2. **Get API Key**:
-   - Go to Configuration > API Keys
-   - Click Create
-   - Name it "Marketing Dept"
-   - Copy and save the key
-3. **Test It**: Try the dashboard tools first
+   - Log into your Rytr account
+   - Go to Account Settings
+   - Find API section
+   - Copy your API key
+3. **Test It**: Try writing something in the dashboard
 
 ### Use Cases
 - Product descriptions
-- Ad headlines
+- Ad headlines & copy
 - Social media posts
 - Email content
+- Blog posts & articles
+- SEO meta descriptions
 
-**Detailed Guide**: [Copy.ai Setup](./setup/COPYAI_SETUP.md)
+**Detailed Guide**: [Rytr.me Setup](./setup/RYTR_SETUP.md)
 
 ---
 
@@ -206,8 +209,8 @@ curl -X GET \
 Create a `.env` file to store all your API keys securely:
 
 ```bash
-# Copy.ai
-COPYAI_API_KEY=your_copyai_key_here
+# Rytr.me
+RYTR_API_KEY=your_rytr_key_here
 
 # Hunter.io
 HUNTERIO_API_KEY=your_hunterio_key_here
@@ -232,13 +235,13 @@ HOTJAR_SITE_ID=your_site_id_here
 
 | Platform | Free Tier | Paid Plans Start At |
 |----------|-----------|-------------------|
-| Copy.ai | 2K words/mo | $49/mo (unlimited) |
+| Rytr.me | 10K chars/mo | $9/mo (100K chars) |
 | Hunter.io | 50 searches/mo | $49/mo (500 searches) |
 | Mailchimp | 500 contacts | $13/mo (500 contacts) |
 | Google Analytics | ∞ FREE | Always free |
 | Hotjar | 35 sessions/day | $39/mo (100 sessions/day) |
 
-**Total if paid**: ~$150/month
+**Total if paid**: ~$110/month
 **Your cost**: **$0/month** 🎉
 
 ---
@@ -247,7 +250,7 @@ HOTJAR_SITE_ID=your_site_id_here
 
 **When to consider upgrading**:
 
-📝 **Copy.ai**: When you need more than 2,000 words/month
+📝 **Rytr.me**: When you need more than 10,000 characters/month
 🎯 **Hunter.io**: When you need 50+ email searches/month
 📧 **Mailchimp**: When you hit 500 contacts
 📊 **Google Analytics**: Never! Always free
@@ -268,7 +271,7 @@ HOTJAR_SITE_ID=your_site_id_here
 ## Support
 
 Need help? Check individual setup guides:
-- [Copy.ai Setup Guide](./setup/COPYAI_SETUP.md)
+- [Rytr.me Setup Guide](./setup/RYTR_SETUP.md)
 - [Hunter.io Documentation](https://hunter.io/api-documentation)
 - [Mailchimp API Docs](https://mailchimp.com/developer/)
 - [Google Analytics Setup](https://support.google.com/analytics)

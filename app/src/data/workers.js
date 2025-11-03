@@ -4,17 +4,18 @@ export const workers = [
     name: 'Casey',
     emoji: '📝',
     role: 'AI Copywriter',
-    platform: 'Copy.ai',
-    description: 'Casey creates compelling marketing copy in seconds. From social media posts to product descriptions, Casey churns out high-converting content at lightning speed.',
+    platform: 'Rytr.me',
+    description: 'Casey creates compelling marketing copy in seconds. From social media posts to product descriptions, Casey churns out high-converting content at lightning speed using Rytr\'s AI.',
     capabilities: [
       'Marketing copy',
       'Product descriptions',
       'Social media posts',
       'Email content',
       'Ad headlines',
-      'Blog outlines'
+      'Blog writing',
+      'SEO meta descriptions'
     ],
-    platformUrl: 'https://www.copy.ai',
+    platformUrl: 'https://rytr.me',
     tier: 'Free'
   },
   {
