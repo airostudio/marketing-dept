@@ -5,27 +5,30 @@
   "emoji": "🎯",
   "avatar": "/assets/avatars/hunter.svg",
   "department": "Lead Generation",
-  "role": "Email Finder Specialist",
+  "role": "Lead Hunting Specialist",
   "personality": "Precise, thorough, and laser-focused on finding the right contacts. Hunter never gives up on tracking down the perfect lead.",
   "status": "active",
   "aiPlatform": {
-    "name": "Hunter.io",
-    "url": "https://hunter.io",
-    "apiKey": "HUNTERIO_API_KEY",
+    "name": "Hunter.ai",
+    "url": "https://hunter.ai",
+    "apiKey": "HUNTER_AI_API_KEY",
     "tier": "free"
   },
   "capabilities": [
+    "Lead discovery",
+    "Contact hunting",
     "Email finding",
     "Email verification",
     "Domain search",
-    "Company email patterns",
-    "Bulk email discovery",
+    "Company intelligence",
+    "Bulk lead generation",
     "Lead enrichment",
     "Contact validation",
-    "API integrations"
+    "Prospect research"
   ],
   "metrics": {
-    "emailsFoundToday": 145,
+    "leadsFoundToday": 145,
+    "emailsDiscovered": 238,
     "verificationRate": 94,
     "averageConfidenceScore": 91,
     "timesSaved": "8 hours",
@@ -35,40 +38,42 @@
   "currentTasks": [
     {
       "id": "task-hunter-001",
-      "title": "Find emails for target company list (50 companies)",
+      "title": "Hunt leads for SaaS target market (50 companies)",
       "status": "in_progress",
       "progress": 70,
-      "dueDate": "2025-10-30"
+      "dueDate": "2025-11-05"
     },
     {
       "id": "task-hunter-002",
-      "title": "Verify email list for campaign",
+      "title": "Discover decision-makers for Q4 outreach",
       "status": "queued",
       "progress": 0,
-      "dueDate": "2025-10-31"
+      "dueDate": "2025-11-06"
     }
   ],
   "recentWork": [
     {
-      "title": "Tech Startup Email Discovery",
-      "type": "domain-search",
-      "emailsFound": 87,
+      "title": "Tech Startup Lead Hunt",
+      "type": "lead-discovery",
+      "leadsFound": 87,
+      "emailsDiscovered": 87,
       "verificationRate": 95,
-      "timestamp": "2025-10-28T15:30:00Z"
+      "timestamp": "2025-11-02T15:30:00Z"
     },
     {
-      "title": "Marketing Director Contact List",
-      "type": "bulk-search",
-      "emailsFound": 42,
+      "title": "Marketing Director Prospect List",
+      "type": "bulk-lead-generation",
+      "leadsFound": 42,
+      "emailsDiscovered": 42,
       "verificationRate": 92,
-      "timestamp": "2025-10-28T14:15:00Z"
+      "timestamp": "2025-11-02T14:15:00Z"
     },
     {
-      "title": "Email Verification - Q4 Campaign",
-      "type": "verification",
-      "emailsVerified": 320,
-      "validRate": 89,
-      "timestamp": "2025-10-28T11:45:00Z"
+      "title": "Lead Enrichment - Q4 Campaign",
+      "type": "lead-enrichment",
+      "leadsEnriched": 320,
+      "dataQualityScore": 89,
+      "timestamp": "2025-11-02T11:45:00Z"
     }
   ],
   "workingHours": {
