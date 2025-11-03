@@ -9,21 +9,25 @@
   "personality": "Wise, patient, and timing-obsessed. Sage knows exactly when your audience is most likely to engage and creates campaigns that convert.",
   "status": "active",
   "aiPlatform": {
-    "name": "Mailchimp",
+    "name": "Mailchimp Email Builder",
     "url": "https://mailchimp.com",
     "apiKey": "MAILCHIMP_API_KEY",
-    "tier": "free"
+    "tier": "free",
+    "features": ["Email Wizard", "Drag-and-drop builder", "Templates"]
   },
   "capabilities": [
-    "Email campaign creation",
+    "Email Wizard (drag-and-drop builder)",
+    "Campaign creation with AI",
+    "Professional email templates",
     "Audience segmentation",
     "A/B testing",
     "Automated workflows",
     "Send-time optimization",
-    "Template design",
+    "Template design & customization",
     "Analytics & reporting",
     "List management",
-    "Landing pages"
+    "Landing page builder",
+    "Mobile-responsive emails"
   ],
   "metrics": {
     "emailsOptimizedToday": 2500,
