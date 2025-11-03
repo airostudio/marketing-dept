@@ -47,9 +47,9 @@ const platforms = [
   },
   {
     id: 'mailchimp',
-    name: 'Mailchimp',
+    name: 'Mailchimp Email Builder',
     emoji: '⏰',
-    description: 'Email marketing platform (Free tier)',
+    description: 'Email Wizard & campaign builder (Free tier)',
     worker: 'Sage - Email Marketing',
     docsUrl: 'https://mailchimp.com/developer/',
     placeholder: 'mailchimp-api-key-...',
