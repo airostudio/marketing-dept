@@ -10,9 +10,9 @@
   "status": "active",
   "aiPlatform": {
     "name": "Hotjar",
-    "url": "https://www.hotjar.com",
-    "apiKey": "HOTJAR_API_KEY",
-    "tier": "free"
+    "url": "https://insights.hotjar.com",
+    "apiKey": "HJ5W9X2K3L7M8N9P0Q1R2",
+    "tier": "basic"
   },
   "capabilities": [
     "Heatmap generation",
