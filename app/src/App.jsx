@@ -1,67 +1,23 @@
-import { workers } from './data/workers'
-import './index.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navigation from './components/Navigation';
+import Home from './pages/Home';
+import Casey from './pages/Casey';
+import Stats from './pages/Stats';
+import './index.css';
 
 function App() {
   return (
-    <div className="app">
-      <header className="header">
-        <h1>
-          🤖 Free AI Marketing Department
-          <span className="badge">100% FREE</span>
-        </h1>
-        <p>
-          5 powerful AI workers to supercharge your marketing - all with free tiers!
-        </p>
-      </header>
-
-      <div className="workers-grid">
-        {workers.map((worker) => (
-          <div key={worker.id} className="worker-card">
-            <div className="worker-header">
-              <div className="worker-emoji">{worker.emoji}</div>
-              <div className="worker-info">
-                <h3>{worker.name}</h3>
-                <div className="worker-role">{worker.role}</div>
-              </div>
-            </div>
-
-            <p className="worker-description">{worker.description}</p>
-
-            <div className="worker-capabilities">
-              <h4>Capabilities</h4>
-              <div className="capabilities-list">
-                {worker.capabilities.map((cap, idx) => (
-                  <span key={idx} className="capability-tag">
-                    {cap}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="platform-badge">
-              Powered by {worker.platform}
-            </div>
-          </div>
-        ))}
+    <Router>
+      <div className="app">
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/casey" element={<Casey />} />
+          <Route path="/stats" element={<Stats />} />
+        </Routes>
       </div>
-
-      <div className="cta-section">
-        <h2>Ready to Build Your AI Team?</h2>
-        <p>
-          All these platforms offer free tiers - start automating your marketing today
-          without spending a dime!
-        </p>
-        <a
-          href="https://github.com/airostudio/marketing-dept"
-          className="cta-button"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View on GitHub
-        </a>
-      </div>
-    </div>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
