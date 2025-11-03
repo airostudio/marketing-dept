@@ -6,10 +6,10 @@
  * SETUP REQUIRED:
  * 1. Sign up at https://rytr.me
  * 2. Get API key from Account Settings > API Keys
- * 3. Add your API key to .env file as RYTR_API_KEY
+ * 3. Add your API key to .env file as VITE_RYTR_API_KEY
  */
 
-const RYTR_API_KEY = process.env.RYTR_API_KEY || '';
+const RYTR_API_KEY = import.meta.env.VITE_RYTR_API_KEY || '';
 const API_BASE_URL = 'https://api.rytr.me/v1';
 
 // ============================================

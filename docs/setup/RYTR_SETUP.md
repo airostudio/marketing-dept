@@ -1,5 +1,19 @@
 # Rytr.me Setup Guide for Casey (AI Copywriter)
 
+## ✅ Configuration Status: ACTIVE
+
+Your Rytr.me account has been configured with the following details:
+
+- **Platform**: Rytr AI
+- **URL**: https://app.rytr.me
+- **API Key**: `90ECPFOACTFO2KE2LPHZR`
+- **Tier**: Unlimited
+- **Status**: ✅ Ready to use
+
+You can start using Casey's copywriting tools immediately at `/casey` in the application!
+
+---
+
 ## What You Need
 
 To integrate Casey (your AI copywriter) with Rytr.me, you'll need:

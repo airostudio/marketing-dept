@@ -209,22 +209,23 @@ curl -X GET \
 Create a `.env` file to store all your API keys securely:
 
 ```bash
-# Rytr.me
-RYTR_API_KEY=your_rytr_key_here
+# Rytr.me (✅ CONFIGURED)
+VITE_RYTR_API_KEY=90ECPFOACTFO2KE2LPHZR
 
 # Hunter.io
-HUNTERIO_API_KEY=your_hunterio_key_here
+VITE_HUNTERIO_API_KEY=your_hunterio_key_here
 
 # Mailchimp
-MAILCHIMP_API_KEY=your_mailchimp_key_here
-MAILCHIMP_SERVER_PREFIX=us1  # Check your API key for server prefix
+VITE_MAILCHIMP_API_KEY=your_mailchimp_key_here
+VITE_MAILCHIMP_SERVER_PREFIX=us1  # Check your API key for server prefix
 
 # Google Analytics
-GOOGLE_ANALYTICS_TRACKING_ID=G-XXXXXXXXXX
-GOOGLE_ANALYTICS_CREDENTIALS=/path/to/credentials.json  # Optional, for API
+VITE_GA_TRACKING_ID=G-XXXXXXXXXX
 
 # Hotjar
-HOTJAR_SITE_ID=your_site_id_here
+VITE_HOTJAR_SITE_ID=your_site_id_here
+
+# Note: VITE_ prefix is required for environment variables in Vite projects
 ```
 
 **⚠️ IMPORTANT**: Add `.env` to your `.gitignore`!
