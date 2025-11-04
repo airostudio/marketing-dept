@@ -26,7 +26,7 @@ This workflow demonstrates how different departments and AI agents work together
 **Department**: Content Creation + SEO
 
 3. **Generate Content** (Content Creation)
-   - Use Jasper AI or Writesonic to create initial draft
+   - Use Writesonic or Rytr.me to create initial draft
    - Follow content brief from Phase 1
    - Include target keywords naturally
 
@@ -188,7 +188,7 @@ Email + Social Media
 | Phase | Primary Tools |
 |-------|--------------|
 | Research | SEMrush, Frase, Google Analytics, MonkeyLearn |
-| Creation | Jasper AI, Writesonic, Surfer SEO, Clearscope |
+| Creation | Writesonic, Rytr.me, Surfer SEO, Clearscope |
 | Personalization | Mutiny, Dynamic Yield |
 | Distribution | Mailchimp, Phrasee, Smartly.io, Cortex |
 | Lead Capture | Clearbit, Hunter.io, Optimizely |

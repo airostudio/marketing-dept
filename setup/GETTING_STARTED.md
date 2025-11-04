@@ -55,7 +55,7 @@ Don't try to implement everything at once. Start small:
 ## Setup by Department
 
 ### Content Creation Setup (1-2 hours)
-1. **Sign up**: Jasper AI or Copy.ai
+1. **Sign up**: Writesonic or Rytr.me
 2. **Define brand voice**: Create style guide
 3. **Set up templates**: Common content types
 4. **Integrate with SEO**: Connect Surfer SEO
@@ -143,7 +143,7 @@ Don't try to implement everything at once. Start small:
 - **Total**: ~$227/month + ad spend
 
 ### Growth Budget ($2,000-10,000/month)
-- **Content**: Jasper AI ($99/mo)
+- **Content**: Writesonic ($13/mo unlimited)
 - **Lead Gen**: Hunter.io ($199/mo) + UpLead ($299/mo)
 - **Email**: Sendinblue ($99/mo) + Seventh Sense ($600/mo)
 - **Social**: Adext AI ($299/mo)

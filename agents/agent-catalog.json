@@ -5,18 +5,20 @@
     "contentCreation": {
       "agents": [
         {
-          "name": "Jasper AI",
+          "name": "Writesonic",
           "type": "content-generation",
-          "url": "https://www.jasper.ai",
+          "url": "https://writesonic.com",
           "apiAvailable": true,
-          "pricing": "subscription",
-          "integrations": ["Chrome", "API", "Zapier"],
+          "pricing": "freemium",
+          "integrations": ["Chrome", "API", "Zapier", "WordPress"],
           "capabilities": [
             "blog-posts",
             "social-media-copy",
             "product-descriptions",
             "ad-copy",
-            "email-content"
+            "email-content",
+            "seo-optimization",
+            "article-rewriting"
           ]
         },
         {
@@ -340,7 +342,7 @@
           "url": "https://www.surferseo.com",
           "apiAvailable": true,
           "pricing": "subscription",
-          "integrations": ["Google Docs", "WordPress", "Jasper"],
+          "integrations": ["Google Docs", "WordPress", "Writesonic"],
           "capabilities": [
             "content-scoring",
             "serp-analysis",

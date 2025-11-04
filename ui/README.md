@@ -25,11 +25,11 @@ Each AI worker has a detailed interface showing:
 
 ## AI Workers
 
-### ✍️ Jasper (Content Creation)
-**Personality**: Creative and eloquent
+### ✍️ Sonic (Content Creation)
+**Personality**: Fast, creative and SEO-savvy
 - Creates blog posts, marketing copy, social media content
 - Tracks: words written, quality scores, content pieces
-- Platform: Jasper AI
+- Platform: Writesonic
 
 ### 🔍 Zoey (Lead Generation)
 **Personality**: Detail-oriented and persistent
@@ -116,8 +116,8 @@ ui/
 Edit the JSON files in `/agents/workers/`:
 ```javascript
 {
-  "id": "jasper-the-writer",
-  "name": "Jasper",
+  "id": "sonic-the-writer",
+  "name": "Sonic",
   "metrics": {
     "wordsWrittenToday": 12500,  // Update this
     "contentPiecesCreated": 8
@@ -160,9 +160,9 @@ Each worker is configured to connect with its respective AI platform:
 
 ```javascript
 "aiPlatform": {
-  "name": "Jasper AI",
-  "url": "https://www.jasper.ai",
-  "apiKey": "JASPER_API_KEY"  // Replace with actual key
+  "name": "Writesonic",
+  "url": "https://writesonic.com",
+  "apiKey": "WRITESONIC_API_KEY"  // Replace with actual key
 }
 ```
 
@@ -213,7 +213,7 @@ showNotification('Title', 'Message', 'info');
 
 Real-time activity tracking:
 ```javascript
-addActivity('✍️', 'Jasper', 'completed a new blog post');
+addActivity('✍️', 'Sonic', 'completed a new blog post');
 ```
 
 ## Future Enhancements

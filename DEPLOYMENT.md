@@ -20,7 +20,7 @@ A comprehensive AI-powered marketing and sales department with 8 personified AI 
 
 | Worker | Role | Platform |
 |--------|------|----------|
-| ✍️ Jasper | Content Creation | Jasper AI |
+| ✍️ Sonic | Content Creation | Writesonic |
 | 🔍 Zoey | Lead Generation | ZoomInfo |
 | ⏰ Sage | Email Marketing | Seventh Sense |
 | 🎯 Smarta | Social Advertising | Smartly.io |
