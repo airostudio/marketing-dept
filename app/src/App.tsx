@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard'
 import WorkerDetail from './pages/WorkerDetail'
 import TaskManager from './pages/TaskManager'
 import Settings from './pages/Settings'
+import HunterWorkspace from './pages/HunterWorkspace'
 
 function App() {
   const isSetupComplete = useStore((state) => state.isSetupComplete)
@@ -25,6 +26,7 @@ function App() {
             <>
               <Route path="/" element={<Dashboard />} />
               <Route path="/worker/:workerId" element={<WorkerDetail />} />
+              <Route path="/hunter/workspace" element={<HunterWorkspace />} />
               <Route path="/tasks" element={<TaskManager />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/setup" element={<Navigate to="/" replace />} />
