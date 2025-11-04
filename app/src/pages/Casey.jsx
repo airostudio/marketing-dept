@@ -188,7 +188,7 @@ function Casey() {
             <ol>
               <li>Sign up at <a href="https://rytr.me" target="_blank" rel="noopener noreferrer">rytr.me</a></li>
               <li>Get your API key from Account Settings</li>
-              <li>Add <code>RYTR_API_KEY=your_key_here</code> to your .env file</li>
+              <li>Add <code>VITE_RYTR_API_KEY=your_key_here</code> to your <code>/app/.env</code> file</li>
               <li>Restart the dev server</li>
             </ol>
           </div>
