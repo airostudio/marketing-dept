@@ -6,7 +6,7 @@ const workerId = urlParams.get('id');
 
 // Worker data mapping
 const workerFiles = {
-    'jasper': 'jasper-the-writer',
+    'sonic': 'sonic-the-writer',
     'zoey': 'zoey-the-prospector',
     'sage': 'sage-the-send-timer',
     'smarta': 'smarta-the-ad-optimizer',

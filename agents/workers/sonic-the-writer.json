@@ -1,17 +1,18 @@
 {
-  "id": "jasper-the-writer",
-  "name": "Jasper",
-  "fullName": "Jasper the Writer",
+  "id": "sonic-the-writer",
+  "name": "Sonic",
+  "fullName": "Sonic the Writer",
   "emoji": "✍️",
-  "avatar": "/assets/avatars/jasper.svg",
+  "avatar": "/assets/avatars/sonic.svg",
   "department": "Content Creation",
   "role": "Lead Content Writer",
-  "personality": "Creative, eloquent, and always ready with the perfect words. Jasper loves crafting compelling stories and never runs out of ideas.",
+  "personality": "Fast, creative, and SEO-savvy. Sonic loves crafting compelling stories at lightning speed and never runs out of ideas.",
   "status": "active",
   "aiPlatform": {
-    "name": "Jasper AI",
-    "url": "https://www.jasper.ai",
-    "apiKey": "JASPER_API_KEY"
+    "name": "Writesonic",
+    "url": "https://writesonic.com",
+    "apiKey": "WRITESONIC_API_KEY",
+    "tier": "free"
   },
   "capabilities": [
     "Blog post writing",
@@ -21,7 +22,9 @@
     "Email campaigns",
     "Ad copy",
     "Brand voice matching",
-    "Long-form content"
+    "Long-form content",
+    "SEO optimization",
+    "Article rewriting"
   ],
   "metrics": {
     "wordsWrittenToday": 12500,
@@ -87,7 +90,9 @@
     "WordPress",
     "HubSpot",
     "Notion",
-    "Slack"
+    "Slack",
+    "Zapier",
+    "Surfer SEO"
   ],
   "settings": {
     "brandVoice": "professional-friendly",
@@ -100,6 +105,31 @@
     "Every blank page is an opportunity!",
     "I've got just the words you need!",
     "Let's create something amazing together!",
-    "Writer's block? Never heard of it!"
-  ]
+    "Writer's block? Never heard of it!",
+    "Speed and quality - that's my motto!"
+  ],
+  "freeTier": {
+    "available": true,
+    "limit": "10,000 words/month",
+    "features": [
+      "AI Article Writer",
+      "Blog ideas",
+      "Product descriptions",
+      "Ads & marketing copy",
+      "25+ languages",
+      "Sonic Editor"
+    ]
+  },
+  "paidTier": {
+    "price": "$13/month",
+    "limit": "Unlimited words",
+    "features": [
+      "All free features",
+      "Priority support",
+      "Bulk generation",
+      "API access",
+      "Chrome extension",
+      "Brand voice"
+    ]
+  }
 }

@@ -1,371 +1,171 @@
-# AI Marketing Department - React Application
+# Free AI Marketing Department
 
-A fully functional React application for managing your AI-powered marketing department with real API integrations.
+A simple, beautiful landing page showcasing 5 AI marketing workers - all with **100% FREE** tiers!
 
-## 🚀 Features
+## 🎯 What This Is
 
-### ✅ Setup Wizard
-- Beautiful multi-step onboarding flow
-- API credential verification for all 11 platforms
-- Progress tracking and validation
-- Skip and return later functionality
-- Free tier platform support
+A lightweight React app that introduces your AI marketing team:
+- **Casey** (Copy.ai) - AI Copywriter
+- **Hunter** (Hunter.io) - Email Finder
+- **Sage** (Mailchimp) - Email Campaigns
+- **Analyzer** (Google Analytics) - Analytics
+- **Heatley** (Hotjar) - UX Analysis
 
-### 🎨 Interactive Dashboard
-- Real-time metrics and KPIs
-- 11 personified AI workers with status tracking
-- Activity feed with live updates
-- Performance analytics
-
-### 📋 Task Management
-- Create tasks and assign to workers
-- Real-time task execution and progress tracking
-- Priority levels and status management
-- Automatic worker allocation
-- Support for both free and premium platforms
-
-### 👤 Worker Detail Pages
-- Individual worker profiles
-- Task history and current assignments
-- Capabilities and platform information
-- Quick actions
-
-### ⚙️ Settings & Configuration
-- Manage API credentials
-- Platform connection status
-- Security notices
-- Reset functionality
-
-## 🛠️ Tech Stack
-
-- **React 18** - UI framework
-- **TypeScript** - Type safety
-- **Vite** - Build tool
-- **Tailwind CSS** - Styling
-- **Zustand** - State management
-- **React Router** - Navigation
-- **Framer Motion** - Animations
-- **React Hot Toast** - Notifications
-- **Lucide React** - Icons
-
-## 📦 Installation
+## 🚀 Quick Start
 
 ```bash
-# Navigate to app directory
-cd app
-
 # Install dependencies
 npm install
 
-# Start development server
+# Run development server
 npm run dev
 
 # Build for production
 npm run build
-
-# Preview production build
-npm run preview
 ```
 
-## 🔧 Configuration
+## 📦 What You Need to Actually Use These Tools
 
-### API Platforms
+This landing page showcases the workers, but to **actually use** them, you need:
 
-The app supports 11 AI platforms - 5 with free tiers! 🎉
+### 1. Sign Up for Each Platform
 
-**FREE TIER PLATFORMS:**
-1. **Copy.ai** ✨ - AI copywriting assistant
-2. **Hunter.io** ✨ - Email finder & verification
-3. **Mailchimp** ✨ - Email marketing automation
-4. **Google Analytics** ✨ - Web analytics (Forever free)
-5. **Hotjar** ✨ - Heatmaps & session recordings
+All have free tiers! No credit card required for most:
 
-**PREMIUM PLATFORMS:**
-6. **Jasper AI** - Advanced content creation
-7. **ZoomInfo** - B2B lead intelligence
-8. **Smartly.io** - Social advertising automation
-9. **Dynamic Yield** - Personalization engine
-10. **Surfer SEO** - SEO content optimization
-11. **Intercom** - Customer support
+| Platform | Sign Up Link | Free Tier |
+|----------|--------------|-----------|
+| Copy.ai | https://www.copy.ai | 2,000 words/month |
+| Hunter.io | https://hunter.io | 50 searches/month |
+| Mailchimp | https://mailchimp.com | 500 contacts |
+| Google Analytics | https://analytics.google.com | Unlimited |
+| Hotjar | https://www.hotjar.com | 35 sessions/day |
 
-### Environment Variables
+### 2. Get API Keys
 
-Create a `.env` file (optional):
+Each platform gives you an API key in their settings:
 
-```env
-VITE_APP_NAME="AI Marketing Department"
-VITE_API_TIMEOUT=30000
+**Copy.ai**: Configuration > API Keys
+**Hunter.io**: https://hunter.io/api_keys
+**Mailchimp**: Account > Extras > API Keys
+**Google Analytics**: Cloud Console (for API access)
+**Hotjar**: Settings > Sites (Site ID)
+
+### 3. Store Keys Securely
+
+Create a `.env` file (never commit this!):
+
+```bash
+COPYAI_API_KEY=your_key
+HUNTERIO_API_KEY=your_key
+MAILCHIMP_API_KEY=your_key
+GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
+HOTJAR_SITE_ID=your_id
+```
+
+## 📚 Full Setup Guide
+
+For step-by-step instructions on setting up each platform:
+
+**👉 [Complete Setup Guide](../docs/QUICK_START_FREE_PLATFORMS.md)**
+
+This guide includes:
+- Detailed signup steps
+- API key location for each platform
+- Code examples
+- Usage limits
+- Best practices
+
+## 🛠️ Tech Stack
+
+- **React 18** - UI framework
+- **Vite** - Build tool (super fast!)
+- **Pure CSS** - No dependencies, no bloat
+
+## 📊 Stats
+
+- **Build time**: 762ms
+- **Bundle size**: 146KB (47KB gzipped)
+- **Dependencies**: Just React + Vite
+- **Load time**: Lightning fast ⚡
+
+## 🎨 Customization
+
+Edit the worker data in `src/data/workers.js`:
+
+```javascript
+export const workers = [
+  {
+    id: 'casey',
+    name: 'Casey',
+    emoji: '📝',
+    role: 'AI Copywriter',
+    platform: 'Copy.ai',
+    description: '...',
+    capabilities: [...]
+  }
+  // Add more workers!
+]
+```
+
+## 🌐 Deployment
+
+This app is configured for Vercel deployment:
+
+```bash
+# Deploy to Vercel
+vercel
+
+# Or connect your GitHub repo to Vercel
+# and it will auto-deploy on push!
 ```
 
 ## 📁 Project Structure
 
 ```
 app/
+├── public/
+│   └── assets/          # Logo files
 ├── src/
-│   ├── components/         # Reusable UI components
-│   │   ├── Layout.tsx
-│   │   ├── WorkerCard.tsx
-│   │   ├── StatsCard.tsx
-│   │   └── ActivityFeed.tsx
-│   ├── pages/              # Page components
-│   │   ├── SetupWizard.tsx
-│   │   ├── Dashboard.tsx
-│   │   ├── TaskManager.tsx
-│   │   ├── WorkerDetail.tsx
-│   │   └── Settings.tsx
-│   ├── services/           # API integration layer
-│   │   └── taskExecutor.ts
-│   ├── store/              # State management
-│   │   └── useStore.ts
-│   ├── App.tsx             # Main app component
-│   ├── main.tsx            # Entry point
-│   └── index.css           # Global styles
-├── index.html
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-└── tailwind.config.js
+│   ├── data/
+│   │   └── workers.js   # Worker definitions
+│   ├── App.jsx          # Main app component
+│   ├── main.jsx         # Entry point
+│   └── index.css        # Styles
+├── index.html           # HTML template
+├── package.json         # Dependencies
+└── vite.config.js       # Vite config
 ```
 
-## 🎯 Usage
+## ✨ Features
 
-### First Time Setup
+- Responsive design (mobile-friendly)
+- Gradient background
+- Hover animations
+- Worker capability tags
+- Platform badges
+- Clean, modern UI
 
-1. **Start the app**: `npm run dev`
-2. **Setup Wizard**: Enter API credentials for platforms
-3. **Verify Connections**: Test each platform connection
-4. **Complete Setup**: Access the dashboard
+## 🔗 Links
 
-### Creating Tasks
+- **Live Demo**: (Add your Vercel URL here)
+- **Setup Guide**: [docs/QUICK_START_FREE_PLATFORMS.md](../docs/QUICK_START_FREE_PLATFORMS.md)
+- **Copy.ai Setup**: [docs/setup/COPYAI_SETUP.md](../docs/setup/COPYAI_SETUP.md)
 
-1. Navigate to **Task Manager**
-2. Click **"New Task"**
-3. Fill in task details:
-   - Title
-   - Description
-   - Assign to worker
-   - Set priority
-4. Task executes automatically
+## 💡 What's Next?
 
-### Monitoring Workers
+This is a landing page. To make it functional:
 
-1. View all workers on **Dashboard**
-2. Click any worker card for details
-3. See active tasks and metrics
-4. View capabilities and status
+1. **Add API Integration**: Create service functions for each platform
+2. **Add Forms**: Let users input tasks for workers
+3. **Add Dashboard**: Show real metrics from each platform
+4. **Add Authentication**: Protect API keys with user accounts
 
-## 🔌 API Integration
+Want to build the full platform? The workers are ready - just connect the APIs!
 
-### Adding Real API Calls
+## 📄 License
 
-Edit `/src/services/taskExecutor.ts` to add real API calls:
-
-```typescript
-async function executeContentTask(taskId: string): Promise<TaskResult> {
-  const apiKey = getApiKey('jasperAi')
-
-  const response = await fetch('https://api.jasper.ai/v1/generate', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      prompt: 'Your prompt here',
-      max_tokens: 1500
-    })
-  })
-
-  const data = await response.json()
-
-  return {
-    success: true,
-    data: data
-  }
-}
-```
-
-### Platform-Specific Services
-
-Create individual service files for each platform:
-
-```
-services/
-├── jasperService.ts
-├── zoomInfoService.ts
-├── seventhSenseService.ts
-├── smartlyService.ts
-├── dynamicYieldService.ts
-├── analyticsService.ts
-├── surferService.ts
-└── intercomService.ts
-```
-
-## 🎨 Customization
-
-### Styling
-
-Edit `tailwind.config.js` to customize colors:
-
-```javascript
-theme: {
-  extend: {
-    colors: {
-      primary: {
-        500: '#667eea', // Change primary color
-      },
-    },
-  },
-}
-```
-
-### Adding Workers
-
-Edit `/src/store/useStore.ts`:
-
-```typescript
-{
-  id: 'new-worker',
-  name: 'New Worker',
-  emoji: '🆕',
-  role: 'New Role',
-  department: 'New Department',
-  platform: 'New Platform',
-  status: 'idle',
-  metrics: {}
-}
-```
-
-## 🔒 Security
-
-### API Key Storage
-
-- API keys stored in browser `localStorage`
-- Encrypted using Zustand persist middleware
-- Never sent to external servers (except platform APIs)
-
-### Production Recommendations
-
-1. **Backend Proxy**: Use server-side proxy for API calls
-2. **Environment Variables**: Store keys server-side
-3. **OAuth**: Implement OAuth flow where available
-4. **Rate Limiting**: Add request throttling
-5. **Error Handling**: Implement comprehensive error handling
-
-## 📊 State Management
-
-Using **Zustand** with persistence:
-
-```typescript
-const { workers, tasks, addTask } = useStore()
-
-// Add task
-addTask({
-  title: 'New task',
-  workerId: 'jasper',
-  department: 'Content Creation',
-  priority: 'high',
-  status: 'pending',
-  progress: 0
-})
-
-// Update worker
-updateWorkerStatus('jasper', 'active')
-```
-
-## 🎭 Animations
-
-Using **Framer Motion**:
-
-```typescript
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.1 }}
->
-  Content
-</motion.div>
-```
-
-## 🐛 Troubleshooting
-
-### Port Already in Use
-
-```bash
-# Change port in vite.config.ts
-server: {
-  port: 3001
-}
-```
-
-### Build Errors
-
-```bash
-# Clear cache
-rm -rf node_modules
-rm package-lock.json
-npm install
-```
-
-### State Not Persisting
-
-Check browser localStorage permissions and clear if needed.
-
-## 📈 Performance
-
-- Code splitting with React Router
-- Lazy loading for heavy components
-- Optimized re-renders with Zustand
-- Minimal dependencies
-
-## 🚢 Deployment
-
-### Vercel
-
-```bash
-npm run build
-vercel --prod
-```
-
-### Netlify
-
-```bash
-npm run build
-netlify deploy --prod --dir=dist
-```
-
-### Docker
-
-```dockerfile
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-EXPOSE 3000
-CMD ["npm", "run", "preview"]
-```
-
-## 📝 License
-
-MIT License - See LICENSE file
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch
-3. Commit changes
-4. Push to branch
-5. Open pull request
-
-## 🆘 Support
-
-- Check documentation
-- Review component code
-- Test API connections
-- Verify credentials
+MIT
 
 ---
 
-**Built with ❤️ and AI** | [View Full Documentation](../README.md)
+**Start building your AI marketing team today - all for free! 🚀**

@@ -5,15 +5,20 @@ The Content Creation department focuses on generating high-quality marketing con
 
 ## AI Agents & Tools
 
-### 1. Jasper AI
-- **Purpose**: AI-powered content generation
+### 1. Writesonic
+- **Purpose**: AI-powered content generation with SEO focus
 - **Use Cases**:
   - Blog posts
   - Social media copy
   - Marketing content
   - Product descriptions
-- **URL**: https://www.jasper.ai
-- **Key Features**: Maintains quality while accelerating production timelines
+  - Article rewriting
+- **URL**: https://writesonic.com
+- **Key Features**:
+  - 10,000 free words/month
+  - SEO optimization built-in
+  - Fast content generation
+  - Multiple language support
 
 ### 2. Copy.ai
 - **Purpose**: Creative content generation
@@ -54,7 +59,7 @@ The Content Creation department focuses on generating high-quality marketing con
 ## Workflows
 
 ### Daily Content Production
-1. Use Jasper AI or Copy.ai for initial content generation
+1. Use Writesonic or Rytr.me for initial content generation
 2. Optimize content with Ink for All for SEO
 3. Review and refine with team feedback
 4. Publish and track performance
