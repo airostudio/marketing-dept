@@ -11,11 +11,14 @@ export default function Settings() {
 
   const platforms = [
     { id: 'jasperAi', name: 'Jasper AI', worker: 'Jasper' },
+    { id: 'copyAi', name: 'Copy.ai', worker: 'Casey' },
     { id: 'zoomInfo', name: 'ZoomInfo', worker: 'Zoey' },
-    { id: 'seventhSense', name: 'Seventh Sense', worker: 'Sage' },
+    { id: 'hunterIo', name: 'Hunter.io', worker: 'Hunter' },
+    { id: 'mailchimp', name: 'Mailchimp', worker: 'Sage' },
     { id: 'smartlyIo', name: 'Smartly.io', worker: 'Smarta' },
     { id: 'dynamicYield', name: 'Dynamic Yield', worker: 'Dynamo' },
     { id: 'googleAnalytics', name: 'Google Analytics', worker: 'Analyzer' },
+    { id: 'hotjar', name: 'Hotjar', worker: 'Heatley' },
     { id: 'surferSeo', name: 'Surfer SEO', worker: 'Surfy' },
     { id: 'intercom', name: 'Intercom', worker: 'Chatty' },
   ]
