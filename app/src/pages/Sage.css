@@ -1,0 +1,168 @@
+/* Reuse most styles from Casey, with Sage-specific overrides */
+@import './Casey.css';
+
+.sage-page {
+  composes: casey-page;
+}
+
+.sage-header {
+  composes: casey-header;
+}
+
+.sage-tabs {
+  composes: casey-tabs;
+}
+
+.sage-content {
+  composes: casey-content;
+}
+
+/* Sage-specific styling */
+.list-card {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #2563eb;
+}
+
+.list-card h5 {
+  margin: 0 0 0.5rem 0;
+  color: #1e293b;
+  font-size: 1.1rem;
+}
+
+.list-stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.list-id {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin: 0.5rem 0 0 0;
+  font-family: monospace;
+}
+
+.member-card {
+  background: #f8f9fa;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.member-card p {
+  margin: 0.25rem 0;
+}
+
+.member-card strong {
+  color: #1e293b;
+}
+
+.members-list {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.subscribed {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status-badge.unsubscribed {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-badge.pending {
+  background: #fef3c7;
+  color: #ca8a04;
+}
+
+.report-card {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #10b981;
+}
+
+.report-card h5 {
+  margin: 0 0 1rem 0;
+  color: #1e293b;
+}
+
+.report-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.report-date {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0.5rem 0 0 0;
+}
+
+.account-info {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.account-info p {
+  margin: 0.75rem 0;
+  color: #1e293b;
+}
+
+.account-info strong {
+  color: #64748b;
+  display: inline-block;
+  min-width: 150px;
+}
+
+.result-box.success {
+  background: #dcfce7;
+  border-left-color: #16a34a;
+}
+
+.result-box.success h4 {
+  color: #16a34a;
+}
