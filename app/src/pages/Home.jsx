@@ -43,11 +43,9 @@ function Home() {
               Powered by {worker.platform}
             </div>
 
-            {worker.id === 'casey' && (
-              <Link to="/casey" className="worker-action-btn">
-                Launch Casey →
-              </Link>
-            )}
+            <Link to={`/${worker.id}`} className="worker-action-btn">
+              Launch {worker.name} →
+            </Link>
           </div>
         ))}
       </div>

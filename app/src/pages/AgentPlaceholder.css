@@ -1,0 +1,269 @@
+/* Shared styles for agent placeholder pages */
+
+.agent-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.agent-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 40px 20px;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Agent-specific header colors */
+.sage .agent-header {
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+}
+
+.analyzer .agent-header {
+  background: linear-gradient(135deg, #f9ca24 0%, #f0932b 100%);
+}
+
+.heatley .agent-header {
+  background: linear-gradient(135deg, #ff9ff3 0%, #feca57 100%);
+}
+
+.agent-header h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.5rem;
+}
+
+.agent-header p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 1.1rem;
+}
+
+/* Config Section */
+.config-section {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.free {
+  background: #d4edda;
+  color: #155724;
+}
+
+/* Agent Description */
+.agent-description {
+  margin-bottom: 40px;
+}
+
+.agent-description p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+/* Capabilities Grid */
+.capabilities-grid h3 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.capability-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.capability-card {
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.capability-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #667eea;
+}
+
+.capability-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.capability-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* Setup Section */
+.setup-section {
+  background: #f8f9fa;
+  padding: 30px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+}
+
+.setup-section h3 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.setup-steps {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.setup-steps li {
+  margin: 15px 0;
+  line-height: 1.8;
+  color: #555;
+}
+
+.setup-steps a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.setup-steps a:hover {
+  text-decoration: underline;
+}
+
+.setup-steps code {
+  background: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #d63384;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+.code-block {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 15px;
+  border-radius: 6px;
+  margin: 10px 0;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+/* Tier Info */
+.tier-info {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+}
+
+.tier-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.tier-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.tier-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tier-item strong {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.tier-item span {
+  opacity: 0.9;
+  font-size: 0.9rem;
+}
+
+/* Coming Soon */
+.coming-soon {
+  background: #e3f2fd;
+  border: 2px solid #2196f3;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+}
+
+.coming-soon h3 {
+  color: #1565c0;
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.coming-soon p {
+  color: #1976d2;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .agent-header h1 {
+    font-size: 2rem;
+  }
+
+  .agent-header p {
+    font-size: 1rem;
+  }
+
+  .agent-page {
+    padding: 10px;
+  }
+
+  .config-section {
+    padding: 20px;
+  }
+
+  .capability-cards {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .tier-details {
+    grid-template-columns: 1fr;
+  }
+
+  .setup-section {
+    padding: 20px;
+  }
+}
