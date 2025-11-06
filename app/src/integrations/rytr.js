@@ -84,7 +84,7 @@ const TONES = {
  */
 async function callRytr(useCaseId, inputContexts, toneId = 'casual', variations = 1) {
   if (!RYTR_API_KEY) {
-    throw new Error('Rytr.me API key not found. Set RYTR_API_KEY in .env file');
+    throw new Error('Rytr.me API key not found. Set VITE_RYTR_API_KEY in .env file');
   }
 
   try {
@@ -367,7 +367,7 @@ export function getConfigStatus() {
     isConfigured: hasApiKey,
     hasApiKey,
     message: !hasApiKey
-      ? 'API key not set. Add RYTR_API_KEY to .env file'
+      ? 'API key not set. Add VITE_RYTR_API_KEY to .env file'
       : 'Rytr.me is ready to use!',
   };
 }
