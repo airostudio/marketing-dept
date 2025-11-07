@@ -83,24 +83,24 @@ export default function TaskManager() {
   }
 
   const statusColors = {
-    pending: 'bg-gray-100 text-gray-800',
-    in_progress: 'bg-blue-100 text-blue-800',
-    completed: 'bg-green-100 text-green-800',
-    failed: 'bg-red-100 text-red-800',
+    pending: 'bg-gray-700/50 text-gray-300 border border-gray-600',
+    in_progress: 'bg-primary-500/10 text-primary-400 border border-primary-500/20',
+    completed: 'bg-green-500/10 text-green-400 border border-green-500/20',
+    failed: 'bg-red-500/10 text-red-400 border border-red-500/20',
   }
 
   const priorityColors = {
-    low: 'text-gray-600',
-    medium: 'text-yellow-600',
-    high: 'text-red-600',
+    low: 'text-gray-400',
+    medium: 'text-yellow-400',
+    high: 'text-red-400',
   }
 
   return (
     <Layout>
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Task Manager</h1>
-          <p className="text-gray-600 mt-1">Create and manage tasks for your AI workers</p>
+          <h1 className="text-3xl font-bold text-white">Task Manager</h1>
+          <p className="text-gray-400 mt-1">Create and manage tasks for your AI workers</p>
         </div>
         <button
           onClick={() => setShowNewTask(true)}
@@ -126,13 +126,13 @@ export default function TaskManager() {
               animate={{ scale: 1 }}
               exit={{ scale: 0.95 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              className="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
             >
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">Create New Task</h2>
+                <h2 className="text-2xl font-bold text-white">Create New Task</h2>
                 <button
                   onClick={() => setShowNewTask(false)}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -223,8 +223,8 @@ export default function TaskManager() {
         {tasks.length === 0 ? (
           <div className="card text-center py-12">
             <div className="text-6xl mb-4">📋</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">No tasks yet</h3>
-            <p className="text-gray-600 mb-4">Create your first task to get started</p>
+            <h3 className="text-xl font-bold text-white mb-2">No tasks yet</h3>
+            <p className="text-gray-400 mb-4">Create your first task to get started</p>
             <button
               onClick={() => setShowNewTask(true)}
               className="btn-primary inline-flex items-center gap-2"
@@ -244,12 +244,12 @@ export default function TaskManager() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className="card hover:shadow-lg transition-shadow"
+                className="card hover:shadow-2xl hover:shadow-primary-500/10 transition-all"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-lg font-bold text-gray-900">{task.title}</h3>
+                      <h3 className="text-lg font-bold text-white">{task.title}</h3>
                       <span className={`px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 ${statusColors[task.status]}`}>
                         <StatusIcon className={`w-3 h-3 ${task.status === 'in_progress' ? 'animate-spin' : ''}`} />
                         {task.status.replace('_', ' ')}
@@ -259,7 +259,7 @@ export default function TaskManager() {
                       </span>
                     </div>
                     {task.description && (
-                      <p className="text-gray-600 text-sm mb-3">{task.description}</p>
+                      <p className="text-gray-400 text-sm mb-3">{task.description}</p>
                     )}
                     <div className="flex items-center gap-4 text-sm text-gray-500">
                       <div className="flex items-center gap-1">
@@ -272,7 +272,7 @@ export default function TaskManager() {
                   </div>
                   <button
                     onClick={() => deleteTask(task.id)}
-                    className="p-2 hover:bg-red-50 rounded-lg transition-colors text-red-600"
+                    className="p-2 hover:bg-red-500/10 rounded-lg transition-colors text-red-400"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -282,10 +282,10 @@ export default function TaskManager() {
                 {task.status === 'in_progress' && (
                   <div className="mb-4">
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-gray-600">Progress</span>
-                      <span className="font-semibold text-gray-900">{task.progress}%</span>
+                      <span className="text-gray-400">Progress</span>
+                      <span className="font-semibold text-white">{task.progress}%</span>
                     </div>
-                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
                       <motion.div
                         className="h-full gradient-primary"
                         initial={{ width: 0 }}
@@ -298,8 +298,8 @@ export default function TaskManager() {
 
                 {/* Error Message */}
                 {task.error && (
-                  <div className="mt-3 p-3 bg-red-50 rounded-lg border border-red-200">
-                    <p className="text-sm text-red-800">
+                  <div className="mt-3 p-3 bg-red-500/10 rounded-lg border border-red-500/20">
+                    <p className="text-sm text-red-300">
                       <strong>Error:</strong> {task.error}
                     </p>
                   </div>
@@ -307,8 +307,8 @@ export default function TaskManager() {
 
                 {/* Result */}
                 {task.result && (
-                  <div className="mt-3 p-3 bg-green-50 rounded-lg border border-green-200">
-                    <p className="text-sm text-green-800">
+                  <div className="mt-3 p-3 bg-green-500/10 rounded-lg border border-green-500/20">
+                    <p className="text-sm text-green-300">
                       <strong>Result:</strong> {JSON.stringify(task.result, null, 2)}
                     </p>
                   </div>

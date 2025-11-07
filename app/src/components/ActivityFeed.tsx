@@ -34,16 +34,16 @@ export default function ActivityFeed() {
   }
 
   const statusColors = {
-    completed: 'bg-green-100 border-green-200',
-    in_progress: 'bg-blue-100 border-blue-200',
-    failed: 'bg-red-100 border-red-200',
-    pending: 'bg-gray-100 border-gray-200',
+    completed: 'bg-green-500/10 border-green-500/20',
+    in_progress: 'bg-primary-500/10 border-primary-500/20',
+    failed: 'bg-red-500/10 border-red-500/20',
+    pending: 'bg-gray-700/50 border-gray-600',
   }
 
   return (
     <div className="card">
-      <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-        <Activity className="w-5 h-5" />
+      <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+        <Activity className="w-5 h-5 text-primary-500" />
         Recent Activity
       </h3>
 
@@ -61,14 +61,14 @@ export default function ActivityFeed() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.05 }}
-              className={`p-4 rounded-lg border ${statusColors[activity.status as keyof typeof statusColors]}`}
+              className={`p-4 rounded-lg border ${statusColors[activity.status as keyof typeof statusColors]} hover:bg-opacity-20 transition-colors`}
             >
               <div className="flex items-start gap-3">
                 <div className="text-2xl">{activity.emoji}</div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-gray-900">
+                  <p className="text-sm text-white">
                     <span className="font-semibold">{activity.workerName}</span>{' '}
-                    {activity.action}
+                    <span className="text-gray-400">{activity.action}</span>
                   </p>
                   <p className="text-xs text-gray-500 mt-1">
                     {formatDistanceToNow(new Date(activity.time), { addSuffix: true })}

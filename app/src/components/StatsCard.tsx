@@ -25,15 +25,15 @@ export default function StatsCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      className="card hover:shadow-lg transition-shadow"
+      className="card hover:shadow-2xl hover:shadow-primary-500/10 transition-all"
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-gray-600 text-sm mb-2">{label}</p>
-          <h3 className="text-3xl font-bold text-gray-900 mb-2">{value}</h3>
+          <p className="text-gray-400 text-sm mb-2">{label}</p>
+          <h3 className="text-3xl font-bold text-white mb-2">{value}</h3>
           {change && (
             <div className={`flex items-center gap-1 text-sm ${
-              positive ? 'text-green-600' : 'text-gray-600'
+              positive ? 'text-green-400' : 'text-gray-400'
             }`}>
               {positive !== undefined && (
                 positive ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />
@@ -42,7 +42,7 @@ export default function StatsCard({
             </div>
           )}
         </div>
-        <div className={`p-3 rounded-xl bg-gradient-to-br ${gradient}`}>
+        <div className={`p-3 rounded-xl bg-gradient-to-br ${gradient} shadow-lg`}>
           <Icon className="w-6 h-6 text-white" />
         </div>
       </div>

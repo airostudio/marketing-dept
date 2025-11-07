@@ -24,9 +24,9 @@ export default function Layout({ children }: LayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-black">
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-screen w-64 gradient-primary text-white p-6 overflow-y-auto">
+      <aside className="fixed left-0 top-0 h-screen w-64 gradient-primary text-white p-6 overflow-y-auto shadow-2xl shadow-primary-500/20">
         <div className="mb-8">
           <Link to="/" className="flex items-center gap-3">
             <img

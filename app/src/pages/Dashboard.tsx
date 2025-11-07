@@ -65,8 +65,8 @@ export default function Dashboard() {
       {/* Header */}
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-600 mt-1">Welcome back! Here's what's happening today.</p>
+          <h1 className="text-3xl font-bold text-white">Dashboard</h1>
+          <p className="text-gray-400 mt-1">Welcome back! Here's what's happening today.</p>
         </div>
         <Link to="/tasks">
           <button className="btn-primary flex items-center gap-2">
@@ -86,8 +86,8 @@ export default function Dashboard() {
       {/* Workers Section */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">Your AI Workers</h2>
-          <Link to="/tasks" className="text-primary-600 hover:text-primary-700 font-semibold">
+          <h2 className="text-2xl font-bold text-white">Your AI Workers</h2>
+          <Link to="/tasks" className="text-primary-500 hover:text-primary-400 font-semibold transition-colors">
             View all tasks →
           </Link>
         </div>
@@ -108,30 +108,30 @@ export default function Dashboard() {
         {/* Quick Stats */}
         <div className="space-y-6">
           <div className="card">
-            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <Activity className="w-5 h-5" />
+            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+              <Activity className="w-5 h-5 text-primary-500" />
               Today's Activity
             </h3>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Tasks Created</span>
-                <span className="font-bold text-gray-900">{todaysTasks.length}</span>
+                <span className="text-gray-400">Tasks Created</span>
+                <span className="font-bold text-white">{todaysTasks.length}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">In Progress</span>
-                <span className="font-bold text-gray-900">
+                <span className="text-gray-400">In Progress</span>
+                <span className="font-bold text-white">
                   {todaysTasks.filter(t => t.status === 'in_progress').length}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Completed</span>
-                <span className="font-bold text-green-600">
+                <span className="text-gray-400">Completed</span>
+                <span className="font-bold text-green-400">
                   {todaysTasks.filter(t => t.status === 'completed').length}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Failed</span>
-                <span className="font-bold text-red-600">
+                <span className="text-gray-400">Failed</span>
+                <span className="font-bold text-red-400">
                   {todaysTasks.filter(t => t.status === 'failed').length}
                 </span>
               </div>
@@ -139,48 +139,48 @@ export default function Dashboard() {
           </div>
 
           <div className="card">
-            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <TrendingUp className="w-5 h-5" />
+            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-primary-500" />
               Performance
             </h3>
             <div className="space-y-3">
               <div>
                 <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-600">Success Rate</span>
-                  <span className="font-semibold text-gray-900">94%</span>
+                  <span className="text-gray-400">Success Rate</span>
+                  <span className="font-semibold text-white">94%</span>
                 </div>
-                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div className="h-full bg-green-500" style={{ width: '94%' }} />
-                </div>
-              </div>
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-600">Efficiency</span>
-                  <span className="font-semibold text-gray-900">87%</span>
-                </div>
-                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div className="h-full bg-blue-500" style={{ width: '87%' }} />
+                <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-green-500 shadow-sm shadow-green-500" style={{ width: '94%' }} />
                 </div>
               </div>
               <div>
                 <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-600">Utilization</span>
-                  <span className="font-semibold text-gray-900">76%</span>
+                  <span className="text-gray-400">Efficiency</span>
+                  <span className="font-semibold text-white">87%</span>
                 </div>
-                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div className="h-full bg-purple-500" style={{ width: '76%' }} />
+                <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-primary-500 shadow-sm shadow-primary-500" style={{ width: '87%' }} />
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between text-sm mb-1">
+                  <span className="text-gray-400">Utilization</span>
+                  <span className="font-semibold text-white">76%</span>
+                </div>
+                <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-secondary-500 shadow-sm shadow-secondary-500" style={{ width: '76%' }} />
                 </div>
               </div>
             </div>
           </div>
 
           {workers.some(w => w.status === 'error') && (
-            <div className="card bg-red-50 border-red-200">
-              <h3 className="text-lg font-bold text-red-900 mb-3 flex items-center gap-2">
+            <div className="card bg-red-500/10 border-red-500/30">
+              <h3 className="text-lg font-bold text-red-400 mb-3 flex items-center gap-2">
                 <AlertCircle className="w-5 h-5" />
                 Attention Required
               </h3>
-              <p className="text-sm text-red-700">
+              <p className="text-sm text-red-300">
                 Some workers are experiencing issues. Check their status for details.
               </p>
             </div>

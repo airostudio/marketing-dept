@@ -8,22 +8,25 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#f5f7ff',
-          100: '#ebf0ff',
-          200: '#d6e0ff',
-          300: '#b3c7ff',
-          400: '#8da3ff',
-          500: '#667eea',
-          600: '#5568d3',
-          700: '#4451b8',
-          800: '#363d94',
-          900: '#2d3275',
+          50: '#e6f7ff',
+          100: '#b3e5ff',
+          200: '#80d4ff',
+          300: '#4dc2ff',
+          400: '#1ab0ff',
+          500: '#00a1ec',
+          600: '#0081bd',
+          700: '#00608e',
+          800: '#00405f',
+          900: '#002030',
         },
         secondary: {
-          500: '#764ba2',
-          600: '#5f3c82',
-          700: '#4a2e63',
+          500: '#00d4ff',
+          600: '#00b8e6',
+          700: '#009ccc',
         },
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
