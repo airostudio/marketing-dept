@@ -103,7 +103,7 @@ Full departmental structure as shown in org chart.
 - Oversee AI tool usage
 - Ensure brand consistency
 
-**AI Tools Used**: Jasper AI, Copy.ai, Surfer SEO
+**AI Tools Used**: Jasper AI, Rytr AI, Surfer SEO
 
 #### Content Writers
 - Create content using AI assistance
@@ -223,7 +223,7 @@ Full departmental structure as shown in org chart.
 - A/B testing creative
 - Brand guidelines
 
-**AI Tools Used**: Cortex (for insights), Copy.ai (for copy)
+**AI Tools Used**: Cortex (for insights), Rytr AI (for copy)
 
 ### Customer Support Team
 
@@ -342,7 +342,7 @@ Full departmental structure as shown in org chart.
 ### Stage 1: First Marketing Hire
 **Role**: Marketing Generalist
 **Skills**: Content, SEO, email, paid ads (basic)
-**AI Tools**: Copy.ai, Mailchimp, Google Analytics
+**AI Tools**: Rytr AI, Mailchimp, Google Analytics
 
 ### Stage 2: Specialize (2-3 people)
 **Hires**:
@@ -489,7 +489,7 @@ Full departmental structure as shown in org chart.
 
 **Startup**: $500-2,000/month
 - Focus on free tiers and essential tools
-- Copy.ai, Mailchimp, Google Analytics, Hotjar
+- Rytr AI, Mailchimp, Google Analytics, Hotjar
 
 **Growth**: $2,000-10,000/month
 - Add lead gen and email optimization

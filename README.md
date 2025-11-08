@@ -222,7 +222,7 @@ View the complete catalog of all 35+ AI agents with capabilities, integrations, 
 
 ### Starter Package ($200-500/month)
 Perfect for small businesses and startups
-- Content: Copy.ai ($49/mo)
+- Content: Rytr AI ($29/mo unlimited)
 - Email: Mailchimp (Free-$50/mo)
 - Analytics: Google Analytics (Free) + Hotjar ($39/mo)
 - SEO: Surfer SEO ($89/mo)

@@ -74,7 +74,7 @@ npm run preview
 The app supports 11 AI platforms - 5 with free tiers! 🎉
 
 **FREE TIER PLATFORMS:**
-1. **Copy.ai** ✨ - AI copywriting assistant
+1. **Rytr AI** ✨ - AI copywriting assistant (Unlimited tier)
 2. **Hunter.io** ✨ - Email finder & verification
 3. **Mailchimp** ✨ - Email marketing automation
 4. **Google Analytics** ✨ - Web analytics (Forever free)

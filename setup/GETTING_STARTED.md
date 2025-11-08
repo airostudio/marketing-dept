@@ -34,7 +34,7 @@ Navigate to `/departments/[your-choice]/README.md` and review:
 Don't try to implement everything at once. Start small:
 
 **Beginner-Friendly Tools**:
-- Copy.ai (Content) - Free tier available
+- Rytr AI (Content) - Unlimited tier available
 - Hunter.io (Lead Gen) - Free tier available
 - Mailchimp (Email) - Free tier available
 - Google Analytics (Analytics) - Free
@@ -55,7 +55,7 @@ Don't try to implement everything at once. Start small:
 ## Setup by Department
 
 ### Content Creation Setup (1-2 hours)
-1. **Sign up**: Jasper AI or Copy.ai
+1. **Sign up**: Jasper AI or Rytr AI
 2. **Define brand voice**: Create style guide
 3. **Set up templates**: Common content types
 4. **Integrate with SEO**: Connect Surfer SEO
@@ -136,7 +136,7 @@ Don't try to implement everything at once. Start small:
 ## Budget Planning
 
 ### Starter Budget ($500-2,000/month)
-- **Content**: Copy.ai ($49/mo)
+- **Content**: Rytr AI ($29/mo unlimited)
 - **Email**: Mailchimp ($50/mo)
 - **Analytics**: Google Analytics (Free) + Hotjar ($39/mo)
 - **SEO**: Surfer SEO ($89/mo)

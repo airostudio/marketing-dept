@@ -54,7 +54,7 @@ The Content Creation department focuses on generating high-quality marketing con
 ## Workflows
 
 ### Daily Content Production
-1. Use Jasper AI or Copy.ai for initial content generation
+1. Use Jasper AI or Rytr AI for initial content generation
 2. Optimize content with Ink for All for SEO
 3. Review and refine with team feedback
 4. Publish and track performance

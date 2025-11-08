@@ -16,14 +16,14 @@ const platforms = [
     tier: 'Premium'
   },
   {
-    id: 'copyAi',
-    name: 'Copy.ai',
+    id: 'rytrAi',
+    name: 'Rytr AI',
     emoji: '📝',
-    description: 'AI copywriting assistant (Free tier)',
+    description: 'AI copywriting assistant (Unlimited tier)',
     worker: 'Casey - Content Creation',
-    docsUrl: 'https://www.copy.ai/api',
-    placeholder: 'copyai-api-key-...',
-    tier: 'Free'
+    docsUrl: 'https://rytr.me/api',
+    placeholder: 'rytr-api-key-...',
+    tier: 'Unlimited'
   },
   {
     id: 'zoomInfo',
