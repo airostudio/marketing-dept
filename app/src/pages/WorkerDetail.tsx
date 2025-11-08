@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import Layout from '../components/Layout'
+import HunterTools from '../components/HunterTools'
 
 export default function WorkerDetail() {
   const { workerId } = useParams()
@@ -65,6 +66,9 @@ export default function WorkerDetail() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-6">
+          {/* Hunter-specific tools */}
+          {worker.id === 'hunter' && <HunterTools workerId={worker.id} />}
+
           {/* Tasks */}
           <div className="card">
             <h2 className="text-xl font-bold text-gray-900 mb-4">Tasks</h2>
@@ -200,11 +204,14 @@ export default function WorkerDetail() {
 function getCapabilitiesForWorker(workerId: string): string[] {
   const capabilities: Record<string, string[]> = {
     jasper: ['Blog posts', 'Marketing copy', 'Social media content', 'Product descriptions', 'Email campaigns', 'Ad copy'],
+    casey: ['AI copywriting', 'Product descriptions', 'Blog posts', 'Social media copy', 'Ad copy', 'Email templates'],
     zoey: ['B2B lead discovery', 'Contact enrichment', 'Company intelligence', 'Decision maker identification', 'Lead scoring', 'Intent data'],
+    hunter: ['Email finding', 'Email verification', 'Domain search', 'Company email patterns', 'Bulk email discovery', 'Lead enrichment', 'Contact validation', 'Campaign management'],
     sage: ['Send-time optimization', 'Engagement prediction', 'Email frequency optimization', 'Behavioral analysis', 'A/B testing', 'Campaign performance'],
     smarta: ['Ad automation', 'Budget optimization', 'Creative testing', 'Audience targeting', 'Multi-platform campaigns', 'ROAS optimization'],
     dynamo: ['Website personalization', 'A/B testing', 'Product recommendations', 'Behavioral targeting', 'Mobile optimization', 'Email personalization'],
     analyzer: ['Traffic analysis', 'Conversion tracking', 'User behavior', 'Attribution modeling', 'Anomaly detection', 'Custom reporting'],
+    heatley: ['Heatmaps', 'Session recordings', 'Conversion funnels', 'Form analysis', 'User feedback', 'Behavior analytics'],
     surfy: ['Content optimization', 'Keyword research', 'SERP analysis', 'On-page SEO', 'Competitor analysis', 'Rank tracking'],
     chatty: ['Live chat', 'Automated responses', 'Ticket management', 'Knowledge base', '24/7 availability', 'Multi-language support'],
   }
@@ -214,11 +221,15 @@ function getCapabilitiesForWorker(workerId: string): string[] {
 function getPlatformUrl(platform: string): string {
   const urls: Record<string, string> = {
     'Jasper AI': 'https://docs.jasper.ai',
+    'Copy.ai': 'https://docs.copy.ai',
     'ZoomInfo': 'https://api-docs.zoominfo.com',
+    'Hunter.io': 'https://hunter.io/api-documentation/v2',
     'Seventh Sense': 'https://theseventhsense.com',
+    'Mailchimp': 'https://mailchimp.com/developer',
     'Smartly.io': 'https://developers.smartly.io',
     'Dynamic Yield': 'https://adm-api.dynamicyield.com/api/docs',
     'Google Analytics': 'https://developers.google.com/analytics',
+    'Hotjar': 'https://www.hotjar.com/api',
     'Surfer SEO': 'https://docs.surferseo.com',
     'Intercom': 'https://developers.intercom.com',
   }

@@ -25,11 +25,14 @@ This repository contains a complete organizational structure for building a mode
 | Worker | Role | Personality | Platform |
 |--------|------|-------------|----------|
 | ✍️ **Jasper** | Content Creation | Creative & eloquent | Jasper AI |
-| 🔍 **Zoey** | Lead Generation | Detail-oriented & persistent | ZoomInfo |
-| ⏰ **Sage** | Email Marketing | Wise & timing-obsessed | Seventh Sense |
+| 📝 **Casey** | AI Copywriter | Versatile & persuasive | Copy.ai |
+| 🔍 **Zoey** | Lead Prospecting | Detail-oriented & persistent | ZoomInfo |
+| 🎯 **Hunter** | Email Finder | Precise & laser-focused | Hunter.io |
+| ⏰ **Sage** | Email Campaign Manager | Wise & timing-obsessed | Mailchimp |
 | 🎯 **Smarta** | Social Advertising | Strategic & results-driven | Smartly.io |
-| 🎨 **Dynamo** | Personalization | Creative & adaptive | Dynamic Yield |
-| 📊 **Analyzer** | Analytics | Curious & insight-hungry | Google Analytics |
+| 🎨 **Dynamo** | Experience Optimization | Creative & adaptive | Dynamic Yield |
+| 📊 **Analyzer** | Data Analytics | Curious & insight-hungry | Google Analytics |
+| 🔥 **Heatley** | User Experience | Observant & detail-focused | Hotjar |
 | 🏄 **Surfy** | SEO Optimization | Meticulous & ranking-obsessed | Surfer SEO |
 | 💬 **Chatty** | Customer Support | Friendly & infinitely patient | Intercom |
 
@@ -69,11 +72,30 @@ Visit `http://localhost:3000` to start the setup wizard!
 
 ### What It Does
 
-1. **Setup**: Enter API keys for Jasper AI, ZoomInfo, Intercom, etc.
+1. **Setup**: Enter API keys for Jasper AI, ZoomInfo, Hunter.io, Intercom, etc.
 2. **Verify**: Automatically tests connections to each platform
 3. **Create Tasks**: Assign work to your AI workers
 4. **Watch**: Monitor real-time progress as tasks execute
 5. **Manage**: View results, adjust settings, track performance
+
+### 🎯 Hunter Integration (NEW!)
+
+The Hunter worker now has **full API integration** with Hunter.io:
+
+**Features:**
+- 🔍 **Domain Search** - Find all email addresses for a company domain
+- 📧 **Email Finder** - Find specific person's email address
+- ✅ **Email Verifier** - Verify email deliverability
+- 📊 **Lead Management** - Create and manage leads
+- 🚀 **Campaign Creation** - Start cold email campaigns with a button click
+
+**Get Started:**
+1. Get your free API key at [Hunter.io](https://hunter.io)
+2. Add it in the Settings page of the React app
+3. Visit Hunter's worker page to access all tools
+4. Click "Start a Campaign" to create email outreach campaigns
+
+All Hunter.io API v2 endpoints are fully integrated and ready to use!
 
 **[See Full React App Guide →](./app/README.md)**
 

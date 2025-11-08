@@ -1,9 +1,24 @@
 // Task Executor - Handles execution of tasks through API integrations
+import HunterService from './hunterService'
 
 interface TaskResult {
   success: boolean
   data?: any
   error?: string
+}
+
+// Get API key from local storage
+function getApiKey(platform: string): string | undefined {
+  try {
+    const stored = localStorage.getItem('ai-marketing-storage')
+    if (stored) {
+      const parsed = JSON.parse(stored)
+      return parsed.state?.apiCredentials?.[platform]
+    }
+  } catch (e) {
+    console.error('Failed to get API key:', e)
+  }
+  return undefined
 }
 
 export async function executeTask(taskId: string, workerId: string): Promise<TaskResult> {
@@ -151,14 +166,49 @@ async function executeCopyAiTask(_taskId: string): Promise<TaskResult> {
   }
 }
 
-async function executeHunterIoTask(_taskId: string): Promise<TaskResult> {
-  // In production, this would call Hunter.io API
-  return {
-    success: true,
-    data: {
-      emailsFound: 87,
-      emailsVerified: 82,
-      confidenceScore: 94
+async function executeHunterIoTask(taskId: string): Promise<TaskResult> {
+  const apiKey = getApiKey('hunterIo')
+
+  if (!apiKey) {
+    return {
+      success: false,
+      error: 'Hunter.io API key not configured. Please add it in Settings.'
+    }
+  }
+
+  // Parse task to determine what operation to perform
+  // For now, we'll do a demo domain search
+  try {
+    // Example: Find leads for a domain
+    const result = await HunterService.findLeads(
+      {
+        domain: 'example.com', // This would come from the task description in production
+        limit: 50
+      },
+      apiKey
+    )
+
+    if (result.success) {
+      return {
+        success: true,
+        data: {
+          emailsFound: result.data.emailsFound,
+          emailsVerified: result.data.emails.filter((e: any) => e.verified).length,
+          confidenceScore: Math.round(
+            result.data.emails.reduce((acc: number, e: any) => acc + e.confidence, 0) /
+            result.data.emailsFound
+          ),
+          organization: result.data.organization,
+          pattern: result.data.pattern
+        }
+      }
+    } else {
+      return result
+    }
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Failed to execute Hunter task'
     }
   }
 }
