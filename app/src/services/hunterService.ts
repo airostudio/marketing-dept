@@ -3,7 +3,6 @@ import { createHunterApiService } from './hunterApi';
 import type {
   DomainSearchParams,
   EmailFinderParams,
-  EmailVerifierParams,
   LeadParams,
   CampaignParams,
 } from './hunterApi';

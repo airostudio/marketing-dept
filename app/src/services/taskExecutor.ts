@@ -166,7 +166,7 @@ async function executeCopyAiTask(_taskId: string): Promise<TaskResult> {
   }
 }
 
-async function executeHunterIoTask(taskId: string): Promise<TaskResult> {
+async function executeHunterIoTask(_taskId: string): Promise<TaskResult> {
   const apiKey = getApiKey('hunterIo')
 
   if (!apiKey) {

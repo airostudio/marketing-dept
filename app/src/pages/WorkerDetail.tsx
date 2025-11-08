@@ -67,7 +67,7 @@ export default function WorkerDetail() {
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-6">
           {/* Hunter-specific tools */}
-          {worker.id === 'hunter' && <HunterTools workerId={worker.id} />}
+          {worker.id === 'hunter' && <HunterTools />}
 
           {/* Tasks */}
           <div className="card">

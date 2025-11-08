@@ -1,15 +1,11 @@
 import { useState } from 'react'
-import { Search, Mail, CheckCircle, Loader2, ExternalLink } from 'lucide-react'
+import { Search, Mail, CheckCircle, Loader2 } from 'lucide-react'
 import HunterService from '../services/hunterService'
 import { useStore } from '../store/useStore'
 import toast from 'react-hot-toast'
 import CampaignModal from './CampaignModal'
 
-interface HunterToolsProps {
-  workerId: string
-}
-
-export default function HunterTools({ workerId }: HunterToolsProps) {
+export default function HunterTools() {
   const [activeTab, setActiveTab] = useState<'domain' | 'finder' | 'verifier'>('domain')
   const [isCampaignModalOpen, setIsCampaignModalOpen] = useState(false)
   const { apiCredentials } = useStore()
@@ -94,7 +90,6 @@ export default function HunterTools({ workerId }: HunterToolsProps) {
       <CampaignModal
         isOpen={isCampaignModalOpen}
         onClose={() => setIsCampaignModalOpen(false)}
-        workerId={workerId}
       />
     </div>
   )

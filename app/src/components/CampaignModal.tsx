@@ -7,10 +7,9 @@ import toast from 'react-hot-toast'
 interface CampaignModalProps {
   isOpen: boolean
   onClose: () => void
-  workerId: string
 }
 
-export default function CampaignModal({ isOpen, onClose, workerId }: CampaignModalProps) {
+export default function CampaignModal({ isOpen, onClose }: CampaignModalProps) {
   const [campaignName, setCampaignName] = useState('')
   const [leadEmails, setLeadEmails] = useState('')
   const [isCreating, setIsCreating] = useState(false)
