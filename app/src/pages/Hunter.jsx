@@ -1,9 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   domainSearch,
   emailFinder,
   verifyEmail,
   getAccountInfo,
+  createCampaign,
+  getCampaigns,
+  addCampaignRecipients,
+  sendCampaign,
+  getCampaignStats,
+  pauseCampaign,
   isHunterConfigured,
   getConfigStatus
 } from '../integrations/hunter';
@@ -27,7 +33,40 @@ function Hunter() {
   // Email Verification Form
   const [emailToVerify, setEmailToVerify] = useState('');
 
+  // Campaign Management
+  const [campaigns, setCampaigns] = useState([]);
+  const [showCampaignForm, setShowCampaignForm] = useState(false);
+  const [campaignName, setCampaignName] = useState('');
+  const [campaignSubject, setCampaignSubject] = useState('');
+  const [campaignBody, setCampaignBody] = useState('');
+  const [fromEmail, setFromEmail] = useState('');
+  const [fromName, setFromName] = useState('');
+  const [selectedCampaign, setSelectedCampaign] = useState(null);
+
+  // Recipients for campaign
+  const [recipientEmail, setRecipientEmail] = useState('');
+  const [recipientFirstName, setRecipientFirstName] = useState('');
+  const [recipientLastName, setRecipientLastName] = useState('');
+  const [recipientCompany, setRecipientCompany] = useState('');
+  const [recipientsList, setRecipientsList] = useState([]);
+
   const configStatus = getConfigStatus();
+
+  // Load campaigns when tab changes to campaigns
+  useEffect(() => {
+    if (activeTab === 'campaigns' && configStatus.isConfigured) {
+      loadCampaigns();
+    }
+  }, [activeTab, configStatus.isConfigured]);
+
+  const loadCampaigns = async () => {
+    try {
+      const data = await getCampaigns();
+      setCampaigns(data);
+    } catch (err) {
+      console.error('Error loading campaigns:', err);
+    }
+  };
 
   const handleDomainSearch = async () => {
     setLoading(true);
@@ -94,6 +133,115 @@ function Hunter() {
     }
   };
 
+  const handleCreateCampaign = async () => {
+    setLoading(true);
+    setError('');
+
+    try {
+      const campaign = await createCampaign({
+        name: campaignName,
+        subject: campaignSubject,
+        emailContent: campaignBody,
+        fromEmail,
+        fromName
+      });
+
+      // Add recipients to campaign if any
+      if (recipientsList.length > 0) {
+        await addCampaignRecipients(campaign.id, recipientsList);
+      }
+
+      alert(`Campaign "${campaignName}" created successfully!`);
+
+      // Reset form
+      setCampaignName('');
+      setCampaignSubject('');
+      setCampaignBody('');
+      setFromEmail('');
+      setFromName('');
+      setRecipientsList([]);
+      setShowCampaignForm(false);
+
+      // Reload campaigns
+      await loadCampaigns();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddRecipient = () => {
+    if (!recipientEmail) {
+      alert('Email is required');
+      return;
+    }
+
+    const newRecipient = {
+      email: recipientEmail,
+      firstName: recipientFirstName,
+      lastName: recipientLastName,
+      company: recipientCompany
+    };
+
+    setRecipientsList([...recipientsList, newRecipient]);
+
+    // Clear recipient form
+    setRecipientEmail('');
+    setRecipientFirstName('');
+    setRecipientLastName('');
+    setRecipientCompany('');
+  };
+
+  const handleRemoveRecipient = (index) => {
+    setRecipientsList(recipientsList.filter((_, i) => i !== index));
+  };
+
+  const handleSendCampaign = async (campaignId) => {
+    if (!confirm('Are you sure you want to send this campaign?')) {
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await sendCampaign(campaignId);
+      alert('Campaign sent successfully!');
+      await loadCampaigns();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePauseCampaign = async (campaignId) => {
+    setLoading(true);
+    try {
+      await pauseCampaign(campaignId);
+      alert('Campaign paused successfully!');
+      await loadCampaigns();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleViewStats = async (campaignId) => {
+    setLoading(true);
+    setError('');
+    setResult(null);
+
+    try {
+      const stats = await getCampaignStats(campaignId);
+      setResult({ campaignStats: stats });
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
     alert('Copied to clipboard!');
@@ -103,7 +251,7 @@ function Hunter() {
     return (
       <div className="hunter-page">
         <div className="hunter-header">
-          <h1>🎯 Hunter - Email Finder</h1>
+          <h1>🎯 Hunter - Email Finder & Campaign Manager</h1>
           <p>Powered by Hunter.io</p>
         </div>
         <div className="config-warning">
@@ -131,14 +279,15 @@ function Hunter() {
     { id: 'domain', label: 'Domain Search', icon: '🔍' },
     { id: 'finder', label: 'Email Finder', icon: '📧' },
     { id: 'verify', label: 'Verify Email', icon: '✅' },
+    { id: 'campaigns', label: 'Campaigns', icon: '📨' },
     { id: 'account', label: 'Account Info', icon: '📊' },
   ];
 
   return (
     <div className="hunter-page">
       <div className="hunter-header">
-        <h1>🎯 Hunter - Email Finder</h1>
-        <p>Powered by Hunter.io - 50 searches/month free</p>
+        <h1>🎯 Hunter - Email Finder & Campaign Manager</h1>
+        <p>Powered by Hunter.io - Find leads, verify emails, send cold campaigns</p>
       </div>
 
       <div className="hunter-tabs">
@@ -165,7 +314,7 @@ function Hunter() {
             <div className="form">
               <h2>🔍 Search Domain for Emails</h2>
               <p className="form-description">
-                Find all email addresses associated with a company domain
+                Find all email addresses associated with a company domain using Hunter's B2B lead database
               </p>
               <div className="form-group">
                 <label>Company Domain</label>
@@ -244,7 +393,7 @@ function Hunter() {
             <div className="form">
               <h2>✅ Verify Email Address</h2>
               <p className="form-description">
-                Check if an email address is valid and deliverable
+                Verify individual email addresses with the most complete email checker
               </p>
               <div className="form-group">
                 <label>Email Address</label>
@@ -262,6 +411,210 @@ function Hunter() {
               >
                 {loading ? 'Verifying...' : 'Verify Email'}
               </button>
+            </div>
+          )}
+
+          {/* Campaigns Tab */}
+          {activeTab === 'campaigns' && (
+            <div className="form campaigns-section">
+              <div className="campaigns-header">
+                <h2>📨 Cold Email Campaigns</h2>
+                <button
+                  className="start-campaign-btn"
+                  onClick={() => setShowCampaignForm(!showCampaignForm)}
+                  disabled={loading}
+                >
+                  {showCampaignForm ? '← Back to Campaigns' : '✉️ Start a Campaign'}
+                </button>
+              </div>
+
+              {!showCampaignForm && (
+                <div className="campaigns-list">
+                  <p className="form-description">
+                    Create, personalize, schedule, and send targeted cold email campaigns at scale
+                  </p>
+                  {campaigns.length === 0 ? (
+                    <div className="no-campaigns">
+                      <p>No campaigns yet. Click "Start a Campaign" to create your first campaign!</p>
+                    </div>
+                  ) : (
+                    <div className="campaign-cards">
+                      {campaigns.map(campaign => (
+                        <div key={campaign.id} className="campaign-card">
+                          <div className="campaign-info">
+                            <h4>{campaign.name}</h4>
+                            <p className="campaign-subject">Subject: {campaign.subject}</p>
+                            <div className="campaign-meta">
+                              <span>Status: {campaign.status}</span>
+                              <span>Recipients: {campaign.recipients_count || 0}</span>
+                            </div>
+                          </div>
+                          <div className="campaign-actions">
+                            {campaign.status === 'draft' && (
+                              <button
+                                className="campaign-action-btn send"
+                                onClick={() => handleSendCampaign(campaign.id)}
+                                disabled={loading}
+                              >
+                                Send
+                              </button>
+                            )}
+                            {campaign.status === 'running' && (
+                              <button
+                                className="campaign-action-btn pause"
+                                onClick={() => handlePauseCampaign(campaign.id)}
+                                disabled={loading}
+                              >
+                                Pause
+                              </button>
+                            )}
+                            <button
+                              className="campaign-action-btn stats"
+                              onClick={() => handleViewStats(campaign.id)}
+                              disabled={loading}
+                            >
+                              View Stats
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {showCampaignForm && (
+                <div className="campaign-form">
+                  <h3>Create New Campaign</h3>
+
+                  <div className="form-group">
+                    <label>Campaign Name *</label>
+                    <input
+                      type="text"
+                      value={campaignName}
+                      onChange={(e) => setCampaignName(e.target.value)}
+                      placeholder="Q4 Outreach Campaign"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Email Subject *</label>
+                    <input
+                      type="text"
+                      value={campaignSubject}
+                      onChange={(e) => setCampaignSubject(e.target.value)}
+                      placeholder="Quick question about {company}"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Email Body *</label>
+                    <textarea
+                      value={campaignBody}
+                      onChange={(e) => setCampaignBody(e.target.value)}
+                      placeholder="Hi {first_name},&#10;&#10;I noticed your work at {company}...&#10;&#10;Best regards,&#10;{from_name}"
+                      rows={8}
+                    />
+                    <small>Use variables: {'{first_name}'}, {'{last_name}'}, {'{company}'}, {'{from_name}'}</small>
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>From Name *</label>
+                      <input
+                        type="text"
+                        value={fromName}
+                        onChange={(e) => setFromName(e.target.value)}
+                        placeholder="John Smith"
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label>From Email *</label>
+                      <input
+                        type="email"
+                        value={fromEmail}
+                        onChange={(e) => setFromEmail(e.target.value)}
+                        placeholder="john@yourcompany.com"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="recipients-section">
+                    <h4>Add Recipients</h4>
+                    <div className="recipient-form">
+                      <div className="form-row">
+                        <div className="form-group">
+                          <input
+                            type="email"
+                            value={recipientEmail}
+                            onChange={(e) => setRecipientEmail(e.target.value)}
+                            placeholder="recipient@example.com"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            value={recipientFirstName}
+                            onChange={(e) => setRecipientFirstName(e.target.value)}
+                            placeholder="First Name"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            value={recipientLastName}
+                            onChange={(e) => setRecipientLastName(e.target.value)}
+                            placeholder="Last Name"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            value={recipientCompany}
+                            onChange={(e) => setRecipientCompany(e.target.value)}
+                            placeholder="Company"
+                          />
+                        </div>
+                        <button
+                          type="button"
+                          className="add-recipient-btn"
+                          onClick={handleAddRecipient}
+                        >
+                          Add
+                        </button>
+                      </div>
+                    </div>
+
+                    {recipientsList.length > 0 && (
+                      <div className="recipients-list">
+                        <h5>Recipients ({recipientsList.length})</h5>
+                        {recipientsList.map((recipient, idx) => (
+                          <div key={idx} className="recipient-item">
+                            <span>{recipient.email}</span>
+                            <span>{recipient.firstName} {recipient.lastName}</span>
+                            <span>{recipient.company}</span>
+                            <button
+                              onClick={() => handleRemoveRecipient(idx)}
+                              className="remove-btn"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <button
+                    className="generate-btn create-campaign-btn"
+                    onClick={handleCreateCampaign}
+                    disabled={loading || !campaignName || !campaignSubject || !campaignBody || !fromEmail || !fromName}
+                  >
+                    {loading ? 'Creating Campaign...' : 'Create Campaign'}
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
@@ -362,6 +715,31 @@ function Hunter() {
                 </div>
               )}
 
+              {/* Campaign Stats Results */}
+              {activeTab === 'campaigns' && result.campaignStats && (
+                <div className="campaign-stats-results">
+                  <h4>Campaign Statistics</h4>
+                  <div className="stats-grid">
+                    <div className="stat-item">
+                      <div className="stat-label">Sent</div>
+                      <div className="stat-value">{result.campaignStats.sent || 0}</div>
+                    </div>
+                    <div className="stat-item">
+                      <div className="stat-label">Opened</div>
+                      <div className="stat-value">{result.campaignStats.opened || 0}</div>
+                    </div>
+                    <div className="stat-item">
+                      <div className="stat-label">Clicked</div>
+                      <div className="stat-value">{result.campaignStats.clicked || 0}</div>
+                    </div>
+                    <div className="stat-item">
+                      <div className="stat-label">Replied</div>
+                      <div className="stat-value">{result.campaignStats.replied || 0}</div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Account Info Results */}
               {activeTab === 'account' && result.requests && (
                 <div className="account-results">
@@ -392,7 +770,9 @@ function Hunter() {
           )}
           {!result && !error && !loading && (
             <div className="empty-state">
-              Fill out the form and click the button to see results here
+              {activeTab === 'campaigns' && !showCampaignForm
+                ? 'Your campaigns will appear here. Click "Start a Campaign" to begin!'
+                : 'Fill out the form and click the button to see results here'}
             </div>
           )}
           {loading && (
