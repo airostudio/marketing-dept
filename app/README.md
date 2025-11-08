@@ -71,22 +71,24 @@ npm run preview
 
 ### API Platforms
 
-The app supports 11 AI platforms - 5 with free tiers! 🎉
+The app supports 11 AI platforms - 6 with free tiers! 🎉
 
 **FREE TIER PLATFORMS:**
-1. **Rytr AI** ✨ - AI copywriting assistant (Unlimited tier)
-2. **Hunter.io** ✨ - Email finder & verification
-3. **Mailchimp** ✨ - Email marketing automation
-4. **Google Analytics** ✨ - Web analytics (Forever free)
-5. **Hotjar** ✨ - Heatmaps & session recordings
+1. **Google Gemini** ✨ - Advanced AI content generation (Free tier)
+2. **Rytr AI** ✨ - AI copywriting assistant (Unlimited tier)
+3. **Hunter.io** ✨ - Email finder & verification
+4. **Mailchimp** ✨ - Email marketing automation
+5. **Google Analytics** ✨ - Web analytics (Forever free)
+6. **Hotjar** ✨ - Heatmaps & session recordings
 
 **PREMIUM PLATFORMS:**
-6. **Jasper AI** - Advanced content creation
-7. **ZoomInfo** - B2B lead intelligence
-8. **Smartly.io** - Social advertising automation
-9. **Dynamic Yield** - Personalization engine
-10. **Surfer SEO** - SEO content optimization
-11. **Intercom** - Customer support
+6. **ZoomInfo** - B2B lead intelligence
+7. **Smartly.io** - Social advertising automation
+8. **Dynamic Yield** - Personalization engine
+9. **Surfer SEO** - SEO content optimization
+10. **Intercom** - Customer support
+
+Note: Google Gemini is listed in the FREE tier platforms above.
 
 ### Environment Variables
 
@@ -162,17 +164,20 @@ Edit `/src/services/taskExecutor.ts` to add real API calls:
 
 ```typescript
 async function executeContentTask(taskId: string): Promise<TaskResult> {
-  const apiKey = getApiKey('jasperAi')
+  const apiKey = getApiKey('googleGemini')
 
-  const response = await fetch('https://api.jasper.ai/v1/generate', {
+  const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'x-goog-api-key': apiKey
     },
     body: JSON.stringify({
-      prompt: 'Your prompt here',
-      max_tokens: 1500
+      contents: [{
+        parts: [{
+          text: 'Your prompt here'
+        }]
+      }]
     })
   })
 
@@ -191,7 +196,7 @@ Create individual service files for each platform:
 
 ```
 services/
-├── jasperService.ts
+├── geminiService.ts
 ├── zoomInfoService.ts
 ├── seventhSenseService.ts
 ├── smartlyService.ts

@@ -24,7 +24,7 @@ This repository contains a complete organizational structure for building a mode
 
 | Worker | Role | Personality | Platform |
 |--------|------|-------------|----------|
-| ✍️ **Jasper** | Content Creation | Creative & eloquent | Jasper AI |
+| ✍️ **Jasper** | Content Creation | Creative & eloquent | Google Gemini |
 | 🔍 **Zoey** | Lead Generation | Detail-oriented & persistent | ZoomInfo |
 | ⏰ **Sage** | Email Marketing | Wise & timing-obsessed | Seventh Sense |
 | 🎯 **Smarta** | Social Advertising | Strategic & results-driven | Smartly.io |
@@ -69,7 +69,7 @@ Visit `http://localhost:3000` to start the setup wizard!
 
 ### What It Does
 
-1. **Setup**: Enter API keys for Jasper AI, ZoomInfo, Intercom, etc.
+1. **Setup**: Enter API keys for Google Gemini, ZoomInfo, Intercom, etc.
 2. **Verify**: Automatically tests connections to each platform
 3. **Create Tasks**: Assign work to your AI workers
 4. **Watch**: Monitor real-time progress as tasks execute
@@ -94,7 +94,7 @@ Visit `http://localhost:3000` to start the setup wizard!
 ## Department Structure
 
 ### 1. Content Creation Department
-**AI Agents**: Jasper AI, Copy.ai, Writesonic, Rytr, Ink for All
+**AI Agents**: Google Gemini, Rytr AI, Writesonic, Ink for All
 
 Create high-quality marketing content 5x faster with AI-powered writing assistants.
 
@@ -209,7 +209,7 @@ View the complete catalog of all 35+ AI agents with capabilities, integrations, 
 
 | Department | Primary Tools | Free Tier? |
 |------------|---------------|------------|
-| Content Creation | Jasper AI, Copy.ai, Writesonic | ✅ Yes |
+| Content Creation | Google Gemini, Rytr AI, Writesonic | ✅ Yes |
 | Lead Generation | Clearbit, Hunter.io, ZoomInfo | ✅ Limited |
 | Email Marketing | Mailchimp, Sendinblue | ✅ Yes |
 | Social Media | Smartly.io, Adext AI | ❌ No |

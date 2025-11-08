@@ -103,7 +103,7 @@ Full departmental structure as shown in org chart.
 - Oversee AI tool usage
 - Ensure brand consistency
 
-**AI Tools Used**: Jasper AI, Rytr AI, Surfer SEO
+**AI Tools Used**: Google Gemini, Rytr AI, Surfer SEO
 
 #### Content Writers
 - Create content using AI assistance
@@ -349,7 +349,7 @@ Full departmental structure as shown in org chart.
 1. Content/SEO Specialist
 2. Demand Gen/Paid Specialist
 
-**AI Tools**: Add Jasper, Surfer SEO, Adext AI
+**AI Tools**: Add Google Gemini, Surfer SEO, Adext AI
 
 ### Stage 3: Scale (4-8 people)
 **Hires**:

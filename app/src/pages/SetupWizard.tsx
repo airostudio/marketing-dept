@@ -6,14 +6,14 @@ import toast from 'react-hot-toast'
 
 const platforms = [
   {
-    id: 'jasperAi',
-    name: 'Jasper AI',
+    id: 'googleGemini',
+    name: 'Google Gemini',
     emoji: '✍️',
-    description: 'AI content generation platform',
+    description: 'AI content generation platform (Free tier)',
     worker: 'Jasper - Content Creation',
-    docsUrl: 'https://docs.jasper.ai/api',
-    placeholder: 'sk-jasper-...',
-    tier: 'Premium'
+    docsUrl: 'https://ai.google.dev/tutorials/setup',
+    placeholder: 'AIza...',
+    tier: 'Free'
   },
   {
     id: 'rytrAi',

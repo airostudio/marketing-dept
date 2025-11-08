@@ -9,9 +9,10 @@
   "personality": "Creative, eloquent, and always ready with the perfect words. Jasper loves crafting compelling stories and never runs out of ideas.",
   "status": "active",
   "aiPlatform": {
-    "name": "Jasper AI",
-    "url": "https://www.jasper.ai",
-    "apiKey": "JASPER_API_KEY"
+    "name": "Google Gemini",
+    "url": "https://ai.google.dev",
+    "apiKey": "GOOGLE_GEMINI_API_KEY",
+    "tier": "free"
   },
   "capabilities": [
     "Blog post writing",

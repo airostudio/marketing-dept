@@ -51,7 +51,7 @@ export async function executeTask(taskId: string, workerId: string): Promise<Tas
 
 // Individual task executors for each worker
 async function executeContentTask(_taskId: string): Promise<TaskResult> {
-  // In production, this would call Jasper AI API
+  // In production, this would call Google Gemini API
   // For now, simulate successful completion
   return {
     success: true,

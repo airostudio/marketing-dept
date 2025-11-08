@@ -5,23 +5,25 @@ The Content Creation department focuses on generating high-quality marketing con
 
 ## AI Agents & Tools
 
-### 1. Jasper AI
-- **Purpose**: AI-powered content generation
+### 1. Google Gemini
+- **Purpose**: Advanced AI content generation (Free tier)
 - **Use Cases**:
   - Blog posts
   - Social media copy
   - Marketing content
   - Product descriptions
-- **URL**: https://www.jasper.ai
-- **Key Features**: Maintains quality while accelerating production timelines
+  - Long-form content
+- **URL**: https://ai.google.dev
+- **Key Features**: Free tier with generous limits, high-quality content generation, excellent for long-form content
 
-### 2. Copy.ai
-- **Purpose**: Creative content generation
+### 2. Rytr AI
+- **Purpose**: Fast and efficient copywriting
 - **Use Cases**:
   - Promotional copy for blogs
   - Email campaigns
   - Ad copy
-- **URL**: https://www.copy.ai
+  - Social media posts
+- **URL**: https://rytr.me
 - **Integration**: API available for automated content workflows
 
 ### 3. Writesonic
@@ -54,7 +56,7 @@ The Content Creation department focuses on generating high-quality marketing con
 ## Workflows
 
 ### Daily Content Production
-1. Use Jasper AI or Rytr AI for initial content generation
+1. Use Google Gemini or Rytr AI for initial content generation
 2. Optimize content with Ink for All for SEO
 3. Review and refine with team feedback
 4. Publish and track performance

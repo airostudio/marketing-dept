@@ -55,7 +55,7 @@ Don't try to implement everything at once. Start small:
 ## Setup by Department
 
 ### Content Creation Setup (1-2 hours)
-1. **Sign up**: Jasper AI or Rytr AI
+1. **Sign up**: Google Gemini or Rytr AI
 2. **Define brand voice**: Create style guide
 3. **Set up templates**: Common content types
 4. **Integrate with SEO**: Connect Surfer SEO
@@ -143,14 +143,14 @@ Don't try to implement everything at once. Start small:
 - **Total**: ~$227/month + ad spend
 
 ### Growth Budget ($2,000-10,000/month)
-- **Content**: Jasper AI ($99/mo)
+- **Content**: Google Gemini (Free) + Premium writing tools
 - **Lead Gen**: Hunter.io ($199/mo) + UpLead ($299/mo)
 - **Email**: Sendinblue ($99/mo) + Seventh Sense ($600/mo)
 - **Social**: Adext AI ($299/mo)
 - **SEO**: SEMrush ($229/mo) + Frase ($114/mo)
 - **Analytics**: PaveAI ($150/mo)
 - **Support**: Intercom ($74/mo)
-- **Total**: ~$2,162/month + ad spend
+- **Total**: ~$2,063/month + ad spend
 
 ### Enterprise Budget ($10,000+/month)
 - All tools at premium tiers
