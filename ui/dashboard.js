@@ -74,7 +74,7 @@ function addActivity(icon, workerName, message) {
 // Simulate worker activities
 function simulateActivity() {
     const activities = [
-        { icon: '✍️', worker: 'Sonic', message: 'completed a new blog post' },
+        { icon: '✍️', worker: 'Kylie', message: 'completed a new blog post' },
         { icon: '🔍', worker: 'Zoey', message: 'found 15 new qualified leads' },
         { icon: '⏰', worker: 'Sage', message: 'optimized send times for 500 subscribers' },
         { icon: '🎯', worker: 'Smarta', message: 'improved campaign ROAS by 12%' },

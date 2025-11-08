@@ -1,0 +1,137 @@
+{
+  "id": "kylie-the-email-specialist",
+  "name": "Kylie",
+  "fullName": "Kylie the Email Specialist",
+  "emoji": "💌",
+  "avatar": "/assets/avatars/kylie.svg",
+  "department": "Email Marketing",
+  "role": "Email Marketing Automation Specialist",
+  "personality": "Data-driven, customer-focused, and automation-savvy. Kylie excels at creating personalized email experiences that drive engagement and revenue.",
+  "status": "active",
+  "aiPlatform": {
+    "name": "Klaviyo",
+    "url": "https://www.klaviyo.com",
+    "apiKey": "KLAVIYO_API_KEY",
+    "tier": "free"
+  },
+  "capabilities": [
+    "Email automation workflows",
+    "Customer segmentation",
+    "Personalized email campaigns",
+    "E-commerce email marketing",
+    "Abandoned cart recovery",
+    "Post-purchase sequences",
+    "SMS marketing",
+    "Customer data management",
+    "A/B testing",
+    "Predictive analytics"
+  ],
+  "metrics": {
+    "emailsSentToday": 5420,
+    "campaignsActive": 12,
+    "averageOpenRate": 38.5,
+    "averageClickRate": 4.2,
+    "currentFlows": 8,
+    "revenueGenerated": "$12,450"
+  },
+  "currentTasks": [
+    {
+      "id": "task-001",
+      "title": "Optimize abandoned cart flow",
+      "status": "in_progress",
+      "progress": 60,
+      "dueDate": "2025-10-29"
+    },
+    {
+      "id": "task-002",
+      "title": "Create Black Friday campaign segment",
+      "status": "queued",
+      "progress": 0,
+      "dueDate": "2025-10-30"
+    },
+    {
+      "id": "task-003",
+      "title": "Set up post-purchase review request",
+      "status": "queued",
+      "progress": 0,
+      "dueDate": "2025-10-31"
+    }
+  ],
+  "recentWork": [
+    {
+      "title": "Welcome Series - 5 Email Flow",
+      "type": "automation",
+      "recipients": 1250,
+      "openRate": 42.3,
+      "timestamp": "2025-10-28T10:30:00Z"
+    },
+    {
+      "title": "Weekly Newsletter",
+      "type": "campaign",
+      "recipients": 8500,
+      "openRate": 35.2,
+      "timestamp": "2025-10-28T09:15:00Z"
+    },
+    {
+      "title": "VIP Customer Exclusive Offer",
+      "type": "segment-campaign",
+      "recipients": 450,
+      "openRate": 51.8,
+      "timestamp": "2025-10-28T08:00:00Z"
+    }
+  ],
+  "workingHours": {
+    "timezone": "UTC",
+    "availability": "24/7",
+    "preferredHours": "Always monitoring and optimizing!"
+  },
+  "integrations": [
+    "Shopify",
+    "WooCommerce",
+    "Magento",
+    "BigCommerce",
+    "Facebook Ads",
+    "Google Analytics",
+    "Zapier",
+    "Segment"
+  ],
+  "settings": {
+    "personalizationLevel": "high",
+    "automationMode": "intelligent",
+    "segmentationStrategy": "behavioral",
+    "sendTimeOptimization": true,
+    "aiPredictions": true
+  },
+  "quotes": [
+    "Every customer deserves a personalized experience!",
+    "Data tells the story, automation delivers it!",
+    "Let's turn subscribers into loyal customers!",
+    "The right message, to the right person, at the right time!",
+    "Email isn't dead - it's just getting smarter!"
+  ],
+  "freeTier": {
+    "available": true,
+    "limit": "250 contacts",
+    "features": [
+      "Email campaigns",
+      "Email automation",
+      "Pre-built templates",
+      "Basic segmentation",
+      "Email support",
+      "SMS (10 SMS/month)"
+    ]
+  },
+  "paidTier": {
+    "price": "Starts at $20/month",
+    "limit": "Up to 500 contacts",
+    "features": [
+      "All free features",
+      "Advanced segmentation",
+      "Predictive analytics",
+      "A/B testing",
+      "Custom templates",
+      "Priority support",
+      "Advanced automation"
+    ]
+  }
+}

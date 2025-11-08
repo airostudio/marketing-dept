@@ -20,9 +20,9 @@ A comprehensive AI-powered marketing and sales department with 8 personified AI 
 
 | Worker | Role | Platform |
 |--------|------|----------|
-| ✍️ Sonic | Content Creation | Writesonic |
+| 💌 Kylie | Email Marketing Automation | Klaviyo |
 | 🔍 Zoey | Lead Generation | ZoomInfo |
-| ⏰ Sage | Email Marketing | Seventh Sense |
+| 📧 Sage | Email Campaigns | Mailchimp |
 | 🎯 Smarta | Social Advertising | Smartly.io |
 | 🎨 Dynamo | Personalization | Dynamic Yield |
 | 📊 Analyzer | Analytics | Google Analytics |

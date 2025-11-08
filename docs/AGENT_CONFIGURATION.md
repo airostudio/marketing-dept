@@ -104,7 +104,7 @@ VITE_HOTJAR_SITE_ID=your_site_id_here
 
 ---
 
-### Sonic (Content Writer) - Writesonic
+### Kylie (Content Writer) - Klaviyo
 **Platform**: https://writesonic.com
 **Worker File**: `/agents/workers/sonic-the-writer.json`
 
@@ -146,7 +146,7 @@ VITE_GA_TRACKING_ID=G-XXXXXXXXXX
 # Heatley - UX Analytics (Hotjar)
 VITE_HOTJAR_SITE_ID=your_hotjar_site_id_here
 
-# Sonic - Content Writer (Writesonic)
+# Kylie - Content Writer (Klaviyo)
 VITE_WRITESONIC_API_KEY=your_writesonic_key_here
 
 # ===================================
@@ -204,7 +204,7 @@ All individual agent configurations are stored in:
 
 **Available Workers**:
 - `casey-the-copywriter.json` - Rytr.me (Configured ✅)
-- `sonic-the-writer.json` - Writesonic
+- `sonic-the-writer.json` - Klaviyo
 - `hunter-the-finder.json` - Hunter.io
 - `analyzer-the-insight-finder.json` - Google Analytics
 - `heatley-the-heatmapper.json` - Hotjar

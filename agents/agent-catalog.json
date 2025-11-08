@@ -5,12 +5,12 @@
     "contentCreation": {
       "agents": [
         {
-          "name": "Writesonic",
+          "name": "Rytr",
           "type": "content-generation",
-          "url": "https://writesonic.com",
+          "url": "https://rytr.me",
           "apiAvailable": true,
           "pricing": "freemium",
-          "integrations": ["Chrome", "API", "Zapier", "WordPress"],
+          "integrations": ["API", "Chrome Extension"],
           "capabilities": [
             "blog-posts",
             "social-media-copy",
@@ -33,32 +33,6 @@
             "blog-ideas",
             "social-media",
             "email-copy"
-          ]
-        },
-        {
-          "name": "Writesonic",
-          "type": "content-generation",
-          "url": "https://www.writesonic.com",
-          "apiAvailable": true,
-          "pricing": "freemium",
-          "integrations": ["API", "Chrome Extension"],
-          "capabilities": [
-            "articles",
-            "landing-pages",
-            "ads",
-            "product-descriptions"
-          ]
-        },
-        {
-          "name": "Rytr",
-          "type": "content-generation",
-          "url": "https://rytr.me",
-          "apiAvailable": true,
-          "pricing": "freemium",
-          "capabilities": [
-            "emails",
-            "social-posts",
-            "blog-content"
           ]
         },
         {
@@ -145,6 +119,23 @@
     },
     "emailMarketing": {
       "agents": [
+        {
+          "name": "Klaviyo",
+          "type": "email-automation",
+          "url": "https://www.klaviyo.com",
+          "apiAvailable": true,
+          "pricing": "freemium",
+          "integrations": ["Shopify", "WooCommerce", "Magento", "BigCommerce", "API"],
+          "capabilities": [
+            "email-automation",
+            "customer-segmentation",
+            "personalized-campaigns",
+            "e-commerce-integration",
+            "abandoned-cart",
+            "sms-marketing",
+            "predictive-analytics"
+          ]
+        },
         {
           "name": "Seventh Sense",
           "type": "send-time-optimization",
@@ -342,7 +333,7 @@
           "url": "https://www.surferseo.com",
           "apiAvailable": true,
           "pricing": "subscription",
-          "integrations": ["Google Docs", "WordPress", "Writesonic"],
+          "integrations": ["Google Docs", "WordPress", "Rytr"],
           "capabilities": [
             "content-scoring",
             "serp-analysis",

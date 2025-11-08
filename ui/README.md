@@ -25,11 +25,11 @@ Each AI worker has a detailed interface showing:
 
 ## AI Workers
 
-### ✍️ Sonic (Content Creation)
+### ✍️ Kylie (Content Creation)
 **Personality**: Fast, creative and SEO-savvy
 - Creates blog posts, marketing copy, social media content
 - Tracks: words written, quality scores, content pieces
-- Platform: Writesonic
+- Platform: Klaviyo
 
 ### 🔍 Zoey (Lead Generation)
 **Personality**: Detail-oriented and persistent
@@ -117,7 +117,7 @@ Edit the JSON files in `/agents/workers/`:
 ```javascript
 {
   "id": "sonic-the-writer",
-  "name": "Sonic",
+  "name": "Kylie",
   "metrics": {
     "wordsWrittenToday": 12500,  // Update this
     "contentPiecesCreated": 8
@@ -160,7 +160,7 @@ Each worker is configured to connect with its respective AI platform:
 
 ```javascript
 "aiPlatform": {
-  "name": "Writesonic",
+  "name": "Klaviyo",
   "url": "https://writesonic.com",
   "apiKey": "WRITESONIC_API_KEY"  // Replace with actual key
 }
@@ -213,7 +213,7 @@ showNotification('Title', 'Message', 'info');
 
 Real-time activity tracking:
 ```javascript
-addActivity('✍️', 'Sonic', 'completed a new blog post');
+addActivity('✍️', 'Kylie', 'completed a new blog post');
 ```
 
 ## Future Enhancements

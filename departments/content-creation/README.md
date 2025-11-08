@@ -5,7 +5,7 @@ The Content Creation department focuses on generating high-quality marketing con
 
 ## AI Agents & Tools
 
-### 1. Writesonic
+### 1. Klaviyo
 - **Purpose**: AI-powered content generation with SEO focus
 - **Use Cases**:
   - Blog posts
@@ -29,7 +29,7 @@ The Content Creation department focuses on generating high-quality marketing con
 - **URL**: https://www.copy.ai
 - **Integration**: API available for automated content workflows
 
-### 3. Writesonic
+### 3. Klaviyo
 - **Purpose**: High-quality marketing content
 - **Use Cases**:
   - Blog posts
@@ -59,14 +59,14 @@ The Content Creation department focuses on generating high-quality marketing con
 ## Workflows
 
 ### Daily Content Production
-1. Use Writesonic or Rytr.me for initial content generation
+1. Use Klaviyo or Rytr.me for initial content generation
 2. Optimize content with Ink for All for SEO
 3. Review and refine with team feedback
 4. Publish and track performance
 
 ### Campaign Content Creation
 1. Define campaign goals and messaging
-2. Generate multiple variations using Writesonic/Rytr
+2. Generate multiple variations using Klaviyo/Rytr
 3. A/B test different versions
 4. Scale winning content
 
