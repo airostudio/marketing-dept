@@ -16,7 +16,7 @@ export async function executeTask(taskId: string, workerId: string): Promise<Tas
       case 'jasper':
         return await executeContentTask(taskId)
       case 'casey':
-        return await executeCopyAiTask(taskId)
+        return await executeRytrTask(taskId)
       case 'zoey':
         return await executeLeadGenTask(taskId)
       case 'hunter':
@@ -51,7 +51,7 @@ export async function executeTask(taskId: string, workerId: string): Promise<Tas
 
 // Individual task executors for each worker
 async function executeContentTask(_taskId: string): Promise<TaskResult> {
-  // In production, this would call Jasper AI API
+  // In production, this would call Google Gemini API
   // For now, simulate successful completion
   return {
     success: true,
@@ -139,8 +139,8 @@ async function executeSupportTask(_taskId: string): Promise<TaskResult> {
   }
 }
 
-async function executeCopyAiTask(_taskId: string): Promise<TaskResult> {
-  // In production, this would call Copy.ai API
+async function executeRytrTask(_taskId: string): Promise<TaskResult> {
+  // In production, this would call Rytr AI API
   return {
     success: true,
     data: {

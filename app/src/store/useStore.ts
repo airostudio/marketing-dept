@@ -2,8 +2,8 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 export interface ApiCredentials {
-  jasperAi?: string
-  copyAi?: string
+  googleGemini?: string
+  rytrAi?: string
   zoomInfo?: string
   hunterIo?: string
   mailchimp?: string
@@ -82,7 +82,7 @@ export const useStore = create<Store>()(
           emoji: '✍️',
           role: 'Content Creation Lead',
           department: 'Content Creation',
-          platform: 'Jasper AI',
+          platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
@@ -92,7 +92,7 @@ export const useStore = create<Store>()(
           emoji: '📝',
           role: 'AI Copywriter',
           department: 'Content Creation',
-          platform: 'Copy.ai',
+          platform: 'Rytr AI',
           status: 'idle',
           metrics: {}
         },

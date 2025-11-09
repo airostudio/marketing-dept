@@ -24,7 +24,7 @@ This repository contains a complete organizational structure for building a mode
 
 | Worker | Role | Personality | Platform |
 |--------|------|-------------|----------|
-| ✍️ **Jasper** | Content Creation | Creative & eloquent | Jasper AI |
+| ✍️ **Jasper** | Content Creation | Creative & eloquent | Google Gemini |
 | 🔍 **Zoey** | Lead Generation | Detail-oriented & persistent | ZoomInfo |
 | ⏰ **Sage** | Email Marketing | Wise & timing-obsessed | Seventh Sense |
 | 🎯 **Smarta** | Social Advertising | Strategic & results-driven | Smartly.io |
@@ -69,7 +69,7 @@ Visit `http://localhost:3000` to start the setup wizard!
 
 ### What It Does
 
-1. **Setup**: Enter API keys for Jasper AI, ZoomInfo, Intercom, etc.
+1. **Setup**: Enter API keys for Google Gemini, ZoomInfo, Intercom, etc.
 2. **Verify**: Automatically tests connections to each platform
 3. **Create Tasks**: Assign work to your AI workers
 4. **Watch**: Monitor real-time progress as tasks execute
@@ -94,7 +94,7 @@ Visit `http://localhost:3000` to start the setup wizard!
 ## Department Structure
 
 ### 1. Content Creation Department
-**AI Agents**: Jasper AI, Copy.ai, Writesonic, Rytr, Ink for All
+**AI Agents**: Google Gemini, Rytr AI, Writesonic, Ink for All
 
 Create high-quality marketing content 5x faster with AI-powered writing assistants.
 
@@ -209,7 +209,7 @@ View the complete catalog of all 35+ AI agents with capabilities, integrations, 
 
 | Department | Primary Tools | Free Tier? |
 |------------|---------------|------------|
-| Content Creation | Jasper AI, Copy.ai, Writesonic | ✅ Yes |
+| Content Creation | Google Gemini, Rytr AI, Writesonic | ✅ Yes |
 | Lead Generation | Clearbit, Hunter.io, ZoomInfo | ✅ Limited |
 | Email Marketing | Mailchimp, Sendinblue | ✅ Yes |
 | Social Media | Smartly.io, Adext AI | ❌ No |
@@ -222,7 +222,7 @@ View the complete catalog of all 35+ AI agents with capabilities, integrations, 
 
 ### Starter Package ($200-500/month)
 Perfect for small businesses and startups
-- Content: Copy.ai ($49/mo)
+- Content: Rytr AI ($29/mo unlimited)
 - Email: Mailchimp (Free-$50/mo)
 - Analytics: Google Analytics (Free) + Hotjar ($39/mo)
 - SEO: Surfer SEO ($89/mo)
@@ -452,3 +452,44 @@ For questions about specific tools, consult their documentation:
 ---
 
 **Ready to get started?** → [Getting Started Guide](./setup/GETTING_STARTED.md)
+
+## 🔐 Security - API Key Management
+
+**IMPORTANT**: API keys must NEVER be committed to git!
+
+### Quick Setup
+
+1. **Copy the example file:**
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Add your API keys** to `.env` (this file is gitignored)
+
+3. **Never commit** `.env` files - they're automatically ignored
+
+### Vercel Deployment
+
+For production deployment, add environment variables in the Vercel dashboard:
+
+1. Go to **Settings** → **Environment Variables**
+2. Add each key individually (e.g., `VITE_GOOGLE_GEMINI_API_KEY`)
+3. Redeploy your app
+
+### Full Security Guide
+
+📖 **[Read the complete Security Guide →](./SECURITY.md)**
+
+Key points:
+- ✅ Use `.env.example` as a template (no real keys)
+- ✅ Store real keys in `.env` (gitignored)  
+- ✅ Use Vercel dashboard for production environment variables
+- ❌ NEVER commit `.env` files to git
+- ❌ NEVER share API keys in chat/email
+- ❌ NEVER hardcode keys in source code
+
+**If you accidentally commit API keys:**
+1. Remove from git immediately
+2. Rotate ALL exposed keys
+3. See [SECURITY.md](./SECURITY.md) for detailed steps
+
