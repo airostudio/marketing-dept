@@ -296,6 +296,18 @@ export const useStore = create<Store>()(
     }),
     {
       name: 'ai-marketing-storage',
+      onRehydrateStorage: () => (state) => {
+        // After rehydration, check if we have env vars and override setup completion
+        const envCreds = getInitialCredentialsFromEnv()
+        const hasEnvCreds = Object.keys(envCreds).length > 0
+
+        if (hasEnvCreds && state) {
+          // Override with environment variables
+          state.isSetupComplete = true
+          state.apiCredentials = { ...state.apiCredentials, ...envCreds }
+          state.verifiedApis = [...new Set([...state.verifiedApis, ...Object.keys(envCreds)])]
+        }
+      },
     }
   )
 )
