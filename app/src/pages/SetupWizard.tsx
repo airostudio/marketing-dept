@@ -122,11 +122,13 @@ export default function SetupWizard() {
     verifyApi,
     completeSetup,
     apiCredentials,
-    verifiedApis
+    verifiedApis,
+    hasEnvKey
   } = useStore()
 
   const currentPlatform = platforms[step]
   const isLastStep = step === platforms.length - 1
+  const isConfiguredFromEnv = hasEnvKey(currentPlatform.id)
 
   const handleVerify = async () => {
     const apiKey = apiCredentials[currentPlatform.id as keyof typeof apiCredentials]
@@ -246,28 +248,50 @@ export default function SetupWizard() {
               </div>
             </div>
 
+            {/* Environment Variable Badge */}
+            {isConfiguredFromEnv && (
+              <div className="mb-6 p-4 bg-green-50 rounded-lg border border-green-200">
+                <div className="flex items-center gap-2 text-green-800">
+                  <CheckCircle className="w-5 h-5" />
+                  <span className="font-semibold">
+                    ✅ Configured from Environment Variables
+                  </span>
+                </div>
+                <p className="text-sm text-green-700 mt-2">
+                  This platform is already configured via Vercel environment variables. You can skip this step or override with a different key below.
+                </p>
+              </div>
+            )}
+
             {/* API Key Input */}
             <div className="mb-6">
               <label className="label">
-                API Key / Credentials
+                API Key / Credentials {isConfiguredFromEnv && <span className="text-green-600 font-normal">(Optional - using env var)</span>}
               </label>
               <input
                 type="password"
                 className="input font-mono text-sm"
-                placeholder={currentPlatform.placeholder}
+                placeholder={isConfiguredFromEnv ? '••••••••••••••••' : currentPlatform.placeholder}
                 value={apiCredentials[currentPlatform.id as keyof typeof apiCredentials] || ''}
                 onChange={(e) => setApiCredential(currentPlatform.id, e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleVerify()}
+                disabled={isConfiguredFromEnv}
               />
               <div className="mt-2 flex items-center justify-between">
-                <a
-                  href={currentPlatform.docsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-primary-600 hover:text-primary-700 underline"
-                >
-                  Where do I find this? →
-                </a>
+                {!isConfiguredFromEnv ? (
+                  <a
+                    href={currentPlatform.docsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-primary-600 hover:text-primary-700 underline"
+                  >
+                    Where do I find this? →
+                  </a>
+                ) : (
+                  <span className="text-sm text-green-600">
+                    Using VITE_{currentPlatform.id.replace(/([A-Z])/g, '_$1').toUpperCase()}_API_KEY
+                  </span>
+                )}
                 {verifiedApis.includes(currentPlatform.id) && (
                   <span className="text-sm text-green-600 flex items-center gap-1">
                     <CheckCircle className="w-4 h-4" />
@@ -278,27 +302,29 @@ export default function SetupWizard() {
             </div>
 
             {/* Verify Button */}
-            <button
-              onClick={handleVerify}
-              disabled={!apiCredentials[currentPlatform.id as keyof typeof apiCredentials] || verifying === currentPlatform.id}
-              className="w-full btn-primary mb-4 flex items-center justify-center gap-2"
-            >
-              {verifying === currentPlatform.id ? (
-                <>
-                  <Loader className="w-5 h-5 animate-spin" />
-                  Verifying...
-                </>
-              ) : verifiedApis.includes(currentPlatform.id) ? (
-                <>
-                  <CheckCircle className="w-5 h-5" />
-                  Verified
-                </>
-              ) : (
-                <>
-                  Verify Connection
-                </>
-              )}
-            </button>
+            {!isConfiguredFromEnv && (
+              <button
+                onClick={handleVerify}
+                disabled={!apiCredentials[currentPlatform.id as keyof typeof apiCredentials] || verifying === currentPlatform.id}
+                className="w-full btn-primary mb-4 flex items-center justify-center gap-2"
+              >
+                {verifying === currentPlatform.id ? (
+                  <>
+                    <Loader className="w-5 h-5 animate-spin" />
+                    Verifying...
+                  </>
+                ) : verifiedApis.includes(currentPlatform.id) ? (
+                  <>
+                    <CheckCircle className="w-5 h-5" />
+                    Verified
+                  </>
+                ) : (
+                  <>
+                    Verify Connection
+                  </>
+                )}
+              </button>
+            )}
 
             {/* Navigation */}
             <div className="flex items-center justify-between gap-4">

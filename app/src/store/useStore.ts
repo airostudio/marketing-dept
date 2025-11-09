@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { getInitialCredentialsFromEnv, getApiKey as getEnvApiKey, isEnvKey } from '../utils/env'
 
 export interface ApiCredentials {
   googleGemini?: string
@@ -66,15 +67,23 @@ interface Store {
 
   updateWorkerStatus: (workerId: string, status: Worker['status']) => void
   updateWorkerMetrics: (workerId: string, metrics: Record<string, any>) => void
+
+  // Helper methods for environment variables
+  getApiKey: (platform: string) => string | undefined
+  hasEnvKey: (platform: string) => boolean
 }
+
+// Initialize with environment variables
+const envCredentials = getInitialCredentialsFromEnv()
+const hasEnvCredentials = Object.keys(envCredentials).length > 0
 
 export const useStore = create<Store>()(
   persist(
     (set, get) => ({
-      // Initial state
-      isSetupComplete: false,
-      apiCredentials: {},
-      verifiedApis: [],
+      // Initial state - auto-populate from environment variables
+      isSetupComplete: hasEnvCredentials,
+      apiCredentials: envCredentials,
+      verifiedApis: hasEnvCredentials ? Object.keys(envCredentials) : [],
       workers: [
         {
           id: 'jasper',
@@ -200,8 +209,7 @@ export const useStore = create<Store>()(
       },
 
       verifyApi: async (platform) => {
-        const credentials = get().apiCredentials
-        const apiKey = credentials[platform as keyof ApiCredentials]
+        const apiKey = get().getApiKey(platform)
 
         if (!apiKey) return false
 
@@ -210,7 +218,7 @@ export const useStore = create<Store>()(
         await new Promise(resolve => setTimeout(resolve, 1000))
 
         set((state) => ({
-          verifiedApis: [...state.verifiedApis, platform],
+          verifiedApis: [...new Set([...state.verifiedApis, platform])],
         }))
 
         return true
@@ -221,10 +229,12 @@ export const useStore = create<Store>()(
       },
 
       resetSetup: () => {
+        // Keep environment variables, only reset user-entered keys
+        const envCreds = getInitialCredentialsFromEnv()
         set({
-          isSetupComplete: false,
-          apiCredentials: {},
-          verifiedApis: [],
+          isSetupComplete: Object.keys(envCreds).length > 0,
+          apiCredentials: envCreds,
+          verifiedApis: Object.keys(envCreds),
         })
       },
 
@@ -272,6 +282,16 @@ export const useStore = create<Store>()(
               : worker
           ),
         }))
+      },
+
+      // Helper methods
+      getApiKey: (platform) => {
+        const credentials = get().apiCredentials as Record<string, string | undefined>
+        return getEnvApiKey(platform, credentials)
+      },
+
+      hasEnvKey: (platform) => {
+        return isEnvKey(platform)
       },
     }),
     {
