@@ -3,6 +3,11 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 /**
  * Health check endpoint that returns which API services are configured
  * This endpoint is safe to call from the client as it doesn't expose any keys
+ *
+ * Environment variable sources:
+ * - Vercel production: process.env populated from Vercel Dashboard ONLY
+ * - Local development: process.env populated from .env file (gitignored)
+ * - .env files are NEVER deployed to Vercel
  */
 export default function handler(req: VercelRequest, res: VercelResponse) {
   // Only allow GET requests

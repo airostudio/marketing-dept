@@ -4,14 +4,54 @@
 
 This guide shows you how to properly configure API keys in Vercel to ensure they remain **secure and server-side only**.
 
-## ⚠️ CRITICAL SECURITY REQUIREMENT
+## ⚠️ CRITICAL SECURITY REQUIREMENTS
 
-**ALL API keys MUST be set in Vercel Environment Variables WITHOUT the `VITE_` prefix.**
+### 1. API Keys Source in Production
+
+**In Vercel production, API keys come from Vercel Dashboard Environment Variables ONLY.**
+
+- ✅ **Production Source**: Vercel Dashboard → Settings → Environment Variables
+- ❌ **.env files are NOT deployed**: They are in `.gitignore` and completely ignored by Vercel
+- ⚠️ **Local development only**: .env files are ONLY used for local development with Vercel CLI
+
+### 2. Never Use VITE_ Prefix
+
+**ALL API keys MUST be set WITHOUT the `VITE_` prefix.**
 
 - ✅ **Correct**: `GOOGLE_GEMINI_API_KEY`
 - ❌ **Wrong**: `VITE_GOOGLE_GEMINI_API_KEY`
 
 The `VITE_` prefix exposes variables to the browser bundle, making your API keys publicly accessible. **Never use it for sensitive data.**
+
+### 3. How It Works
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ VERCEL PRODUCTION                                           │
+│                                                             │
+│  Vercel Dashboard Environment Variables                    │
+│         ↓                                                   │
+│  process.env.GOOGLE_GEMINI_API_KEY                         │
+│         ↓                                                   │
+│  /api/proxy.ts serverless function                         │
+│         ↓                                                   │
+│  External API (Google Gemini, Rytr, ZoomInfo, etc.)       │
+│                                                             │
+│  .env file = NOT USED (gitignored, not deployed)           │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ LOCAL DEVELOPMENT                                           │
+│                                                             │
+│  .env file (gitignored)                                     │
+│         ↓                                                   │
+│  Vercel CLI loads into process.env                         │
+│         ↓                                                   │
+│  /api/proxy.ts serverless function                         │
+│         ↓                                                   │
+│  External API (Google Gemini, Rytr, ZoomInfo, etc.)       │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ## 📋 Step-by-Step Setup
 
@@ -126,7 +166,7 @@ This returns a JSON response with all configured services:
 
 ## 🛠️ Local Development
 
-For local development:
+For **local development only**:
 
 1. Copy `.env.example` to `.env`:
    ```bash
@@ -145,9 +185,25 @@ For local development:
    npm run dev
    ```
 
-4. The Vercel CLI will automatically load variables from `.env`
+4. The Vercel CLI will automatically load variables from `.env` for local development
 
-**Important**: The `.env` file is gitignored and should never be committed.
+**CRITICAL: .env files are ONLY for local development**
+- .env files are in `.gitignore` and are **NEVER** committed to git
+- .env files are **NEVER** deployed to Vercel
+- Vercel production **IGNORES** .env files completely
+- Vercel production uses **ONLY** Vercel Dashboard Environment Variables
+
+### How Environment Variables Work
+
+| Environment | Source | Location |
+|-------------|--------|----------|
+| **Vercel Production** | Vercel Dashboard ONLY | Settings → Environment Variables |
+| **Vercel Preview** | Vercel Dashboard ONLY | Settings → Environment Variables |
+| **Local Development** | .env file | `/home/user/marketing-dept/.env` |
+
+In **all cases**, the backend code reads from `process.env.VARIABLE_NAME`, but the source differs:
+- Production/Preview: `process.env` is populated by Vercel from Dashboard settings
+- Local: `process.env` is populated by Vercel CLI from `.env` file
 
 ## 🔄 Updating Environment Variables
 

@@ -286,6 +286,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   // Get API key from environment (server-side only)
+  // In Vercel production: process.env comes from Vercel Dashboard Environment Variables ONLY
+  // In local development: process.env comes from .env file (gitignored, never deployed)
+  // .env files are NEVER deployed to Vercel - they are in .gitignore
   const apiKey = process.env[config.keyEnvVar]
 
   if (!apiKey || apiKey.length === 0) {
