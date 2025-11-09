@@ -141,7 +141,7 @@ export default function TaskManager() {
               </div>
 
               {/* Casey - Copywriting */}
-              <div className="mb-6 p-4 bg-gradient-to-r from-pink-50 to-orange-50 rounded-lg border border-pink-100">
+              <div className="mb-4 p-4 bg-gradient-to-r from-pink-50 to-orange-50 rounded-lg border border-pink-100">
                 <div className="flex items-center gap-2 mb-3">
                   <Sparkles className="w-4 h-4 text-pink-600" />
                   <h3 className="font-semibold text-gray-900 text-sm">Casey - AI Copywriting</h3>
@@ -195,6 +195,65 @@ export default function TaskManager() {
                     className="px-3 py-2 bg-white hover:bg-pink-50 rounded-lg text-sm font-medium text-gray-700 border border-pink-200 transition-colors"
                   >
                     🎯 Landing Page
+                  </button>
+                </div>
+              </div>
+
+              {/* Zoey - Lead Prospecting */}
+              <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-teal-50 rounded-lg border border-green-100">
+                <div className="flex items-center gap-2 mb-3">
+                  <Sparkles className="w-4 h-4 text-green-600" />
+                  <h3 className="font-semibold text-gray-900 text-sm">Zoey - Lead Prospecting</h3>
+                  <span className="text-xs text-gray-500">(ZoomInfo)</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    onClick={() => setNewTask({
+                      ...newTask,
+                      title: 'Find B2B leads',
+                      description: 'Search for qualified B2B contacts and decision makers',
+                      workerId: 'zoey',
+                      department: 'Lead Generation',
+                    })}
+                    className="px-3 py-2 bg-white hover:bg-green-50 rounded-lg text-sm font-medium text-gray-700 border border-green-200 transition-colors"
+                  >
+                    🎯 Find Leads
+                  </button>
+                  <button
+                    onClick={() => setNewTask({
+                      ...newTask,
+                      title: 'Search contacts by title',
+                      description: 'Find contacts with specific job titles (e.g., CEO, VP Marketing)',
+                      workerId: 'zoey',
+                      department: 'Lead Generation',
+                    })}
+                    className="px-3 py-2 bg-white hover:bg-green-50 rounded-lg text-sm font-medium text-gray-700 border border-green-200 transition-colors"
+                  >
+                    👔 By Job Title
+                  </button>
+                  <button
+                    onClick={() => setNewTask({
+                      ...newTask,
+                      title: 'Search leads by company',
+                      description: 'Find contacts at specific companies',
+                      workerId: 'zoey',
+                      department: 'Lead Generation',
+                    })}
+                    className="px-3 py-2 bg-white hover:bg-green-50 rounded-lg text-sm font-medium text-gray-700 border border-green-200 transition-colors"
+                  >
+                    🏢 By Company
+                  </button>
+                  <button
+                    onClick={() => setNewTask({
+                      ...newTask,
+                      title: 'Target by industry',
+                      description: 'Search for leads in specific industries (tech, healthcare, etc.)',
+                      workerId: 'zoey',
+                      department: 'Lead Generation',
+                    })}
+                    className="px-3 py-2 bg-white hover:bg-green-50 rounded-lg text-sm font-medium text-gray-700 border border-green-200 transition-colors"
+                  >
+                    🏭 By Industry
                   </button>
                 </div>
               </div>

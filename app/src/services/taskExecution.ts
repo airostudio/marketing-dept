@@ -3,6 +3,7 @@
  * Automatically executes tasks using AI workers
  * - Jasper: Long-form content (blogs, articles)
  * - Casey: Copywriting (ads, social media, short-form)
+ * - Zoey: Lead prospecting (ZoomInfo B2B contact search)
  */
 
 import { Task, Worker } from '../store/useStore'
@@ -13,6 +14,11 @@ import {
   requestCopywritingFromCasey,
   ContentRequest
 } from './contentCreation'
+import {
+  searchLeads,
+  requestLeadsFromZoey,
+  parseLeadSearchFromTask
+} from './leadGeneration'
 
 /**
  * Execute a task using the appropriate AI worker
@@ -30,8 +36,12 @@ export async function executeTask(
       return await executeContentCreationTask(task, worker, onProgress)
     }
 
-    // Other workers can request content from Jasper
-    return await executeTaskWithJasperSupport(task, worker, onProgress)
+    if (worker.id === 'zoey' || worker.department === 'Lead Generation') {
+      return await executeLeadGenerationTask(task, worker, onProgress)
+    }
+
+    // Other workers can request content from Jasper or leads from Zoey
+    return await executeTaskWithSpecialistSupport(task, worker, onProgress)
   } catch (error) {
     return {
       success: false,
@@ -98,15 +108,83 @@ async function executeContentCreationTask(
 }
 
 /**
- * Execute task with content creation support (Jasper or Casey)
- * Other agents can request content from Jasper or copywriting from Casey
+ * Execute lead generation task (Zoey)
  */
-async function executeTaskWithJasperSupport(
+async function executeLeadGenerationTask(
+  task: Task,
+  worker: Worker,
+  onProgress?: (progress: number, status: string) => void
+): Promise<{ success: boolean; result?: any; error?: string }> {
+  onProgress?.(20, 'Analyzing lead search criteria...')
+
+  // Parse task description to extract search criteria
+  const searchCriteria = parseLeadSearchFromTask(task.title, task.description)
+
+  onProgress?.(40, 'Searching for leads with ZoomInfo...')
+
+  const result = await searchLeads(searchCriteria)
+
+  if ('error' in result) {
+    return {
+      success: false,
+      error: result.error,
+    }
+  }
+
+  onProgress?.(90, 'Compiling lead results...')
+
+  return {
+    success: true,
+    result: {
+      leads: result.leads,
+      totalFound: result.totalFound,
+      generatedAt: result.generatedAt,
+      worker: worker.name,
+      platform: worker.platform,
+      leadsFoundBy: `${worker.name} (ZoomInfo)`,
+    },
+  }
+}
+
+/**
+ * Execute task with specialist support (Jasper, Casey, or Zoey)
+ * Other agents can request content, copywriting, or leads from specialists
+ */
+async function executeTaskWithSpecialistSupport(
   task: Task,
   worker: Worker,
   onProgress?: (progress: number, status: string) => void
 ): Promise<{ success: boolean; result?: any; error?: string }> {
   onProgress?.(20, `${worker.name} is analyzing the task...`)
+
+  // Check if task requires lead generation
+  if (requiresLeadGeneration(task)) {
+    onProgress?.(40, 'Requesting lead prospecting from Zoey...')
+
+    const searchCriteria = parseLeadSearchFromTask(task.title, task.description)
+    const result = await requestLeadsFromZoey(worker.name, searchCriteria)
+
+    if ('error' in result) {
+      return {
+        success: false,
+        error: result.error,
+      }
+    }
+
+    onProgress?.(80, `${worker.name} is processing the leads...`)
+
+    return {
+      success: true,
+      result: {
+        leads: result.leads,
+        totalFound: result.totalFound,
+        generatedAt: result.generatedAt,
+        worker: worker.name,
+        platform: worker.platform,
+        leadsFoundBy: 'Zoey (ZoomInfo)',
+      },
+    }
+  }
 
   // Check if task requires content creation
   if (requiresContentCreation(task)) {
@@ -274,6 +352,31 @@ function requiresContentCreation(task: Task): boolean {
     'post',
     'ad',
     'description',
+  ]
+
+  const combined = `${task.title} ${task.description}`.toLowerCase()
+
+  return keywords.some((keyword) => combined.includes(keyword))
+}
+
+/**
+ * Check if a task requires lead generation
+ */
+function requiresLeadGeneration(task: Task): boolean {
+  const keywords = [
+    'lead',
+    'leads',
+    'prospect',
+    'prospecting',
+    'contact',
+    'contacts',
+    'find',
+    'search',
+    'b2b',
+    'outreach',
+    'sales',
+    'target',
+    'customer',
   ]
 
   const combined = `${task.title} ${task.description}`.toLowerCase()
