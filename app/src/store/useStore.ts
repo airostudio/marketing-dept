@@ -221,6 +221,22 @@ export const useStore = create<Store>()(
 
         // Update worker status
         get().updateWorkerStatus(task.workerId, 'active')
+
+        // Auto-execute task asynchronously
+        const worker = get().workers.find((w) => w.id === task.workerId)
+        if (worker && worker.apiConnected) {
+          // Import dynamically to avoid circular dependencies
+          import('../services/taskExecution').then(({ autoExecuteTask }) => {
+            autoExecuteTask(newTask, worker, (updates) => {
+              get().updateTask(newTask.id, updates)
+
+              // Update worker status when task completes
+              if (updates.status === 'completed' || updates.status === 'failed') {
+                get().updateWorkerStatus(task.workerId, 'idle')
+              }
+            })
+          })
+        }
       },
 
       updateTask: (id, updates) => {

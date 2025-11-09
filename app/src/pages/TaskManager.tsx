@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, X, Loader, CheckCircle, XCircle, Clock } from 'lucide-react'
+import { Plus, X, Loader, CheckCircle, XCircle, Clock, Sparkles } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import Layout from '../components/Layout'
 import toast from 'react-hot-toast'
-import { executeTask } from '../services/taskExecutor'
 
 export default function TaskManager() {
-  const { workers, tasks, addTask, updateTask, deleteTask } = useStore()
+  const { workers, tasks, addTask, deleteTask } = useStore()
   const [showNewTask, setShowNewTask] = useState(false)
   const [newTask, setNewTask] = useState({
     title: '',
@@ -17,7 +16,7 @@ export default function TaskManager() {
     priority: 'medium' as 'low' | 'medium' | 'high',
   })
 
-  const handleCreateTask = async () => {
+  const handleCreateTask = () => {
     if (!newTask.title || !newTask.workerId) {
       toast.error('Please fill in all required fields')
       return
@@ -29,11 +28,9 @@ export default function TaskManager() {
       progress: 0,
     }
 
+    // Task will be automatically executed by the store
     addTask(task)
-    toast.success('Task created successfully!')
-
-    // Execute task
-    executeTaskAsync(tasks.length.toString(), newTask.workerId)
+    toast.success('Task created! AI worker will start processing...')
 
     setShowNewTask(false)
     setNewTask({
@@ -43,36 +40,6 @@ export default function TaskManager() {
       workerId: '',
       priority: 'medium',
     })
-  }
-
-  const executeTaskAsync = async (taskId: string, workerId: string) => {
-    try {
-      updateTask(taskId, { status: 'in_progress', progress: 0 })
-
-      const result = await executeTask(taskId, workerId)
-
-      if (result.success) {
-        updateTask(taskId, {
-          status: 'completed',
-          progress: 100,
-          completedAt: new Date().toISOString(),
-          result: result.data,
-        })
-        toast.success('Task completed successfully!')
-      } else {
-        updateTask(taskId, {
-          status: 'failed',
-          error: result.error,
-        })
-        toast.error('Task failed: ' + result.error)
-      }
-    } catch (error) {
-      updateTask(taskId, {
-        status: 'failed',
-        error: error instanceof Error ? error.message : 'Unknown error',
-      })
-      toast.error('Task execution failed')
-    }
   }
 
   const statusIcons = {
@@ -136,6 +103,65 @@ export default function TaskManager() {
                 >
                   <X className="w-5 h-5" />
                 </button>
+              </div>
+
+              {/* Quick Content Creation Actions */}
+              <div className="mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-100">
+                <div className="flex items-center gap-2 mb-3">
+                  <Sparkles className="w-4 h-4 text-purple-600" />
+                  <h3 className="font-semibold text-gray-900 text-sm">Quick Content Creation</h3>
+                  <span className="text-xs text-gray-500">(Auto-assigns to Jasper)</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    onClick={() => setNewTask({
+                      ...newTask,
+                      title: 'Write blog post',
+                      description: 'Create an engaging blog post',
+                      workerId: 'jasper',
+                      department: 'Content Creation',
+                    })}
+                    className="px-3 py-2 bg-white hover:bg-purple-50 rounded-lg text-sm font-medium text-gray-700 border border-purple-200 transition-colors"
+                  >
+                    📝 Blog Post
+                  </button>
+                  <button
+                    onClick={() => setNewTask({
+                      ...newTask,
+                      title: 'Create social media content',
+                      description: 'Generate engaging social media posts',
+                      workerId: 'jasper',
+                      department: 'Content Creation',
+                    })}
+                    className="px-3 py-2 bg-white hover:bg-purple-50 rounded-lg text-sm font-medium text-gray-700 border border-purple-200 transition-colors"
+                  >
+                    📱 Social Post
+                  </button>
+                  <button
+                    onClick={() => setNewTask({
+                      ...newTask,
+                      title: 'Write email campaign',
+                      description: 'Create compelling email content',
+                      workerId: 'jasper',
+                      department: 'Content Creation',
+                    })}
+                    className="px-3 py-2 bg-white hover:bg-purple-50 rounded-lg text-sm font-medium text-gray-700 border border-purple-200 transition-colors"
+                  >
+                    ✉️ Email Copy
+                  </button>
+                  <button
+                    onClick={() => setNewTask({
+                      ...newTask,
+                      title: 'Generate ad copy',
+                      description: 'Create persuasive advertising copy',
+                      workerId: 'jasper',
+                      department: 'Content Creation',
+                    })}
+                    className="px-3 py-2 bg-white hover:bg-purple-50 rounded-lg text-sm font-medium text-gray-700 border border-purple-200 transition-colors"
+                  >
+                    💡 Ad Copy
+                  </button>
+                </div>
               </div>
 
               <div className="space-y-4">
@@ -307,10 +333,32 @@ export default function TaskManager() {
 
                 {/* Result */}
                 {task.result && (
-                  <div className="mt-3 p-3 bg-green-50 rounded-lg border border-green-200">
-                    <p className="text-sm text-green-800">
-                      <strong>Result:</strong> {JSON.stringify(task.result, null, 2)}
-                    </p>
+                  <div className="mt-3 p-4 bg-green-50 rounded-lg border border-green-200">
+                    {task.result.content ? (
+                      <>
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-2">
+                            <Sparkles className="w-4 h-4 text-green-600" />
+                            <strong className="text-sm text-green-900">Generated Content</strong>
+                          </div>
+                          {task.result.wordCount && (
+                            <span className="text-xs text-green-700">{task.result.wordCount} words</span>
+                          )}
+                        </div>
+                        <div className="bg-white rounded p-3 text-sm text-gray-800 whitespace-pre-wrap border border-green-100 max-h-64 overflow-y-auto">
+                          {task.result.content}
+                        </div>
+                        {task.result.contentGeneratedBy && (
+                          <p className="text-xs text-green-700 mt-2">
+                            Content generated by: {task.result.contentGeneratedBy}
+                          </p>
+                        )}
+                      </>
+                    ) : (
+                      <p className="text-sm text-green-800">
+                        <strong>Result:</strong> {JSON.stringify(task.result, null, 2)}
+                      </p>
+                    )}
                   </div>
                 )}
               </motion.div>
