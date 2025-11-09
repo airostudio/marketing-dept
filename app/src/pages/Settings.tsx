@@ -99,7 +99,7 @@ export default function Settings() {
               <ol className="text-sm text-blue-800 list-decimal list-inside space-y-1">
                 <li>Access your Vercel project dashboard</li>
                 <li>Navigate to Settings → Environment Variables</li>
-                <li>Add or update the relevant VITE_* environment variables</li>
+                <li>Add or update the environment variables (WITHOUT VITE_ prefix for security)</li>
                 <li>Redeploy your application for changes to take effect</li>
               </ol>
             </div>
