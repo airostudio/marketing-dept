@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Home, Users, ListTodo, Settings as SettingsIcon, LogOut } from 'lucide-react'
-import { useStore } from '../store/useStore'
+import { Home, Users, ListTodo, Settings as SettingsIcon } from 'lucide-react'
 
 interface LayoutProps {
   children: ReactNode
@@ -9,7 +8,6 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation()
-  const resetSetup = useStore(state => state.resetSetup)
 
   const navigation = [
     { name: 'Dashboard', path: '/', icon: Home },
@@ -63,17 +61,7 @@ export default function Layout({ children }: LayoutProps) {
           })}
         </nav>
 
-        <div className="mt-auto pt-8">
-          <button
-            onClick={resetSetup}
-            className="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:bg-white/10 hover:text-white transition-all w-full"
-          >
-            <LogOut className="w-5 h-5" />
-            <span className="font-medium">Reset Setup</span>
-          </button>
-        </div>
-
-        <div className="mt-4 p-4 bg-white/10 rounded-lg">
+        <div className="mt-auto pt-8 p-4 bg-white/10 rounded-lg">
           <p className="text-xs text-white/60 mb-1">System Status</p>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />

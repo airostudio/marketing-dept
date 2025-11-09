@@ -1,93 +1,85 @@
-import { useState } from 'react'
-import { Save, Eye, EyeOff, AlertTriangle } from 'lucide-react'
+import { Shield, Check, X, Info } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import Layout from '../components/Layout'
-import toast from 'react-hot-toast'
 
 export default function Settings() {
-  const { apiCredentials, setApiCredential, resetSetup } = useStore()
-  const [showKeys, setShowKeys] = useState<Record<string, boolean>>({})
-  const [showResetConfirm, setShowResetConfirm] = useState(false)
+  const { getConfiguredPlatforms } = useStore()
+  const configuredPlatforms = getConfiguredPlatforms()
 
   const platforms = [
-    { id: 'jasperAi', name: 'Jasper AI', worker: 'Jasper' },
+    { id: 'googleGemini', name: 'Google Gemini', worker: 'Jasper' },
+    { id: 'rytrAi', name: 'Rytr AI', worker: 'Casey' },
     { id: 'zoomInfo', name: 'ZoomInfo', worker: 'Zoey' },
-    { id: 'seventhSense', name: 'Seventh Sense', worker: 'Sage' },
+    { id: 'hunterIo', name: 'Hunter.io', worker: 'Hunter' },
+    { id: 'mailchimp', name: 'Mailchimp', worker: 'Sage' },
     { id: 'smartlyIo', name: 'Smartly.io', worker: 'Smarta' },
     { id: 'dynamicYield', name: 'Dynamic Yield', worker: 'Dynamo' },
     { id: 'googleAnalytics', name: 'Google Analytics', worker: 'Analyzer' },
+    { id: 'hotjar', name: 'Hotjar', worker: 'Heatley' },
     { id: 'surferSeo', name: 'Surfer SEO', worker: 'Surfy' },
     { id: 'intercom', name: 'Intercom', worker: 'Chatty' },
   ]
-
-  const handleSave = (platformId: string) => {
-    toast.success(`${platformId} credentials saved`)
-  }
-
-  const toggleShowKey = (platformId: string) => {
-    setShowKeys({ ...showKeys, [platformId]: !showKeys[platformId] })
-  }
-
-  const handleReset = () => {
-    resetSetup()
-    toast.success('Setup reset successfully. Redirecting to setup wizard...')
-  }
 
   return (
     <Layout>
       <div className="max-w-4xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-          <p className="text-gray-600 mt-1">Manage your API credentials and platform connections</p>
+          <p className="text-gray-600 mt-1">View your API configuration and platform connections</p>
         </div>
 
-        {/* API Credentials */}
-        <div className="card mb-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">API Credentials</h2>
+        {/* Security Notice */}
+        <div className="card bg-green-50 border-green-200 mb-6">
+          <div className="flex gap-3">
+            <Shield className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <h3 className="font-semibold text-green-900 mb-1">Secure Configuration</h3>
+              <p className="text-sm text-green-800">
+                All API keys are configured via secure environment variables and are never stored in your browser.
+                This ensures your credentials remain protected and cannot be accessed by client-side code.
+              </p>
+            </div>
+          </div>
+        </div>
 
-          <div className="space-y-6">
+        {/* API Status */}
+        <div className="card mb-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-6">API Configuration Status</h2>
+
+          <div className="space-y-4">
             {platforms.map((platform) => {
-              const currentKey = apiCredentials[platform.id as keyof typeof apiCredentials]
-              const isVisible = showKeys[platform.id]
+              const isConfigured = configuredPlatforms.includes(platform.id)
 
               return (
-                <div key={platform.id} className="pb-6 border-b border-gray-200 last:border-0 last:pb-0">
-                  <div className="flex items-center justify-between mb-3">
-                    <div>
+                <div key={platform.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <div className="flex items-center gap-4 flex-1">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                      isConfigured ? 'bg-green-100' : 'bg-gray-200'
+                    }`}>
+                      {isConfigured ? (
+                        <Check className="w-5 h-5 text-green-600" />
+                      ) : (
+                        <X className="w-5 h-5 text-gray-400" />
+                      )}
+                    </div>
+                    <div className="flex-1">
                       <h3 className="font-semibold text-gray-900">{platform.name}</h3>
                       <p className="text-sm text-gray-600">Powers: {platform.worker}</p>
                     </div>
-                    <div className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      currentKey ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                    }`}>
-                      {currentKey ? 'Connected' : 'Not Connected'}
+                    <div className="text-right">
+                      {isConfigured ? (
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-sm text-gray-400">••••••••••••</span>
+                          <div className="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                            Configured
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-600">
+                          Not Configured
+                        </div>
+                      )}
                     </div>
-                  </div>
-
-                  <div className="flex gap-2">
-                    <div className="flex-1 relative">
-                      <input
-                        type={isVisible ? 'text' : 'password'}
-                        className="input pr-12 font-mono text-sm"
-                        placeholder="Enter API key..."
-                        value={currentKey || ''}
-                        onChange={(e) => setApiCredential(platform.id, e.target.value)}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => toggleShowKey(platform.id)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                      >
-                        {isVisible ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                      </button>
-                    </div>
-                    <button
-                      onClick={() => handleSave(platform.id)}
-                      className="btn-secondary flex items-center gap-2"
-                    >
-                      <Save className="w-4 h-4" />
-                      Save
-                    </button>
                   </div>
                 </div>
               )
@@ -95,52 +87,23 @@ export default function Settings() {
           </div>
         </div>
 
-        {/* Security Notice */}
-        <div className="card bg-blue-50 border-blue-200 mb-6">
+        {/* Configuration Info */}
+        <div className="card bg-blue-50 border-blue-200">
           <div className="flex gap-3">
-            <AlertTriangle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+            <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
             <div>
-              <h3 className="font-semibold text-blue-900 mb-1">Security Notice</h3>
-              <p className="text-sm text-blue-800">
-                Your API keys are stored locally in your browser using encrypted localStorage.
-                They are never sent to any server except the respective API platforms.
-                For production use, consider implementing a secure backend proxy.
+              <h3 className="font-semibold text-blue-900 mb-1">How to Update API Keys</h3>
+              <p className="text-sm text-blue-800 mb-2">
+                API keys are managed through environment variables. To add or update keys:
               </p>
+              <ol className="text-sm text-blue-800 list-decimal list-inside space-y-1">
+                <li>Access your Vercel project dashboard</li>
+                <li>Navigate to Settings → Environment Variables</li>
+                <li>Add or update the relevant VITE_* environment variables</li>
+                <li>Redeploy your application for changes to take effect</li>
+              </ol>
             </div>
           </div>
-        </div>
-
-        {/* Danger Zone */}
-        <div className="card border-red-200 bg-red-50">
-          <h2 className="text-xl font-bold text-red-900 mb-4">Danger Zone</h2>
-          <p className="text-sm text-red-800 mb-4">
-            Resetting will clear all your API credentials and take you back to the setup wizard.
-            All tasks and worker data will be preserved.
-          </p>
-
-          {!showResetConfirm ? (
-            <button
-              onClick={() => setShowResetConfirm(true)}
-              className="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors"
-            >
-              Reset Setup
-            </button>
-          ) : (
-            <div className="flex gap-3">
-              <button
-                onClick={handleReset}
-                className="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors"
-              >
-                Confirm Reset
-              </button>
-              <button
-                onClick={() => setShowResetConfirm(false)}
-                className="btn-secondary"
-              >
-                Cancel
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </Layout>

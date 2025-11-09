@@ -46,11 +46,6 @@ export interface Task {
 }
 
 interface Store {
-  // Setup
-  isSetupComplete: boolean
-  apiCredentials: ApiCredentials
-  verifiedApis: string[]
-
   // Workers
   workers: Worker[]
 
@@ -58,11 +53,6 @@ interface Store {
   tasks: Task[]
 
   // Actions
-  setApiCredential: (platform: string, key: string) => void
-  verifyApi: (platform: string) => Promise<boolean>
-  completeSetup: () => void
-  resetSetup: () => void
-
   addTask: (task: Omit<Task, 'id' | 'createdAt'>) => void
   updateTask: (id: string, updates: Partial<Task>) => void
   deleteTask: (id: string) => void
@@ -72,22 +62,16 @@ interface Store {
   updateWorkerConnection: (workerId: string, connected: boolean) => void
   testAllApiConnections: () => Promise<void>
 
-  // Helper methods for environment variables
+  // Helper methods for environment variables (read-only, never stored)
   getApiKey: (platform: string) => string | undefined
   hasEnvKey: (platform: string) => boolean
+  getConfiguredPlatforms: () => string[]
 }
-
-// Initialize with environment variables
-const envCredentials = getInitialCredentialsFromEnv()
-const hasEnvCredentials = Object.keys(envCredentials).length > 0
 
 export const useStore = create<Store>()(
   persist(
     (set, get) => ({
-      // Initial state - auto-populate from environment variables
-      isSetupComplete: hasEnvCredentials,
-      apiCredentials: envCredentials,
-      verifiedApis: hasEnvCredentials ? Object.keys(envCredentials) : [],
+      // Initial state - workers only
       workers: [
         {
           id: 'jasper',
@@ -225,45 +209,6 @@ export const useStore = create<Store>()(
       tasks: [],
 
       // Actions
-      setApiCredential: (platform, key) => {
-        set((state) => ({
-          apiCredentials: {
-            ...state.apiCredentials,
-            [platform]: key,
-          },
-        }))
-      },
-
-      verifyApi: async (platform) => {
-        const apiKey = get().getApiKey(platform)
-
-        if (!apiKey) return false
-
-        // TODO: Implement actual API verification
-        // For now, simulate verification
-        await new Promise(resolve => setTimeout(resolve, 1000))
-
-        set((state) => ({
-          verifiedApis: [...new Set([...state.verifiedApis, platform])],
-        }))
-
-        return true
-      },
-
-      completeSetup: () => {
-        set({ isSetupComplete: true })
-      },
-
-      resetSetup: () => {
-        // Keep environment variables, only reset user-entered keys
-        const envCreds = getInitialCredentialsFromEnv()
-        set({
-          isSetupComplete: Object.keys(envCreds).length > 0,
-          apiCredentials: envCreds,
-          verifiedApis: Object.keys(envCreds),
-        })
-      },
-
       addTask: (task) => {
         const newTask: Task = {
           ...task,
@@ -338,30 +283,22 @@ export const useStore = create<Store>()(
         }
       },
 
-      // Helper methods
+      // Helper methods - only use environment variables (never stored in browser)
       getApiKey: (platform) => {
-        const credentials = get().apiCredentials as Record<string, string | undefined>
-        return getEnvApiKey(platform, credentials)
+        return getEnvApiKey(platform, {})
       },
 
       hasEnvKey: (platform) => {
         return isEnvKey(platform)
       },
+
+      getConfiguredPlatforms: () => {
+        return Object.keys(getInitialCredentialsFromEnv())
+      },
     }),
     {
       name: 'ai-marketing-storage',
       onRehydrateStorage: () => (state) => {
-        // After rehydration, check if we have env vars and override setup completion
-        const envCreds = getInitialCredentialsFromEnv()
-        const hasEnvCreds = Object.keys(envCreds).length > 0
-
-        if (hasEnvCreds && state) {
-          // Override with environment variables
-          state.isSetupComplete = true
-          state.apiCredentials = { ...state.apiCredentials, ...envCreds }
-          state.verifiedApis = [...new Set([...state.verifiedApis, ...Object.keys(envCreds)])]
-        }
-
         // Test all API connections after rehydration
         if (state) {
           state.testAllApiConnections()
