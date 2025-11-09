@@ -105,19 +105,19 @@ export default function TaskManager() {
                 </button>
               </div>
 
-              {/* Quick Content Creation Actions */}
-              <div className="mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-100">
+              {/* Jasper - Long-form Content */}
+              <div className="mb-4 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-100">
                 <div className="flex items-center gap-2 mb-3">
                   <Sparkles className="w-4 h-4 text-purple-600" />
-                  <h3 className="font-semibold text-gray-900 text-sm">Quick Content Creation</h3>
-                  <span className="text-xs text-gray-500">(Auto-assigns to Jasper)</span>
+                  <h3 className="font-semibold text-gray-900 text-sm">Jasper - Long-form Content</h3>
+                  <span className="text-xs text-gray-500">(Google Gemini)</span>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => setNewTask({
                       ...newTask,
                       title: 'Write blog post',
-                      description: 'Create an engaging blog post',
+                      description: 'Create an engaging, SEO-optimized blog post',
                       workerId: 'jasper',
                       department: 'Content Creation',
                     })}
@@ -128,38 +128,73 @@ export default function TaskManager() {
                   <button
                     onClick={() => setNewTask({
                       ...newTask,
-                      title: 'Create social media content',
-                      description: 'Generate engaging social media posts',
+                      title: 'Write article',
+                      description: 'Create an in-depth article',
                       workerId: 'jasper',
                       department: 'Content Creation',
                     })}
                     className="px-3 py-2 bg-white hover:bg-purple-50 rounded-lg text-sm font-medium text-gray-700 border border-purple-200 transition-colors"
                   >
-                    📱 Social Post
+                    📄 Article
                   </button>
-                  <button
-                    onClick={() => setNewTask({
-                      ...newTask,
-                      title: 'Write email campaign',
-                      description: 'Create compelling email content',
-                      workerId: 'jasper',
-                      department: 'Content Creation',
-                    })}
-                    className="px-3 py-2 bg-white hover:bg-purple-50 rounded-lg text-sm font-medium text-gray-700 border border-purple-200 transition-colors"
-                  >
-                    ✉️ Email Copy
-                  </button>
+                </div>
+              </div>
+
+              {/* Casey - Copywriting */}
+              <div className="mb-6 p-4 bg-gradient-to-r from-pink-50 to-orange-50 rounded-lg border border-pink-100">
+                <div className="flex items-center gap-2 mb-3">
+                  <Sparkles className="w-4 h-4 text-pink-600" />
+                  <h3 className="font-semibold text-gray-900 text-sm">Casey - AI Copywriting</h3>
+                  <span className="text-xs text-gray-500">(Rytr AI)</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => setNewTask({
                       ...newTask,
                       title: 'Generate ad copy',
-                      description: 'Create persuasive advertising copy',
-                      workerId: 'jasper',
+                      description: 'Create high-converting advertisement copy',
+                      workerId: 'casey',
                       department: 'Content Creation',
                     })}
-                    className="px-3 py-2 bg-white hover:bg-purple-50 rounded-lg text-sm font-medium text-gray-700 border border-purple-200 transition-colors"
+                    className="px-3 py-2 bg-white hover:bg-pink-50 rounded-lg text-sm font-medium text-gray-700 border border-pink-200 transition-colors"
                   >
                     💡 Ad Copy
+                  </button>
+                  <button
+                    onClick={() => setNewTask({
+                      ...newTask,
+                      title: 'Create social media ads',
+                      description: 'Generate engaging social media advertisement copy',
+                      workerId: 'casey',
+                      department: 'Content Creation',
+                    })}
+                    className="px-3 py-2 bg-white hover:bg-pink-50 rounded-lg text-sm font-medium text-gray-700 border border-pink-200 transition-colors"
+                  >
+                    📱 Social Ads
+                  </button>
+                  <button
+                    onClick={() => setNewTask({
+                      ...newTask,
+                      title: 'Write product description',
+                      description: 'Create compelling product description',
+                      workerId: 'casey',
+                      department: 'Content Creation',
+                    })}
+                    className="px-3 py-2 bg-white hover:bg-pink-50 rounded-lg text-sm font-medium text-gray-700 border border-pink-200 transition-colors"
+                  >
+                    🏷️ Product Copy
+                  </button>
+                  <button
+                    onClick={() => setNewTask({
+                      ...newTask,
+                      title: 'Create landing page copy',
+                      description: 'Write persuasive landing page copy with CTA',
+                      workerId: 'casey',
+                      department: 'Content Creation',
+                    })}
+                    className="px-3 py-2 bg-white hover:bg-pink-50 rounded-lg text-sm font-medium text-gray-700 border border-pink-200 transition-colors"
+                  >
+                    🎯 Landing Page
                   </button>
                 </div>
               </div>

@@ -1,10 +1,18 @@
 /**
  * Task Execution Service
  * Automatically executes tasks using AI workers
+ * - Jasper: Long-form content (blogs, articles)
+ * - Casey: Copywriting (ads, social media, short-form)
  */
 
 import { Task, Worker } from '../store/useStore'
-import { generateContent, requestContentFromJasper, ContentRequest } from './contentCreation'
+import {
+  generateContent,
+  generateCopywriting,
+  requestContentFromJasper,
+  requestCopywritingFromCasey,
+  ContentRequest
+} from './contentCreation'
 
 /**
  * Execute a task using the appropriate AI worker
@@ -45,7 +53,10 @@ async function executeContentCreationTask(
   // Parse task description to determine content type
   const contentType = determineContentType(task.title, task.description)
 
-  onProgress?.(40, 'Generating content with AI...')
+  // Determine if this is a copywriting task (Casey) or general content (Jasper)
+  const isCopywriting = isCopywritingTask(task.title, task.description)
+
+  onProgress?.(40, `Generating ${isCopywriting ? 'copywriting' : 'content'} with AI...`)
 
   const request: ContentRequest = {
     type: contentType,
@@ -55,7 +66,10 @@ async function executeContentCreationTask(
     length: 'medium',
   }
 
-  const result = await generateContent(request)
+  // Route to appropriate AI service
+  const result = isCopywriting && worker.id === 'casey'
+    ? await generateCopywriting(request)  // Casey uses Rytr AI
+    : await generateContent(request)      // Jasper uses Google Gemini
 
   if ('error' in result) {
     return {
@@ -66,6 +80,10 @@ async function executeContentCreationTask(
 
   onProgress?.(90, 'Finalizing content...')
 
+  const aiService = isCopywriting && worker.id === 'casey'
+    ? 'Rytr AI'
+    : 'Google Gemini'
+
   return {
     success: true,
     result: {
@@ -74,12 +92,14 @@ async function executeContentCreationTask(
       generatedAt: result.generatedAt,
       worker: worker.name,
       platform: worker.platform,
+      contentGeneratedBy: `${worker.name} (${aiService})`,
     },
   }
 }
 
 /**
- * Execute task with Jasper's content creation support
+ * Execute task with content creation support (Jasper or Casey)
+ * Other agents can request content from Jasper or copywriting from Casey
  */
 async function executeTaskWithJasperSupport(
   task: Task,
@@ -90,38 +110,77 @@ async function executeTaskWithJasperSupport(
 
   // Check if task requires content creation
   if (requiresContentCreation(task)) {
-    onProgress?.(40, 'Requesting content from Jasper...')
-
     const contentType = determineContentType(task.title, task.description)
-    const result = await requestContentFromJasper(
-      worker.name,
-      contentType,
-      task.title,
-      {
-        additionalInstructions: task.description,
-        tone: 'professional',
-      }
-    )
+    const needsCopywriting = isCopywritingTask(task.title, task.description)
 
-    if ('error' in result) {
+    if (needsCopywriting) {
+      // Request copywriting from Casey
+      onProgress?.(40, 'Requesting copywriting from Casey...')
+
+      const result = await requestCopywritingFromCasey(
+        worker.name,
+        contentType,
+        task.title,
+        {
+          additionalInstructions: task.description,
+          tone: 'persuasive',
+        }
+      )
+
+      if ('error' in result) {
+        return {
+          success: false,
+          error: result.error,
+        }
+      }
+
+      onProgress?.(80, `${worker.name} is processing the copy...`)
+
       return {
-        success: false,
-        error: result.error,
+        success: true,
+        result: {
+          content: result.content,
+          wordCount: result.wordCount,
+          generatedAt: result.generatedAt,
+          worker: worker.name,
+          platform: worker.platform,
+          contentGeneratedBy: 'Casey (Rytr AI)',
+        },
       }
-    }
+    } else {
+      // Request general content from Jasper
+      onProgress?.(40, 'Requesting content from Jasper...')
 
-    onProgress?.(80, `${worker.name} is processing the content...`)
+      const result = await requestContentFromJasper(
+        worker.name,
+        contentType,
+        task.title,
+        {
+          additionalInstructions: task.description,
+          tone: 'professional',
+        }
+      )
 
-    return {
-      success: true,
-      result: {
-        content: result.content,
-        wordCount: result.wordCount,
-        generatedAt: result.generatedAt,
-        worker: worker.name,
-        platform: worker.platform,
-        contentGeneratedBy: 'Jasper (Google Gemini)',
-      },
+      if ('error' in result) {
+        return {
+          success: false,
+          error: result.error,
+        }
+      }
+
+      onProgress?.(80, `${worker.name} is processing the content...`)
+
+      return {
+        success: true,
+        result: {
+          content: result.content,
+          wordCount: result.wordCount,
+          generatedAt: result.generatedAt,
+          worker: worker.name,
+          platform: worker.platform,
+          contentGeneratedBy: 'Jasper (Google Gemini)',
+        },
+      }
     }
   }
 
@@ -168,6 +227,35 @@ function determineContentType(
   }
 
   return 'general'
+}
+
+/**
+ * Check if a task is copywriting-specific (Casey/Rytr)
+ * Copywriting: ads, social media, product descriptions, short-form
+ */
+function isCopywritingTask(title: string, description: string): boolean {
+  const copywritingKeywords = [
+    'ad copy',
+    'advertisement',
+    'ads',
+    'social media',
+    'facebook ad',
+    'instagram',
+    'twitter',
+    'linkedin post',
+    'product description',
+    'landing page',
+    'headline',
+    'tagline',
+    'slogan',
+    'cta',
+    'call to action',
+    'copy',
+  ]
+
+  const combined = `${title} ${description}`.toLowerCase()
+
+  return copywritingKeywords.some((keyword) => combined.includes(keyword))
 }
 
 /**
