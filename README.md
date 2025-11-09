@@ -452,3 +452,44 @@ For questions about specific tools, consult their documentation:
 ---
 
 **Ready to get started?** → [Getting Started Guide](./setup/GETTING_STARTED.md)
+
+## 🔐 Security - API Key Management
+
+**IMPORTANT**: API keys must NEVER be committed to git!
+
+### Quick Setup
+
+1. **Copy the example file:**
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Add your API keys** to `.env` (this file is gitignored)
+
+3. **Never commit** `.env` files - they're automatically ignored
+
+### Vercel Deployment
+
+For production deployment, add environment variables in the Vercel dashboard:
+
+1. Go to **Settings** → **Environment Variables**
+2. Add each key individually (e.g., `VITE_GOOGLE_GEMINI_API_KEY`)
+3. Redeploy your app
+
+### Full Security Guide
+
+📖 **[Read the complete Security Guide →](./SECURITY.md)**
+
+Key points:
+- ✅ Use `.env.example` as a template (no real keys)
+- ✅ Store real keys in `.env` (gitignored)  
+- ✅ Use Vercel dashboard for production environment variables
+- ❌ NEVER commit `.env` files to git
+- ❌ NEVER share API keys in chat/email
+- ❌ NEVER hardcode keys in source code
+
+**If you accidentally commit API keys:**
+1. Remove from git immediately
+2. Rotate ALL exposed keys
+3. See [SECURITY.md](./SECURITY.md) for detailed steps
+
