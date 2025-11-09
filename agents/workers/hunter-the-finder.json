@@ -11,7 +11,7 @@
   "aiPlatform": {
     "name": "Hunter.io",
     "url": "https://hunter.io",
-    "apiKey": "HUNTERIO_API_KEY",
+    "apiKey": "4f87decfcf8cce273a9d752c1252b853f24b8fe1",
     "tier": "free"
   },
   "capabilities": [
