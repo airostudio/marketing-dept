@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { getInitialCredentialsFromEnv, getApiKey as getEnvApiKey, isEnvKey } from '../utils/env'
+import { getConfiguredServices, isEnvKey } from '../utils/env'
 
 export interface ApiCredentials {
   googleGemini?: string
@@ -267,25 +267,21 @@ export const useStore = create<Store>()(
         const state = get()
         const workers = state.workers
 
-        // Test each worker's API connection
-        for (const worker of workers) {
-          const apiKey = state.getApiKey(worker.platformKey)
+        // Get configured services from backend
+        const configured = await getConfiguredServices()
 
-          // If API key exists and is not a placeholder, mark as connected
-          if (apiKey &&
-              apiKey !== 'your_google_gemini_api_key_here' &&
-              apiKey !== 'your_rytr_api_key_here' &&
-              apiKey.length > 0) {
-            get().updateWorkerConnection(worker.id, true)
-          } else {
-            get().updateWorkerConnection(worker.id, false)
-          }
+        // Update each worker's connection status
+        for (const worker of workers) {
+          const isConnected = configured.includes(worker.platformKey)
+          get().updateWorkerConnection(worker.id, isConnected)
         }
       },
 
-      // Helper methods - only use environment variables (never stored in browser)
-      getApiKey: (platform) => {
-        return getEnvApiKey(platform, {})
+      // Helper methods - queries backend for configuration
+      getApiKey: (_platform) => {
+        // API keys are never accessible on the client
+        console.warn('getApiKey called but API keys are not available on client. Use API client instead.')
+        return undefined
       },
 
       hasEnvKey: (platform) => {
@@ -293,7 +289,10 @@ export const useStore = create<Store>()(
       },
 
       getConfiguredPlatforms: () => {
-        return Object.keys(getInitialCredentialsFromEnv())
+        // This needs to be called asynchronously
+        // Use testAllApiConnections() to update connection status
+        const workers = get().workers
+        return workers.filter(w => w.apiConnected).map(w => w.platformKey)
       },
     }),
     {
