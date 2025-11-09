@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { useStore } from './store/useStore'
@@ -9,6 +10,12 @@ import Settings from './pages/Settings'
 
 function App() {
   const isSetupComplete = useStore((state) => state.isSetupComplete)
+  const testAllApiConnections = useStore((state) => state.testAllApiConnections)
+
+  // Test all API connections when app starts
+  useEffect(() => {
+    testAllApiConnections()
+  }, [])
 
   return (
     <Router>

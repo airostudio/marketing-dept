@@ -23,7 +23,9 @@ export interface Worker {
   role: string
   department: string
   platform: string
+  platformKey: string // Maps to ApiCredentials key
   status: 'active' | 'idle' | 'error'
+  apiConnected: boolean
   currentTask?: string
   metrics: Record<string, any>
 }
@@ -67,6 +69,8 @@ interface Store {
 
   updateWorkerStatus: (workerId: string, status: Worker['status']) => void
   updateWorkerMetrics: (workerId: string, metrics: Record<string, any>) => void
+  updateWorkerConnection: (workerId: string, connected: boolean) => void
+  testAllApiConnections: () => Promise<void>
 
   // Helper methods for environment variables
   getApiKey: (platform: string) => string | undefined
@@ -92,7 +96,9 @@ export const useStore = create<Store>()(
           role: 'Content Creation Lead',
           department: 'Content Creation',
           platform: 'Google Gemini',
+          platformKey: 'googleGemini',
           status: 'idle',
+          apiConnected: false,
           metrics: {}
         },
         {
@@ -102,7 +108,9 @@ export const useStore = create<Store>()(
           role: 'AI Copywriter',
           department: 'Content Creation',
           platform: 'Rytr AI',
+          platformKey: 'rytrAi',
           status: 'idle',
+          apiConnected: false,
           metrics: {}
         },
         {
@@ -112,7 +120,9 @@ export const useStore = create<Store>()(
           role: 'Lead Prospecting Specialist',
           department: 'Lead Generation',
           platform: 'ZoomInfo',
+          platformKey: 'zoomInfo',
           status: 'idle',
+          apiConnected: false,
           metrics: {}
         },
         {
@@ -122,7 +132,9 @@ export const useStore = create<Store>()(
           role: 'Email Finder Specialist',
           department: 'Lead Generation',
           platform: 'Hunter.io',
+          platformKey: 'hunterIo',
           status: 'idle',
+          apiConnected: false,
           metrics: {}
         },
         {
@@ -132,7 +144,9 @@ export const useStore = create<Store>()(
           role: 'Email Campaign Manager',
           department: 'Email Marketing',
           platform: 'Mailchimp',
+          platformKey: 'mailchimp',
           status: 'idle',
+          apiConnected: false,
           metrics: {}
         },
         {
@@ -142,7 +156,9 @@ export const useStore = create<Store>()(
           role: 'Social Advertising Manager',
           department: 'Social Media',
           platform: 'Smartly.io',
+          platformKey: 'smartlyIo',
           status: 'idle',
+          apiConnected: false,
           metrics: {}
         },
         {
@@ -152,7 +168,9 @@ export const useStore = create<Store>()(
           role: 'Experience Optimization Lead',
           department: 'Personalization',
           platform: 'Dynamic Yield',
+          platformKey: 'dynamicYield',
           status: 'idle',
+          apiConnected: false,
           metrics: {}
         },
         {
@@ -162,7 +180,9 @@ export const useStore = create<Store>()(
           role: 'Data Analytics Specialist',
           department: 'Analytics',
           platform: 'Google Analytics',
+          platformKey: 'googleAnalytics',
           status: 'idle',
+          apiConnected: false,
           metrics: {}
         },
         {
@@ -172,7 +192,9 @@ export const useStore = create<Store>()(
           role: 'User Experience Analyst',
           department: 'Analytics',
           platform: 'Hotjar',
+          platformKey: 'hotjar',
           status: 'idle',
+          apiConnected: false,
           metrics: {}
         },
         {
@@ -182,7 +204,9 @@ export const useStore = create<Store>()(
           role: 'SEO Optimization Specialist',
           department: 'SEO',
           platform: 'Surfer SEO',
+          platformKey: 'surferSeo',
           status: 'idle',
+          apiConnected: false,
           metrics: {}
         },
         {
@@ -192,7 +216,9 @@ export const useStore = create<Store>()(
           role: 'Customer Support Specialist',
           department: 'Customer Support',
           platform: 'Intercom',
+          platformKey: 'intercom',
           status: 'idle',
+          apiConnected: false,
           metrics: {}
         },
       ],
@@ -284,6 +310,34 @@ export const useStore = create<Store>()(
         }))
       },
 
+      updateWorkerConnection: (workerId, connected) => {
+        set((state) => ({
+          workers: state.workers.map((worker) =>
+            worker.id === workerId ? { ...worker, apiConnected: connected } : worker
+          ),
+        }))
+      },
+
+      testAllApiConnections: async () => {
+        const state = get()
+        const workers = state.workers
+
+        // Test each worker's API connection
+        for (const worker of workers) {
+          const apiKey = state.getApiKey(worker.platformKey)
+
+          // If API key exists and is not a placeholder, mark as connected
+          if (apiKey &&
+              apiKey !== 'your_google_gemini_api_key_here' &&
+              apiKey !== 'your_rytr_api_key_here' &&
+              apiKey.length > 0) {
+            get().updateWorkerConnection(worker.id, true)
+          } else {
+            get().updateWorkerConnection(worker.id, false)
+          }
+        }
+      },
+
       // Helper methods
       getApiKey: (platform) => {
         const credentials = get().apiCredentials as Record<string, string | undefined>
@@ -306,6 +360,11 @@ export const useStore = create<Store>()(
           state.isSetupComplete = true
           state.apiCredentials = { ...state.apiCredentials, ...envCreds }
           state.verifiedApis = [...new Set([...state.verifiedApis, ...Object.keys(envCreds)])]
+        }
+
+        // Test all API connections after rehydration
+        if (state) {
+          state.testAllApiConnections()
         }
       },
     }

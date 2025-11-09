@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowRight, AlertCircle } from 'lucide-react'
+import { ArrowRight, AlertCircle, Wifi, WifiOff } from 'lucide-react'
 import { Worker } from '../store/useStore'
 
 interface WorkerCardProps {
@@ -53,9 +53,24 @@ export default function WorkerCard({ worker, index }: WorkerCardProps) {
           )}
 
           {/* Platform */}
-          <div className="flex items-center justify-between text-sm">
+          <div className="flex items-center justify-between text-sm mb-3">
             <span className="text-gray-600">Platform:</span>
             <span className="font-semibold text-gray-900">{worker.platform}</span>
+          </div>
+
+          {/* API Connection Status */}
+          <div className="flex items-center gap-2 text-sm">
+            {worker.apiConnected ? (
+              <div className="flex items-center gap-2 text-green-600">
+                <Wifi className="w-4 h-4" />
+                <span className="font-medium">API Connected</span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 text-gray-400">
+                <WifiOff className="w-4 h-4" />
+                <span className="font-medium">Not Connected</span>
+              </div>
+            )}
           </div>
 
           {/* View Details Link */}
