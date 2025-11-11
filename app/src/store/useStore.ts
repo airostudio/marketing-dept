@@ -74,6 +74,18 @@ export const useStore = create<Store>()(
       // Initial state - workers only
       workers: [
         {
+          id: 'manager',
+          name: 'Manager',
+          emoji: '🎯',
+          role: 'AI Coordinator & Orchestrator',
+          department: 'Management',
+          platform: 'Internal',
+          platformKey: 'internal',
+          status: 'idle',
+          apiConnected: true, // Always connected (no external API)
+          metrics: {}
+        },
+        {
           id: 'jasper',
           name: 'Jasper',
           emoji: '✍️',
@@ -222,12 +234,13 @@ export const useStore = create<Store>()(
         // Update worker status
         get().updateWorkerStatus(task.workerId, 'active')
 
-        // Auto-execute task asynchronously
+        // Auto-execute task asynchronously with Manager coordination
         const worker = get().workers.find((w) => w.id === task.workerId)
-        if (worker && worker.apiConnected) {
+        const allWorkers = get().workers
+        if (worker && (worker.apiConnected || worker.id === 'manager')) {
           // Import dynamically to avoid circular dependencies
           import('../services/taskExecution').then(({ autoExecuteTask }) => {
-            autoExecuteTask(newTask, worker, (updates) => {
+            autoExecuteTask(newTask, worker, allWorkers, (updates) => {
               get().updateTask(newTask.id, updates)
 
               // Update worker status when task completes

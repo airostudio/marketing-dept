@@ -1,9 +1,11 @@
 /**
  * Task Execution Service
  * Automatically executes tasks using AI workers
+ * Routes all tasks through the Agent Manager for coordination
  * - Jasper: Long-form content (blogs, articles)
  * - Casey: Copywriting (ads, social media, short-form)
  * - Zoey: Lead prospecting (ZoomInfo B2B contact search)
+ * - Manager: Coordinates multi-agent workflows
  */
 
 import { Task, Worker } from '../store/useStore'
@@ -19,6 +21,7 @@ import {
   requestLeadsFromZoey,
   parseLeadSearchFromTask
 } from './leadGeneration'
+import { agentManager } from './agentManager'
 
 /**
  * Execute a task using the appropriate AI worker
@@ -386,10 +389,12 @@ function requiresLeadGeneration(task: Task): boolean {
 
 /**
  * Auto-execute task when it's created
+ * Routes through Agent Manager for multi-agent coordination
  */
 export async function autoExecuteTask(
   task: Task,
   worker: Worker,
+  allWorkers: Worker[],
   updateCallback: (updates: Partial<Task>) => void
 ): Promise<void> {
   // Update to in_progress
@@ -398,16 +403,31 @@ export async function autoExecuteTask(
     progress: 0,
   })
 
-  const result = await executeTask(
-    task,
-    worker,
-    (progress, status) => {
+  // Create enhanced progress callback for Manager coordination
+  const managerProgress = (agentId: string, progress: number, status: string) => {
+    if (agentId === 'manager') {
       updateCallback({
         progress,
         error: undefined,
       })
-      console.log(`Task progress: ${progress}% - ${status}`)
+      console.log(`🎯 Manager: ${status} (${progress}%)`)
+    } else {
+      const agent = allWorkers.find(w => w.id === agentId)
+      const emoji = agent?.emoji || '🤖'
+      updateCallback({
+        progress,
+        error: undefined,
+      })
+      console.log(`${emoji} ${agent?.name || agentId}: ${status} (${progress}%)`)
     }
+  }
+
+  // Route through Manager for coordination
+  const result = await agentManager.coordinateTask(
+    task,
+    worker,
+    allWorkers,
+    managerProgress
   )
 
   if (result.success) {
