@@ -1,17 +1,16 @@
 /**
  * Lead Generation Service
- * Routes lead prospecting tasks to Zoey (ZoomInfo)
- * - Zoey: Contact search, lead enrichment, B2B prospecting
+ * Routes lead prospecting tasks to Hunter (Hunter.io)
+ * - Hunter: Company search, lead enrichment, email finding
  */
 
-import { zoomInfo } from '../utils/apiClient'
+import { hunter } from '../utils/apiClient'
 
 export interface LeadSearchRequest {
   companyName?: string
-  jobTitle?: string
-  location?: string
   industry?: string
-  companySize?: string
+  location?: string
+  domain?: string
   keywords?: string[]
   limit?: number
 }
@@ -31,26 +30,45 @@ export interface Lead {
   phone?: string
   location?: string
   linkedInUrl?: string
+  domain?: string
 }
 
 /**
- * Search for leads using Zoey (ZoomInfo)
+ * Search for leads using Hunter (Hunter.io)
  */
 export async function searchLeads(
   request: LeadSearchRequest
 ): Promise<LeadResult | { error: string }> {
   try {
-    // Build ZoomInfo query
-    const query = buildZoomInfoQuery(request)
+    // If domain is provided, use Domain Search
+    if (request.domain) {
+      const result = await hunter.findEmails(request.domain, 'domain-search')
 
-    const result = await zoomInfo.searchContact(query)
+      if (result.error) {
+        return { error: result.error }
+      }
+
+      const leads = extractLeadsFromDomainSearch(result.data)
+
+      return {
+        leads,
+        totalFound: leads.length,
+        generatedAt: new Date().toISOString(),
+      }
+    }
+
+    // Otherwise, use company discovery
+    // Build search query from request
+    const query = buildSearchQuery(request)
+
+    // Use Hunter.io Discover API for company search (free)
+    const result = await hunter.discoverCompanies(query)
 
     if (result.error) {
       return { error: result.error }
     }
 
-    // Extract leads from ZoomInfo response
-    const leads = extractLeadsFromResponse(result.data)
+    const leads = extractLeadsFromDiscovery(result.data)
 
     return {
       leads,
@@ -65,130 +83,91 @@ export async function searchLeads(
 }
 
 /**
- * Build ZoomInfo API query from request
+ * Build search query from request parameters
  */
-function buildZoomInfoQuery(request: LeadSearchRequest): any {
-  const query: any = {
-    outputFields: [
-      'id',
-      'firstName',
-      'lastName',
-      'jobTitle',
-      'companyName',
-      'email',
-      'phone',
-      'city',
-      'state',
-      'country',
-      'linkedInUrl',
-    ],
-    page: 1,
-    rpp: request.limit || 25, // Results per page
-  }
+function buildSearchQuery(request: LeadSearchRequest): string {
+  const parts: string[] = []
 
-  // Add filters based on request
-  const matchCriteria: any[] = []
+  if (request.companyName) parts.push(request.companyName)
+  if (request.industry) parts.push(request.industry)
+  if (request.location) parts.push(request.location)
+  if (request.keywords) parts.push(...request.keywords)
 
-  if (request.companyName) {
-    matchCriteria.push({
-      field: 'company',
-      values: [request.companyName],
-    })
-  }
-
-  if (request.jobTitle) {
-    matchCriteria.push({
-      field: 'jobTitle',
-      values: [request.jobTitle],
-    })
-  }
-
-  if (request.location) {
-    matchCriteria.push({
-      field: 'location',
-      values: [request.location],
-    })
-  }
-
-  if (request.industry) {
-    matchCriteria.push({
-      field: 'companyIndustry',
-      values: [request.industry],
-    })
-  }
-
-  if (request.companySize) {
-    matchCriteria.push({
-      field: 'companyEmployeeCount',
-      values: [request.companySize],
-    })
-  }
-
-  if (matchCriteria.length > 0) {
-    query.matchCriteria = matchCriteria
-  }
-
-  return query
+  return parts.join(' ')
 }
 
 /**
- * Extract lead information from ZoomInfo response
+ * Extract lead information from Hunter.io Domain Search response
  */
-function extractLeadsFromResponse(response: any): Lead[] {
+function extractLeadsFromDomainSearch(response: any): Lead[] {
   try {
-    // ZoomInfo response structure: { data: [{ ...contact fields }] }
-    if (response?.data && Array.isArray(response.data)) {
-      return response.data.map((contact: any) => ({
-        firstName: contact.firstName || contact.first_name,
-        lastName: contact.lastName || contact.last_name,
-        title: contact.jobTitle || contact.job_title || contact.title,
-        company: contact.companyName || contact.company_name || contact.company,
-        email: contact.email || contact.emailAddress,
-        phone: contact.phone || contact.directPhoneNumber,
-        location: formatLocation(contact),
-        linkedInUrl: contact.linkedInUrl || contact.linkedin_url,
-      }))
-    }
-
-    // Fallback if data is in different structure
-    if (Array.isArray(response)) {
-      return response.map((contact: any) => ({
-        firstName: contact.firstName || contact.first_name,
-        lastName: contact.lastName || contact.last_name,
-        title: contact.jobTitle || contact.job_title || contact.title,
-        company: contact.companyName || contact.company_name || contact.company,
-        email: contact.email || contact.emailAddress,
-        phone: contact.phone || contact.directPhoneNumber,
-        location: formatLocation(contact),
-        linkedInUrl: contact.linkedInUrl || contact.linkedin_url,
+    if (response?.data?.emails && Array.isArray(response.data.emails)) {
+      return response.data.emails.map((email: any) => ({
+        firstName: email.first_name,
+        lastName: email.last_name,
+        title: email.position,
+        company: response.data.domain || email.company,
+        email: email.value,
+        phone: email.phone_number,
+        location: '',
+        linkedInUrl: email.linkedin,
+        domain: response.data.domain,
       }))
     }
 
     return []
   } catch (error) {
-    console.error('Error extracting leads from ZoomInfo response:', error)
+    console.error('Error extracting leads from Hunter Domain Search:', error)
     return []
   }
 }
 
 /**
- * Format location from various contact fields
+ * Extract lead information from Hunter.io Discover response
  */
-function formatLocation(contact: any): string {
+function extractLeadsFromDiscovery(response: any): Lead[] {
+  try {
+    // Hunter.io Discover API returns companies, not individual contacts
+    // We'll create leads based on company information
+    if (response?.data?.companies && Array.isArray(response.data.companies)) {
+      return response.data.companies.map((company: any) => ({
+        firstName: '',
+        lastName: '',
+        title: '',
+        company: company.name || company.domain,
+        email: '',
+        phone: company.phone,
+        location: formatCompanyLocation(company),
+        linkedInUrl: company.linkedin,
+        domain: company.domain,
+      }))
+    }
+
+    return []
+  } catch (error) {
+    console.error('Error extracting leads from Hunter Discover:', error)
+    return []
+  }
+}
+
+/**
+ * Format company location from various fields
+ */
+function formatCompanyLocation(company: any): string {
   const parts = []
 
-  if (contact.city) parts.push(contact.city)
-  if (contact.state) parts.push(contact.state)
-  if (contact.country) parts.push(contact.country)
+  if (company.city) parts.push(company.city)
+  if (company.state) parts.push(company.state)
+  if (company.country) parts.push(company.country)
 
   return parts.join(', ')
 }
 
 /**
- * Request lead prospecting from Zoey
- * This allows other agents to request Zoey's help for lead generation
+ * Request lead prospecting from Hunter
+ * This allows other agents to request Hunter's help for lead generation
  */
-export async function requestLeadsFromZoey(
+export async function requestLeadsFromHunter(
   requestingAgent: string,
   searchCriteria: LeadSearchRequest
 ): Promise<LeadResult | { error: string }> {
@@ -224,10 +203,10 @@ export function parseLeadSearchFromTask(
   }
 
   // Extract job title
-  const titleKeywords = ['ceo', 'cto', 'cfo', 'vp', 'director', 'manager', 'engineer', 'developer', 'designer', 'marketing', 'sales']
+  const titleKeywords = ['ceo', 'cto', 'cfo', 'vp', 'director', 'manager', 'engineer', 'developer', 'designer', 'marketing', 'sales', 'founder', 'head']
   for (const keyword of titleKeywords) {
     if (combined.includes(keyword)) {
-      request.jobTitle = keyword
+      // Title is less relevant for Hunter.io company search
       break
     }
   }

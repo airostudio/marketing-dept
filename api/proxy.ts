@@ -85,8 +85,19 @@ const API_CONFIGS: Record<string, ApiConfig> = {
     name: 'Hunter.io',
     keyEnvVar: 'HUNTER_IO_API_KEY',
     handler: async (apiKey: string, body: any) => {
-      const { domain, type = 'domain-search' } = body
-      const url = `https://api.hunter.io/v2/${type}?domain=${domain}&api_key=${apiKey}`
+      const { domain, query, type = 'domain-search' } = body
+
+      let url: string
+      if (type === 'discover') {
+        // Discover API for company search (free)
+        url = `https://api.hunter.io/v2/discover?query=${encodeURIComponent(query)}&api_key=${apiKey}`
+      } else if (type === 'company-enrichment') {
+        // Company enrichment API (0.2 credits)
+        url = `https://api.hunter.io/v2/companies/enrichment?domain=${domain}&api_key=${apiKey}`
+      } else {
+        // Domain search API (1 credit for 1-10 emails)
+        url = `https://api.hunter.io/v2/${type}?domain=${domain}&api_key=${apiKey}`
+      }
 
       const response = await fetch(url)
 

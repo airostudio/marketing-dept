@@ -4,7 +4,7 @@
  * Routes all tasks through the Agent Manager for coordination
  * - Jasper: Long-form content (blogs, articles)
  * - Casey: Copywriting (ads, social media, short-form)
- * - Zoey: Lead prospecting (ZoomInfo B2B contact search)
+ * - Hunter: Lead prospecting & email finding (Hunter.io)
  * - Manager: Coordinates multi-agent workflows
  */
 
@@ -18,7 +18,7 @@ import {
 } from './contentCreation'
 import {
   searchLeads,
-  requestLeadsFromZoey,
+  requestLeadsFromHunter,
   parseLeadSearchFromTask
 } from './leadGeneration'
 import { agentManager } from './agentManager'
@@ -39,11 +39,11 @@ export async function executeTask(
       return await executeContentCreationTask(task, worker, onProgress)
     }
 
-    if (worker.id === 'zoey' || worker.department === 'Lead Generation') {
+    if (worker.id === 'hunter' || worker.department === 'Lead Generation') {
       return await executeLeadGenerationTask(task, worker, onProgress)
     }
 
-    // Other workers can request content from Jasper or leads from Zoey
+    // Other workers can request content from Jasper or leads from Hunter
     return await executeTaskWithSpecialistSupport(task, worker, onProgress)
   } catch (error) {
     return {
@@ -111,7 +111,7 @@ async function executeContentCreationTask(
 }
 
 /**
- * Execute lead generation task (Zoey)
+ * Execute lead generation task (Hunter)
  */
 async function executeLeadGenerationTask(
   task: Task,
@@ -150,7 +150,7 @@ async function executeLeadGenerationTask(
 }
 
 /**
- * Execute task with specialist support (Jasper, Casey, or Zoey)
+ * Execute task with specialist support (Jasper, Casey, or Hunter)
  * Other agents can request content, copywriting, or leads from specialists
  */
 async function executeTaskWithSpecialistSupport(
@@ -162,10 +162,10 @@ async function executeTaskWithSpecialistSupport(
 
   // Check if task requires lead generation
   if (requiresLeadGeneration(task)) {
-    onProgress?.(40, 'Requesting lead prospecting from Zoey...')
+    onProgress?.(40, 'Requesting lead prospecting from Hunter...')
 
     const searchCriteria = parseLeadSearchFromTask(task.title, task.description)
-    const result = await requestLeadsFromZoey(worker.name, searchCriteria)
+    const result = await requestLeadsFromHunter(worker.name, searchCriteria)
 
     if ('error' in result) {
       return {
@@ -184,7 +184,7 @@ async function executeTaskWithSpecialistSupport(
         generatedAt: result.generatedAt,
         worker: worker.name,
         platform: worker.platform,
-        leadsFoundBy: 'Zoey (ZoomInfo)',
+        leadsFoundBy: 'Hunter (Hunter.io)',
       },
     }
   }

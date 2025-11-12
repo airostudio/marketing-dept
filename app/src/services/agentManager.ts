@@ -72,17 +72,15 @@ class AgentManagerService {
       'email-copy',
     ])
 
-    this.agentCapabilities.set('zoey', [
+    this.agentCapabilities.set('hunter', [
       'lead-prospecting',
       'b2b-leads',
       'contact-search',
       'company-research',
-    ])
-
-    this.agentCapabilities.set('hunter', [
       'email-finding',
       'email-verification',
       'domain-search',
+      'company-enrichment',
     ])
 
     this.agentCapabilities.set('sage', [
@@ -216,20 +214,14 @@ class AgentManagerService {
     // Check for lead generation + content creation pattern
     if (taskText.includes('lead') && (taskText.includes('content') || taskText.includes('email'))) {
       steps.push({
-        agentId: 'zoey',
-        action: 'find-leads',
-        status: 'pending',
-      })
-      steps.push({
         agentId: 'hunter',
-        action: 'find-emails',
-        dependencies: ['0'], // Depends on Zoey's leads
+        action: 'find-leads-and-emails',
         status: 'pending',
       })
       steps.push({
         agentId: 'casey',
         action: 'create-outreach-copy',
-        dependencies: ['1'], // Depends on Hunter's emails
+        dependencies: ['0'], // Depends on Hunter's leads & emails
         status: 'pending',
       })
     }
@@ -415,8 +407,8 @@ class AgentManagerService {
           return { success: false, error: copyResult.error }
         }
         result = copyResult
-      } else if (worker.id === 'zoey') {
-        onProgress?.(worker.id, 50, 'Finding leads with Zoey...')
+      } else if (worker.id === 'hunter') {
+        onProgress?.(worker.id, 50, 'Finding leads and emails with Hunter...')
         const leadsResult = await searchLeads({
           keywords: [task.title, task.description],
           limit: 25,
@@ -468,7 +460,7 @@ class AgentManagerService {
           keywords: [],
         })
 
-      case 'zoey':
+      case 'hunter':
         return await searchLeads({
           keywords: [action],
           limit: 25,

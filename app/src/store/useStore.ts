@@ -110,22 +110,10 @@ export const useStore = create<Store>()(
           metrics: {}
         },
         {
-          id: 'zoey',
-          name: 'Zoey',
-          emoji: '🔍',
-          role: 'Lead Prospecting Specialist',
-          department: 'Lead Generation',
-          platform: 'ZoomInfo',
-          platformKey: 'zoomInfo',
-          status: 'idle',
-          apiConnected: false,
-          metrics: {}
-        },
-        {
           id: 'hunter',
           name: 'Hunter',
           emoji: '🎯',
-          role: 'Email Finder Specialist',
+          role: 'Lead Prospecting & Email Finder',
           department: 'Lead Generation',
           platform: 'Hunter.io',
           platformKey: 'hunterIo',

@@ -84,6 +84,12 @@ export const hunter = {
   findEmails: async (domain: string, type = 'domain-search') => {
     return proxyRequest('hunterIo', { domain, type })
   },
+  discoverCompanies: async (query: string) => {
+    return proxyRequest('hunterIo', { query, type: 'discover' })
+  },
+  enrichCompany: async (domain: string) => {
+    return proxyRequest('hunterIo', { domain, type: 'company-enrichment' })
+  },
 }
 
 export const mailchimp = {
