@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Home, Users, ListTodo, Settings as SettingsIcon, LogOut } from 'lucide-react'
+import { ListTodo, Settings as SettingsIcon, LogOut, Sparkles, LayoutDashboard } from 'lucide-react'
 import { useStore } from '../store/useStore'
 
 interface LayoutProps {
@@ -12,19 +12,20 @@ export default function Layout({ children }: LayoutProps) {
   const resetSetup = useStore(state => state.resetSetup)
 
   const navigation = [
-    { name: 'Dashboard', path: '/', icon: Home },
-    { name: 'Workers', path: '/#workers', icon: Users },
+    { name: 'Manager', path: '/', icon: Sparkles },
+    { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Tasks', path: '/tasks', icon: ListTodo },
     { name: 'Settings', path: '/settings', icon: SettingsIcon },
   ]
 
   const isActive = (path: string) => {
     if (path === '/') return location.pathname === '/'
+    if (path === '/dashboard') return location.pathname === '/dashboard'
     return location.pathname.startsWith(path)
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-900">
       {/* Sidebar */}
       <aside className="fixed left-0 top-0 h-screen w-64 gradient-primary text-white p-6 overflow-y-auto">
         <div className="mb-8">

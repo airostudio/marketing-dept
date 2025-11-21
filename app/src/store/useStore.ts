@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { Workflow } from '../types/workflow'
 
 export interface ApiCredentials {
   jasperAi?: string
@@ -54,6 +55,10 @@ interface Store {
   // Tasks
   tasks: Task[]
 
+  // Workflows
+  workflows: Workflow[]
+  activeWorkflowId?: string
+
   // Actions
   setApiCredential: (platform: string, key: string) => void
   verifyApi: (platform: string) => Promise<boolean>
@@ -66,6 +71,11 @@ interface Store {
 
   updateWorkerStatus: (workerId: string, status: Worker['status']) => void
   updateWorkerMetrics: (workerId: string, metrics: Record<string, any>) => void
+
+  addWorkflow: (workflow: Workflow) => void
+  updateWorkflow: (id: string, updates: Partial<Workflow>) => void
+  deleteWorkflow: (id: string) => void
+  setActiveWorkflow: (id: string | undefined) => void
 }
 
 export const useStore = create<Store>()(
@@ -188,6 +198,8 @@ export const useStore = create<Store>()(
         },
       ],
       tasks: [],
+      workflows: [],
+      activeWorkflowId: undefined,
 
       // Actions
       setApiCredential: (platform, key) => {
@@ -272,6 +284,31 @@ export const useStore = create<Store>()(
               : worker
           ),
         }))
+      },
+
+      addWorkflow: (workflow) => {
+        set((state) => ({
+          workflows: [workflow, ...state.workflows],
+        }))
+      },
+
+      updateWorkflow: (id, updates) => {
+        set((state) => ({
+          workflows: state.workflows.map((workflow) =>
+            workflow.id === id ? { ...workflow, ...updates } : workflow
+          ),
+        }))
+      },
+
+      deleteWorkflow: (id) => {
+        set((state) => ({
+          workflows: state.workflows.filter((workflow) => workflow.id !== id),
+          activeWorkflowId: state.activeWorkflowId === id ? undefined : state.activeWorkflowId,
+        }))
+      },
+
+      setActiveWorkflow: (id) => {
+        set({ activeWorkflowId: id })
       },
     }),
     {

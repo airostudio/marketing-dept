@@ -6,7 +6,17 @@ interface TaskResult {
   error?: string
 }
 
-export async function executeTask(taskId: string, workerId: string): Promise<TaskResult> {
+interface TaskContext {
+  action?: string
+  description?: string
+  context?: Record<string, any>
+}
+
+export async function executeTask(
+  taskId: string,
+  workerId: string,
+  _taskContext?: TaskContext
+): Promise<TaskResult> {
   // Simulate API call delay
   await new Promise(resolve => setTimeout(resolve, 2000))
 
