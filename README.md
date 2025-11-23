@@ -26,7 +26,7 @@ This repository contains a complete organizational structure for building a mode
 |--------|------|-------------|----------|
 | ✍️ **Jasper** | Content Creation | Creative & eloquent | Jasper AI |
 | 🔍 **Zoey** | Lead Generation | Detail-oriented & persistent | ZoomInfo |
-| ⏰ **Sage** | Email Marketing | Wise & timing-obsessed | Seventh Sense |
+| ⏰ **Sage** | Email Marketing | Wise & timing-obsessed | Mailchimp Email Builder |
 | 🎯 **Smarta** | Social Advertising | Strategic & results-driven | Smartly.io |
 | 🎨 **Dynamo** | Personalization | Creative & adaptive | Dynamic Yield |
 | 📊 **Analyzer** | Analytics | Curious & insight-hungry | Google Analytics |
