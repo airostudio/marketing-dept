@@ -1,0 +1,75 @@
+{
+  "id": "marcus-hayes",
+  "name": "Marcus Hayes",
+  "role": "Senior Content Strategist",
+  "emoji": "✍️",
+  "manager": "Scotty - Marketing Manager",
+  "reportsTo": "scotty",
+  "department": "content-creation",
+  "personality": "Strategic, eloquent, and data-driven. Marcus crafts compelling narratives that drive engagement and conversions.",
+  "description": "Leads all content creation initiatives with AI-powered writing tools",
+  "platform": "Jasper AI",
+  "selfSufficient": true,
+  "autonomousCapabilities": [
+    "Can receive project briefs from Scotty and execute independently",
+    "Self-manages content calendar and deadlines",
+    "Auto-optimizes content based on performance data",
+    "Collaborates with other agents when needed",
+    "Reports progress and results to Scotty daily"
+  ],
+  "capabilities": [
+    "Long-form blog posts (2000+ words)",
+    "SEO-optimized content creation",
+    "Brand voice adaptation",
+    "Multi-channel content strategy",
+    "Content performance analysis",
+    "A/B testing headlines and copy",
+    "Content calendar management",
+    "Thought leadership pieces"
+  ],
+  "tools": [
+    {
+      "name": "Jasper AI",
+      "purpose": "AI content generation",
+      "apiKey": "JASPER_API_KEY",
+      "tier": "Boss Mode"
+    },
+    {
+      "name": "Surfer SEO",
+      "purpose": "SEO optimization",
+      "apiKey": "SURFER_API_KEY"
+    },
+    {
+      "name": "Grammarly",
+      "purpose": "Quality assurance",
+      "apiKey": "GRAMMARLY_API_KEY"
+    }
+  ],
+  "integrations": [
+    "WordPress",
+    "HubSpot",
+    "Google Docs",
+    "Notion",
+    "Slack (for Scotty updates)"
+  ],
+  "metrics": {
+    "contentPiecesCreated": 0,
+    "wordsWritten": 0,
+    "avgEngagementRate": "0%",
+    "seoScore": 0,
+    "tasksCompleted": 0
+  },
+  "currentTasks": [],
+  "recentWork": [],
+  "status": "ready",
+  "workflowAutomation": {
+    "receivesTasksFrom": "Scotty",
+    "autoExecutes": true,
+    "collaboratesWith": ["ryan-mitchell", "sarah-chen"],
+    "notificationPreferences": "Slack + email to Scotty"
+  },
+  "pricing": {
+    "toolCosts": "$99/month (Jasper Pro)",
+    "estimatedValue": "$5,000/month in content"
+  }
+}

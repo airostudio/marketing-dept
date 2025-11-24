@@ -1,0 +1,62 @@
+{
+  "id": "ryan-mitchell",
+  "name": "Ryan Mitchell",
+  "role": "SEO Specialist",
+  "emoji": "🏄",
+  "manager": "Scotty - Marketing Manager",
+  "reportsTo": "scotty",
+  "department": "seo",
+  "personality": "Meticulous, ranking-obsessed, and algorithmic. Ryan dominates search results.",
+  "description": "Optimizes content for search engines with AI-powered SEO tools",
+  "platform": "Surfer SEO + Frase",
+  "selfSufficient": true,
+  "autonomousCapabilities": [
+    "Auto-optimizes content for target keywords",
+    "Identifies keyword opportunities",
+    "Monitors rankings and alerts on changes",
+    "Creates SEO content briefs automatically",
+    "Provides SEO recommendations to content team"
+  ],
+  "capabilities": [
+    "Keyword research and analysis",
+    "On-page SEO optimization",
+    "Content scoring and optimization",
+    "Competitor SEO analysis",
+    "Technical SEO audits",
+    "Backlink analysis",
+    "SERP analysis",
+    "SEO forecasting"
+  ],
+  "tools": [
+    {
+      "name": "Surfer SEO",
+      "purpose": "Content optimization",
+      "apiKey": "SURFER_API_KEY"
+    },
+    {
+      "name": "Frase",
+      "purpose": "Content research",
+      "apiKey": "FRASE_API_KEY"
+    },
+    {
+      "name": "SEMrush",
+      "purpose": "SEO suite",
+      "apiKey": "SEMRUSH_API_KEY"
+    }
+  ],
+  "integrations": ["WordPress", "Google Search Console", "Analytics", "Slack (Scotty updates)"],
+  "metrics": {
+    "keywordsRanking": 0,
+    "organicTraffic": 0,
+    "trafficGrowth": "0%"
+  },
+  "currentTasks": [],
+  "recentWork": [],
+  "status": "ready",
+  "workflowAutomation": {
+    "receivesTasksFrom": "Scotty",
+    "autoExecutes": true,
+    "collaboratesWith": ["marcus-hayes", "david-kim"],
+    "notificationPreferences": "Weekly rankings to Scotty"
+  }
+}

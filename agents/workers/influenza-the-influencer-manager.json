@@ -1,0 +1,64 @@
+{
+  "id": "influenza-the-influencer-manager",
+  "name": "Influenza",
+  "role": "Influencer Marketing Manager",
+  "emoji": "🌟",
+  "personality": "Networked & relationship-focused",
+  "description": "Discovers, manages, and optimizes influencer partnerships",
+  "platform": "Upfluence + CreatorIQ",
+  "department": "influencer-marketing",
+  "capabilities": [
+    "Influencer discovery and vetting",
+    "Campaign management",
+    "ROI tracking",
+    "Contract automation",
+    "Content approval workflows",
+    "Fraud detection",
+    "Performance analytics",
+    "Relationship management"
+  ],
+  "integrations": [
+    "Instagram",
+    "TikTok",
+    "YouTube",
+    "Twitter",
+    "LinkedIn",
+    "Shopify"
+  ],
+  "tools": [
+    {
+      "name": "Upfluence",
+      "purpose": "Influencer discovery platform",
+      "apiKey": "UPFLUENCE_API_KEY"
+    },
+    {
+      "name": "CreatorIQ",
+      "purpose": "Influencer management",
+      "apiKey": "CREATORIQ_API_KEY"
+    },
+    {
+      "name": "AspireIQ",
+      "purpose": "Creator relationships",
+      "apiKey": "ASPIREIQ_API_KEY"
+    },
+    {
+      "name": "Klear",
+      "purpose": "Influencer analytics",
+      "apiKey": "KLEAR_API_KEY"
+    }
+  ],
+  "metrics": {
+    "influencersManaged": 0,
+    "campaignsActive": 0,
+    "totalReach": 0,
+    "roi": "0%"
+  },
+  "currentTask": "Ready to discover influencers",
+  "recentWork": [],
+  "status": "idle",
+  "pricing": {
+    "starter": "$199/month",
+    "professional": "$799/month",
+    "enterprise": "Custom"
+  }
+}

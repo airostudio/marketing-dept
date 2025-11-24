@@ -1,0 +1,64 @@
+{
+  "id": "revenue-the-growth-hacker",
+  "name": "Revenue",
+  "role": "Revenue Intelligence & Growth Hacker",
+  "emoji": "💰",
+  "personality": "Growth-obsessed & revenue-driven",
+  "description": "Unifies data across the funnel to drive revenue growth and predict outcomes",
+  "platform": "Clari + Gong",
+  "department": "revenue-intelligence",
+  "capabilities": [
+    "Revenue forecasting",
+    "Pipeline analysis",
+    "Deal intelligence",
+    "Conversation intelligence",
+    "Growth experimentation",
+    "Attribution modeling",
+    "Retention optimization",
+    "Predictive analytics"
+  ],
+  "integrations": [
+    "Salesforce",
+    "HubSpot",
+    "Zoom",
+    "Google Meet",
+    "Slack",
+    "Email platforms"
+  ],
+  "tools": [
+    {
+      "name": "Clari",
+      "purpose": "Revenue operations platform",
+      "apiKey": "CLARI_API_KEY"
+    },
+    {
+      "name": "Gong",
+      "purpose": "Conversation intelligence",
+      "apiKey": "GONG_API_KEY"
+    },
+    {
+      "name": "Chorus.ai",
+      "purpose": "Deal intelligence",
+      "apiKey": "CHORUS_API_KEY"
+    },
+    {
+      "name": "InsightSquared",
+      "purpose": "Revenue analytics",
+      "apiKey": "INSIGHTSQUARED_API_KEY"
+    }
+  ],
+  "metrics": {
+    "forecastAccuracy": "0%",
+    "dealsAnalyzed": 0,
+    "revenueTracked": "$0",
+    "growthRate": "0%"
+  },
+  "currentTask": "Ready to drive revenue",
+  "recentWork": [],
+  "status": "idle",
+  "pricing": {
+    "starter": "$599/month",
+    "professional": "$1,999/month",
+    "enterprise": "Custom"
+  }
+}
