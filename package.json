@@ -1,13 +1,11 @@
 {
-  "name": "ai-marketing-department",
+  "name": "scotty-ai-marketing-department",
   "version": "2.0.0",
-  "description": "AI-powered marketing and sales department with 8 personified AI workers and React app",
+  "description": "Scotty AI - Enterprise Marketing Department with 15 AI agents",
   "main": "index.html",
   "scripts": {
-    "dev": "cd app && npm run dev",
-    "build": "cd app && npm install && npm run build",
-    "preview": "cd app && npm run preview",
-    "static": "python -m http.server 8000"
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000"
   },
   "repository": {
     "type": "git",
@@ -16,13 +14,13 @@
   "keywords": [
     "ai",
     "marketing",
-    "sales",
+    "scotty",
     "automation",
     "dashboard",
-    "react",
-    "typescript",
-    "agents"
+    "agents",
+    "b2b",
+    "saas"
   ],
-  "author": "AI Marketing Department",
+  "author": "Scotty AI Marketing Department",
   "license": "MIT"
 }
