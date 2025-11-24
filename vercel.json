@@ -1,11 +1,21 @@
 {
-  "rootDirectory": "app",
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/dashboard",
+      "destination": "/scotty/index.html"
+    },
+    {
+      "source": "/",
+      "destination": "/scotty/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/ui/dashboard.html",
+      "destination": "/scotty/index.html",
+      "permanent": false
     }
   ],
   "headers": [
@@ -27,11 +37,11 @@
       ]
     },
     {
-      "source": "/assets/(.*)",
+      "source": "/scotty/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "value": "public, max-age=3600"
         }
       ]
     }

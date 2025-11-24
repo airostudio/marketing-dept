@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=/ui/dashboard.html">
+    <meta http-equiv="refresh" content="0; url=/scotty/index.html">
     <link rel="icon" type="image/svg+xml" href="/ui/assets/icon.svg">
-    <title>AI Marketing Department - Redirecting...</title>
+    <title>Scotty AI - Marketing Manager - Redirecting...</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -20,35 +20,49 @@
         .loader {
             text-align: center;
         }
-        .logo-img {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 2rem;
             animation: float 3s ease-in-out infinite;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-20px); }
         }
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid white;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
+            margin: 0 auto 2rem;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
         h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
+            font-weight: 800;
         }
         p {
             opacity: 0.9;
+            font-size: 1.2rem;
+        }
+        .sub {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-top: 1rem;
         }
         a {
             color: white;
@@ -58,16 +72,18 @@
 </head>
 <body>
     <div class="loader">
-        <img src="/ui/assets/icon.svg" alt="AI Marketing Department" class="logo-img">
-        <h1>AI Marketing Department</h1>
-        <p>Redirecting to dashboard...</p>
-        <p><small>If not redirected, <a href="/ui/dashboard.html">click here</a></small></p>
+        <div class="logo">🤖</div>
+        <h1>Scotty AI</h1>
+        <p>Marketing Manager Dashboard</p>
+        <div class="spinner"></div>
+        <p class="sub">Loading 15 AI agents...</p>
+        <p class="sub"><small>If not redirected, <a href="/scotty/index.html">click here</a></small></p>
     </div>
     <script>
-        // Fallback redirect
+        // Immediate redirect to Scotty dashboard
         setTimeout(() => {
-            window.location.href = '/ui/dashboard.html';
-        }, 1000);
+            window.location.href = '/scotty/index.html';
+        }, 500);
     </script>
 </body>
 </html>
