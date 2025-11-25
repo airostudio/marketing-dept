@@ -1,39 +1,14 @@
 {
-  "version": 2,
-  "builds": [
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
     {
-      "src": "**/*",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/dashboard",
-      "dest": "/scotty/index.html"
+      "source": "/dashboard",
+      "destination": "/scotty/index.html"
     },
     {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/scotty/(.*)",
-      "dest": "/scotty/$1"
-    },
-    {
-      "src": "/ui/(.*)",
-      "dest": "/ui/$1"
-    },
-    {
-      "src": "/departments/(.*)",
-      "dest": "/departments/$1"
-    },
-    {
-      "src": "/workflows/(.*)",
-      "dest": "/workflows/$1"
-    },
-    {
-      "src": "/agents/(.*)",
-      "dest": "/agents/$1"
+      "source": "/",
+      "destination": "/index.html"
     }
   ],
   "headers": [
