@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Scotty AI Marketing Department</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --dark: #0f172a;
+            --dark-card: #1e293b;
+            --border: #334155;
+            --text: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .header {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-left: 1rem;
+        }
+
+        /* Layout */
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .nav-item {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .nav-item.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Content Area */
+        .content {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-help {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        select.form-input {
+            cursor: pointer;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border);
+            transition: 0.3s;
+            border-radius: 26px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Integration Grid */
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .integration-card {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .integration-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 1rem;
+            background: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .integration-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .integration-status {
+            font-size: 0.85rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+        }
+
+        .status-connected {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .status-available {
+            background: rgba(148, 163, 184, 0.2);
+            color: var(--text-secondary);
+        }
+
+        /* API Key Display */
+        .api-key-display {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .api-key-input {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            background: var(--dark);
+        }
+
+        .copy-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Team Member List */
+        .team-member {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--dark);
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .member-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .member-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .member-role {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 1024px) {
+            .settings-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <a href="index.html" class="back-btn">← Back to Dashboard</a>
+                <h1>⚙️ Settings</h1>
+            </div>
+        </div>
+
+        <!-- Settings Layout -->
+        <div class="settings-layout">
+            <!-- Sidebar Navigation -->
+            <div class="sidebar">
+                <div class="nav-item active" onclick="showSection('account')">
+                    <span class="nav-icon">👤</span>
+                    <span>Account</span>
+                </div>
+                <div class="nav-item" onclick="showSection('team')">
+                    <span class="nav-icon">👥</span>
+                    <span>Team Management</span>
+                </div>
+                <div class="nav-item" onclick="showSection('integrations')">
+                    <span class="nav-icon">🔗</span>
+                    <span>Integrations</span>
+                </div>
+                <div class="nav-item" onclick="showSection('api')">
+                    <span class="nav-icon">🔑</span>
+                    <span>API Keys</span>
+                </div>
+                <div class="nav-item" onclick="showSection('notifications')">
+                    <span class="nav-icon">🔔</span>
+                    <span>Notifications</span>
+                </div>
+                <div class="nav-item" onclick="showSection('departments')">
+                    <span class="nav-icon">🏢</span>
+                    <span>Departments</span>
+                </div>
+                <div class="nav-item" onclick="showSection('automation')">
+                    <span class="nav-icon">⚡</span>
+                    <span>Automation</span>
+                </div>
+                <div class="nav-item" onclick="showSection('analytics')">
+                    <span class="nav-icon">📊</span>
+                    <span>Analytics & Data</span>
+                </div>
+                <div class="nav-item" onclick="showSection('billing')">
+                    <span class="nav-icon">💳</span>
+                    <span>Billing</span>
+                </div>
+                <div class="nav-item" onclick="showSection('security')">
+                    <span class="nav-icon">🔒</span>
+                    <span>Security</span>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content">
+                <!-- Account Section -->
+                <div id="account" class="section active">
+                    <div class="section-header">
+                        <h2 class="section-title">Account Settings</h2>
+                        <p class="section-description">Manage your account information and preferences</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Company Name</label>
+                        <input type="text" class="form-input" placeholder="Your Company Inc." value="Marketing Department">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Company Website</label>
+                        <input type="url" class="form-input" placeholder="https://yourcompany.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Industry</label>
+                        <select class="form-input">
+                            <option>SaaS & Technology</option>
+                            <option>E-commerce</option>
+                            <option>Financial Services</option>
+                            <option>Healthcare</option>
+                            <option>Education</option>
+                            <option>Manufacturing</option>
+                            <option>Consulting</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Time Zone</label>
+                        <select class="form-input">
+                            <option>UTC-08:00 (Pacific Time)</option>
+                            <option>UTC-07:00 (Mountain Time)</option>
+                            <option>UTC-06:00 (Central Time)</option>
+                            <option>UTC-05:00 (Eastern Time)</option>
+                            <option>UTC+00:00 (GMT)</option>
+                            <option>UTC+01:00 (CET)</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary">Save Changes</button>
+                </div>
+
+                <!-- Team Management Section -->
+                <div id="team" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Team Management</h2>
+                        <p class="section-description">Manage user access and permissions</p>
+                    </div>
+
+                    <button class="btn btn-primary" style="margin-bottom: 2rem;">➕ Invite Team Member</button>
+
+                    <div class="team-member">
+                        <div class="member-info">
+                            <div class="member-avatar">SC</div>
+                            <div>
+                                <div class="member-name">Scotty (You)</div>
+                                <div class="member-role">Account Owner</div>
+                            </div>
+                        </div>
+                        <select class="form-input" style="width: 150px;">
+                            <option>Owner</option>
+                        </select>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem;">Permission Levels</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            Control what team members can access and modify
+                        </p>
+                        <ul style="color: var(--text-secondary); line-height: 1.8;">
+                            <li><strong>Owner:</strong> Full access to all features and settings</li>
+                            <li><strong>Admin:</strong> Manage agents, campaigns, and users</li>
+                            <li><strong>Manager:</strong> Create and manage campaigns</li>
+                            <li><strong>Member:</strong> View analytics and create content</li>
+                            <li><strong>Guest:</strong> View-only access</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Integrations Section -->
+                <div id="integrations" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Integrations</h2>
+                        <p class="section-description">Connect your favorite tools and platforms</p>
+                    </div>
+
+                    <div class="integration-grid">
+                        <div class="integration-card">
+                            <div class="integration-icon">📧</div>
+                            <div class="integration-name">HubSpot</div>
+                            <div class="integration-status status-connected">Connected</div>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">💼</div>
+                            <div class="integration-name">Salesforce</div>
+                            <div class="integration-status status-connected">Connected</div>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">📊</div>
+                            <div class="integration-name">Google Analytics</div>
+                            <div class="integration-status status-connected">Connected</div>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">📱</div>
+                            <div class="integration-name">Facebook Ads</div>
+                            <div class="integration-status status-available">Available</div>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">💙</div>
+                            <div class="integration-name">LinkedIn</div>
+                            <div class="integration-status status-available">Available</div>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">🐦</div>
+                            <div class="integration-name">Twitter/X</div>
+                            <div class="integration-status status-available">Available</div>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">📧</div>
+                            <div class="integration-name">Mailchimp</div>
+                            <div class="integration-status status-available">Available</div>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">⚡</div>
+                            <div class="integration-name">Zapier</div>
+                            <div class="integration-status status-connected">Connected</div>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">📈</div>
+                            <div class="integration-name">Tableau</div>
+                            <div class="integration-status status-available">Available</div>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">🎨</div>
+                            <div class="integration-name">Canva</div>
+                            <div class="integration-status status-connected">Connected</div>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">📹</div>
+                            <div class="integration-name">YouTube</div>
+                            <div class="integration-status status-available">Available</div>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">💬</div>
+                            <div class="integration-name">Slack</div>
+                            <div class="integration-status status-connected">Connected</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Keys Section -->
+                <div id="api" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">API Keys</h2>
+                        <p class="section-description">Manage API keys for custom integrations</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Production API Key</h3>
+                            <button class="btn btn-secondary">Regenerate</button>
+                        </div>
+                        <p class="form-help">Use this key for production applications. Keep it secure!</p>
+                        <div class="api-key-display">
+                            <input type="text" class="form-input api-key-input" value="scotty_live_XXXXXXXXXXXXXXXXXXXXXXXXXXXX" readonly>
+                            <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Test API Key</h3>
+                            <button class="btn btn-secondary">Regenerate</button>
+                        </div>
+                        <p class="form-help">Use this key for development and testing</p>
+                        <div class="api-key-display">
+                            <input type="text" class="form-input api-key-input" value="scotty_test_XXXXXXXXXXXXXXXXXXXXXXXXXXXX" readonly>
+                            <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem;">Webhook Endpoints</h3>
+                        <p class="form-help">Configure webhooks to receive real-time updates</p>
+                        <button class="btn btn-primary">➕ Add Webhook</button>
+                    </div>
+                </div>
+
+                <!-- Notifications Section -->
+                <div id="notifications" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Notification Preferences</h2>
+                        <p class="section-description">Choose how you want to be notified</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1.5rem;">Email Notifications</h3>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label">Campaign Completions</div>
+                                <p class="form-help">Get notified when campaigns finish</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label">Lead Alerts</div>
+                                <p class="form-help">Get notified about new qualified leads</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label">Weekly Performance Reports</div>
+                                <p class="form-help">Receive weekly summary emails</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label">Agent Activity Updates</div>
+                                <p class="form-help">Get updates when agents complete tasks</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1.5rem;">Slack Notifications</h3>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label">Send alerts to Slack</div>
+                                <p class="form-help">Post notifications to your Slack workspace</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Slack Channel</label>
+                            <input type="text" class="form-input" placeholder="#marketing-alerts" value="#marketing-alerts">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Departments Section -->
+                <div id="departments" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Department Configuration</h2>
+                        <p class="section-description">Configure and manage your marketing departments</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem;">Active Departments (14)</h3>
+                        <ul style="color: var(--text-secondary); line-height: 2;">
+                            <li>✅ Content Creation</li>
+                            <li>✅ Lead Generation</li>
+                            <li>✅ Email Marketing</li>
+                            <li>✅ Social Media Advertising</li>
+                            <li>✅ Video Marketing</li>
+                            <li>✅ Influencer Marketing</li>
+                            <li>✅ Conversion Rate Optimization</li>
+                            <li>✅ Competitive Intelligence</li>
+                            <li>✅ Personalization</li>
+                            <li>✅ Analytics & Data</li>
+                            <li>✅ SEO</li>
+                            <li>✅ Customer Support</li>
+                            <li>✅ Account-Based Marketing</li>
+                            <li>✅ Revenue Intelligence</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem;">Department Budgets</h3>
+                        <p class="form-help" style="margin-bottom: 1.5rem;">Set monthly budgets for each department</p>
+                        <button class="btn btn-primary">Configure Budgets</button>
+                    </div>
+                </div>
+
+                <!-- Automation Section -->
+                <div id="automation" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Workflow Automation</h2>
+                        <p class="section-description">Automate repetitive marketing tasks</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem;">Active Workflows (5)</h3>
+                        <div style="color: var(--text-secondary); line-height: 2;">
+                            <div>🏭 AI Content Factory - <span style="color: var(--success);">Active</span></div>
+                            <div>🚀 Revenue Acceleration Engine - <span style="color: var(--success);">Active</span></div>
+                            <div>📈 Viral Growth Machine - <span style="color: var(--success);">Active</span></div>
+                            <div>🎯 Competitive Domination - <span style="color: var(--success);">Active</span></div>
+                            <div>💎 Customer Retention Maximizer - <span style="color: var(--success);">Active</span></div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary">➕ Create New Workflow</button>
+                </div>
+
+                <!-- Analytics Section -->
+                <div id="analytics" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Analytics & Data Settings</h2>
+                        <p class="section-description">Configure data collection and reporting</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label">Advanced Analytics</div>
+                                <p class="form-help">Track detailed user behavior and attribution</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label">Cross-Domain Tracking</div>
+                                <p class="form-help">Track users across multiple domains</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label">Real-Time Reporting</div>
+                                <p class="form-help">Enable live dashboard updates</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem;">Data Retention</h3>
+                        <div class="form-group">
+                            <label class="form-label">Keep analytics data for</label>
+                            <select class="form-input">
+                                <option>6 months</option>
+                                <option>12 months</option>
+                                <option selected>24 months</option>
+                                <option>Indefinitely</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Billing Section -->
+                <div id="billing" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Billing & Subscription</h2>
+                        <p class="section-description">Manage your subscription and payment methods</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem;">Current Plan</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div>
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">Enterprise</div>
+                                <div style="color: var(--text-secondary);">15 AI Agents • Unlimited Campaigns</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 1.5rem; font-weight: 700;">$4,999<span style="font-size: 1rem; color: var(--text-secondary);">/mo</span></div>
+                                <div style="color: var(--success);">Billed annually - Save 20%</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Upgrade Plan</button>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem;">Payment Method</h3>
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="font-size: 2rem;">💳</div>
+                            <div>
+                                <div>Visa ending in 4242</div>
+                                <div style="color: var(--text-secondary); font-size: 0.85rem;">Expires 12/2025</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary">Update Payment Method</button>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem;">Billing History</h3>
+                        <button class="btn btn-secondary">View Invoices</button>
+                    </div>
+                </div>
+
+                <!-- Security Section -->
+                <div id="security" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Security Settings</h2>
+                        <p class="section-description">Protect your account and data</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1.5rem;">Authentication</h3>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label">Two-Factor Authentication (2FA)</div>
+                                <p class="form-help">Add an extra layer of security to your account</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div class="form-label">SSO (Single Sign-On)</div>
+                                <p class="form-help">Enable SAML-based authentication</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem;">Password</h3>
+                        <button class="btn btn-secondary">Change Password</button>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem;">Active Sessions</h3>
+                        <p class="form-help" style="margin-bottom: 1rem;">Manage your active login sessions</p>
+                        <button class="btn btn-secondary">View All Sessions</button>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem; color: var(--danger);">Danger Zone</h3>
+                        <p class="form-help" style="margin-bottom: 1rem;">Irreversible actions that affect your account</p>
+                        <button class="btn btn-danger">Delete Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation between sections
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Add active class to clicked nav item
+            event.currentTarget.classList.add('active');
+        }
+
+        // Copy to clipboard function
+        function copyToClipboard(button) {
+            const input = button.previousElementSibling;
+            input.select();
+            document.execCommand('copy');
+
+            const originalText = button.innerHTML;
+            button.innerHTML = '✅ Copied!';
+
+            setTimeout(() => {
+                button.innerHTML = originalText;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

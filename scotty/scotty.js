@@ -664,5 +664,45 @@ function startLiveUpdates() {
     }, 5000);
 }
 
+// Show/Hide Agents Dropdown
+function showAgentsDropdown() {
+    const dropdown = document.getElementById('agentsDropdown');
+
+    if (!dropdown.classList.contains('show')) {
+        // Populate dropdown with agents
+        dropdown.innerHTML = `
+            <div class="dropdown-header">All Agents (${agents.length})</div>
+            ${agents.map(agent => `
+                <div class="dropdown-agent" onclick="navigateToAgent('${agent.id}'); event.stopPropagation();">
+                    <div class="dropdown-agent-emoji">${agent.emoji}</div>
+                    <div class="dropdown-agent-info">
+                        <div class="dropdown-agent-name">${agent.name}</div>
+                        <div class="dropdown-agent-role">${agent.role}</div>
+                    </div>
+                </div>
+            `).join('')}
+        `;
+
+        dropdown.classList.add('show');
+
+        // Close dropdown when clicking outside
+        setTimeout(() => {
+            document.addEventListener('click', closeDropdown);
+        }, 10);
+    } else {
+        dropdown.classList.remove('show');
+    }
+}
+
+function closeDropdown(e) {
+    const dropdown = document.getElementById('agentsDropdown');
+    const agentsBtn = document.getElementById('agentsBtn');
+
+    if (!dropdown.contains(e.target) && e.target !== agentsBtn) {
+        dropdown.classList.remove('show');
+        document.removeEventListener('click', closeDropdown);
+    }
+}
+
 // Initialize on load
 document.addEventListener('DOMContentLoaded', initDashboard);

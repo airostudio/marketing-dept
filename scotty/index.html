@@ -609,6 +609,67 @@
         .loading {
             animation: pulse 2s ease-in-out infinite;
         }
+
+        /* Agents Dropdown */
+        .agents-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1rem;
+            min-width: 320px;
+            max-height: 500px;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .agents-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-header {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dropdown-agent {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .dropdown-agent:hover {
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        .dropdown-agent-emoji {
+            font-size: 1.5rem;
+        }
+
+        .dropdown-agent-info {
+            flex: 1;
+        }
+
+        .dropdown-agent-name {
+            font-weight: 600;
+        }
+
+        .dropdown-agent-role {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
     </style>
 </head>
 <body>
@@ -624,9 +685,13 @@
                     <p class="subtitle">Marketing Operations Manager</p>
                 </div>
             </div>
-            <div class="header-actions">
-                <button class="btn btn-secondary" onclick="alert('Settings page coming soon!')">⚙️ Settings</button>
+            <div class="header-actions" style="position: relative;">
+                <button class="btn btn-secondary" onclick="showAgentsDropdown()" id="agentsBtn">👥 Agents</button>
+                <button class="btn btn-secondary" onclick="window.location.href='settings.html'">⚙️ Settings</button>
                 <button class="btn btn-primary" onclick="quickAction('content')">➕ New Campaign</button>
+
+                <!-- Agents Dropdown -->
+                <div class="agents-dropdown" id="agentsDropdown"></div>
             </div>
         </header>
 
