@@ -245,7 +245,7 @@ function renderAgents(filter = 'all') {
         : agents.filter(a => a.status === filter);
 
     grid.innerHTML = filteredAgents.map(agent => `
-        <div class="agent-card" data-agent-id="${agent.id}" onclick="showAgentSplash('${agent.id}')">
+        <div class="agent-card" data-agent-id="${agent.id}" onclick="navigateToAgent('${agent.id}')">
             <div class="agent-header">
                 <div class="agent-info">
                     <div class="agent-avatar" style="background: ${agent.gradient};">
@@ -437,6 +437,11 @@ function closeAgentSplash() {
     }
 }
 
+// Navigate to Agent Page
+function navigateToAgent(agentId) {
+    window.location.href = `agents/${agentId}.html`;
+}
+
 // Render Activity Feed
 function renderActivityFeed() {
     const feed = document.getElementById('activityFeed');
@@ -481,9 +486,11 @@ function sendCommand() {
     setTimeout(() => {
         const agent = determineAgentForTask(command);
         showTaskAssignmentNotification(command, agent);
-        input.value = '';
-        input.disabled = false;
-        input.focus();
+
+        // Navigate to agent page after 2 seconds
+        setTimeout(() => {
+            navigateToAgent(agent.id);
+        }, 2000);
     }, 1500);
 }
 
@@ -491,22 +498,65 @@ function sendCommand() {
 function determineAgentForTask(command) {
     const lowerCommand = command.toLowerCase();
 
-    if (lowerCommand.includes('content') || lowerCommand.includes('blog') || lowerCommand.includes('write')) {
+    // Content Creation
+    if (lowerCommand.includes('content') || lowerCommand.includes('blog') || lowerCommand.includes('write') || lowerCommand.includes('article')) {
         return agents.find(a => a.id === 'marcus-hayes');
-    } else if (lowerCommand.includes('lead') || lowerCommand.includes('prospect')) {
+    }
+    // Lead Generation
+    else if (lowerCommand.includes('lead') || lowerCommand.includes('prospect') || lowerCommand.includes('outreach')) {
         return agents.find(a => a.id === 'sarah-chen');
-    } else if (lowerCommand.includes('email')) {
+    }
+    // Email Marketing
+    else if (lowerCommand.includes('email') || lowerCommand.includes('newsletter') || lowerCommand.includes('drip')) {
         return agents.find(a => a.id === 'emma-wilson');
-    } else if (lowerCommand.includes('social') || lowerCommand.includes('ad')) {
+    }
+    // Social Advertising
+    else if (lowerCommand.includes('social') || lowerCommand.includes('ad') || lowerCommand.includes('facebook') || lowerCommand.includes('instagram')) {
         return agents.find(a => a.id === 'alex-rodriguez');
-    } else if (lowerCommand.includes('video')) {
+    }
+    // Video Marketing
+    else if (lowerCommand.includes('video') || lowerCommand.includes('youtube') || lowerCommand.includes('film')) {
         return agents.find(a => a.id === 'victor-stone');
-    } else if (lowerCommand.includes('seo')) {
-        return agents.find(a => a.id === 'ryan-mitchell');
-    } else if (lowerCommand.includes('analytic') || lowerCommand.includes('report')) {
+    }
+    // Influencer Marketing
+    else if (lowerCommand.includes('influencer') || lowerCommand.includes('partnership') || lowerCommand.includes('collaboration')) {
+        return agents.find(a => a.id === 'natalie-brooks');
+    }
+    // Conversion Optimization
+    else if (lowerCommand.includes('conversion') || lowerCommand.includes('a/b') || lowerCommand.includes('optimize') || lowerCommand.includes('cro')) {
+        return agents.find(a => a.id === 'oliver-grant');
+    }
+    // Competitive Intelligence
+    else if (lowerCommand.includes('competitor') || lowerCommand.includes('competitive') || lowerCommand.includes('market research')) {
+        return agents.find(a => a.id === 'nathan-cross');
+    }
+    // Personalization
+    else if (lowerCommand.includes('personalization') || lowerCommand.includes('personalize') || lowerCommand.includes('segment')) {
+        return agents.find(a => a.id === 'maya-patel');
+    }
+    // Analytics
+    else if (lowerCommand.includes('analytic') || lowerCommand.includes('report') || lowerCommand.includes('data') || lowerCommand.includes('dashboard')) {
         return agents.find(a => a.id === 'david-kim');
-    } else {
-        return agents.find(a => a.id === 'oscar-wright'); // Default to orchestrator
+    }
+    // SEO
+    else if (lowerCommand.includes('seo') || lowerCommand.includes('search') || lowerCommand.includes('rank') || lowerCommand.includes('keyword')) {
+        return agents.find(a => a.id === 'ryan-mitchell');
+    }
+    // Customer Support
+    else if (lowerCommand.includes('support') || lowerCommand.includes('customer') || lowerCommand.includes('help') || lowerCommand.includes('chatbot')) {
+        return agents.find(a => a.id === 'sophie-anderson');
+    }
+    // ABM
+    else if (lowerCommand.includes('abm') || lowerCommand.includes('account-based') || lowerCommand.includes('enterprise')) {
+        return agents.find(a => a.id === 'ava-martinez');
+    }
+    // Revenue Intelligence
+    else if (lowerCommand.includes('revenue') || lowerCommand.includes('forecast') || lowerCommand.includes('pipeline') || lowerCommand.includes('sales')) {
+        return agents.find(a => a.id === 'robert-davis');
+    }
+    // Default to Operations Coordinator
+    else {
+        return agents.find(a => a.id === 'oscar-wright');
     }
 }
 
