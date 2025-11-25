@@ -7,6 +7,14 @@
       "destination": "/scotty/index.html"
     },
     {
+      "source": "/settings",
+      "destination": "/scotty/settings.html"
+    },
+    {
+      "source": "/agents/:agent",
+      "destination": "/scotty/agents/:agent.html"
+    },
+    {
       "source": "/",
       "destination": "/index.html"
     }
