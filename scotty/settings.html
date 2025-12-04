@@ -633,8 +633,8 @@
                             <label class="form-label">DeepSeek API Key</label>
                             <p class="form-help">Get your key from <a href="https://platform.deepseek.com" target="_blank" style="color: var(--primary);">platform.deepseek.com</a></p>
                             <div style="display: flex; gap: 0.5rem;">
-                                <input type="password" class="form-input" placeholder="sk-..." value="">
-                                <button class="btn btn-secondary" style="white-space: nowrap;">Save Key</button>
+                                <input type="password" class="form-input" id="deepseek-api-key" placeholder="sk-..." value="">
+                                <button class="btn btn-secondary" style="white-space: nowrap;" onclick="saveAPIKey('deepseek', document.getElementById('deepseek-api-key'))">Save Key</button>
                             </div>
                         </div>
 
@@ -642,8 +642,8 @@
                             <label class="form-label">OpenAI API Key</label>
                             <p class="form-help">Get your key from <a href="https://platform.openai.com" target="_blank" style="color: var(--primary);">platform.openai.com</a></p>
                             <div style="display: flex; gap: 0.5rem;">
-                                <input type="password" class="form-input" placeholder="sk-..." value="">
-                                <button class="btn btn-secondary" style="white-space: nowrap;">Save Key</button>
+                                <input type="password" class="form-input" id="openai-api-key" placeholder="sk-..." value="">
+                                <button class="btn btn-secondary" style="white-space: nowrap;" onclick="saveAPIKey('openai', document.getElementById('openai-api-key'))">Save Key</button>
                             </div>
                         </div>
 
@@ -651,8 +651,8 @@
                             <label class="form-label">Anthropic (Claude) API Key</label>
                             <p class="form-help">Get your key from <a href="https://console.anthropic.com" target="_blank" style="color: var(--primary);">console.anthropic.com</a></p>
                             <div style="display: flex; gap: 0.5rem;">
-                                <input type="password" class="form-input" placeholder="sk-ant-..." value="">
-                                <button class="btn btn-secondary" style="white-space: nowrap;">Save Key</button>
+                                <input type="password" class="form-input" id="anthropic-api-key" placeholder="sk-ant-..." value="">
+                                <button class="btn btn-secondary" style="white-space: nowrap;" onclick="saveAPIKey('anthropic', document.getElementById('anthropic-api-key'))">Save Key</button>
                             </div>
                         </div>
 
@@ -660,8 +660,8 @@
                             <label class="form-label">Google Gemini API Key</label>
                             <p class="form-help">Get your key from <a href="https://makersuite.google.com" target="_blank" style="color: var(--primary);">makersuite.google.com</a></p>
                             <div style="display: flex; gap: 0.5rem;">
-                                <input type="password" class="form-input" placeholder="AIza..." value="">
-                                <button class="btn btn-secondary" style="white-space: nowrap;">Save Key</button>
+                                <input type="password" class="form-input" id="google-api-key" placeholder="AIza..." value="">
+                                <button class="btn btn-secondary" style="white-space: nowrap;" onclick="saveAPIKey('google', document.getElementById('google-api-key'))">Save Key</button>
                             </div>
                         </div>
                     </div>
@@ -686,7 +686,7 @@
                                 <div style="display: grid; gap: 0.75rem;">
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>🔍 Sarah Chen - Lead Generation</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="sarah-chen" style="width: 200px; padding: 0.5rem;">
                                             <option selected>DeepSeek Chat</option>
                                             <option>GPT-3.5 Turbo</option>
                                             <option>GPT-4 Turbo</option>
@@ -696,7 +696,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>📧 Emma Wilson - Email Marketing</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="emma-wilson" style="width: 200px; padding: 0.5rem;">
                                             <option selected>DeepSeek Chat</option>
                                             <option>GPT-3.5 Turbo</option>
                                             <option>GPT-4 Turbo</option>
@@ -706,7 +706,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>📊 David Kim - Analytics</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="david-kim" style="width: 200px; padding: 0.5rem;">
                                             <option selected>DeepSeek Chat</option>
                                             <option>GPT-3.5 Turbo</option>
                                             <option>GPT-4 Turbo</option>
@@ -716,7 +716,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>🏄 Ryan Mitchell - SEO</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="ryan-mitchell" style="width: 200px; padding: 0.5rem;">
                                             <option selected>DeepSeek Chat</option>
                                             <option>GPT-3.5 Turbo</option>
                                             <option>GPT-4 Turbo</option>
@@ -726,7 +726,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>💬 Sophie Anderson - Support</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="sophie-anderson" style="width: 200px; padding: 0.5rem;">
                                             <option selected>DeepSeek Chat</option>
                                             <option>GPT-3.5 Turbo</option>
                                             <option>GPT-4 Turbo</option>
@@ -736,7 +736,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>🕷️ Nathan Cross - Competitive Intel</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="nathan-cross" style="width: 200px; padding: 0.5rem;">
                                             <option selected>DeepSeek Chat</option>
                                             <option>GPT-3.5 Turbo</option>
                                             <option>GPT-4 Turbo</option>
@@ -746,7 +746,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>📈 Oliver Grant - CRO</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="oliver-grant" style="width: 200px; padding: 0.5rem;">
                                             <option selected>DeepSeek Chat</option>
                                             <option>GPT-3.5 Turbo</option>
                                             <option>GPT-4 Turbo</option>
@@ -769,7 +769,7 @@
                                 <div style="display: grid; gap: 0.75rem;">
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>🎯 Alex Rodriguez - Social Ads</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="alex-rodriguez" style="width: 200px; padding: 0.5rem;">
                                             <option>DeepSeek Chat</option>
                                             <option selected>GPT-3.5 Turbo</option>
                                             <option>GPT-4 Turbo</option>
@@ -779,7 +779,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>🌟 Natalie Brooks - Influencer</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="natalie-brooks" style="width: 200px; padding: 0.5rem;">
                                             <option>DeepSeek Chat</option>
                                             <option selected>GPT-3.5 Turbo</option>
                                             <option>GPT-4 Turbo</option>
@@ -789,7 +789,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>🎨 Maya Patel - Personalization</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="maya-patel" style="width: 200px; padding: 0.5rem;">
                                             <option>DeepSeek Chat</option>
                                             <option selected>GPT-3.5 Turbo</option>
                                             <option>GPT-4 Turbo</option>
@@ -799,7 +799,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>🎯 Ava Martinez - ABM</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="ava-martinez" style="width: 200px; padding: 0.5rem;">
                                             <option>DeepSeek Chat</option>
                                             <option selected>GPT-3.5 Turbo</option>
                                             <option>GPT-4 Turbo</option>
@@ -809,7 +809,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>🎬 Victor Stone - Video</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="victor-stone" style="width: 200px; padding: 0.5rem;">
                                             <option>DeepSeek Chat</option>
                                             <option selected>GPT-3.5 Turbo</option>
                                             <option>GPT-4 Turbo</option>
@@ -832,7 +832,7 @@
                                 <div style="display: grid; gap: 0.75rem;">
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>✍️ Marcus Hayes - Content Strategy</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="marcus-hayes" style="width: 200px; padding: 0.5rem;">
                                             <option>DeepSeek Chat</option>
                                             <option>GPT-3.5 Turbo</option>
                                             <option selected>GPT-4 Turbo</option>
@@ -842,7 +842,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>💰 Robert Davis - Revenue Intelligence</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="robert-davis" style="width: 200px; padding: 0.5rem;">
                                             <option>DeepSeek Chat</option>
                                             <option>GPT-3.5 Turbo</option>
                                             <option selected>GPT-4 Turbo</option>
@@ -852,7 +852,7 @@
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span>🎼 Oscar Wright - Operations</span>
-                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                        <select class="form-input" data-agent="oscar-wright" style="width: 200px; padding: 0.5rem;">
                                             <option>DeepSeek Chat</option>
                                             <option>GPT-3.5 Turbo</option>
                                             <option selected>GPT-4 Turbo</option>
@@ -1360,6 +1360,274 @@
     </div>
 
     <script>
+        // AI Configuration State
+        let aiConfig = null;
+
+        // Agent ID to selector mapping
+        const agentSelectors = {
+            'sarah-chen': 'select[data-agent="sarah-chen"]',
+            'emma-wilson': 'select[data-agent="emma-wilson"]',
+            'david-kim': 'select[data-agent="david-kim"]',
+            'ryan-mitchell': 'select[data-agent="ryan-mitchell"]',
+            'sophie-anderson': 'select[data-agent="sophie-anderson"]',
+            'nathan-cross': 'select[data-agent="nathan-cross"]',
+            'oliver-grant': 'select[data-agent="oliver-grant"]',
+            'alex-rodriguez': 'select[data-agent="alex-rodriguez"]',
+            'natalie-brooks': 'select[data-agent="natalie-brooks"]',
+            'maya-patel': 'select[data-agent="maya-patel"]',
+            'ava-martinez': 'select[data-agent="ava-martinez"]',
+            'victor-stone': 'select[data-agent="victor-stone"]',
+            'marcus-hayes': 'select[data-agent="marcus-hayes"]',
+            'robert-davis': 'select[data-agent="robert-davis"]',
+            'oscar-wright': 'select[data-agent="oscar-wright"]'
+        };
+
+        // Model display name mapping
+        const modelDisplayNames = {
+            'deepseek-chat': 'DeepSeek Chat',
+            'gpt-3.5-turbo': 'GPT-3.5 Turbo',
+            'gpt-4-turbo': 'GPT-4 Turbo',
+            'claude-3-haiku': 'Claude 3 Haiku',
+            'claude-3-sonnet': 'Claude 3 Sonnet',
+            'gemini-1.5-flash': 'Gemini 1.5 Flash',
+            'gemini-1.5-pro': 'Gemini 1.5 Pro'
+        };
+
+        // Load AI configuration on page load
+        async function loadAIConfig() {
+            try {
+                const response = await fetch('../config/ai-config.json');
+                if (response.ok) {
+                    aiConfig = await response.json();
+                    console.log('AI Config loaded:', aiConfig);
+                    populateAISettings();
+                } else {
+                    console.error('Failed to load AI config:', response.status);
+                    showNotification('Failed to load AI configuration', 'error');
+                }
+            } catch (error) {
+                console.error('Error loading AI config:', error);
+                showNotification('Error loading AI configuration', 'error');
+            }
+        }
+
+        // Populate AI settings from loaded config
+        function populateAISettings() {
+            if (!aiConfig) return;
+
+            // Populate API keys (show masked version)
+            populateAPIKeys();
+
+            // Populate agent model selections
+            populateAgentModels();
+
+            // Populate budget settings
+            populateBudgetSettings();
+        }
+
+        // Populate API key fields
+        function populateAPIKeys() {
+            const providers = aiConfig.providers;
+
+            if (providers.deepseek?.apiKey) {
+                const input = document.getElementById('deepseek-api-key');
+                if (input) input.value = maskAPIKey(providers.deepseek.apiKey);
+            }
+
+            if (providers.openai?.apiKey) {
+                const input = document.getElementById('openai-api-key');
+                if (input) input.value = maskAPIKey(providers.openai.apiKey);
+            }
+
+            if (providers.anthropic?.apiKey) {
+                const input = document.getElementById('anthropic-api-key');
+                if (input) input.value = maskAPIKey(providers.anthropic.apiKey);
+            }
+
+            if (providers.google?.apiKey) {
+                const input = document.getElementById('google-api-key');
+                if (input) input.value = maskAPIKey(providers.google.apiKey);
+            }
+        }
+
+        // Mask API key for display
+        function maskAPIKey(key) {
+            if (!key || key === '') return '';
+            if (key.length <= 8) return key;
+            return key.substring(0, 8) + '••••••••••••••••';
+        }
+
+        // Populate agent model dropdowns
+        function populateAgentModels() {
+            const agents = aiConfig.agentConfigurations;
+
+            Object.keys(agents).forEach(agentId => {
+                const agent = agents[agentId];
+                const modelId = agent.model;
+                const displayName = modelDisplayNames[modelId] || modelId;
+
+                // Find the dropdown for this agent
+                const dropdown = document.querySelector(`select[data-agent="${agentId}"]`);
+                if (dropdown) {
+                    // Set the selected option
+                    const options = dropdown.querySelectorAll('option');
+                    options.forEach(option => {
+                        if (option.textContent.trim() === displayName) {
+                            option.selected = true;
+                        }
+                    });
+                }
+            });
+        }
+
+        // Populate budget settings
+        function populateBudgetSettings() {
+            const budget = aiConfig.budget;
+
+            if (budget) {
+                const monthlyLimitInput = document.querySelector('input[value="300"]');
+                if (monthlyLimitInput) monthlyLimitInput.value = budget.monthlyLimit;
+
+                const alertThresholdInput = document.querySelector('input[value="80"]');
+                if (alertThresholdInput) alertThresholdInput.value = budget.alertThreshold;
+
+                // Update current month stats
+                if (budget.currentMonth) {
+                    updateUsageDisplay(budget.currentMonth);
+                }
+            }
+        }
+
+        // Update usage display
+        function updateUsageDisplay(currentMonth) {
+            const spent = currentMonth.spent || 0;
+            const requests = currentMonth.requests || 0;
+            const avgCost = currentMonth.averageCostPerRequest || 0;
+            const limit = aiConfig.budget.monthlyLimit || 300;
+            const remaining = limit - spent;
+            const percentage = (spent / limit * 100).toFixed(1);
+
+            // Update displayed values
+            const spentEl = document.querySelector('div[style*="color: var(--primary)"]');
+            if (spentEl && spentEl.textContent.includes('$')) {
+                spentEl.textContent = `$${spent.toFixed(2)}`;
+            }
+
+            // Update progress bar
+            const progressBar = document.querySelector('div[style*="background: var(--primary)"][style*="height: 100%"]');
+            if (progressBar) {
+                progressBar.style.width = `${percentage}%`;
+            }
+        }
+
+        // Save all agent configurations
+        async function saveAgentConfigurations() {
+            if (!aiConfig) {
+                showNotification('Configuration not loaded', 'error');
+                return;
+            }
+
+            try {
+                // Collect all agent model selections
+                const agents = aiConfig.agentConfigurations;
+                let updated = false;
+
+                Object.keys(agents).forEach(agentId => {
+                    const dropdown = document.querySelector(`select[data-agent="${agentId}"]`);
+                    if (dropdown) {
+                        const selectedText = dropdown.options[dropdown.selectedIndex].text;
+                        const modelId = getModelIdFromDisplayName(selectedText);
+
+                        if (modelId && agents[agentId].model !== modelId) {
+                            // Update the model and provider
+                            const provider = getProviderForModel(modelId);
+                            agents[agentId].model = modelId;
+                            agents[agentId].provider = provider;
+                            updated = true;
+                        }
+                    }
+                });
+
+                if (updated) {
+                    // In a real app, this would POST to a backend API
+                    // For now, we'll show success and log the updated config
+                    console.log('Updated AI Config:', aiConfig);
+                    showNotification('Agent configurations saved successfully!', 'success');
+                } else {
+                    showNotification('No changes detected', 'info');
+                }
+            } catch (error) {
+                console.error('Error saving configurations:', error);
+                showNotification('Failed to save configurations', 'error');
+            }
+        }
+
+        // Get model ID from display name
+        function getModelIdFromDisplayName(displayName) {
+            const reverseMap = Object.fromEntries(
+                Object.entries(modelDisplayNames).map(([k, v]) => [v, k])
+            );
+            return reverseMap[displayName.trim()];
+        }
+
+        // Get provider for a given model
+        function getProviderForModel(modelId) {
+            if (modelId.includes('deepseek')) return 'deepseek';
+            if (modelId.includes('gpt')) return 'openai';
+            if (modelId.includes('claude')) return 'anthropic';
+            if (modelId.includes('gemini')) return 'google';
+            return 'deepseek'; // default
+        }
+
+        // Save individual API key
+        async function saveAPIKey(provider, inputElement) {
+            const apiKey = inputElement.value.trim();
+
+            if (!apiKey || apiKey === '') {
+                showNotification('Please enter an API key', 'error');
+                return;
+            }
+
+            if (aiConfig && aiConfig.providers[provider]) {
+                aiConfig.providers[provider].apiKey = apiKey;
+                console.log(`Saved ${provider} API key:`, maskAPIKey(apiKey));
+
+                // In a real app, this would POST to a backend API
+                showNotification(`${provider} API key saved!`, 'success');
+
+                // Mask the key after saving
+                inputElement.value = maskAPIKey(apiKey);
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                padding: 1rem 1.5rem;
+                border-radius: 0.75rem;
+                background: ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--danger)' : 'var(--primary)'};
+                color: white;
+                font-weight: 600;
+                z-index: 10000;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
         // Navigation between sections
         function showSection(sectionId) {
             // Hide all sections
@@ -1392,6 +1660,43 @@
                 button.innerHTML = originalText;
             }, 2000);
         }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAIConfig();
+
+            // Add click handler for save all button
+            const saveAllBtn = document.querySelector('button[style*="margin-top: 1.5rem"]');
+            if (saveAllBtn && saveAllBtn.textContent.includes('Save All')) {
+                saveAllBtn.addEventListener('click', saveAgentConfigurations);
+            }
+        });
+
+        // Add animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
