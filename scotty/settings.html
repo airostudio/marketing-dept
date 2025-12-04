@@ -433,6 +433,10 @@
                     <span class="nav-icon">👥</span>
                     <span>Team Management</span>
                 </div>
+                <div class="nav-item" onclick="showSection('ai-config')">
+                    <span class="nav-icon">🤖</span>
+                    <span>AI Configuration</span>
+                </div>
                 <div class="nav-item" onclick="showSection('integrations')">
                     <span class="nav-icon">🔗</span>
                     <span>Integrations</span>
@@ -549,6 +553,408 @@
                             <li><strong>Member:</strong> View analytics and create content</li>
                             <li><strong>Guest:</strong> View-only access</li>
                         </ul>
+                    </div>
+                </div>
+
+                <!-- AI Configuration Section -->
+                <div id="ai-config" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">AI Configuration</h2>
+                        <p class="section-description">Configure AI providers and optimize costs for your 15 marketing agents</p>
+                    </div>
+
+                    <!-- Provider Comparison -->
+                    <div class="card">
+                        <h3 style="margin-bottom: 1.5rem;">🤖 AI Provider Comparison</h3>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="border-bottom: 2px solid var(--border);">
+                                        <th style="padding: 1rem; text-align: left;">Provider</th>
+                                        <th style="padding: 1rem; text-align: left;">Model</th>
+                                        <th style="padding: 1rem; text-align: left;">Cost per 1M tokens</th>
+                                        <th style="padding: 1rem; text-align: left;">Best For</th>
+                                        <th style="padding: 1rem; text-align: left;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="color: var(--text-secondary);">
+                                    <tr style="border-bottom: 1px solid var(--border);">
+                                        <td style="padding: 1rem;"><strong style="color: var(--text);">DeepSeek</strong></td>
+                                        <td style="padding: 1rem;">deepseek-chat</td>
+                                        <td style="padding: 1rem;"><span style="color: var(--success);">$0.27 - $1.10</span></td>
+                                        <td style="padding: 1rem;">Data processing, templates, high volume</td>
+                                        <td style="padding: 1rem;"><span style="background: rgba(16, 185, 129, 0.2); color: var(--success); padding: 0.25rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem;">✓ Recommended</span></td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border);">
+                                        <td style="padding: 1rem;"><strong style="color: var(--text);">OpenAI</strong></td>
+                                        <td style="padding: 1rem;">gpt-3.5-turbo</td>
+                                        <td style="padding: 1rem;"><span style="color: var(--warning);">$1.50 - $2.00</span></td>
+                                        <td style="padding: 1rem;">Balanced quality & cost</td>
+                                        <td style="padding: 1rem;"><span style="background: rgba(245, 158, 11, 0.2); color: var(--warning); padding: 0.25rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem;">Mid-Tier</span></td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border);">
+                                        <td style="padding: 1rem;"><strong style="color: var(--text);">OpenAI</strong></td>
+                                        <td style="padding: 1rem;">gpt-4-turbo</td>
+                                        <td style="padding: 1rem;"><span style="color: var(--danger);">$30 - $60</span></td>
+                                        <td style="padding: 1rem;">Premium content, strategic analysis</td>
+                                        <td style="padding: 1rem;"><span style="background: rgba(239, 68, 68, 0.2); color: var(--danger); padding: 0.25rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem;">Premium</span></td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border);">
+                                        <td style="padding: 1rem;"><strong style="color: var(--text);">Anthropic</strong></td>
+                                        <td style="padding: 1rem;">claude-3-haiku</td>
+                                        <td style="padding: 1rem;"><span style="color: var(--success);">$0.80 - $4.00</span></td>
+                                        <td style="padding: 1rem;">Fast responses, cost-effective</td>
+                                        <td style="padding: 1rem;"><span style="background: rgba(16, 185, 129, 0.2); color: var(--success); padding: 0.25rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem;">✓ Budget</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 1rem;"><strong style="color: var(--text);">Google</strong></td>
+                                        <td style="padding: 1rem;">gemini-1.5-flash</td>
+                                        <td style="padding: 1rem;"><span style="color: var(--success);">$0.35 - $1.05</span></td>
+                                        <td style="padding: 1rem;">Multimodal, fast processing</td>
+                                        <td style="padding: 1rem;"><span style="background: rgba(16, 185, 129, 0.2); color: var(--success); padding: 0.25rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem;">✓ Budget</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.85rem;">
+                            💡 <strong>Recommendation:</strong> Start with DeepSeek for all agents (~$30/month), then upgrade strategic agents to GPT-4 as needed.
+                        </p>
+                    </div>
+
+                    <!-- API Keys Management -->
+                    <div class="card">
+                        <h3 style="margin-bottom: 1.5rem;">🔑 AI Provider API Keys</h3>
+                        <p class="form-help" style="margin-bottom: 1.5rem;">
+                            Enter your API keys for each provider. Keys are encrypted and stored securely.
+                            <strong>Users can bring their own API keys</strong> to use their preferred providers and control costs.
+                        </p>
+
+                        <div class="form-group">
+                            <label class="form-label">DeepSeek API Key</label>
+                            <p class="form-help">Get your key from <a href="https://platform.deepseek.com" target="_blank" style="color: var(--primary);">platform.deepseek.com</a></p>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="password" class="form-input" placeholder="sk-..." value="">
+                                <button class="btn btn-secondary" style="white-space: nowrap;">Save Key</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">OpenAI API Key</label>
+                            <p class="form-help">Get your key from <a href="https://platform.openai.com" target="_blank" style="color: var(--primary);">platform.openai.com</a></p>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="password" class="form-input" placeholder="sk-..." value="">
+                                <button class="btn btn-secondary" style="white-space: nowrap;">Save Key</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Anthropic (Claude) API Key</label>
+                            <p class="form-help">Get your key from <a href="https://console.anthropic.com" target="_blank" style="color: var(--primary);">console.anthropic.com</a></p>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="password" class="form-input" placeholder="sk-ant-..." value="">
+                                <button class="btn btn-secondary" style="white-space: nowrap;">Save Key</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Google Gemini API Key</label>
+                            <p class="form-help">Get your key from <a href="https://makersuite.google.com" target="_blank" style="color: var(--primary);">makersuite.google.com</a></p>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="password" class="form-input" placeholder="AIza..." value="">
+                                <button class="btn btn-secondary" style="white-space: nowrap;">Save Key</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Per-Agent Configuration -->
+                    <div class="card">
+                        <h3 style="margin-bottom: 1.5rem;">🎯 Per-Agent AI Model Assignment</h3>
+                        <p class="form-help" style="margin-bottom: 1.5rem;">
+                            Assign different AI models to each agent based on task complexity and budget. Our recommendations balance quality and cost.
+                        </p>
+
+                        <div style="display: grid; gap: 1rem;">
+                            <!-- Tier 1: Budget Agents -->
+                            <div style="background: var(--dark); padding: 1rem; border-radius: 0.75rem; border-left: 4px solid var(--success);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <strong style="color: var(--success);">💰 Budget Tier - DeepSeek</strong>
+                                    <span style="font-size: 0.85rem; color: var(--text-secondary);">~$10-20/month for 7 agents</span>
+                                </div>
+                                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                                    High volume, data processing, template-based tasks
+                                </p>
+                                <div style="display: grid; gap: 0.75rem;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>🔍 Sarah Chen - Lead Generation</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option selected>DeepSeek Chat</option>
+                                            <option>GPT-3.5 Turbo</option>
+                                            <option>GPT-4 Turbo</option>
+                                            <option>Claude 3 Haiku</option>
+                                            <option>Gemini 1.5 Flash</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>📧 Emma Wilson - Email Marketing</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option selected>DeepSeek Chat</option>
+                                            <option>GPT-3.5 Turbo</option>
+                                            <option>GPT-4 Turbo</option>
+                                            <option>Claude 3 Haiku</option>
+                                            <option>Gemini 1.5 Flash</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>📊 David Kim - Analytics</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option selected>DeepSeek Chat</option>
+                                            <option>GPT-3.5 Turbo</option>
+                                            <option>GPT-4 Turbo</option>
+                                            <option>Claude 3 Haiku</option>
+                                            <option>Gemini 1.5 Flash</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>🏄 Ryan Mitchell - SEO</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option selected>DeepSeek Chat</option>
+                                            <option>GPT-3.5 Turbo</option>
+                                            <option>GPT-4 Turbo</option>
+                                            <option>Claude 3 Haiku</option>
+                                            <option>Gemini 1.5 Flash</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>💬 Sophie Anderson - Support</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option selected>DeepSeek Chat</option>
+                                            <option>GPT-3.5 Turbo</option>
+                                            <option>GPT-4 Turbo</option>
+                                            <option>Claude 3 Haiku</option>
+                                            <option>Gemini 1.5 Flash</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>🕷️ Nathan Cross - Competitive Intel</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option selected>DeepSeek Chat</option>
+                                            <option>GPT-3.5 Turbo</option>
+                                            <option>GPT-4 Turbo</option>
+                                            <option>Claude 3 Haiku</option>
+                                            <option>Gemini 1.5 Flash</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>📈 Oliver Grant - CRO</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option selected>DeepSeek Chat</option>
+                                            <option>GPT-3.5 Turbo</option>
+                                            <option>GPT-4 Turbo</option>
+                                            <option>Claude 3 Haiku</option>
+                                            <option>Gemini 1.5 Flash</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tier 2: Mid-Range Agents -->
+                            <div style="background: var(--dark); padding: 1rem; border-radius: 0.75rem; border-left: 4px solid var(--warning);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <strong style="color: var(--warning);">⚡ Mid-Tier - GPT-3.5 Turbo</strong>
+                                    <span style="font-size: 0.85rem; color: var(--text-secondary);">~$20-40/month for 5 agents</span>
+                                </div>
+                                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                                    Balanced quality and cost for creative tasks
+                                </p>
+                                <div style="display: grid; gap: 0.75rem;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>🎯 Alex Rodriguez - Social Ads</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option>DeepSeek Chat</option>
+                                            <option selected>GPT-3.5 Turbo</option>
+                                            <option>GPT-4 Turbo</option>
+                                            <option>Claude 3 Haiku</option>
+                                            <option>Gemini 1.5 Flash</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>🌟 Natalie Brooks - Influencer</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option>DeepSeek Chat</option>
+                                            <option selected>GPT-3.5 Turbo</option>
+                                            <option>GPT-4 Turbo</option>
+                                            <option>Claude 3 Haiku</option>
+                                            <option>Gemini 1.5 Flash</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>🎨 Maya Patel - Personalization</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option>DeepSeek Chat</option>
+                                            <option selected>GPT-3.5 Turbo</option>
+                                            <option>GPT-4 Turbo</option>
+                                            <option>Claude 3 Haiku</option>
+                                            <option>Gemini 1.5 Flash</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>🎯 Ava Martinez - ABM</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option>DeepSeek Chat</option>
+                                            <option selected>GPT-3.5 Turbo</option>
+                                            <option>GPT-4 Turbo</option>
+                                            <option>Claude 3 Haiku</option>
+                                            <option>Gemini 1.5 Flash</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>🎬 Victor Stone - Video</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option>DeepSeek Chat</option>
+                                            <option selected>GPT-3.5 Turbo</option>
+                                            <option>GPT-4 Turbo</option>
+                                            <option>Claude 3 Haiku</option>
+                                            <option>Gemini 1.5 Flash</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tier 3: Premium Agents -->
+                            <div style="background: var(--dark); padding: 1rem; border-radius: 0.75rem; border-left: 4px solid var(--danger);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <strong style="color: var(--danger);">💎 Premium Tier - GPT-4 Turbo</strong>
+                                    <span style="font-size: 0.85rem; color: var(--text-secondary);">~$100-200/month for 3 agents</span>
+                                </div>
+                                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                                    Best quality for strategic, revenue-critical tasks
+                                </p>
+                                <div style="display: grid; gap: 0.75rem;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>✍️ Marcus Hayes - Content Strategy</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option>DeepSeek Chat</option>
+                                            <option>GPT-3.5 Turbo</option>
+                                            <option selected>GPT-4 Turbo</option>
+                                            <option>Claude 3 Sonnet</option>
+                                            <option>Gemini 1.5 Pro</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>💰 Robert Davis - Revenue Intelligence</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option>DeepSeek Chat</option>
+                                            <option>GPT-3.5 Turbo</option>
+                                            <option selected>GPT-4 Turbo</option>
+                                            <option>Claude 3 Sonnet</option>
+                                            <option>Gemini 1.5 Pro</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>🎼 Oscar Wright - Operations</span>
+                                        <select class="form-input" style="width: 200px; padding: 0.5rem;">
+                                            <option>DeepSeek Chat</option>
+                                            <option>GPT-3.5 Turbo</option>
+                                            <option selected>GPT-4 Turbo</option>
+                                            <option>Claude 3 Sonnet</option>
+                                            <option>Gemini 1.5 Pro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;">💾 Save All Agent Configurations</button>
+                    </div>
+
+                    <!-- Budget & Usage Tracking -->
+                    <div class="card">
+                        <h3 style="margin-bottom: 1.5rem;">💵 Budget & Usage Controls</h3>
+
+                        <div class="form-group">
+                            <label class="form-label">Monthly Budget Limit</label>
+                            <p class="form-help">Set a spending cap to prevent unexpected costs</p>
+                            <div style="display: flex; gap: 1rem; align-items: center;">
+                                <input type="number" class="form-input" value="300" style="max-width: 150px;">
+                                <span style="color: var(--text-secondary);">USD per month</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Alert Threshold</label>
+                            <p class="form-help">Get notified when spending reaches this percentage</p>
+                            <div style="display: flex; gap: 1rem; align-items: center;">
+                                <input type="number" class="form-input" value="80" style="max-width: 150px;">
+                                <span style="color: var(--text-secondary);">% of monthly budget</span>
+                            </div>
+                        </div>
+
+                        <div style="background: var(--dark); padding: 1.5rem; border-radius: 0.75rem; margin-top: 1.5rem;">
+                            <h4 style="margin-bottom: 1rem;">Current Month Usage</h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                                <div>
+                                    <div style="font-size: 0.85rem; color: var(--text-secondary);">Total Spent</div>
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">$47.23</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 0.85rem; color: var(--text-secondary);">Budget Remaining</div>
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">$252.77</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 0.85rem; color: var(--text-secondary);">Total Requests</div>
+                                    <div style="font-size: 1.5rem; font-weight: 700;">12,847</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 0.85rem; color: var(--text-secondary);">Avg. Cost/Request</div>
+                                    <div style="font-size: 1.5rem; font-weight: 700;">$0.0037</div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 1rem;">
+                                <div style="background: var(--border); height: 8px; border-radius: 1rem; overflow: hidden;">
+                                    <div style="background: var(--primary); height: 100%; width: 15.7%; transition: width 0.3s ease;"></div>
+                                </div>
+                                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">15.7% of monthly budget used</div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-secondary" style="margin-top: 1rem;">📊 View Detailed Usage Report</button>
+                    </div>
+
+                    <!-- Cost Estimate Calculator -->
+                    <div class="card">
+                        <h3 style="margin-bottom: 1.5rem;">🧮 Monthly Cost Estimator</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                            Based on your current agent configuration and average usage
+                        </p>
+
+                        <div style="background: var(--dark); padding: 1.5rem; border-radius: 0.75rem;">
+                            <div style="display: grid; gap: 1rem;">
+                                <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--border);">
+                                    <span>7 agents on DeepSeek</span>
+                                    <span style="color: var(--success); font-weight: 600;">$15-25/mo</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--border);">
+                                    <span>5 agents on GPT-3.5 Turbo</span>
+                                    <span style="color: var(--warning); font-weight: 600;">$30-50/mo</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--border);">
+                                    <span>3 agents on GPT-4 Turbo</span>
+                                    <span style="color: var(--danger); font-weight: 600;">$120-180/mo</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 1rem 0; font-size: 1.2rem;">
+                                    <strong>Total Estimated Cost:</strong>
+                                    <strong style="color: var(--primary);">$165-255/mo</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid var(--primary); padding: 1rem; border-radius: 0.75rem; margin-top: 1rem;">
+                            <div style="font-weight: 600; margin-bottom: 0.5rem; color: var(--primary);">💡 Cost Savings Recommendation</div>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                                You're saving <strong style="color: var(--success);">90-95%</strong> compared to B2B Rocket ($2,450-4,199/month)
+                                while getting <strong>3x more agents</strong> (15 vs 5) and full control over AI providers!
+                            </p>
+                        </div>
                     </div>
                 </div>
 
