@@ -1,22 +1,21 @@
 {
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false,
-  "rewrites": [
-    {
-      "source": "/dashboard",
-      "destination": "/scotty/index.html"
-    },
+  "redirects": [
     {
       "source": "/settings",
-      "destination": "/scotty/settings.html"
+      "destination": "/scotty/settings.html",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/scotty/index.html",
+      "permanent": false
     },
     {
       "source": "/agents/:agent",
-      "destination": "/scotty/agents/:agent.html"
-    },
-    {
-      "source": "/",
-      "destination": "/index.html"
+      "destination": "/scotty/agents/:agent.html",
+      "permanent": false
     }
   ],
   "headers": [
