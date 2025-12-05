@@ -494,70 +494,154 @@ function sendCommand() {
     }, 1500);
 }
 
-// Determine which agent should handle the task
+// Intelligent Task Router - Determines which agent(s) should handle the task
+// Uses sophisticated keyword matching, context analysis, and capability mapping
 function determineAgentForTask(command) {
     const lowerCommand = command.toLowerCase();
 
-    // Content Creation
-    if (lowerCommand.includes('content') || lowerCommand.includes('blog') || lowerCommand.includes('write') || lowerCommand.includes('article')) {
-        return agents.find(a => a.id === 'marcus-hayes');
+    // Check for complex multi-agent scenarios first
+    const multiAgentProject = detectMultiAgentProject(lowerCommand);
+    if (multiAgentProject) {
+        // For now, return primary agent but log that this is multi-agent
+        console.log('Multi-agent project detected:', multiAgentProject.type);
+        console.log('Required agents:', multiAgentProject.agents);
+        return agents.find(a => a.id === multiAgentProject.primary);
     }
-    // Lead Generation
-    else if (lowerCommand.includes('lead') || lowerCommand.includes('prospect') || lowerCommand.includes('outreach')) {
-        return agents.find(a => a.id === 'sarah-chen');
+
+    // Enhanced keyword matching with priority scoring
+    const agentScores = {};
+
+    // Marcus Hayes - Content Strategist (Premium Tier)
+    const marcusKeywords = ['content', 'blog', 'write', 'article', 'whitepaper', 'case study', 'thought leadership', 'editorial', 'copywriting', 'messaging', 'positioning', 'brand voice', 'content strategy'];
+    agentScores['marcus-hayes'] = countMatches(lowerCommand, marcusKeywords) * 10;
+
+    // Sarah Chen - Lead Generation (Budget Tier)
+    const sarahKeywords = ['lead', 'prospect', 'outreach', 'cold email', 'list building', 'lead generation', 'demand gen', 'icp', 'qualification', 'outbound', 'lead scoring'];
+    agentScores['sarah-chen'] = countMatches(lowerCommand, sarahKeywords) * 10;
+
+    // Emma Wilson - Email Marketing (Budget Tier)
+    const emmaKeywords = ['email', 'newsletter', 'drip', 'automation', 'nurture', 'sequence', 'mailchimp', 'campaign', 'deliverability', 'esp'];
+    agentScores['emma-wilson'] = countMatches(lowerCommand, emmaKeywords) * 10;
+
+    // Alex Rodriguez - Paid Social (Mid Tier)
+    const alexKeywords = ['social', 'ad', 'facebook', 'instagram', 'linkedin', 'twitter', 'paid', 'roas', 'audience', 'targeting', 'creative', 'campaign'];
+    agentScores['alex-rodriguez'] = countMatches(lowerCommand, alexKeywords) * 10;
+
+    // Ryan Mitchell - SEO (Budget Tier)
+    const ryanKeywords = ['seo', 'search', 'rank', 'keyword', 'backlink', 'technical seo', 'on-page', 'off-page', 'google', 'organic', 'serp'];
+    agentScores['ryan-mitchell'] = countMatches(lowerCommand, ryanKeywords) * 10;
+
+    // Victor Stone - Video (Mid Tier)
+    const victorKeywords = ['video', 'youtube', 'film', 'production', 'script', 'storyboard', 'vimeo', 'video marketing', 'visual'];
+    agentScores['victor-stone'] = countMatches(lowerCommand, victorKeywords) * 10;
+
+    // David Kim - Analytics (Budget Tier)
+    const davidKeywords = ['analytic', 'report', 'data', 'dashboard', 'metrics', 'kpi', 'tracking', 'ga4', 'insights', 'attribution', 'performance'];
+    agentScores['david-kim'] = countMatches(lowerCommand, davidKeywords) * 10;
+
+    // Natalie Brooks - Influencer (Mid Tier)
+    const natalieKeywords = ['influencer', 'partnership', 'collaboration', 'sponsor', 'affiliate', 'brand ambassador'];
+    agentScores['natalie-brooks'] = countMatches(lowerCommand, natalieKeywords) * 10;
+
+    // Oliver Grant - CRO (Budget Tier)
+    const oliverKeywords = ['conversion', 'a/b', 'test', 'optimize', 'cro', 'funnel', 'landing page', 'ux', 'experiment'];
+    agentScores['oliver-grant'] = countMatches(lowerCommand, oliverKeywords) * 10;
+
+    // Nathan Cross - Competitive Intelligence (Budget Tier)
+    const nathanKeywords = ['competitor', 'competitive', 'market research', 'swot', 'intelligence', 'monitoring', 'analysis'];
+    agentScores['nathan-cross'] = countMatches(lowerCommand, nathanKeywords) * 10;
+
+    // Maya Patel - Personalization (Mid Tier)
+    const mayaKeywords = ['personalization', 'personalize', 'segment', 'dynamic', 'recommendation', 'behavioral', 'journey'];
+    agentScores['maya-patel'] = countMatches(lowerCommand, mayaKeywords) * 10;
+
+    // Sophie Anderson - Customer Support (Budget Tier)
+    const sophieKeywords = ['support', 'customer', 'help', 'chatbot', 'faq', 'knowledge base', 'documentation', 'onboarding'];
+    agentScores['sophie-anderson'] = countMatches(lowerCommand, sophieKeywords) * 10;
+
+    // Ava Martinez - ABM (Mid Tier)
+    const avaKeywords = ['abm', 'account-based', 'enterprise', 'strategic accounts', 'executive', 'high-value'];
+    agentScores['ava-martinez'] = countMatches(lowerCommand, avaKeywords) * 10;
+
+    // Robert Davis - Revenue Intelligence (Premium Tier)
+    const robertKeywords = ['revenue', 'forecast', 'pipeline', 'sales', 'churn', 'pricing', 'mrr', 'arr', 'growth'];
+    agentScores['robert-davis'] = countMatches(lowerCommand, robertKeywords) * 10;
+
+    // Oscar Wright - Marketing Operations (Premium Tier)
+    const oscarKeywords = ['martech', 'operations', 'workflow', 'integration', 'automation', 'process', 'crm', 'setup', 'administration'];
+    agentScores['oscar-wright'] = countMatches(lowerCommand, oscarKeywords) * 10;
+
+    // Find agent with highest score
+    let highestScore = 0;
+    let selectedAgentId = 'oscar-wright'; // Default to operations coordinator
+
+    for (const [agentId, score] of Object.entries(agentScores)) {
+        if (score > highestScore) {
+            highestScore = score;
+            selectedAgentId = agentId;
+        }
     }
-    // Email Marketing
-    else if (lowerCommand.includes('email') || lowerCommand.includes('newsletter') || lowerCommand.includes('drip')) {
-        return agents.find(a => a.id === 'emma-wilson');
+
+    // If no strong match, use oscar-wright as default
+    if (highestScore === 0) {
+        console.log('No strong agent match - routing to Marketing Operations Coordinator');
+    } else {
+        console.log(`Task routed to ${selectedAgentId} with confidence score: ${highestScore}`);
     }
-    // Social Advertising
-    else if (lowerCommand.includes('social') || lowerCommand.includes('ad') || lowerCommand.includes('facebook') || lowerCommand.includes('instagram')) {
-        return agents.find(a => a.id === 'alex-rodriguez');
+
+    return agents.find(a => a.id === selectedAgentId);
+}
+
+// Helper function to count keyword matches
+function countMatches(text, keywords) {
+    return keywords.reduce((count, keyword) => {
+        return count + (text.includes(keyword) ? 1 : 0);
+    }, 0);
+}
+
+// Detect if this is a complex multi-agent project
+function detectMultiAgentProject(command) {
+    // Product Launch
+    if (command.includes('product launch') || (command.includes('launch') && command.includes('campaign'))) {
+        return {
+            type: 'product-launch',
+            primary: 'marcus-hayes',
+            agents: ['marcus-hayes', 'alex-rodriguez', 'victor-stone', 'emma-wilson', 'robert-davis'],
+            description: 'Full product launch campaign'
+        };
     }
-    // Video Marketing
-    else if (lowerCommand.includes('video') || lowerCommand.includes('youtube') || lowerCommand.includes('film')) {
-        return agents.find(a => a.id === 'victor-stone');
+
+    // Content Strategy
+    if ((command.includes('content') && command.includes('strategy')) || command.includes('content plan') || command.includes('editorial calendar')) {
+        return {
+            type: 'content-strategy',
+            primary: 'marcus-hayes',
+            agents: ['marcus-hayes', 'ryan-mitchell', 'sarah-chen', 'david-kim'],
+            description: 'Comprehensive content strategy'
+        };
     }
-    // Influencer Marketing
-    else if (lowerCommand.includes('influencer') || lowerCommand.includes('partnership') || lowerCommand.includes('collaboration')) {
-        return agents.find(a => a.id === 'natalie-brooks');
+
+    // Demand Generation Campaign
+    if (command.includes('demand gen') || (command.includes('campaign') && (command.includes('lead') || command.includes('pipeline')))) {
+        return {
+            type: 'demand-gen',
+            primary: 'sarah-chen',
+            agents: ['sarah-chen', 'emma-wilson', 'alex-rodriguez', 'ava-martinez', 'david-kim'],
+            description: 'Multi-channel demand generation'
+        };
     }
-    // Conversion Optimization
-    else if (lowerCommand.includes('conversion') || lowerCommand.includes('a/b') || lowerCommand.includes('optimize') || lowerCommand.includes('cro')) {
-        return agents.find(a => a.id === 'oliver-grant');
+
+    // Website Overhaul
+    if (command.includes('website') && (command.includes('redesign') || command.includes('overhaul') || command.includes('rebuild'))) {
+        return {
+            type: 'website-overhaul',
+            primary: 'ryan-mitchell',
+            agents: ['ryan-mitchell', 'oliver-grant', 'marcus-hayes', 'david-kim', 'oscar-wright'],
+            description: 'Complete website optimization'
+        };
     }
-    // Competitive Intelligence
-    else if (lowerCommand.includes('competitor') || lowerCommand.includes('competitive') || lowerCommand.includes('market research')) {
-        return agents.find(a => a.id === 'nathan-cross');
-    }
-    // Personalization
-    else if (lowerCommand.includes('personalization') || lowerCommand.includes('personalize') || lowerCommand.includes('segment')) {
-        return agents.find(a => a.id === 'maya-patel');
-    }
-    // Analytics
-    else if (lowerCommand.includes('analytic') || lowerCommand.includes('report') || lowerCommand.includes('data') || lowerCommand.includes('dashboard')) {
-        return agents.find(a => a.id === 'david-kim');
-    }
-    // SEO
-    else if (lowerCommand.includes('seo') || lowerCommand.includes('search') || lowerCommand.includes('rank') || lowerCommand.includes('keyword')) {
-        return agents.find(a => a.id === 'ryan-mitchell');
-    }
-    // Customer Support
-    else if (lowerCommand.includes('support') || lowerCommand.includes('customer') || lowerCommand.includes('help') || lowerCommand.includes('chatbot')) {
-        return agents.find(a => a.id === 'sophie-anderson');
-    }
-    // ABM
-    else if (lowerCommand.includes('abm') || lowerCommand.includes('account-based') || lowerCommand.includes('enterprise')) {
-        return agents.find(a => a.id === 'ava-martinez');
-    }
-    // Revenue Intelligence
-    else if (lowerCommand.includes('revenue') || lowerCommand.includes('forecast') || lowerCommand.includes('pipeline') || lowerCommand.includes('sales')) {
-        return agents.find(a => a.id === 'robert-davis');
-    }
-    // Default to Operations Coordinator
-    else {
-        return agents.find(a => a.id === 'oscar-wright');
-    }
+
+    return null;
 }
 
 // Show Task Assignment Notification
