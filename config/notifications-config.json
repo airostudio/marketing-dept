@@ -1,0 +1,267 @@
+{
+  "version": "1.0",
+  "description": "Notification preferences and integrations",
+  "lastUpdated": "2025-12-05",
+
+  "slackIntegration": {
+    "enabled": true,
+    "workspaceName": "Your Company",
+    "workspaceId": "T1234567890",
+    "botUserId": "U9876543210",
+    "webhookUrl": "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXX",
+
+    "channels": [
+      {
+        "id": "C001",
+        "name": "#marketing-alerts",
+        "description": "Real-time marketing notifications and alerts",
+        "notifications": {
+          "leadGenerated": true,
+          "campaignLaunched": true,
+          "campaignCompleted": true,
+          "performanceAlert": true,
+          "budgetAlert": true,
+          "agentError": true
+        },
+        "mentionOnCritical": true,
+        "quietHours": {
+          "enabled": true,
+          "start": "22:00",
+          "end": "07:00",
+          "timezone": "America/New_York"
+        }
+      },
+      {
+        "id": "C002",
+        "name": "#analytics-reports",
+        "description": "Automated performance and analytics reports",
+        "notifications": {
+          "dailyReport": true,
+          "weeklyReport": true,
+          "monthlyReport": true,
+          "customReport": true
+        },
+        "schedule": {
+          "daily": "09:00",
+          "weekly": "Monday 09:00",
+          "monthly": "1st 09:00"
+        }
+      },
+      {
+        "id": "C003",
+        "name": "#agent-updates",
+        "description": "Agent task status and updates",
+        "notifications": {
+          "taskStarted": true,
+          "taskCompleted": true,
+          "taskFailed": false,
+          "agentStatusChange": true
+        },
+        "verbosity": "summary"
+      },
+      {
+        "id": "C004",
+        "name": "#leads-pipeline",
+        "description": "New leads and pipeline updates",
+        "notifications": {
+          "newLead": true,
+          "leadQualified": true,
+          "dealCreated": true,
+          "dealStageChanged": true
+        },
+        "filterByValue": {
+          "enabled": true,
+          "minimumValue": 5000
+        }
+      }
+    ],
+
+    "messageFormatting": {
+      "useRichFormatting": true,
+      "includeEmojis": true,
+      "includeThumbnails": true,
+      "includeActionButtons": true,
+      "colorCoding": {
+        "success": "#10b981",
+        "warning": "#f59e0b",
+        "error": "#ef4444",
+        "info": "#3b82f6"
+      }
+    },
+
+    "slackCommands": {
+      "enabled": true,
+      "commandPrefix": "/scotty",
+      "availableCommands": [
+        {
+          "command": "/scotty status",
+          "description": "Get current status of all agents",
+          "usage": "/scotty status [agent-name]"
+        },
+        {
+          "command": "/scotty create-task",
+          "description": "Create a new marketing task",
+          "usage": "/scotty create-task [description]"
+        },
+        {
+          "command": "/scotty report",
+          "description": "Generate performance report",
+          "usage": "/scotty report [daily|weekly|monthly]"
+        },
+        {
+          "command": "/scotty budget",
+          "description": "Check budget and spending",
+          "usage": "/scotty budget"
+        }
+      ]
+    },
+
+    "interactiveMessages": {
+      "enabled": true,
+      "approvalWorkflows": true,
+      "quickActions": [
+        "Approve Campaign",
+        "Request Changes",
+        "View Details",
+        "Assign to Agent"
+      ]
+    }
+  },
+
+  "emailNotifications": {
+    "enabled": true,
+    "fromAddress": "notifications@marketing-dept.com",
+    "fromName": "The Marketing Department",
+    "
+types": {
+      "dailySummary": {
+        "enabled": true,
+        "time": "09:00",
+        "timezone": "America/New_York",
+        "recipients": ["user@company.com"],
+        "includes": [
+          "tasks_completed",
+          "leads_generated",
+          "campaigns_active",
+          "budget_spent",
+          "top_performing_content"
+        ]
+      },
+      "weeklySummary": {
+        "enabled": true,
+        "day": "Monday",
+        "time": "09:00",
+        "recipients": ["user@company.com", "team@company.com"],
+        "includes": [
+          "weekly_metrics",
+          "campaign_performance",
+          "lead_pipeline",
+          "budget_analysis",
+          "agent_productivity",
+          "recommendations"
+        ]
+      },
+      "criticalAlerts": {
+        "enabled": true,
+        "immediate": true,
+        "recipients": ["user@company.com"],
+        "triggers": [
+          "budget_90_percent",
+          "campaign_failed",
+          "integration_error",
+          "security_alert"
+        ]
+      },
+      "campaignUpdates": {
+        "enabled": true,
+        "frequency": "real-time",
+        "recipients": ["user@company.com"],
+        "events": [
+          "campaign_launched",
+          "campaign_completed",
+          "milestone_reached"
+        ]
+      }
+    }
+  },
+
+  "browserNotifications": {
+    "enabled": true,
+    "permission": "granted",
+    "showOnEvents": [
+      "new_lead",
+      "campaign_completed",
+      "budget_alert",
+      "task_assigned"
+    ],
+    "sound": true,
+    "soundFile": "/sounds/notification.mp3",
+    "desktopNotifications": true
+  },
+
+  "mobileNotifications": {
+    "enabled": false,
+    "platform": "none",
+    "pushNotifications": {
+      "fcmToken": "",
+      "apnsToken": ""
+    },
+    "smsNotifications": {
+      "enabled": false,
+      "provider": "twilio",
+      "phoneNumber": "",
+      "criticalAlertsOnly": true
+    }
+  },
+
+  "notificationPreferences": {
+    "grouping": {
+      "enabled": true,
+      "timeWindow": 300,
+      "description": "Group similar notifications within 5 minutes"
+    },
+    "doNotDisturb": {
+      "enabled": false,
+      "schedule": {
+        "weekdays": {
+          "start": "18:00",
+          "end": "08:00"
+        },
+        "weekends": {
+          "allDay": true
+        }
+      }
+    },
+    "priorityLevels": {
+      "critical": {
+        "alwaysNotify": true,
+        "channels": ["slack", "email", "browser"]
+      },
+      "high": {
+        "channels": ["slack", "email"]
+      },
+      "medium": {
+        "channels": ["slack"]
+      },
+      "low": {
+        "channels": ["email"],
+        "digest": true
+      }
+    }
+  },
+
+  "webhookNotifications": {
+    "description": "Send notifications to custom webhook endpoints",
+    "endpoints": [
+      {
+        "id": "webhook_001",
+        "name": "Custom Dashboard",
+        "url": "https://yourdashboard.com/webhook",
+        "events": ["all"],
+        "enabled": true,
+        "secret": "whsec_custom_xxxx",
+        "retries": 3
+      }
+    ]
+  }
+}
