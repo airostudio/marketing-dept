@@ -15,6 +15,13 @@ export interface ApiCredentials {
   intercom?: string
 }
 
+export interface BrandingConfig {
+  logo?: string // base64 or URL
+  icon?: string // base64 or URL
+  companyName?: string
+  primaryColor?: string
+}
+
 export interface Worker {
   id: string
   name: string
@@ -48,6 +55,9 @@ interface Store {
   apiCredentials: ApiCredentials
   verifiedApis: string[]
 
+  // Branding
+  branding: BrandingConfig
+
   // Workers
   workers: Worker[]
 
@@ -66,6 +76,10 @@ interface Store {
 
   updateWorkerStatus: (workerId: string, status: Worker['status']) => void
   updateWorkerMetrics: (workerId: string, metrics: Record<string, any>) => void
+
+  // Branding actions
+  updateBranding: (branding: Partial<BrandingConfig>) => void
+  resetBranding: () => void
 }
 
 export const useStore = create<Store>()(
@@ -75,6 +89,9 @@ export const useStore = create<Store>()(
       isSetupComplete: false,
       apiCredentials: {},
       verifiedApis: [],
+      branding: {
+        companyName: 'AI Marketing Department',
+      },
       workers: [
         {
           id: 'jasper',
@@ -272,6 +289,20 @@ export const useStore = create<Store>()(
               : worker
           ),
         }))
+      },
+
+      updateBranding: (branding) => {
+        set((state) => ({
+          branding: { ...state.branding, ...branding },
+        }))
+      },
+
+      resetBranding: () => {
+        set({
+          branding: {
+            companyName: 'AI Marketing Department',
+          },
+        })
       },
     }),
     {

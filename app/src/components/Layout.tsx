@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Home, Users, ListTodo, Settings as SettingsIcon, LogOut } from 'lucide-react'
 import { useStore } from '../store/useStore'
@@ -10,6 +10,27 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation()
   const resetSetup = useStore(state => state.resetSetup)
+  const branding = useStore(state => state.branding)
+
+  // Update favicon and document title dynamically
+  useEffect(() => {
+    // Update favicon
+    if (branding.icon) {
+      const link = document.querySelector("link[rel*='icon']") as HTMLLinkElement
+      if (link) {
+        link.href = branding.icon
+      }
+    }
+
+    // Update document title
+    if (branding.companyName) {
+      document.title = branding.companyName
+    }
+  }, [branding.icon, branding.companyName])
+
+  // Get logo and company name with fallbacks
+  const logoSrc = branding.icon || branding.logo || '/assets/icon.svg'
+  const companyName = branding.companyName || 'AI Marketing Department'
 
   const navigation = [
     { name: 'Dashboard', path: '/', icon: Home },
@@ -30,13 +51,17 @@ export default function Layout({ children }: LayoutProps) {
         <div className="mb-8">
           <Link to="/" className="flex items-center gap-3">
             <img
-              src="/assets/icon.svg"
-              alt="AI Marketing Department"
-              className="w-12 h-12 rounded-lg"
+              src={logoSrc}
+              alt={companyName}
+              className="w-12 h-12 rounded-lg object-contain bg-white/10 p-1"
             />
             <div>
-              <h1 className="text-xl font-bold">AI Marketing</h1>
-              <p className="text-sm text-white/80">Department</p>
+              <h1 className="text-xl font-bold">
+                {companyName.split(' ')[0] || 'AI Marketing'}
+              </h1>
+              <p className="text-sm text-white/80">
+                {companyName.split(' ').slice(1).join(' ') || 'Department'}
+              </p>
             </div>
           </Link>
         </div>

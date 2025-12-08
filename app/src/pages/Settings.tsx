@@ -1,13 +1,16 @@
-import { useState } from 'react'
-import { Save, Eye, EyeOff, AlertTriangle } from 'lucide-react'
+import { useState, useRef } from 'react'
+import { Save, Eye, EyeOff, AlertTriangle, Upload, Image as ImageIcon, Trash2 } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import Layout from '../components/Layout'
 import toast from 'react-hot-toast'
 
 export default function Settings() {
-  const { apiCredentials, setApiCredential, resetSetup } = useStore()
+  const { apiCredentials, setApiCredential, resetSetup, branding, updateBranding, resetBranding } = useStore()
   const [showKeys, setShowKeys] = useState<Record<string, boolean>>({})
   const [showResetConfirm, setShowResetConfirm] = useState(false)
+  const [showBrandingReset, setShowBrandingReset] = useState(false)
+  const logoInputRef = useRef<HTMLInputElement>(null)
+  const iconInputRef = useRef<HTMLInputElement>(null)
 
   const platforms = [
     { id: 'jasperAi', name: 'Jasper AI', worker: 'Jasper' },
@@ -33,12 +36,222 @@ export default function Settings() {
     toast.success('Setup reset successfully. Redirecting to setup wizard...')
   }
 
+  const handleImageUpload = (type: 'logo' | 'icon', event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please upload an image file')
+      return
+    }
+
+    // Validate file size (max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error('Image size must be less than 2MB')
+      return
+    }
+
+    // Read file and convert to base64
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const base64 = e.target?.result as string
+      updateBranding({ [type]: base64 })
+      toast.success(`${type === 'logo' ? 'Logo' : 'Icon'} uploaded successfully!`)
+    }
+    reader.onerror = () => {
+      toast.error('Failed to upload image')
+    }
+    reader.readAsDataURL(file)
+  }
+
+  const handleRemoveImage = (type: 'logo' | 'icon') => {
+    updateBranding({ [type]: undefined })
+    toast.success(`${type === 'logo' ? 'Logo' : 'Icon'} removed`)
+  }
+
+  const handleCompanyNameChange = (name: string) => {
+    updateBranding({ companyName: name })
+  }
+
+  const handleBrandingReset = () => {
+    resetBranding()
+    setShowBrandingReset(false)
+    toast.success('Branding reset to defaults')
+  }
+
   return (
     <Layout>
       <div className="max-w-4xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-          <p className="text-gray-600 mt-1">Manage your API credentials and platform connections</p>
+          <p className="text-gray-600 mt-1">Manage your branding, API credentials, and platform connections</p>
+        </div>
+
+        {/* Branding & Logo */}
+        <div className="card mb-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-6">Branding & Logo</h2>
+
+          {/* Company Name */}
+          <div className="mb-6 pb-6 border-b border-gray-200">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Company Name
+            </label>
+            <input
+              type="text"
+              className="input"
+              placeholder="AI Marketing Department"
+              value={branding.companyName || ''}
+              onChange={(e) => handleCompanyNameChange(e.target.value)}
+            />
+            <p className="text-xs text-gray-500 mt-1">This will be displayed in the sidebar and throughout the app</p>
+          </div>
+
+          {/* Logo Upload */}
+          <div className="mb-6 pb-6 border-b border-gray-200">
+            <label className="block text-sm font-semibold text-gray-700 mb-3">
+              Company Logo
+            </label>
+
+            <div className="flex items-start gap-4">
+              {/* Logo Preview */}
+              <div className="flex-shrink-0">
+                <div className="w-32 h-32 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center bg-gray-50 overflow-hidden">
+                  {branding.logo ? (
+                    <img src={branding.logo} alt="Logo" className="w-full h-full object-contain" />
+                  ) : (
+                    <ImageIcon className="w-12 h-12 text-gray-400" />
+                  )}
+                </div>
+              </div>
+
+              {/* Upload Controls */}
+              <div className="flex-1">
+                <input
+                  ref={logoInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleImageUpload('logo', e)}
+                  className="hidden"
+                />
+
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => logoInputRef.current?.click()}
+                    className="btn-secondary flex items-center gap-2"
+                  >
+                    <Upload className="w-4 h-4" />
+                    {branding.logo ? 'Change Logo' : 'Upload Logo'}
+                  </button>
+
+                  {branding.logo && (
+                    <button
+                      onClick={() => handleRemoveImage('logo')}
+                      className="btn-secondary flex items-center gap-2 text-red-600 hover:bg-red-50"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                      Remove
+                    </button>
+                  )}
+                </div>
+
+                <p className="text-xs text-gray-500 mt-2">
+                  Recommended: Square image, min 200x200px, max 2MB. PNG or SVG for best quality.
+                </p>
+                <p className="text-xs text-green-600 mt-1">
+                  ✨ Your logo will automatically update across the entire website!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Icon Upload */}
+          <div className="mb-6">
+            <label className="block text-sm font-semibold text-gray-700 mb-3">
+              App Icon / Favicon
+            </label>
+
+            <div className="flex items-start gap-4">
+              {/* Icon Preview */}
+              <div className="flex-shrink-0">
+                <div className="w-24 h-24 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center bg-gray-50 overflow-hidden">
+                  {branding.icon ? (
+                    <img src={branding.icon} alt="Icon" className="w-full h-full object-contain" />
+                  ) : (
+                    <ImageIcon className="w-8 h-8 text-gray-400" />
+                  )}
+                </div>
+              </div>
+
+              {/* Upload Controls */}
+              <div className="flex-1">
+                <input
+                  ref={iconInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleImageUpload('icon', e)}
+                  className="hidden"
+                />
+
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => iconInputRef.current?.click()}
+                    className="btn-secondary flex items-center gap-2"
+                  >
+                    <Upload className="w-4 h-4" />
+                    {branding.icon ? 'Change Icon' : 'Upload Icon'}
+                  </button>
+
+                  {branding.icon && (
+                    <button
+                      onClick={() => handleRemoveImage('icon')}
+                      className="btn-secondary flex items-center gap-2 text-red-600 hover:bg-red-50"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                      Remove
+                    </button>
+                  )}
+                </div>
+
+                <p className="text-xs text-gray-500 mt-2">
+                  Recommended: Square icon, 64x64px or larger, max 2MB. Will be used in sidebar and browser tab.
+                </p>
+                <p className="text-xs text-green-600 mt-1">
+                  ✨ Your icon will automatically update in the sidebar and browser tab!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Reset Branding */}
+          {(branding.logo || branding.icon || branding.companyName !== 'AI Marketing Department') && (
+            <div className="pt-6 border-t border-gray-200">
+              {!showBrandingReset ? (
+                <button
+                  onClick={() => setShowBrandingReset(true)}
+                  className="text-sm text-gray-600 hover:text-gray-800 underline"
+                >
+                  Reset to default branding
+                </button>
+              ) : (
+                <div className="flex gap-3 items-center">
+                  <p className="text-sm text-gray-600">Are you sure? This will remove all custom branding.</p>
+                  <button
+                    onClick={handleBrandingReset}
+                    className="text-sm bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700"
+                  >
+                    Confirm Reset
+                  </button>
+                  <button
+                    onClick={() => setShowBrandingReset(false)}
+                    className="text-sm text-gray-600 hover:text-gray-800"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* API Credentials */}
