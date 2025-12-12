@@ -13,6 +13,32 @@
     "url": "https://www.jasper.ai",
     "apiKey": "JASPER_API_KEY"
   },
+  "supportedProviders": [
+    {
+      "id": "openai",
+      "name": "OpenAI (ChatGPT)",
+      "recommended": true,
+      "costEfficiency": "high"
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "recommended": true,
+      "costEfficiency": "very-high"
+    },
+    {
+      "id": "jasper",
+      "name": "Jasper AI",
+      "recommended": true,
+      "costEfficiency": "medium"
+    },
+    {
+      "id": "copyai",
+      "name": "Copy.ai",
+      "recommended": false,
+      "costEfficiency": "medium"
+    }
+  ],
   "capabilities": [
     "Blog post writing",
     "Marketing copy creation",

@@ -2,6 +2,11 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 export interface ApiCredentials {
+  // General-Purpose AI Providers
+  openAi?: string
+  deepSeek?: string
+
+  // Specialized Marketing Tools
   jasperAi?: string
   copyAi?: string
   zoomInfo?: string
@@ -13,6 +18,12 @@ export interface ApiCredentials {
   hotjar?: string
   surferSeo?: string
   intercom?: string
+}
+
+export type AIProvider = 'openai' | 'deepseek' | 'jasper' | 'copyai'
+
+export interface ProviderPreferences {
+  contentGeneration: AIProvider
 }
 
 export interface Worker {
@@ -47,6 +58,7 @@ interface Store {
   isSetupComplete: boolean
   apiCredentials: ApiCredentials
   verifiedApis: string[]
+  providerPreferences: ProviderPreferences
 
   // Workers
   workers: Worker[]
@@ -59,6 +71,7 @@ interface Store {
   verifyApi: (platform: string) => Promise<boolean>
   completeSetup: () => void
   resetSetup: () => void
+  setProviderPreference: (category: keyof ProviderPreferences, provider: AIProvider) => void
 
   addTask: (task: Omit<Task, 'id' | 'createdAt'>) => void
   updateTask: (id: string, updates: Partial<Task>) => void
@@ -75,6 +88,9 @@ export const useStore = create<Store>()(
       isSetupComplete: false,
       apiCredentials: {},
       verifiedApis: [],
+      providerPreferences: {
+        contentGeneration: 'openai', // Default to OpenAI
+      },
       workers: [
         {
           id: 'jasper',
@@ -225,7 +241,19 @@ export const useStore = create<Store>()(
           isSetupComplete: false,
           apiCredentials: {},
           verifiedApis: [],
+          providerPreferences: {
+            contentGeneration: 'openai',
+          },
         })
+      },
+
+      setProviderPreference: (category, provider) => {
+        set((state) => ({
+          providerPreferences: {
+            ...state.providerPreferences,
+            [category]: provider,
+          },
+        }))
       },
 
       addTask: (task) => {

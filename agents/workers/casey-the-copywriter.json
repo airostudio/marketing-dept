@@ -14,6 +14,32 @@
     "apiKey": "90ECPFOACTFO2KE2LPHZR",
     "tier": "unlimited"
   },
+  "supportedProviders": [
+    {
+      "id": "openai",
+      "name": "OpenAI (ChatGPT)",
+      "recommended": true,
+      "costEfficiency": "high"
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "recommended": true,
+      "costEfficiency": "very-high"
+    },
+    {
+      "id": "copyai",
+      "name": "Copy.ai / Rytr",
+      "recommended": true,
+      "costEfficiency": "medium"
+    },
+    {
+      "id": "jasper",
+      "name": "Jasper AI",
+      "recommended": false,
+      "costEfficiency": "medium"
+    }
+  ],
   "capabilities": [
     "Marketing copy",
     "Sales emails",

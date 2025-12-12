@@ -6,6 +6,28 @@ import toast from 'react-hot-toast'
 
 const platforms = [
   {
+    id: 'openAi',
+    name: 'OpenAI (ChatGPT)',
+    emoji: '🤖',
+    description: 'General-purpose AI for content generation',
+    worker: 'AI Content Assistant',
+    docsUrl: 'https://platform.openai.com/api-keys',
+    placeholder: 'sk-proj-...',
+    tier: 'Pay-per-use',
+    info: 'Cost-effective: $2.50-$10 per 1M tokens. Supports GPT-4o, GPT-4 Turbo, GPT-3.5.'
+  },
+  {
+    id: 'deepSeek',
+    name: 'DeepSeek',
+    emoji: '🧠',
+    description: 'Ultra cost-effective AI for content generation',
+    worker: 'AI Content Assistant',
+    docsUrl: 'https://platform.deepseek.com/api-keys',
+    placeholder: 'sk-...',
+    tier: 'Pay-per-use',
+    info: 'Extremely affordable: $0.14-$0.28 per 1M tokens. OpenAI-compatible API.'
+  },
+  {
     id: 'jasperAi',
     name: 'Jasper AI',
     emoji: '✍️',
@@ -335,7 +357,14 @@ export default function SetupWizard() {
             </div>
 
             {/* Info */}
-            {!verifiedApis.includes(currentPlatform.id) && (
+            {currentPlatform.info && (
+              <div className="mt-6 p-4 bg-purple-50 rounded-lg border border-purple-200">
+                <p className="text-sm text-purple-800">
+                  ℹ️ {currentPlatform.info}
+                </p>
+              </div>
+            )}
+            {!verifiedApis.includes(currentPlatform.id) && !currentPlatform.info && (
               <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
                 <p className="text-sm text-blue-800">
                   💡 <strong>Tip:</strong> You can skip platforms and add them later in Settings.
