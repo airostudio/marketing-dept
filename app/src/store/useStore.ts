@@ -93,6 +93,20 @@ export const useStore = create<Store>()(
       },
       workers: [
         {
+          id: 'marcus',
+          name: 'Marcus Hayes',
+          emoji: '📋',
+          role: 'Content Strategist',
+          department: 'Content Creation',
+          platform: 'Hybrid AI Platform',
+          status: 'idle',
+          metrics: {
+            tasksCompleted: 142,
+            efficiency: 96,
+            activeProjects: 8
+          }
+        },
+        {
           id: 'jasper',
           name: 'Jasper',
           emoji: '✍️',
