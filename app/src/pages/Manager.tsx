@@ -14,10 +14,12 @@ import {
   Target,
 } from 'lucide-react';
 import Layout from '../components/Layout';
+import LiveTaskMonitor from '../components/LiveTaskMonitor';
 import { campaignTemplates } from '../data/campaignTemplates';
 import { CampaignTemplate, Workflow, WorkflowStep } from '../types/workflow';
 import { useStore } from '../store/useStore';
 import { workflowEngine } from '../services/workflowEngine';
+import { useTaskNotifications } from '../hooks/useTaskNotifications';
 import toast from 'react-hot-toast';
 
 const difficultyColors: Record<string, string> = {
@@ -31,6 +33,9 @@ export default function Manager() {
   const [selectedTemplate, setSelectedTemplate] = useState<CampaignTemplate | null>(null);
   const [isLaunching, setIsLaunching] = useState(false);
   const { workflows, addWorkflow, updateWorkflow, workers } = useStore();
+
+  // Enable task notifications
+  useTaskNotifications();
 
   const activeWorkflow = workflows.find(w => w.status === 'in_progress');
 
@@ -367,6 +372,9 @@ export default function Manager() {
         </motion.div>
       </div>
     </div>
+
+    {/* Real-time task monitoring */}
+    <LiveTaskMonitor />
     </Layout>
   );
 }
