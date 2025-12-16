@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, X, Loader, CheckCircle, XCircle, Clock } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import Layout from '../components/Layout'
+import LiveTaskMonitor from '../components/LiveTaskMonitor'
+import { useTaskNotifications } from '../hooks/useTaskNotifications'
 import toast from 'react-hot-toast'
 import { executeTask } from '../services/taskExecutor'
 
@@ -16,6 +18,9 @@ export default function TaskManager() {
     workerId: '',
     priority: 'medium' as 'low' | 'medium' | 'high',
   })
+
+  // Enable task notifications
+  useTaskNotifications()
 
   const handleCreateTask = async () => {
     if (!newTask.title || !newTask.workerId) {
@@ -83,16 +88,16 @@ export default function TaskManager() {
   }
 
   const statusColors = {
-    pending: 'bg-gray-100 text-gray-800',
-    in_progress: 'bg-blue-100 text-blue-800',
-    completed: 'bg-green-100 text-green-800',
-    failed: 'bg-red-100 text-red-800',
+    pending: 'bg-gray-800/30 text-gray-400 border border-gray-700',
+    in_progress: 'bg-blue-500/10 text-blue-400 border border-blue-500/30',
+    completed: 'bg-green-500/10 text-green-400 border border-green-500/30',
+    failed: 'bg-red-500/10 text-red-400 border border-red-500/30',
   }
 
   const priorityColors = {
-    low: 'text-gray-600',
-    medium: 'text-yellow-600',
-    high: 'text-red-600',
+    low: 'text-gray-400',
+    medium: 'text-yellow-400',
+    high: 'text-red-400',
   }
 
   return (
@@ -318,6 +323,9 @@ export default function TaskManager() {
           })
         )}
       </div>
+
+      {/* Real-time task monitoring */}
+      <LiveTaskMonitor />
     </Layout>
   )
 }

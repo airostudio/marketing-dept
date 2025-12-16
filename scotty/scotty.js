@@ -10,8 +10,8 @@ const agents = [
         emoji: '✍️',
         department: 'content-creation',
         status: 'active',
-        tasksCompleted: 142,
-        efficiency: 96,
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#6366f1',
         gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
     },
@@ -21,9 +21,9 @@ const agents = [
         role: 'Lead Generation',
         emoji: '🔍',
         department: 'lead-generation',
-        status: 'working',
-        tasksCompleted: 89,
-        efficiency: 94,
+        status: 'active',
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#10b981',
         gradient: 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)'
     },
@@ -34,8 +34,8 @@ const agents = [
         emoji: '⏰',
         department: 'email-marketing',
         status: 'active',
-        tasksCompleted: 156,
-        efficiency: 98,
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#f59e0b',
         gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
     },
@@ -45,9 +45,9 @@ const agents = [
         role: 'Social Advertising',
         emoji: '🎯',
         department: 'social-media',
-        status: 'working',
-        tasksCompleted: 73,
-        efficiency: 91,
+        status: 'active',
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#ec4899',
         gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
     },
@@ -58,8 +58,8 @@ const agents = [
         emoji: '🎬',
         department: 'video-marketing',
         status: 'active',
-        tasksCompleted: 45,
-        efficiency: 89,
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#8b5cf6',
         gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)'
     },
@@ -70,8 +70,8 @@ const agents = [
         emoji: '🌟',
         department: 'influencer-marketing',
         status: 'active',
-        tasksCompleted: 62,
-        efficiency: 92,
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#f97316',
         gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)'
     },
@@ -81,9 +81,9 @@ const agents = [
         role: 'CRO Specialist',
         emoji: '📈',
         department: 'conversion-optimization',
-        status: 'working',
-        tasksCompleted: 38,
-        efficiency: 95,
+        status: 'active',
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#06b6d4',
         gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
     },
@@ -94,8 +94,8 @@ const agents = [
         emoji: '🕷️',
         department: 'competitive-intelligence',
         status: 'active',
-        tasksCompleted: 127,
-        efficiency: 97,
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#64748b',
         gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
     },
@@ -106,8 +106,8 @@ const agents = [
         emoji: '🎨',
         department: 'personalization',
         status: 'active',
-        tasksCompleted: 91,
-        efficiency: 93,
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#d946ef',
         gradient: 'linear-gradient(135deg, #fa71cd 0%, #c471f5 100%)'
     },
@@ -118,8 +118,8 @@ const agents = [
         emoji: '📊',
         department: 'analytics',
         status: 'active',
-        tasksCompleted: 203,
-        efficiency: 99,
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#3b82f6',
         gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
     },
@@ -130,8 +130,8 @@ const agents = [
         emoji: '🏄',
         department: 'seo',
         status: 'active',
-        tasksCompleted: 134,
-        efficiency: 96,
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#22c55e',
         gradient: 'linear-gradient(135deg, #0ba360 0%, #3cba92 100%)'
     },
@@ -142,8 +142,8 @@ const agents = [
         emoji: '💬',
         department: 'customer-support',
         status: 'active',
-        tasksCompleted: 312,
-        efficiency: 97,
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#14b8a6',
         gradient: 'linear-gradient(135deg, #2af598 0%, #009efd 100%)'
     },
@@ -153,9 +153,9 @@ const agents = [
         role: 'ABM Specialist',
         emoji: '🎯',
         department: 'account-based-marketing',
-        status: 'working',
-        tasksCompleted: 56,
-        efficiency: 90,
+        status: 'active',
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#ef4444',
         gradient: 'linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%)'
     },
@@ -166,8 +166,8 @@ const agents = [
         emoji: '💰',
         department: 'revenue-intelligence',
         status: 'active',
-        tasksCompleted: 178,
-        efficiency: 98,
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#eab308',
         gradient: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)'
     },
@@ -178,56 +178,15 @@ const agents = [
         emoji: '🎼',
         department: 'orchestration',
         status: 'active',
-        tasksCompleted: 421,
-        efficiency: 99,
+        tasksCompleted: 0,
+        efficiency: null,
         color: '#6366f1',
         gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
     }
 ];
 
-// Recent Activity Data
-const activities = [
-    {
-        agent: 'Marcus Hayes',
-        emoji: '✍️',
-        action: 'Created 3 blog posts',
-        description: 'Generated SEO-optimized content for Q4 campaign',
-        time: '2 min ago',
-        gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-    },
-    {
-        agent: 'Sarah Chen',
-        emoji: '🔍',
-        action: 'Found 847 new leads',
-        description: 'Qualified prospects matching ICP criteria',
-        time: '15 min ago',
-        gradient: 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)'
-    },
-    {
-        agent: 'Emma Wilson',
-        emoji: '⏰',
-        action: 'Sent email campaign',
-        description: '12,500 emails with 43% open rate',
-        time: '1 hour ago',
-        gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
-    },
-    {
-        agent: 'Nathan Cross',
-        emoji: '🕷️',
-        action: 'Competitor alert',
-        description: 'Detected pricing change from top competitor',
-        time: '2 hours ago',
-        gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
-    },
-    {
-        agent: 'David Kim',
-        emoji: '📊',
-        action: 'Generated insights report',
-        description: 'Weekly performance analysis with 8 actionable insights',
-        time: '3 hours ago',
-        gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-    }
-];
+// Recent Activity Data - Will be populated from real task executions
+const activities = [];
 
 // Initialize Dashboard
 function initDashboard() {
