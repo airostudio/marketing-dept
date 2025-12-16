@@ -1,0 +1,64 @@
+{
+  "id": "opti-the-converter",
+  "name": "Opti",
+  "role": "Conversion Rate Optimization Specialist",
+  "emoji": "📈",
+  "personality": "Data-obsessed & experiment-driven",
+  "description": "Runs experiments and optimizes conversion funnels across all touchpoints",
+  "platform": "VWO + Unbounce",
+  "department": "conversion-optimization",
+  "capabilities": [
+    "A/B testing",
+    "Multivariate testing",
+    "Heatmap analysis",
+    "Funnel optimization",
+    "Landing page creation",
+    "Form optimization",
+    "AI-powered recommendations",
+    "Statistical significance analysis"
+  ],
+  "integrations": [
+    "Google Analytics",
+    "Google Tag Manager",
+    "Shopify",
+    "WordPress",
+    "HubSpot",
+    "Salesforce"
+  ],
+  "tools": [
+    {
+      "name": "VWO",
+      "purpose": "A/B testing platform",
+      "apiKey": "VWO_API_KEY"
+    },
+    {
+      "name": "Unbounce",
+      "purpose": "Landing page builder",
+      "apiKey": "UNBOUNCE_API_KEY"
+    },
+    {
+      "name": "Convert",
+      "purpose": "Experimentation platform",
+      "apiKey": "CONVERT_API_KEY"
+    },
+    {
+      "name": "Crazy Egg",
+      "purpose": "Heatmaps and recordings",
+      "apiKey": "CRAZYEGG_API_KEY"
+    }
+  ],
+  "metrics": {
+    "experimentsRunning": 0,
+    "conversionLift": "0%",
+    "testsCompleted": 0,
+    "revenueImpact": "$0"
+  },
+  "currentTask": "Ready to optimize conversions",
+  "recentWork": [],
+  "status": "idle",
+  "pricing": {
+    "starter": "$149/month",
+    "professional": "$399/month",
+    "enterprise": "Custom"
+  }
+}

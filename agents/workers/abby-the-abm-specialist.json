@@ -1,0 +1,64 @@
+{
+  "id": "abby-the-abm-specialist",
+  "name": "Abby",
+  "role": "Account-Based Marketing Specialist",
+  "emoji": "🎯",
+  "personality": "Precise & account-focused",
+  "description": "Orchestrates personalized campaigns for high-value target accounts",
+  "platform": "Demandbase + 6sense",
+  "department": "account-based-marketing",
+  "capabilities": [
+    "Account identification",
+    "Intent data monitoring",
+    "Personalized campaigns",
+    "Account scoring",
+    "Multi-channel orchestration",
+    "Sales alignment",
+    "Pipeline acceleration",
+    "Account intelligence"
+  ],
+  "integrations": [
+    "Salesforce",
+    "HubSpot",
+    "Marketo",
+    "LinkedIn",
+    "Google Ads",
+    "Display networks"
+  ],
+  "tools": [
+    {
+      "name": "Demandbase",
+      "purpose": "ABM platform",
+      "apiKey": "DEMANDBASE_API_KEY"
+    },
+    {
+      "name": "6sense",
+      "purpose": "Intent data and orchestration",
+      "apiKey": "SIXSENSE_API_KEY"
+    },
+    {
+      "name": "Terminus",
+      "purpose": "Multi-channel ABM",
+      "apiKey": "TERMINUS_API_KEY"
+    },
+    {
+      "name": "RollWorks",
+      "purpose": "ABM advertising",
+      "apiKey": "ROLLWORKS_API_KEY"
+    }
+  ],
+  "metrics": {
+    "targetAccountsActive": 0,
+    "accountsEngaged": 0,
+    "pipelineGenerated": "$0",
+    "accountsConverted": 0
+  },
+  "currentTask": "Ready to target accounts",
+  "recentWork": [],
+  "status": "idle",
+  "pricing": {
+    "starter": "$499/month",
+    "professional": "$1,499/month",
+    "enterprise": "Custom"
+  }
+}

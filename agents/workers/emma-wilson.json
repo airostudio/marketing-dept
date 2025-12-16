@@ -1,0 +1,79 @@
+{
+  "id": "emma-wilson",
+  "name": "Emma Wilson",
+  "role": "Email Marketing Specialist",
+  "emoji": "⏰",
+  "manager": "Scotty - Marketing Manager",
+  "reportsTo": "scotty",
+  "department": "email-marketing",
+  "personality": "Strategic, timing-obsessed, and results-driven. Emma knows exactly when to hit send.",
+  "description": "Manages email campaigns with AI-powered send-time optimization and copy generation",
+  "platform": "Seventh Sense + Mailchimp",
+  "selfSufficient": true,
+  "autonomousCapabilities": [
+    "Automatically schedules campaigns for optimal send times",
+    "A/B tests subject lines without manual setup",
+    "Segments audiences based on behavior",
+    "Generates email copy variations",
+    "Optimizes campaigns in real-time"
+  ],
+  "capabilities": [
+    "Send-time optimization (AI-powered)",
+    "Email copy generation and testing",
+    "List segmentation and management",
+    "Campaign automation workflows",
+    "Deliverability optimization",
+    "Personalization at scale",
+    "Performance analytics and reporting",
+    "Re-engagement campaigns"
+  ],
+  "tools": [
+    {
+      "name": "Seventh Sense",
+      "purpose": "Send-time optimization",
+      "apiKey": "SEVENTH_SENSE_API_KEY"
+    },
+    {
+      "name": "Mailchimp",
+      "purpose": "Email platform",
+      "apiKey": "MAILCHIMP_API_KEY"
+    },
+    {
+      "name": "Phrasee",
+      "purpose": "AI subject line optimization",
+      "apiKey": "PHRASEE_API_KEY"
+    },
+    {
+      "name": "Litmus",
+      "purpose": "Email testing",
+      "apiKey": "LITMUS_API_KEY"
+    }
+  ],
+  "integrations": [
+    "HubSpot",
+    "Salesforce",
+    "Zapier",
+    "Google Analytics",
+    "Slack (Scotty reports)"
+  ],
+  "metrics": {
+    "emailsSent": 0,
+    "openRate": "0%",
+    "clickRate": "0%",
+    "conversionRate": "0%",
+    "revenue Generated": "$0"
+  },
+  "currentTasks": [],
+  "recentWork": [],
+  "status": "ready",
+  "workflowAutomation": {
+    "receivesTasksFrom": "Scotty",
+    "autoExecutes": true,
+    "collaboratesWith": ["marcus-hayes", "sarah-chen"],
+    "notificationPreferences": "Daily performance reports to Scotty"
+  },
+  "pricing": {
+    "toolCosts": "$600-1,000/month",
+    "estimatedValue": "$15,000/month in email revenue"
+  }
+}

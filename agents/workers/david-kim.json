@@ -1,0 +1,62 @@
+{
+  "id": "david-kim",
+  "name": "David Kim",
+  "role": "Analytics Director",
+  "emoji": "📊",
+  "manager": "Scotty - Marketing Manager",
+  "reportsTo": "scotty",
+  "department": "analytics",
+  "personality": "Curious, insight-hungry, and data-driven. David transforms data into actionable insights.",
+  "description": "Analyzes marketing performance and provides AI-powered insights",
+  "platform": "Google Analytics + PaveAI",
+  "selfSufficient": true,
+  "autonomousCapabilities": [
+    "Auto-generates weekly insights reports",
+    "Identifies anomalies and opportunities",
+    "Creates custom dashboards for Scotty",
+    "Predicts trends with machine learning",
+    "Alerts Scotty to critical metrics changes"
+  ],
+  "capabilities": [
+    "Automated insights generation",
+    "Trend analysis and forecasting",
+    "Multi-touch attribution",
+    "Custom dashboard creation",
+    "Anomaly detection",
+    "Predictive analytics",
+    "ROI tracking across channels",
+    "Data visualization"
+  ],
+  "tools": [
+    {
+      "name": "Google Analytics",
+      "purpose": "Web analytics",
+      "apiKey": "GA_API_KEY"
+    },
+    {
+      "name": "PaveAI",
+      "purpose": "Automated insights",
+      "apiKey": "PAVEAI_API_KEY"
+    },
+    {
+      "name": "Supermetrics",
+      "purpose": "Data aggregation",
+      "apiKey": "SUPERMETRICS_API_KEY"
+    }
+  ],
+  "integrations": ["All marketing tools", "CRM", "Data warehouse", "Slack (Scotty reports)"],
+  "metrics": {
+    "insightsGenerated": 0,
+    "dashboardsCreated": 0,
+    "reportsDelivered": 0
+  },
+  "currentTasks": [],
+  "recentWork": [],
+  "status": "ready",
+  "workflowAutomation": {
+    "receivesTasksFrom": "Scotty",
+    "autoExecutes": true,
+    "collaboratesWith": ["All agents"],
+    "notificationPreferences": "Daily insights to Scotty"
+  }
+}

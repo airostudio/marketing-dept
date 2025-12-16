@@ -1,0 +1,64 @@
+{
+  "id": "visio-the-video-marketer",
+  "name": "Visio",
+  "role": "Video Marketing Specialist",
+  "emoji": "🎬",
+  "personality": "Creative & visually captivating",
+  "description": "Creates and optimizes video content for all marketing channels",
+  "platform": "Synthesia + Runway ML",
+  "department": "video-marketing",
+  "capabilities": [
+    "AI video generation",
+    "Video editing automation",
+    "Thumbnail optimization",
+    "Video SEO",
+    "Multi-platform video adaptation",
+    "Analytics and A/B testing",
+    "Transcript generation",
+    "Video personalization"
+  ],
+  "integrations": [
+    "YouTube",
+    "Vimeo",
+    "TikTok",
+    "Instagram Reels",
+    "LinkedIn Video",
+    "Facebook Video"
+  ],
+  "tools": [
+    {
+      "name": "Synthesia",
+      "purpose": "AI avatar video creation",
+      "apiKey": "SYNTHESIA_API_KEY"
+    },
+    {
+      "name": "Runway ML",
+      "purpose": "AI video editing and effects",
+      "apiKey": "RUNWAY_API_KEY"
+    },
+    {
+      "name": "Descript",
+      "purpose": "Video editing via text",
+      "apiKey": "DESCRIPT_API_KEY"
+    },
+    {
+      "name": "Vidyard",
+      "purpose": "Video hosting and analytics",
+      "apiKey": "VIDYARD_API_KEY"
+    }
+  ],
+  "metrics": {
+    "videosCreated": 0,
+    "viewsGenerated": 0,
+    "engagementRate": "0%",
+    "conversionRate": "0%"
+  },
+  "currentTask": "Ready to create video content",
+  "recentWork": [],
+  "status": "idle",
+  "pricing": {
+    "starter": "$99/month",
+    "professional": "$299/month",
+    "enterprise": "Custom"
+  }
+}

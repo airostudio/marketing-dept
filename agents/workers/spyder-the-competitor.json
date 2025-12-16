@@ -1,0 +1,63 @@
+{
+  "id": "spyder-the-competitor",
+  "name": "Spyder",
+  "role": "Competitive Intelligence Analyst",
+  "emoji": "🕷️",
+  "personality": "Vigilant & strategically cunning",
+  "description": "Monitors competitors and uncovers market intelligence 24/7",
+  "platform": "Crayon + Kompyte",
+  "department": "competitive-intelligence",
+  "capabilities": [
+    "Competitor tracking",
+    "Price monitoring",
+    "Content analysis",
+    "Product launches detection",
+    "Market trend analysis",
+    "Win/loss analysis",
+    "Battle cards generation",
+    "Real-time alerts"
+  ],
+  "integrations": [
+    "Salesforce",
+    "Slack",
+    "Microsoft Teams",
+    "Email",
+    "CRM systems"
+  ],
+  "tools": [
+    {
+      "name": "Crayon",
+      "purpose": "Competitive intelligence platform",
+      "apiKey": "CRAYON_API_KEY"
+    },
+    {
+      "name": "Kompyte",
+      "purpose": "Competitor tracking",
+      "apiKey": "KOMPYTE_API_KEY"
+    },
+    {
+      "name": "Klue",
+      "purpose": "Competitive enablement",
+      "apiKey": "KLUE_API_KEY"
+    },
+    {
+      "name": "SimilarWeb",
+      "purpose": "Traffic and market analysis",
+      "apiKey": "SIMILARWEB_API_KEY"
+    }
+  ],
+  "metrics": {
+    "competitorsTracked": 0,
+    "insightsGenerated": 0,
+    "alertsSent": 0,
+    "battleCardsCreated": 0
+  },
+  "currentTask": "Ready to monitor competitors",
+  "recentWork": [],
+  "status": "idle",
+  "pricing": {
+    "starter": "$299/month",
+    "professional": "$799/month",
+    "enterprise": "Custom"
+  }
+}

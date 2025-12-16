@@ -1,0 +1,405 @@
+{
+  "version": "1.0",
+  "description": "Comprehensive integrations configuration for The Marketing Department",
+  "lastUpdated": "2025-12-05",
+
+  "platformIntegrations": {
+    "crm": {
+      "hubspot": {
+        "name": "HubSpot",
+        "icon": "📧",
+        "category": "CRM",
+        "status": "connected",
+        "description": "Sync contacts, deals, and campaigns with HubSpot CRM",
+        "agentsUsing": ["sarah-chen", "emma-wilson", "ava-martinez"],
+        "features": [
+          "Contact sync (bidirectional)",
+          "Deal pipeline integration",
+          "Email campaign tracking",
+          "Form submissions",
+          "Workflow triggers"
+        ],
+        "configuration": {
+          "apiKey": "hubspot_xxxxxxxxxxxx",
+          "portalId": "12345678",
+          "syncFrequency": "realtime",
+          "contactSync": true,
+          "dealSync": true,
+          "companySync": true,
+          "emailSync": true
+        },
+        "webhooks": [
+          {
+            "event": "contact.created",
+            "url": "https://api.marketing-dept.com/webhooks/hubspot/contact-created",
+            "enabled": true
+          },
+          {
+            "event": "deal.stage.changed",
+            "url": "https://api.marketing-dept.com/webhooks/hubspot/deal-changed",
+            "enabled": true
+          }
+        ]
+      },
+      "salesforce": {
+        "name": "Salesforce",
+        "icon": "💼",
+        "category": "CRM",
+        "status": "connected",
+        "description": "Enterprise CRM integration for leads, opportunities, and accounts",
+        "agentsUsing": ["sarah-chen", "ava-martinez", "robert-davis"],
+        "features": [
+          "Lead and opportunity sync",
+          "Account and contact management",
+          "Campaign tracking",
+          "Revenue attribution",
+          "Custom object support"
+        ],
+        "configuration": {
+          "instanceUrl": "https://yourcompany.my.salesforce.com",
+          "apiVersion": "v58.0",
+          "username": "integration@yourcompany.com",
+          "connected": true,
+          "leadSync": true,
+          "opportunitySync": true,
+          "accountSync": true
+        }
+      }
+    },
+
+    "analytics": {
+      "googleAnalytics": {
+        "name": "Google Analytics 4",
+        "icon": "📊",
+        "category": "Analytics",
+        "status": "connected",
+        "description": "Track website performance, conversions, and user behavior",
+        "agentsUsing": ["david-kim", "oliver-grant", "ryan-mitchell"],
+        "features": [
+          "Event tracking",
+          "Conversion tracking",
+          "User behavior analysis",
+          "Traffic source attribution",
+          "Custom dimensions"
+        ],
+        "configuration": {
+          "propertyId": "G-XXXXXXXXXX",
+          "measurementId": "G-XXXXXXXXXX",
+          "dataStreamId": "1234567890",
+          "enhancedMeasurement": true,
+          "ecommerce": true,
+          "userIdTracking": true
+        },
+        "customEvents": [
+          {
+            "name": "lead_generated",
+            "parameters": ["source", "campaign", "agent"]
+          },
+          {
+            "name": "content_viewed",
+            "parameters": ["content_type", "content_id", "engagement_time"]
+          }
+        ]
+      },
+      "tableau": {
+        "name": "Tableau",
+        "icon": "📈",
+        "category": "Analytics",
+        "status": "available",
+        "description": "Advanced data visualization and business intelligence",
+        "agentsUsing": ["david-kim", "robert-davis"],
+        "features": [
+          "Custom dashboards",
+          "Real-time data sync",
+          "Automated reporting",
+          "Data blending",
+          "Mobile access"
+        ]
+      }
+    },
+
+    "advertising": {
+      "facebookAds": {
+        "name": "Facebook Ads Manager",
+        "icon": "📱",
+        "category": "Advertising",
+        "status": "available",
+        "description": "Manage Facebook and Instagram ad campaigns",
+        "agentsUsing": ["alex-rodriguez"],
+        "features": [
+          "Campaign management",
+          "Ad creative optimization",
+          "Audience targeting",
+          "Performance tracking",
+          "Budget optimization"
+        ],
+        "configuration": {
+          "adAccountId": "",
+          "pixelId": "",
+          "catalogId": "",
+          "accessToken": "",
+          "campaignSync": false,
+          "adSetSync": false,
+          "leadFormsSync": false
+        }
+      },
+      "linkedInAds": {
+        "name": "LinkedIn Campaign Manager",
+        "icon": "💙",
+        "category": "Advertising",
+        "status": "available",
+        "description": "B2B advertising on LinkedIn",
+        "agentsUsing": ["alex-rodriguez", "ava-martinez"],
+        "features": [
+          "Sponsored content",
+          "InMail campaigns",
+          "Lead gen forms",
+          "Account targeting",
+          "Audience insights"
+        ]
+      },
+      "googleAds": {
+        "name": "Google Ads",
+        "icon": "🔍",
+        "category": "Advertising",
+        "status": "available",
+        "description": "Search, display, and video advertising",
+        "agentsUsing": ["alex-rodriguez", "ryan-mitchell"],
+        "features": [
+          "Search campaigns",
+          "Display campaigns",
+          "Video campaigns",
+          "Shopping campaigns",
+          "Performance Max"
+        ]
+      }
+    },
+
+    "email": {
+      "mailchimp": {
+        "name": "Mailchimp",
+        "icon": "📧",
+        "category": "Email Marketing",
+        "status": "available",
+        "description": "Email marketing and automation platform",
+        "agentsUsing": ["emma-wilson"],
+        "features": [
+          "Email campaigns",
+          "Audience segmentation",
+          "Automation workflows",
+          "Landing pages",
+          "A/B testing"
+        ]
+      },
+      "sendgrid": {
+        "name": "SendGrid",
+        "icon": "✉️",
+        "category": "Email Marketing",
+        "status": "available",
+        "description": "Transactional and marketing email delivery",
+        "agentsUsing": ["emma-wilson"],
+        "features": [
+          "Email API",
+          "Template management",
+          "Deliverability optimization",
+          "Email validation",
+          "Analytics"
+        ]
+      }
+    },
+
+    "collaboration": {
+      "slack": {
+        "name": "Slack",
+        "icon": "💬",
+        "category": "Communication",
+        "status": "connected",
+        "description": "Team communication and notifications",
+        "agentsUsing": ["all"],
+        "features": [
+          "Real-time notifications",
+          "Campaign alerts",
+          "Performance reports",
+          "Agent status updates",
+          "Command interface"
+        ],
+        "configuration": {
+          "workspaceId": "T1234567890",
+          "webhookUrl": "https://hooks.slack.com/services/XXX/YYY/ZZZ",
+          "channel": "#marketing-alerts",
+          "notifications": {
+            "leadGenerated": true,
+            "campaignLaunched": true,
+            "performanceAlert": true,
+            "dailyReport": true,
+            "weeklyReport": true
+          }
+        },
+        "channels": [
+          {
+            "name": "#marketing-alerts",
+            "purpose": "Real-time marketing notifications",
+            "notifications": ["leads", "campaigns", "alerts"]
+          },
+          {
+            "name": "#analytics-reports",
+            "purpose": "Automated performance reports",
+            "notifications": ["daily-report", "weekly-report", "monthly-report"]
+          },
+          {
+            "name": "#agent-updates",
+            "purpose": "Agent status and task updates",
+            "notifications": ["agent-started", "agent-completed", "agent-error"]
+          }
+        ]
+      },
+      "microsoftTeams": {
+        "name": "Microsoft Teams",
+        "icon": "👥",
+        "category": "Communication",
+        "status": "available",
+        "description": "Enterprise team collaboration",
+        "agentsUsing": ["all"],
+        "features": [
+          "Channel notifications",
+          "Bot integration",
+          "Card-based updates",
+          "File sharing",
+          "Meeting integration"
+        ]
+      }
+    },
+
+    "contentCreation": {
+      "canva": {
+        "name": "Canva",
+        "icon": "🎨",
+        "category": "Design",
+        "status": "connected",
+        "description": "Design templates and brand assets",
+        "agentsUsing": ["marcus-hayes", "alex-rodriguez", "victor-stone"],
+        "features": [
+          "Brand kit access",
+          "Template library",
+          "Design export",
+          "Team collaboration",
+          "Asset management"
+        ],
+        "configuration": {
+          "teamId": "canva_team_xxxx",
+          "brandKitId": "brand_kit_yyyy",
+          "apiKey": "canva_api_zzzz",
+          "autoSync": true
+        }
+      },
+      "youtube": {
+        "name": "YouTube",
+        "icon": "📹",
+        "category": "Video",
+        "status": "available",
+        "description": "Video hosting and channel management",
+        "agentsUsing": ["victor-stone"],
+        "features": [
+          "Video upload",
+          "SEO optimization",
+          "Analytics",
+          "Community management",
+          "Monetization"
+        ]
+      }
+    },
+
+    "automation": {
+      "zapier": {
+        "name": "Zapier",
+        "icon": "⚡",
+        "category": "Automation",
+        "status": "connected",
+        "description": "Connect 5000+ apps with automated workflows",
+        "agentsUsing": ["oscar-wright"],
+        "features": [
+          "Multi-step workflows",
+          "App integrations",
+          "Conditional logic",
+          "Data transformation",
+          "Error handling"
+        ],
+        "configuration": {
+          "accountId": "zapier_account_xxxx",
+          "activeZaps": 24,
+          "monthlyTasks": 1500,
+          "zapLimit": 50
+        },
+        "topZaps": [
+          {
+            "name": "New Lead to HubSpot",
+            "trigger": "Marketing Dept - Lead Generated",
+            "action": "HubSpot - Create Contact",
+            "status": "active",
+            "runs": 847
+          },
+          {
+            "name": "Campaign Complete to Slack",
+            "trigger": "Marketing Dept - Campaign Completed",
+            "action": "Slack - Send Message",
+            "status": "active",
+            "runs": 156
+          }
+        ]
+      },
+      "make": {
+        "name": "Make (Integromat)",
+        "icon": "🔗",
+        "category": "Automation",
+        "status": "available",
+        "description": "Advanced automation and integration platform",
+        "agentsUsing": ["oscar-wright"],
+        "features": [
+          "Visual workflow builder",
+          "Complex scenarios",
+          "Error handling",
+          "Data stores",
+          "Scheduling"
+        ]
+      }
+    }
+  },
+
+  "aiProviderIntegrations": {
+    "description": "AI model providers for agent intelligence",
+    "providers": ["deepseek", "openai", "anthropic", "google"],
+    "perAgentConfiguration": true,
+    "managedIn": "/settings (AI Configuration section)"
+  },
+
+  "customIntegrations": {
+    "webhooks": {
+      "description": "Custom webhook endpoints for real-time events",
+      "endpoints": [
+        {
+          "id": "webhook_001",
+          "name": "Lead Notification",
+          "url": "https://yourapi.com/webhooks/lead-created",
+          "events": ["lead.created", "lead.qualified"],
+          "secret": "whsec_xxxxxxxxxxxx",
+          "enabled": true,
+          "retryPolicy": "exponential",
+          "maxRetries": 3
+        }
+      ]
+    },
+    "api": {
+      "description": "RESTful API for custom integrations",
+      "baseUrl": "https://api.marketing-dept.com/v1",
+      "authentication": "Bearer token",
+      "rateLimit": "1000 requests/hour",
+      "endpoints": [
+        "POST /leads",
+        "GET /campaigns",
+        "POST /campaigns",
+        "GET /agents/{agent_id}/tasks",
+        "POST /agents/{agent_id}/tasks"
+      ]
+    }
+  }
+}

@@ -1,9 +1,7 @@
 .git
 .gitignore
 *.log
-app/node_modules
+app/
 .DS_Store
 .env
 .env.local
-app/.env
-app/.env.local

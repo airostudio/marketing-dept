@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scotty AI - Link Testing Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0f172a;
+            color: #f1f5f9;
+        }
+        h1, h2 {
+            color: #6366f1;
+        }
+        .test-section {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .test-link {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            background: #334155;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #60a5fa;
+        }
+        .test-link:hover {
+            background: #475569;
+        }
+        .test-button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .test-button:hover {
+            background: #4f46e5;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .status.working { background: #10b981; }
+        .status.broken { background: #ef4444; }
+        .status.unknown { background: #f59e0b; }
+    </style>
+</head>
+<body>
+    <h1>🤖 Scotty AI - Link Testing Dashboard</h1>
+    <p>This page tests all links and navigation in the Scotty AI system</p>
+
+    <div class="test-section">
+        <h2>📍 Main Dashboard</h2>
+        <a href="index.html" class="test-link">→ Scotty Main Dashboard <span class="status working">SHOULD WORK</span></a>
+    </div>
+
+    <div class="test-section">
+        <h2>👥 Individual Agent Pages (15 total)</h2>
+        <a href="agents/marcus-hayes.html" class="test-link">→ Marcus Hayes - Content Strategist <span class="status working">✓</span></a>
+        <a href="agents/sarah-chen.html" class="test-link">→ Sarah Chen - Lead Generation <span class="status working">✓</span></a>
+        <a href="agents/emma-wilson.html" class="test-link">→ Emma Wilson - Email Marketing <span class="status working">✓</span></a>
+        <a href="agents/alex-rodriguez.html" class="test-link">→ Alex Rodriguez - Social Advertising <span class="status working">✓</span></a>
+        <a href="agents/victor-stone.html" class="test-link">→ Victor Stone - Video Producer <span class="status working">✓</span></a>
+        <a href="agents/natalie-brooks.html" class="test-link">→ Natalie Brooks - Influencer Manager <span class="status working">✓</span></a>
+        <a href="agents/oliver-grant.html" class="test-link">→ Oliver Grant - CRO Specialist <span class="status working">✓</span></a>
+        <a href="agents/nathan-cross.html" class="test-link">→ Nathan Cross - Competitive Intelligence <span class="status working">✓</span></a>
+        <a href="agents/maya-patel.html" class="test-link">→ Maya Patel - Personalization Engineer <span class="status working">✓</span></a>
+        <a href="agents/david-kim.html" class="test-link">→ David Kim - Analytics Director <span class="status working">✓</span></a>
+        <a href="agents/ryan-mitchell.html" class="test-link">→ Ryan Mitchell - SEO Specialist <span class="status working">✓</span></a>
+        <a href="agents/sophie-anderson.html" class="test-link">→ Sophie Anderson - Support Lead <span class="status working">✓</span></a>
+        <a href="agents/ava-martinez.html" class="test-link">→ Ava Martinez - ABM Specialist <span class="status working">✓</span></a>
+        <a href="agents/robert-davis.html" class="test-link">→ Robert Davis - Revenue Intelligence <span class="status working">✓</span></a>
+        <a href="agents/oscar-wright.html" class="test-link">→ Oscar Wright - Operations Coordinator <span class="status working">✓</span></a>
+    </div>
+
+    <div class="test-section">
+        <h2>🎯 Quick Actions (JavaScript Functions)</h2>
+        <p>These buttons test the command routing system:</p>
+        <button class="test-button" onclick="testQuickAction('content')">📝 Create Content</button>
+        <button class="test-button" onclick="testQuickAction('leads')">🔍 Generate Leads</button>
+        <button class="test-button" onclick="testQuickAction('email')">📧 Email Campaign</button>
+        <button class="test-button" onclick="testQuickAction('social')">📱 Social Ads</button>
+        <button class="test-button" onclick="testQuickAction('analyze')">📊 Analytics</button>
+        <button class="test-button" onclick="testQuickAction('competitor')">🕷️ Competitor Intel</button>
+    </div>
+
+    <div class="test-section">
+        <h2>🧪 Agent Card Click Test</h2>
+        <p>Simulating agent card clicks:</p>
+        <button class="test-button" onclick="navigateToAgent('marcus-hayes')">Open Marcus Hayes</button>
+        <button class="test-button" onclick="navigateToAgent('sarah-chen')">Open Sarah Chen</button>
+        <button class="test-button" onclick="navigateToAgent('david-kim')">Open David Kim</button>
+    </div>
+
+    <div class="test-section">
+        <h2>📋 Status Summary</h2>
+        <ul id="statusList">
+            <li>Checking agent pages...</li>
+        </ul>
+    </div>
+
+    <script>
+        // Agent navigation function
+        function navigateToAgent(agentId) {
+            console.log('Navigating to agent:', agentId);
+            window.location.href = `agents/${agentId}.html`;
+        }
+
+        // Test quick actions
+        function testQuickAction(action) {
+            const actions = {
+                'content': 'marcus-hayes',
+                'leads': 'sarah-chen',
+                'email': 'emma-wilson',
+                'social': 'alex-rodriguez',
+                'analyze': 'david-kim',
+                'competitor': 'nathan-cross'
+            };
+
+            alert(`Quick Action: ${action}\nWould navigate to: ${actions[action]}`);
+            if (confirm('Navigate to agent page?')) {
+                navigateToAgent(actions[action]);
+            }
+        }
+
+        // Test all agent pages exist
+        async function testAgentPages() {
+            const agents = [
+                'marcus-hayes', 'sarah-chen', 'emma-wilson', 'alex-rodriguez',
+                'victor-stone', 'natalie-brooks', 'oliver-grant', 'nathan-cross',
+                'maya-patel', 'david-kim', 'ryan-mitchell', 'sophie-anderson',
+                'ava-martinez', 'robert-davis', 'oscar-wright'
+            ];
+
+            const statusList = document.getElementById('statusList');
+            statusList.innerHTML = '<li>Testing agent pages...</li>';
+
+            let working = 0;
+            let broken = 0;
+
+            for (const agentId of agents) {
+                try {
+                    const response = await fetch(`agents/${agentId}.html`);
+                    if (response.ok) {
+                        working++;
+                        statusList.innerHTML += `<li>✅ ${agentId}.html - <span style="color: #10b981">WORKING</span></li>`;
+                    } else {
+                        broken++;
+                        statusList.innerHTML += `<li>❌ ${agentId}.html - <span style="color: #ef4444">NOT FOUND</span></li>`;
+                    }
+                } catch (error) {
+                    broken++;
+                    statusList.innerHTML += `<li>❌ ${agentId}.html - <span style="color: #ef4444">ERROR</span></li>`;
+                }
+            }
+
+            statusList.innerHTML += `<li><strong>Summary: ${working} working, ${broken} broken</strong></li>`;
+        }
+
+        // Run tests on load
+        window.addEventListener('DOMContentLoaded', testAgentPages);
+    </script>
+</body>
+</html>
