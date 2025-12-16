@@ -266,6 +266,10 @@ Never:
 // Call OpenAI API
 async function callOpenAI(model, systemPrompt, userPrompt, temperature = 0.7, maxTokens = 2000) {
   try {
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error('OpenAI API key is not configured. Please add OPENAI_API_KEY to your .env file.');
+    }
+
     const response = await openai.chat.completions.create({
       model: model,
       messages: [
@@ -279,13 +283,29 @@ async function callOpenAI(model, systemPrompt, userPrompt, temperature = 0.7, ma
     return response.choices[0].message.content;
   } catch (error) {
     console.error('OpenAI API Error:', error.message);
-    throw new Error(`OpenAI API failed: ${error.message}`);
+
+    // Provide user-friendly error messages
+    if (error.status === 401) {
+      throw new Error('OpenAI API key is invalid or expired. Please check your API key at https://platform.openai.com/api-keys');
+    } else if (error.status === 429) {
+      throw new Error('OpenAI rate limit exceeded. Please wait a moment and try again, or check your billing at https://platform.openai.com/account/billing');
+    } else if (error.status === 402) {
+      throw new Error('OpenAI account has insufficient credits. Please add credits at https://platform.openai.com/account/billing');
+    } else if (error.code === 'insufficient_quota') {
+      throw new Error('OpenAI quota exceeded. You may have run out of credits or hit your usage limit. Check https://platform.openai.com/account/billing');
+    } else {
+      throw new Error(`OpenAI API error: ${error.message}. If this persists, check your API key and billing status.`);
+    }
   }
 }
 
 // Call DeepSeek API
 async function callDeepSeek(systemPrompt, userPrompt, temperature = 0.6, maxTokens = 2000) {
   try {
+    if (!process.env.DEEPSEEK_API_KEY) {
+      throw new Error('DeepSeek API key is not configured. Please add DEEPSEEK_API_KEY to your .env file.');
+    }
+
     const response = await axios.post(
       'https://api.deepseek.com/v1/chat/completions',
       {
@@ -301,14 +321,34 @@ async function callDeepSeek(systemPrompt, userPrompt, temperature = 0.6, maxToke
         headers: {
           'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`,
           'Content-Type': 'application/json'
-        }
+        },
+        timeout: 60000 // 60 second timeout
       }
     );
 
     return response.data.choices[0].message.content;
   } catch (error) {
     console.error('DeepSeek API Error:', error.response?.data || error.message);
-    throw new Error(`DeepSeek API failed: ${error.message}`);
+
+    // Provide user-friendly error messages
+    if (error.response) {
+      const status = error.response.status;
+      if (status === 401 || status === 403) {
+        throw new Error('DeepSeek API key is invalid or expired. Please check your API key at https://platform.deepseek.com/api_keys');
+      } else if (status === 429) {
+        throw new Error('DeepSeek rate limit exceeded. Please wait a moment and try again.');
+      } else if (status === 402) {
+        throw new Error('DeepSeek account has insufficient balance. Please add credits at https://platform.deepseek.com');
+      } else {
+        throw new Error(`DeepSeek API error (${status}): ${error.response.data?.error?.message || error.message}`);
+      }
+    } else if (error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT') {
+      throw new Error('DeepSeek API request timed out. The service may be slow or unavailable. Please try again.');
+    } else if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED') {
+      throw new Error('Cannot connect to DeepSeek API. Please check your internet connection.');
+    } else {
+      throw new Error(`DeepSeek API error: ${error.message}. If this persists, check your API key and account status.`);
+    }
   }
 }
 
@@ -436,7 +476,18 @@ app.post('/api/tasks', async (req, res) => {
     const { description, priority = 'medium' } = req.body;
 
     if (!description) {
-      return res.status(400).json({ error: 'Task description is required' });
+      return res.status(400).json({
+        error: 'Task description is required',
+        details: 'Please provide a task description in the request body'
+      });
+    }
+
+    // Validate API keys are configured
+    if (!process.env.OPENAI_API_KEY && !process.env.DEEPSEEK_API_KEY) {
+      return res.status(503).json({
+        error: 'API keys not configured',
+        details: 'Both OpenAI and DeepSeek API keys are missing. Please configure at least one in backend/.env file.'
+      });
     }
 
     // Create task
@@ -450,7 +501,8 @@ app.post('/api/tasks', async (req, res) => {
       activities: [],
       assignedAgents: [],
       outputs: [],
-      finalDeliverable: null
+      finalDeliverable: null,
+      error: null
     };
 
     tasks.set(taskId, task);
@@ -474,7 +526,10 @@ app.post('/api/tasks', async (req, res) => {
 
   } catch (error) {
     console.error('Task submission error:', error);
-    res.status(500).json({ error: 'Failed to submit task' });
+    res.status(500).json({
+      error: 'Failed to submit task',
+      details: error.message
+    });
   }
 });
 
@@ -539,12 +594,28 @@ async function processTask(taskId) {
         });
       } catch (error) {
         console.error(`Agent ${agentId} execution error:`, error);
+
+        // Create detailed error message
+        let errorMessage = `${agent.name} encountered an error: ${error.message}`;
+
+        // Add helpful context based on error type
+        if (error.message.includes('API key')) {
+          errorMessage += ` (Check your ${agent.provider === 'openai' ? 'OpenAI' : 'DeepSeek'} API key configuration)`;
+        } else if (error.message.includes('rate limit')) {
+          errorMessage += ' (Please wait a moment before retrying)';
+        } else if (error.message.includes('quota') || error.message.includes('credits')) {
+          errorMessage += ' (Check your account billing and credits)';
+        }
+
         task.activities.push({
           type: 'error',
           agentId,
-          message: `Error executing ${agent.name}: ${error.message}`,
+          message: errorMessage,
           timestamp: new Date().toISOString()
         });
+
+        // Track the error but continue with other agents
+        task.error = task.error || errorMessage;
       }
     }
 
@@ -615,12 +686,27 @@ async function processTask(taskId) {
   } catch (error) {
     console.error(`Task ${taskId} processing error:`, error);
     task.status = 'error';
-    task.error = error.message;
+
+    // Create user-friendly error message
+    let errorMessage = error.message;
+    if (error.message.includes('API key')) {
+      errorMessage = `Configuration Error: ${error.message}. Please check your .env file and restart the server.`;
+    } else if (error.message.includes('rate limit')) {
+      errorMessage = `Rate Limit: ${error.message}. Please wait a few minutes before submitting new tasks.`;
+    } else if (error.message.includes('quota') || error.message.includes('credits') || error.message.includes('billing')) {
+      errorMessage = `Account Issue: ${error.message}. Please check your API account billing and usage.`;
+    } else {
+      errorMessage = `Processing Error: ${error.message}. If this persists, please check the backend logs.`;
+    }
+
+    task.error = errorMessage;
     task.activities.push({
       type: 'error',
-      message: `Error processing task: ${error.message}`,
+      message: errorMessage,
       timestamp: new Date().toISOString()
     });
+
+    console.error(`❌ Task ${taskId} failed with error:`, errorMessage);
   }
 }
 

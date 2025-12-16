@@ -332,9 +332,154 @@
             color: var(--text);
             padding-left: 0.5rem;
         }
+
+        /* Error Notification Banner */
+        .error-banner {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            max-width: 500px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border: 2px solid #fca5a5;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .error-banner-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .error-banner-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .error-banner-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 1;
+            transition: all 0.3s ease;
+        }
+
+        .error-banner-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .error-banner-message {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .error-banner-details {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            word-break: break-word;
+        }
+
+        .error-banner-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .error-banner-action {
+            background: rgba(255, 255, 255, 0.9);
+            color: #dc2626;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .error-banner-action:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        /* Activity Error Items */
+        .activity-item.error {
+            border-left-color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .activity-item.warning {
+            border-left-color: var(--warning);
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        /* Loading State */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(102, 126, 234, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
     <div class="container">
         <!-- Header -->
         <div class="header">
@@ -528,7 +673,14 @@
         // Download/View Deliverable
         async function downloadDeliverable(deliverableId) {
             try {
+                // Show loading state
+                document.getElementById('loadingOverlay').classList.add('active');
+
                 const response = await fetch(`${API_BASE}/deliverables/${deliverableId}`);
+
+                // Hide loading state
+                document.getElementById('loadingOverlay').classList.remove('active');
+
                 if (!response.ok) {
                     throw new Error('Failed to fetch deliverable');
                 }
@@ -613,7 +765,12 @@
 
             } catch (error) {
                 console.error('Download error:', error);
-                alert('Failed to load deliverable. Please ensure the backend server is running.');
+                document.getElementById('loadingOverlay').classList.remove('active');
+
+                showErrorBanner(ErrorTypes.NETWORK_ERROR, 'Could not fetch deliverable from backend');
+                addActivity('error', '❌', 'Deliverable Error',
+                    'Failed to load deliverable. The backend server may be offline or the deliverable may not exist.',
+                    new Date());
             }
         }
 
@@ -670,10 +827,167 @@
         const API_BASE = 'http://localhost:3000/api';
         let currentTaskId = null;
         let pollingInterval = null;
+        let pollingRetryCount = 0;
+        const MAX_POLLING_RETRIES = 5;
+
+        // Error Handling System
+        const ErrorTypes = {
+            BACKEND_OFFLINE: 'backend_offline',
+            API_KEY_MISSING: 'api_key_missing',
+            API_KEY_INVALID: 'api_key_invalid',
+            RATE_LIMIT: 'rate_limit',
+            TASK_FAILED: 'task_failed',
+            NETWORK_ERROR: 'network_error',
+            UNKNOWN: 'unknown'
+        };
+
+        const ErrorMessages = {
+            [ErrorTypes.BACKEND_OFFLINE]: {
+                title: 'Backend Server Not Running',
+                message: 'The AI agent backend server is not responding. The system needs the backend to process tasks.',
+                actions: [
+                    { text: '📖 View Setup Guide', action: 'openSetupGuide' },
+                    { text: '🔄 Retry Connection', action: 'retryConnection' }
+                ]
+            },
+            [ErrorTypes.API_KEY_MISSING]: {
+                title: 'API Keys Not Configured',
+                message: 'OpenAI or DeepSeek API keys are missing. The agents need these keys to generate content.',
+                actions: [
+                    { text: '🔑 Setup API Keys', action: 'openApiKeyGuide' },
+                    { text: '📖 View Documentation', action: 'openSetupGuide' }
+                ]
+            },
+            [ErrorTypes.API_KEY_INVALID]: {
+                title: 'Invalid API Keys',
+                message: 'One or more API keys are invalid or expired. Please check your API keys and account status.',
+                actions: [
+                    { text: '🔑 Update API Keys', action: 'openApiKeyGuide' },
+                    { text: '💳 Check Billing', action: 'openBilling' }
+                ]
+            },
+            [ErrorTypes.RATE_LIMIT]: {
+                title: 'Rate Limit Reached',
+                message: 'API rate limit exceeded. This usually means too many requests in a short time. Please wait a moment.',
+                actions: [
+                    { text: '⏱️ Wait 1 Minute', action: 'waitAndRetry' },
+                    { text: '📊 Check Usage', action: 'openBilling' }
+                ]
+            },
+            [ErrorTypes.TASK_FAILED]: {
+                title: 'Task Processing Failed',
+                message: 'The AI agents encountered an error while processing your task. This could be due to API issues or invalid input.',
+                actions: [
+                    { text: '🔄 Try Again', action: 'retryTask' },
+                    { text: '📝 Modify Request', action: 'closeError' }
+                ]
+            },
+            [ErrorTypes.NETWORK_ERROR]: {
+                title: 'Network Connection Error',
+                message: 'Unable to connect to the backend server. Please check your internet connection.',
+                actions: [
+                    { text: '🔄 Retry', action: 'retryConnection' },
+                    { text: '🌐 Check Connection', action: 'closeError' }
+                ]
+            },
+            [ErrorTypes.UNKNOWN]: {
+                title: 'Unexpected Error',
+                message: 'An unexpected error occurred. Please check the console for details.',
+                actions: [
+                    { text: '🔄 Retry', action: 'retryConnection' },
+                    { text: '📖 View Docs', action: 'openSetupGuide' }
+                ]
+            }
+        };
+
+        // Show Error Banner
+        function showErrorBanner(errorType, details = null) {
+            const errorConfig = ErrorMessages[errorType] || ErrorMessages[ErrorTypes.UNKNOWN];
+
+            // Remove existing error banners
+            const existingBanners = document.querySelectorAll('.error-banner');
+            existingBanners.forEach(banner => banner.remove());
+
+            const banner = document.createElement('div');
+            banner.className = 'error-banner';
+            banner.innerHTML = `
+                <div class="error-banner-header">
+                    <div class="error-banner-title">
+                        <span>⚠️</span>
+                        <span>${errorConfig.title}</span>
+                    </div>
+                    <button class="error-banner-close" onclick="closeErrorBanner(this)">×</button>
+                </div>
+                <div class="error-banner-message">${errorConfig.message}</div>
+                ${details ? `<div class="error-banner-details">Error Details: ${details}</div>` : ''}
+                <div class="error-banner-actions">
+                    ${errorConfig.actions.map(action => `
+                        <button class="error-banner-action" onclick="handleErrorAction('${action.action}')">
+                            ${action.text}
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+
+            document.body.appendChild(banner);
+
+            // Auto-dismiss after 30 seconds
+            setTimeout(() => {
+                if (banner.parentElement) {
+                    banner.style.opacity = '0';
+                    setTimeout(() => banner.remove(), 300);
+                }
+            }, 30000);
+        }
+
+        // Close Error Banner
+        function closeErrorBanner(button) {
+            const banner = button.closest('.error-banner');
+            banner.style.opacity = '0';
+            setTimeout(() => banner.remove(), 300);
+        }
+
+        // Handle Error Actions
+        function handleErrorAction(action) {
+            switch(action) {
+                case 'openSetupGuide':
+                    window.open('https://github.com/anthropics/claude-code', '_blank');
+                    addActivity('info', 'ℹ️', 'Help', 'Opening setup documentation in new tab...', new Date());
+                    break;
+                case 'openApiKeyGuide':
+                    addActivity('info', 'ℹ️', 'Setup Guide',
+                        'API Key Setup:\n1. OpenAI: https://platform.openai.com/api-keys\n2. DeepSeek: https://platform.deepseek.com/api_keys\n3. Add keys to backend/.env file\n4. Restart backend server',
+                        new Date());
+                    break;
+                case 'openBilling':
+                    window.open('https://platform.openai.com/account/billing', '_blank');
+                    break;
+                case 'retryConnection':
+                    checkBackendHealth();
+                    break;
+                case 'retryTask':
+                    // User can resubmit manually
+                    closeErrorBanner(document.querySelector('.error-banner-close'));
+                    addActivity('info', 'ℹ️', 'System', 'Ready to try again. Please resubmit your task.', new Date());
+                    break;
+                case 'waitAndRetry':
+                    addActivity('info', '⏱️', 'System', 'Waiting 60 seconds before retry...', new Date());
+                    setTimeout(() => {
+                        addActivity('success', '✅', 'System', 'Ready to retry. Please resubmit your task.', new Date());
+                    }, 60000);
+                    break;
+                case 'closeError':
+                    closeErrorBanner(document.querySelector('.error-banner-close'));
+                    break;
+            }
+        }
 
         // Real Task Execution (Backend Integration)
         async function executeTask(taskDescription, priority = 'medium') {
             try {
+                // Show loading state
+                document.getElementById('loadingOverlay').classList.add('active');
+
                 // Submit task to backend
                 const response = await fetch(`${API_BASE}/tasks`, {
                     method: 'POST',
@@ -686,22 +1000,70 @@
                     })
                 });
 
+                // Hide loading state
+                document.getElementById('loadingOverlay').classList.remove('active');
+
                 if (!response.ok) {
-                    throw new Error('Failed to submit task');
+                    // Parse error response
+                    let errorData;
+                    try {
+                        errorData = await response.json();
+                    } catch (e) {
+                        errorData = { error: 'Unknown server error' };
+                    }
+
+                    // Handle specific HTTP error codes
+                    if (response.status === 503) {
+                        showErrorBanner(ErrorTypes.API_KEY_MISSING, errorData.details || 'API keys not configured');
+                        addActivity('error', '❌', 'Configuration Error',
+                            'API keys are missing. Please configure OpenAI and DeepSeek API keys in backend/.env file.',
+                            new Date());
+                        return;
+                    } else if (response.status === 401) {
+                        showErrorBanner(ErrorTypes.API_KEY_INVALID, errorData.details || 'Invalid API credentials');
+                        addActivity('error', '❌', 'Authentication Error',
+                            'API keys are invalid or expired. Please check your OpenAI and DeepSeek API keys.',
+                            new Date());
+                        return;
+                    } else if (response.status === 429) {
+                        showErrorBanner(ErrorTypes.RATE_LIMIT, 'Too many requests. Please wait a moment.');
+                        addActivity('warning', '⏱️', 'Rate Limit',
+                            'API rate limit reached. Please wait a moment before submitting new tasks.',
+                            new Date());
+                        return;
+                    }
+
+                    throw new Error(errorData.error || 'Failed to submit task');
                 }
 
                 const data = await response.json();
                 currentTaskId = data.taskId;
 
                 // Show initial activity
-                addActivity('scotty', '🎯', 'Scotty', `Task submitted! Scotty is analyzing your request...`, new Date());
+                addActivity('scotty', '🎯', 'Scotty', `Task submitted successfully! Scotty is analyzing your request...`, new Date());
+
+                // Reset polling retry count
+                pollingRetryCount = 0;
 
                 // Start polling for updates
                 pollTaskStatus(currentTaskId);
 
             } catch (error) {
                 console.error('Task submission error:', error);
-                addActivity('error', '❌', 'Error', `Failed to submit task: ${error.message}. Make sure backend server is running on port 3000.`, new Date());
+                document.getElementById('loadingOverlay').classList.remove('active');
+
+                // Check if it's a network error (backend offline)
+                if (error.message.includes('Failed to fetch') || error.name === 'TypeError') {
+                    showErrorBanner(ErrorTypes.BACKEND_OFFLINE, 'Cannot connect to http://localhost:3000');
+                    addActivity('error', '❌', 'Connection Error',
+                        'Cannot connect to backend server. Please ensure the backend is running:\n\nTerminal: cd backend && node server.js',
+                        new Date());
+                } else {
+                    showErrorBanner(ErrorTypes.UNKNOWN, error.message);
+                    addActivity('error', '❌', 'Error',
+                        `Task submission failed: ${error.message}`,
+                        new Date());
+                }
             }
         }
 
@@ -721,23 +1083,58 @@
 
                     const task = await response.json();
 
+                    // Reset retry count on successful poll
+                    pollingRetryCount = 0;
+
                     // Update activities
                     updateActivitiesFromTask(task);
 
                     // Update agent status
                     updateAgentStatusFromTask(task);
 
-                    // If task is complete, stop polling and show deliverable
-                    if (task.status === 'completed' || task.status === 'error') {
+                    // If task has error status, show error
+                    if (task.status === 'error') {
                         clearInterval(pollingInterval);
 
-                        if (task.status === 'completed' && task.deliverableId) {
+                        const errorMessage = task.error || 'Unknown error occurred during task processing';
+
+                        // Determine error type based on error message
+                        let errorType = ErrorTypes.TASK_FAILED;
+                        if (errorMessage.includes('API key') || errorMessage.includes('Unauthorized')) {
+                            errorType = ErrorTypes.API_KEY_INVALID;
+                        } else if (errorMessage.includes('rate limit') || errorMessage.includes('429')) {
+                            errorType = ErrorTypes.RATE_LIMIT;
+                        }
+
+                        showErrorBanner(errorType, errorMessage);
+                        addActivity('error', '❌', 'Task Failed',
+                            `Task processing failed: ${errorMessage}`,
+                            new Date());
+
+                        return;
+                    }
+
+                    // If task is complete, stop polling and show deliverable
+                    if (task.status === 'completed') {
+                        clearInterval(pollingInterval);
+
+                        if (task.deliverableId) {
                             loadDeliverable(task.deliverableId);
                         }
                     }
 
                 } catch (error) {
                     console.error('Polling error:', error);
+                    pollingRetryCount++;
+
+                    // If too many retries, stop polling and show error
+                    if (pollingRetryCount >= MAX_POLLING_RETRIES) {
+                        clearInterval(pollingInterval);
+                        showErrorBanner(ErrorTypes.NETWORK_ERROR, 'Lost connection to backend after multiple retries');
+                        addActivity('error', '❌', 'Polling Failed',
+                            'Lost connection to backend. Task may still be processing. Please refresh the page to check status.',
+                            new Date());
+                    }
                 }
             }, 1000); // Poll every second
         }
@@ -807,8 +1204,16 @@
                     deliverable.content
                 );
 
+                // Show success notification
+                addActivity('success', '🎉', 'Success',
+                    'Deliverable ready! Click the "View Deliverable" button to see your content.',
+                    new Date());
+
             } catch (error) {
                 console.error('Deliverable load error:', error);
+                addActivity('warning', '⚠️', 'Warning',
+                    'Task completed but deliverable could not be loaded. It may still be available in the backend.',
+                    new Date());
             }
         }
 
@@ -873,22 +1278,62 @@
         // Check Backend Health on Load
         async function checkBackendHealth() {
             try {
-                const response = await fetch(`${API_BASE}/health`);
+                const response = await fetch(`${API_BASE}/health`, {
+                    signal: AbortSignal.timeout(5000) // 5 second timeout
+                });
+
                 if (response.ok) {
                     const data = await response.json();
                     console.log('✅ Backend connected:', data);
 
-                    if (!data.openai || !data.deepseek) {
-                        console.warn('⚠️ Warning: Some API keys are missing. Check backend/.env file');
+                    // Check API key configuration
+                    if (!data.openai && !data.deepseek) {
+                        showErrorBanner(ErrorTypes.API_KEY_MISSING, 'Both OpenAI and DeepSeek API keys are missing');
+                        addActivity('warning', '⚠️', 'Configuration Warning',
+                            'Backend is running but API keys are not configured. Please add your API keys to backend/.env file and restart the server.',
+                            new Date());
+                    } else if (!data.openai) {
+                        addActivity('warning', '⚠️', 'Configuration Warning',
+                            'OpenAI API key is missing. Some premium agents (GPT-4) will not work. Add OPENAI_API_KEY to backend/.env',
+                            new Date());
+                    } else if (!data.deepseek) {
+                        addActivity('warning', '⚠️', 'Configuration Warning',
+                            'DeepSeek API key is missing. Budget-tier agents will not work. Add DEEPSEEK_API_KEY to backend/.env',
+                            new Date());
+                    } else {
+                        // All good!
+                        addActivity('success', '✅', 'System Ready',
+                            'Backend connected successfully. All API keys configured. Ready to process tasks!',
+                            new Date());
                     }
                 } else {
-                    console.error('❌ Backend health check failed');
+                    console.error('❌ Backend health check failed with status:', response.status);
+                    showErrorBanner(ErrorTypes.BACKEND_OFFLINE, `Backend returned error status: ${response.status}`);
+                    addActivity('error', '❌', 'Backend Error',
+                        `Backend server responded with error status ${response.status}. Check backend logs for details.`,
+                        new Date());
                 }
             } catch (error) {
-                console.error('❌ Cannot connect to backend. Make sure server is running on port 3000:', error);
-                addActivity('error', '⚠️', 'Backend Connection',
-                    'Cannot connect to backend server. Please start the backend: cd backend && npm install && node server.js',
-                    new Date());
+                console.error('❌ Cannot connect to backend:', error);
+
+                // Check if it's a timeout or connection error
+                if (error.name === 'TimeoutError' || error.message.includes('Failed to fetch')) {
+                    showErrorBanner(ErrorTypes.BACKEND_OFFLINE, 'Connection timeout or server not running');
+                    addActivity('error', '⚠️', 'Backend Offline',
+                        'Cannot connect to backend server at http://localhost:3000\n\n' +
+                        'To start the backend:\n' +
+                        '1. Open terminal\n' +
+                        '2. cd backend\n' +
+                        '3. npm install (first time only)\n' +
+                        '4. node server.js\n\n' +
+                        'See QUICK-START.md for detailed instructions.',
+                        new Date());
+                } else {
+                    showErrorBanner(ErrorTypes.NETWORK_ERROR, error.message);
+                    addActivity('error', '❌', 'Connection Error',
+                        `Network error: ${error.message}`,
+                        new Date());
+                }
             }
         }
 
