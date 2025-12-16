@@ -8,6 +8,7 @@
 
 import { callGemini } from './gemini';
 import { Worker, Task, WorkflowStep } from '../types/workflow';
+import { detectRequiredAPIs, TaskAPIRequirements } from './apiDetector';
 
 export interface TaskAnalysis {
   complexity: 'simple' | 'moderate' | 'complex' | 'enterprise';
@@ -28,6 +29,7 @@ export interface OrchestrationPlan {
   workflowSteps: WorkflowStep[];
   requiresEACollation: boolean;
   estimatedCost: number;
+  apiRequirements?: TaskAPIRequirements;
 }
 
 /**
@@ -260,12 +262,16 @@ export function createOrchestrationPlan(
   const requiresEACollation = analysis.complexity !== 'simple' ||
                               analysis.requiredAgents.length > 1;
 
+  // Detect required APIs
+  const apiRequirements = detectRequiredAPIs(taskDescription, analysis.requiredAgents);
+
   return {
     taskId,
     analysis,
     workflowSteps,
     requiresEACollation,
-    estimatedCost
+    estimatedCost,
+    apiRequirements
   };
 }
 
