@@ -823,8 +823,25 @@
             return [...new Set(assignedAgents)]; // Remove duplicates
         }
 
-        // Backend API Configuration
-        const API_BASE = 'http://localhost:3000/api';
+        // Backend API Configuration - Environment Aware
+        // Automatically detects if running locally or on Vercel
+        const API_BASE = (() => {
+            const hostname = window.location.hostname;
+
+            // If deployed on Vercel, use Vercel backend URL
+            if (hostname.includes('vercel.app')) {
+                // TODO: Replace with your actual deployed backend URL
+                // Options:
+                // 1. Vercel Serverless: Same domain + /api
+                // 2. Railway: https://your-app.railway.app/api
+                // 3. Render: https://your-app.onrender.com/api
+                return '/api';  // Relative URL for same-domain deployment
+            }
+
+            // Local development
+            return 'http://localhost:3000/api';
+        })();
+
         let currentTaskId = null;
         let pollingInterval = null;
         let pollingRetryCount = 0;
