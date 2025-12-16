@@ -282,8 +282,6 @@ export async function loadAgentConfigs(): Promise<any[]> {
           role: tool.role,
           emoji: tool.emoji,
           status: 'active',
-          efficiency: tool.metrics?.efficiency || 95,
-          tasksCompleted: 0,
           department: tool.department,
           capabilities: tool.capabilities || [],
           aiPlatform: tool.aiPlatform || { name: 'Gemini', model: 'gemini-2.0-flash-exp' }
@@ -301,8 +299,6 @@ export async function loadAgentConfigs(): Promise<any[]> {
     role: config.role,
     emoji: config.emoji,
     status: config.status,
-    efficiency: 95,
-    tasksCompleted: 0,
     department: config.department,
     capabilities: config.capabilities,
     aiPlatform: config.aiPlatform

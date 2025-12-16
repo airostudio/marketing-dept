@@ -268,8 +268,6 @@ export class MarketingAPI {
         role: 'VP of Sales & Marketing',
         emoji: '🎯',
         status: 'active',
-        efficiency: 98,
-        tasksCompleted: 0,
         department: 'executive',
         capabilities: ['strategy', 'orchestration', 'leadership'],
         aiPlatform: { name: 'Gemini', model: 'gemini-2.0-flash-exp' }
@@ -280,8 +278,6 @@ export class MarketingAPI {
         role: 'Senior Content Strategist',
         emoji: '✍️',
         status: 'active',
-        efficiency: 95,
-        tasksCompleted: 0,
         department: 'content-creation',
         capabilities: ['content', 'blogging', 'strategy'],
         aiPlatform: { name: 'Gemini', model: 'gemini-2.0-flash-exp' }
@@ -292,8 +288,6 @@ export class MarketingAPI {
         role: 'Lead Generation Specialist',
         emoji: '🎯',
         status: 'active',
-        efficiency: 94,
-        tasksCompleted: 0,
         department: 'lead-generation',
         capabilities: ['leads', 'prospecting', 'outreach'],
         aiPlatform: { name: 'DeepSeek', model: 'deepseek-chat' }
@@ -304,8 +298,6 @@ export class MarketingAPI {
         role: 'Email Marketing Manager',
         emoji: '📧',
         status: 'active',
-        efficiency: 96,
-        tasksCompleted: 0,
         department: 'email-marketing',
         capabilities: ['email', 'campaigns', 'automation'],
         aiPlatform: { name: 'DeepSeek', model: 'deepseek-chat' }
@@ -316,8 +308,6 @@ export class MarketingAPI {
         role: 'Social Media Advertising Manager',
         emoji: '📱',
         status: 'active',
-        efficiency: 93,
-        tasksCompleted: 0,
         department: 'social-media',
         capabilities: ['social', 'ads', 'targeting'],
         aiPlatform: { name: 'DeepSeek', model: 'deepseek-chat' }
@@ -328,8 +318,6 @@ export class MarketingAPI {
         role: 'SEO Specialist',
         emoji: '🔍',
         status: 'active',
-        efficiency: 92,
-        tasksCompleted: 0,
         department: 'seo',
         capabilities: ['seo', 'keywords', 'optimization'],
         aiPlatform: { name: 'DeepSeek', model: 'deepseek-chat' }
@@ -340,8 +328,6 @@ export class MarketingAPI {
         role: 'Analytics Director',
         emoji: '📊',
         status: 'active',
-        efficiency: 97,
-        tasksCompleted: 0,
         department: 'analytics',
         capabilities: ['analytics', 'reporting', 'insights'],
         aiPlatform: { name: 'DeepSeek', model: 'deepseek-chat' }
@@ -352,8 +338,6 @@ export class MarketingAPI {
         role: 'CRO Specialist',
         emoji: '🎨',
         status: 'active',
-        efficiency: 91,
-        tasksCompleted: 0,
         department: 'conversion-optimization',
         capabilities: ['conversion', 'optimization', 'testing'],
         aiPlatform: { name: 'Gemini', model: 'gemini-2.0-flash-exp' }
@@ -364,8 +348,6 @@ export class MarketingAPI {
         role: 'Operations Coordinator',
         emoji: '⚙️',
         status: 'active',
-        efficiency: 99,
-        tasksCompleted: 0,
         department: 'orchestration',
         capabilities: ['operations', 'coordination', 'management'],
         aiPlatform: { name: 'Gemini', model: 'gemini-2.0-flash-exp' }
