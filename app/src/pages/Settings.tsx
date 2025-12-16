@@ -10,6 +10,7 @@ export default function Settings() {
   const [showResetConfirm, setShowResetConfirm] = useState(false)
 
   const platforms = [
+    { id: 'openAI', name: 'OpenAI (ChatGPT)', worker: 'All Agents', description: 'Powers all AI agents with GPT-4' },
     { id: 'jasperAi', name: 'Jasper AI', worker: 'Jasper' },
     { id: 'zoomInfo', name: 'ZoomInfo', worker: 'Zoey' },
     { id: 'seventhSense', name: 'Seventh Sense', worker: 'Sage' },

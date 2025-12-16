@@ -1,8 +1,10 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { Workflow } from '../types/workflow'
+import { openAIService } from '../services/openai'
 
 export interface ApiCredentials {
+  openAI?: string
   jasperAi?: string
   copyAi?: string
   zoomInfo?: string
@@ -87,12 +89,22 @@ export const useStore = create<Store>()(
       verifiedApis: [],
       workers: [
         {
+          id: 'scotty',
+          name: 'Scotty',
+          emoji: '🎯',
+          role: 'VP of Sales & Marketing',
+          department: 'Executive Leadership',
+          platform: 'ChatGPT',
+          status: 'active',
+          metrics: {}
+        },
+        {
           id: 'jasper',
           name: 'Jasper',
           emoji: '✍️',
           role: 'Content Creation Lead',
           department: 'Content Creation',
-          platform: 'Jasper AI',
+          platform: 'ChatGPT',
           status: 'idle',
           metrics: {}
         },
@@ -209,6 +221,11 @@ export const useStore = create<Store>()(
             [platform]: key,
           },
         }))
+
+        // Initialize OpenAI service when API key is set
+        if (platform === 'openAI' && key) {
+          openAIService.initialize(key)
+        }
       },
 
       verifyApi: async (platform) => {
