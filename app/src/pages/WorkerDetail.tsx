@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import Layout from '../components/Layout'
+import AgentActivityFeed from '../components/AgentActivityFeed'
 
 export default function WorkerDetail() {
   const { workerId } = useParams()
@@ -153,6 +154,11 @@ export default function WorkerDetail() {
                 </span>
               </div>
             </div>
+          </div>
+
+          {/* Real-Time Activity Feed */}
+          <div className="card">
+            <AgentActivityFeed agentId={worker.id} agentName={worker.name} maxActivities={15} />
           </div>
 
           {/* Platform Info */}
