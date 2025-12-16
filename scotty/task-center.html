@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scotty Task Center - AI Marketing Department</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --primary-dark: #764ba2;
+            --dark: #0f172a;
+            --dark-card: #1e293b;
+            --border: #334155;
+            --text: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: var(--gradient);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Task Submission Form */
+        .task-form {
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 1rem;
+            background: var(--dark);
+            border: 2px solid var(--border);
+            border-radius: 0.75rem;
+            color: var(--text);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Activity Feed */
+        .activity-feed {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            padding: 1rem;
+            background: var(--dark);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .activity-item.scotty {
+            border-left-color: var(--primary);
+        }
+
+        .activity-item.agent {
+            border-left-color: var(--success);
+        }
+
+        .activity-item.ea {
+            border-left-color: var(--warning);
+        }
+
+        .activity-item.complete {
+            border-left-color: var(--info);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .activity-time {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .activity-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Agent Status */
+        .agent-grid {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .agent-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: var(--dark);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .agent-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .agent-avatar {
+            font-size: 1.5rem;
+        }
+
+        .agent-name {
+            font-weight: 600;
+        }
+
+        .agent-role {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-available {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .status-working {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Deliverables */
+        .deliverable-item {
+            padding: 1.5rem;
+            background: var(--dark);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .deliverable-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .deliverable-header {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .deliverable-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-download {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-download:hover {
+            background: var(--primary-dark);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .example-tasks {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 0.75rem;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .example-tasks h4 {
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+
+        .example-tasks ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .example-tasks li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .example-tasks li:hover {
+            color: var(--text);
+            padding-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎯 Scotty Task Center</h1>
+            <p>AI-Powered Marketing Department Orchestrator - Submit tasks and watch your team of 15 AI specialists execute</p>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Left Column: Task Submission & Activity -->
+            <div>
+                <!-- Task Submission -->
+                <div class="card">
+                    <h2 class="card-title">📝 New Task Request</h2>
+                    <form class="task-form" id="taskForm">
+                        <div class="form-group">
+                            <label class="form-label">What do you need?</label>
+                            <textarea
+                                class="form-textarea"
+                                id="taskDescription"
+                                placeholder="Example: Write a blog post about AI marketing trends for enterprise B2B audiences..."
+                                required
+                            ></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Priority</label>
+                            <select class="form-select" id="taskPriority">
+                                <option value="high">High - Urgent</option>
+                                <option value="medium" selected>Medium - Normal</option>
+                                <option value="low">Low - When possible</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-primary">
+                            🚀 Submit to Scotty
+                        </button>
+                    </form>
+
+                    <!-- Example Tasks -->
+                    <div class="example-tasks">
+                        <h4>💡 Example Tasks (Click to try):</h4>
+                        <ul id="exampleTasks">
+                            <li data-task="Write a blog post about AI marketing trends">📄 Write a blog post about AI marketing trends</li>
+                            <li data-task="Create a LinkedIn ad campaign targeting CFOs">🎯 Create a LinkedIn ad campaign targeting CFOs</li>
+                            <li data-task="Build a cold email sequence for enterprise SaaS prospects">📧 Build a cold email sequence for enterprise prospects</li>
+                            <li data-task="Launch a complete product launch campaign">🚀 Launch a complete product launch campaign</li>
+                            <li data-task="Analyze competitor landscape and provide SWOT analysis">🕵️ Analyze competitor landscape and provide SWOT</li>
+                            <li data-task="Optimize our checkout page conversion rate">📈 Optimize checkout page conversion rate</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Activity Feed -->
+                <div class="card" style="margin-top: 2rem;">
+                    <h2 class="card-title">⚡ Live Activity Feed</h2>
+                    <div class="activity-feed" id="activityFeed">
+                        <div class="empty-state">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+                            <p>No tasks submitted yet. Scotty is ready to orchestrate your marketing team!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Agent Status & Deliverables -->
+            <div>
+                <!-- Agent Status -->
+                <div class="card">
+                    <h2 class="card-title">👥 Agent Status</h2>
+                    <div class="agent-grid" id="agentStatus">
+                        <!-- Agents will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Deliverables -->
+                <div class="card" style="margin-top: 2rem;">
+                    <h2 class="card-title">📦 Completed Deliverables</h2>
+                    <div id="deliverables">
+                        <div class="empty-state">
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">📦</div>
+                            <p>No deliverables yet. Submit a task to get started!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Agent Database
+        const agents = [
+            { id: 'marcus', name: 'Marcus Hayes', role: 'Content Strategist', emoji: '✍️', tier: 'premium', model: 'GPT-4 Turbo' },
+            { id: 'sarah', name: 'Sarah Chen', role: 'Lead Generation', emoji: '🔍', tier: 'budget', model: 'DeepSeek' },
+            { id: 'emma', name: 'Emma Wilson', role: 'Email Marketing', emoji: '📧', tier: 'mid', model: 'GPT-3.5 Turbo' },
+            { id: 'alex', name: 'Alex Rodriguez', role: 'Social Advertising', emoji: '🎯', tier: 'mid', model: 'GPT-3.5 Turbo' },
+            { id: 'victor', name: 'Victor Stone', role: 'Video Marketing', emoji: '🎬', tier: 'mid', model: 'GPT-3.5 Turbo' },
+            { id: 'ryan', name: 'Ryan Mitchell', role: 'SEO Specialist', emoji: '🔎', tier: 'budget', model: 'DeepSeek' },
+            { id: 'david', name: 'David Kim', role: 'Analytics Director', emoji: '📊', tier: 'budget', model: 'DeepSeek' },
+            { id: 'nathan', name: 'Nathan Cross', role: 'Competitive Intel', emoji: '🕵️', tier: 'budget', model: 'DeepSeek' },
+            { id: 'oliver', name: 'Oliver Grant', role: 'CRO Specialist', emoji: '📈', tier: 'budget', model: 'DeepSeek' },
+            { id: 'natalie', name: 'Natalie Brooks', role: 'Influencer Marketing', emoji: '🌟', tier: 'mid', model: 'GPT-3.5 Turbo' },
+            { id: 'ava', name: 'Ava Martinez', role: 'ABM Specialist', emoji: '🎯', tier: 'mid', model: 'GPT-3.5 Turbo' },
+            { id: 'maya', name: 'Maya Patel', role: 'Personalization', emoji: '🎨', tier: 'mid', model: 'GPT-3.5 Turbo' },
+            { id: 'sophie', name: 'Sophie Anderson', role: 'Customer Support', emoji: '💬', tier: 'budget', model: 'DeepSeek' },
+            { id: 'robert', name: 'Robert Davis', role: 'Revenue Intelligence', emoji: '💰', tier: 'premium', model: 'GPT-4 Turbo' },
+            { id: 'oscar', name: 'Oscar Wright', role: 'Marketing Ops', emoji: '🎼', tier: 'premium', model: 'GPT-4 Turbo' }
+        ];
+
+        // Agent Status State
+        const agentStates = {};
+        agents.forEach(agent => {
+            agentStates[agent.id] = 'available';
+        });
+
+        // Initialize Agent Status Display
+        function initializeAgents() {
+            const container = document.getElementById('agentStatus');
+            container.innerHTML = agents.map(agent => `
+                <div class="agent-status" data-agent="${agent.id}">
+                    <div class="agent-info">
+                        <div class="agent-avatar">${agent.emoji}</div>
+                        <div>
+                            <div class="agent-name">${agent.name}</div>
+                            <div class="agent-role">${agent.role}</div>
+                        </div>
+                    </div>
+                    <span class="status-badge status-available" id="status-${agent.id}">Available</span>
+                </div>
+            `).join('');
+        }
+
+        // Update Agent Status
+        function updateAgentStatus(agentId, status) {
+            agentStates[agentId] = status;
+            const badge = document.getElementById(`status-${agentId}`);
+            if (badge) {
+                badge.className = `status-badge status-${status}`;
+                badge.textContent = status === 'working' ? 'Working' : 'Available';
+            }
+        }
+
+        // Add Activity Item
+        function addActivity(type, icon, title, message, time = new Date()) {
+            const feed = document.getElementById('activityFeed');
+
+            // Remove empty state if present
+            const emptyState = feed.querySelector('.empty-state');
+            if (emptyState) {
+                feed.innerHTML = '';
+            }
+
+            const timeStr = time.toLocaleTimeString();
+            const activityHTML = `
+                <div class="activity-item ${type}">
+                    <div class="activity-header">
+                        <span>${icon}</span>
+                        <span>${title}</span>
+                        <span class="activity-time">${timeStr}</span>
+                    </div>
+                    <div class="activity-content">${message}</div>
+                </div>
+            `;
+
+            feed.insertAdjacentHTML('afterbegin', activityHTML);
+        }
+
+        // Add Deliverable
+        function addDeliverable(title, description, fileName) {
+            const container = document.getElementById('deliverables');
+
+            // Remove empty state
+            const emptyState = container.querySelector('.empty-state');
+            if (emptyState) {
+                container.innerHTML = '';
+            }
+
+            const deliverableHTML = `
+                <div class="deliverable-item">
+                    <div class="deliverable-header">${title}</div>
+                    <div class="deliverable-meta">${description}</div>
+                    <button class="btn-download" onclick="downloadDeliverable('${fileName}')">
+                        📥 Download Deliverable
+                    </button>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('afterbegin', deliverableHTML);
+        }
+
+        // Download Deliverable (Simulated)
+        function downloadDeliverable(fileName) {
+            alert(`In production, this would download: ${fileName}\n\nFor now, this demonstrates the workflow. The actual file would be generated by the AI agents and stored in cloud storage.`);
+        }
+
+        // Intelligent Task Routing (Simulated Scotty)
+        function routeTask(taskDescription) {
+            const task = taskDescription.toLowerCase();
+            const assignedAgents = [];
+
+            // Keyword matching (simplified version of Scotty's routing)
+            if (task.includes('blog') || task.includes('article') || task.includes('content') || task.includes('whitepaper')) {
+                assignedAgents.push(agents.find(a => a.id === 'marcus'));
+            }
+            if (task.includes('email') || task.includes('newsletter') || task.includes('drip')) {
+                assignedAgents.push(agents.find(a => a.id === 'emma'));
+            }
+            if (task.includes('ads') || task.includes('facebook') || task.includes('instagram') || task.includes('linkedin ads') || task.includes('social')) {
+                assignedAgents.push(agents.find(a => a.id === 'alex'));
+            }
+            if (task.includes('lead') || task.includes('cold email') || task.includes('outreach') || task.includes('prospect')) {
+                assignedAgents.push(agents.find(a => a.id === 'sarah'));
+            }
+            if (task.includes('video') || task.includes('youtube') || task.includes('tiktok')) {
+                assignedAgents.push(agents.find(a => a.id === 'victor'));
+            }
+            if (task.includes('seo') || task.includes('keyword') || task.includes('ranking')) {
+                assignedAgents.push(agents.find(a => a.id === 'ryan'));
+            }
+            if (task.includes('analytics') || task.includes('data') || task.includes('dashboard') || task.includes('report')) {
+                assignedAgents.push(agents.find(a => a.id === 'david'));
+            }
+            if (task.includes('competitor') || task.includes('competitive') || task.includes('swot')) {
+                assignedAgents.push(agents.find(a => a.id === 'nathan'));
+            }
+            if (task.includes('conversion') || task.includes('cro') || task.includes('a/b test') || task.includes('optimize')) {
+                assignedAgents.push(agents.find(a => a.id === 'oliver'));
+            }
+            if (task.includes('campaign') || task.includes('launch')) {
+                // Multi-agent project
+                assignedAgents.push(agents.find(a => a.id === 'marcus'));
+                assignedAgents.push(agents.find(a => a.id === 'emma'));
+                assignedAgents.push(agents.find(a => a.id === 'alex'));
+                assignedAgents.push(agents.find(a => a.id === 'sarah'));
+            }
+
+            // If no match, default to Marcus (content)
+            if (assignedAgents.length === 0) {
+                assignedAgents.push(agents.find(a => a.id === 'marcus'));
+            }
+
+            return [...new Set(assignedAgents)]; // Remove duplicates
+        }
+
+        // Simulate Task Execution
+        async function executeTask(taskDescription) {
+            // Step 1: Scotty analyzes request
+            addActivity('scotty', '🎯', 'Scotty', `Analyzing request: "${taskDescription}"`, new Date());
+            await sleep(1500);
+
+            // Step 2: Route to agents
+            const assignedAgents = routeTask(taskDescription);
+            const isMultiAgent = assignedAgents.length > 1;
+
+            const agentNames = assignedAgents.map(a => a.name).join(', ');
+            addActivity('scotty', '🎯', 'Scotty', `Routing to ${assignedAgents.length} agent(s): ${agentNames}`, new Date());
+            await sleep(1000);
+
+            // Step 3: Agents execute
+            for (const agent of assignedAgents) {
+                updateAgentStatus(agent.id, 'working');
+                addActivity('agent', agent.emoji, agent.name, `${agent.name} is executing task using ${agent.model}...`, new Date());
+                await sleep(2000);
+            }
+
+            // Step 4: If multi-agent, EA synthesizes
+            if (isMultiAgent) {
+                addActivity('ea', '📋', 'EA Agent', 'Collecting outputs from all agents and synthesizing into final deliverable...', new Date());
+                await sleep(2000);
+            }
+
+            // Step 5: Mark agents as available
+            for (const agent of assignedAgents) {
+                updateAgentStatus(agent.id, 'available');
+                addActivity('agent', agent.emoji, agent.name, `${agent.name} completed their deliverable.`, new Date());
+                await sleep(500);
+            }
+
+            // Step 6: Deliver final output
+            if (isMultiAgent) {
+                addActivity('complete', '✅', 'Project Complete', 'EA Agent has synthesized all outputs into one polished deliverable.', new Date());
+                addDeliverable(
+                    'Complete Marketing Campaign Package',
+                    `Multi-agent collaboration: ${agentNames}`,
+                    'campaign-package.pdf'
+                );
+            } else {
+                const agent = assignedAgents[0];
+                addActivity('complete', '✅', 'Task Complete', `${agent.name} has delivered your ${agent.role.toLowerCase()} deliverable.`, new Date());
+                addDeliverable(
+                    `${agent.role} Deliverable`,
+                    `Created by ${agent.name} using ${agent.model}`,
+                    `${agent.id}-deliverable.pdf`
+                );
+            }
+        }
+
+        // Helper function
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Form Submission Handler
+        document.getElementById('taskForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const taskDescription = document.getElementById('taskDescription').value;
+            const priority = document.getElementById('taskPriority').value;
+
+            // Clear form
+            this.reset();
+
+            // Execute task
+            await executeTask(taskDescription);
+        });
+
+        // Example Task Clicks
+        document.getElementById('exampleTasks').addEventListener('click', function(e) {
+            if (e.target.tagName === 'LI') {
+                const task = e.target.getAttribute('data-task');
+                document.getElementById('taskDescription').value = task;
+            }
+        });
+
+        // Initialize on load
+        initializeAgents();
+    </script>
+</body>
+</html>
