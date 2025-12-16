@@ -1,10 +1,12 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { Workflow } from '../types/workflow'
-import { openAIService } from '../services/openai'
+import { geminiService } from '../services/gemini'
+import { deepseekService } from '../services/deepseek'
 
 export interface ApiCredentials {
-  openAI?: string
+  gemini?: string
+  deepseek?: string
   jasperAi?: string
   copyAi?: string
   zoomInfo?: string
@@ -94,7 +96,7 @@ export const useStore = create<Store>()(
           emoji: '🎯',
           role: 'VP of Sales & Marketing',
           department: 'Executive Leadership',
-          platform: 'ChatGPT',
+          platform: 'Google Gemini',
           status: 'active',
           metrics: {}
         },
@@ -104,7 +106,7 @@ export const useStore = create<Store>()(
           emoji: '✍️',
           role: 'Content Creation Lead',
           department: 'Content Creation',
-          platform: 'ChatGPT',
+          platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
@@ -114,7 +116,7 @@ export const useStore = create<Store>()(
           emoji: '📝',
           role: 'AI Copywriter',
           department: 'Content Creation',
-          platform: 'Copy.ai',
+          platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
@@ -124,7 +126,7 @@ export const useStore = create<Store>()(
           emoji: '🔍',
           role: 'Lead Prospecting Specialist',
           department: 'Lead Generation',
-          platform: 'ZoomInfo',
+          platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
@@ -134,7 +136,7 @@ export const useStore = create<Store>()(
           emoji: '🎯',
           role: 'Email Finder Specialist',
           department: 'Lead Generation',
-          platform: 'Hunter.io',
+          platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
@@ -144,7 +146,7 @@ export const useStore = create<Store>()(
           emoji: '⏰',
           role: 'Email Campaign Manager',
           department: 'Email Marketing',
-          platform: 'Mailchimp',
+          platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
@@ -154,7 +156,7 @@ export const useStore = create<Store>()(
           emoji: '🎯',
           role: 'Social Advertising Manager',
           department: 'Social Media',
-          platform: 'Smartly.io',
+          platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
@@ -164,7 +166,7 @@ export const useStore = create<Store>()(
           emoji: '🎨',
           role: 'Experience Optimization Lead',
           department: 'Personalization',
-          platform: 'Dynamic Yield',
+          platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
@@ -174,7 +176,7 @@ export const useStore = create<Store>()(
           emoji: '📊',
           role: 'Data Analytics Specialist',
           department: 'Analytics',
-          platform: 'Google Analytics',
+          platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
@@ -184,7 +186,7 @@ export const useStore = create<Store>()(
           emoji: '🔥',
           role: 'User Experience Analyst',
           department: 'Analytics',
-          platform: 'Hotjar',
+          platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
@@ -194,7 +196,7 @@ export const useStore = create<Store>()(
           emoji: '🏄',
           role: 'SEO Optimization Specialist',
           department: 'SEO',
-          platform: 'Surfer SEO',
+          platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
@@ -204,7 +206,7 @@ export const useStore = create<Store>()(
           emoji: '💬',
           role: 'Customer Support Specialist',
           department: 'Customer Support',
-          platform: 'Intercom',
+          platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
@@ -222,9 +224,11 @@ export const useStore = create<Store>()(
           },
         }))
 
-        // Initialize OpenAI service when API key is set
-        if (platform === 'openAI' && key) {
-          openAIService.initialize(key)
+        // Initialize AI services when API keys are set
+        if (platform === 'gemini' && key) {
+          geminiService.initialize(key)
+        } else if (platform === 'deepseek' && key) {
+          deepseekService.initialize(key)
         }
       },
 

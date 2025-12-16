@@ -1,19 +1,19 @@
-// OpenAI ChatGPT Integration Service
-// Provides real AI capabilities to all marketing and sales agents
+// DeepSeek AI Integration Service
+// Provides AI capabilities using DeepSeek models (OpenAI-compatible API)
 
-interface ChatMessage {
+interface DeepSeekMessage {
   role: 'system' | 'user' | 'assistant';
   content: string;
 }
 
-interface ChatCompletionRequest {
+interface DeepSeekRequest {
   model?: string;
-  messages: ChatMessage[];
+  messages: DeepSeekMessage[];
   temperature?: number;
   max_tokens?: number;
 }
 
-interface ChatCompletionResponse {
+interface DeepSeekResponse {
   success: boolean;
   content?: string;
   error?: string;
@@ -24,13 +24,13 @@ interface ChatCompletionResponse {
   };
 }
 
-class OpenAIService {
+class DeepSeekService {
   private apiKey: string | null = null;
-  private baseURL = 'https://api.openai.com/v1';
-  private defaultModel = 'gpt-4o'; // Latest model as of 2025
+  private baseURL = 'https://api.deepseek.com/v1';
+  private defaultModel = 'deepseek-chat'; // DeepSeek's latest chat model
 
   /**
-   * Initialize the OpenAI service with API key
+   * Initialize the DeepSeek service with API key
    */
   initialize(apiKey: string): void {
     this.apiKey = apiKey;
@@ -44,13 +44,13 @@ class OpenAIService {
   }
 
   /**
-   * Send a chat completion request to OpenAI
+   * Send a chat completion request to DeepSeek
    */
-  async chat(request: ChatCompletionRequest): Promise<ChatCompletionResponse> {
+  async chat(request: DeepSeekRequest): Promise<DeepSeekResponse> {
     if (!this.apiKey) {
       return {
         success: false,
-        error: 'OpenAI API key not configured. Please add your API key in Settings.',
+        error: 'DeepSeek API key not configured. Please add your API key in Settings.',
       };
     }
 
@@ -65,7 +65,7 @@ class OpenAIService {
           model: request.model || this.defaultModel,
           messages: request.messages,
           temperature: request.temperature ?? 0.7,
-          max_tokens: request.max_tokens ?? 2000,
+          max_tokens: request.max_tokens ?? 2048,
         }),
       });
 
@@ -73,7 +73,7 @@ class OpenAIService {
         const errorData = await response.json().catch(() => ({}));
         return {
           success: false,
-          error: errorData.error?.message || `OpenAI API error: ${response.status}`,
+          error: errorData.error?.message || `DeepSeek API error: ${response.status}`,
         };
       }
 
@@ -83,7 +83,7 @@ class OpenAIService {
       if (!content) {
         return {
           success: false,
-          error: 'No response from OpenAI',
+          error: 'No response from DeepSeek',
         };
       }
 
@@ -108,8 +108,8 @@ class OpenAIService {
     systemPrompt: string,
     userTask: string,
     context?: Record<string, any>
-  ): Promise<ChatCompletionResponse> {
-    const messages: ChatMessage[] = [
+  ): Promise<DeepSeekResponse> {
+    const messages: DeepSeekMessage[] = [
       {
         role: 'system',
         content: systemPrompt,
@@ -135,4 +135,4 @@ class OpenAIService {
 }
 
 // Export singleton instance
-export const openAIService = new OpenAIService();
+export const deepseekService = new DeepSeekService();

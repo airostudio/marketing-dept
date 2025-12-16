@@ -1,6 +1,7 @@
 // Task Executor - Handles execution of tasks through real AI integrations
-import { openAIService } from './openai'
-import { getAgentConfig, getAgentSystemPrompt } from './agentLoader'
+import { geminiService } from './gemini'
+import { deepseekService } from './deepseek'
+import { getAgentConfig, getAgentSystemPrompt, getAgentAIPlatform } from './agentLoader'
 
 interface TaskResult {
   success: boolean
@@ -38,20 +39,44 @@ export async function executeTask(
       }
     }
 
+    // Get agent's AI platform
+    const aiPlatform = getAgentAIPlatform(workerId)
+    if (!aiPlatform) {
+      return {
+        success: false,
+        error: `No AI platform assigned for ${workerId}`
+      }
+    }
+
     // Build the user task description
     const userTask = taskContext?.description || taskContext?.action || 'Execute assigned task'
 
-    // Execute task using AI
-    const response = await openAIService.executeAgentTask(
-      agentConfig.name,
-      systemPrompt,
-      userTask,
-      taskContext?.context
-    )
+    // Route to appropriate AI service
+    let response;
+    if (aiPlatform === 'Gemini') {
+      response = await geminiService.executeAgentTask(
+        agentConfig.name,
+        systemPrompt,
+        userTask,
+        taskContext?.context
+      )
+    } else if (aiPlatform === 'DeepSeek') {
+      response = await deepseekService.executeAgentTask(
+        agentConfig.name,
+        systemPrompt,
+        userTask,
+        taskContext?.context
+      )
+    } else {
+      return {
+        success: false,
+        error: `Unknown AI platform: ${aiPlatform}`
+      }
+    }
 
     if (!response.success) {
-      // Fallback to simulated execution if OpenAI fails
-      console.warn(`OpenAI execution failed for ${workerId}, using fallback`)
+      // Fallback to simulated execution if AI fails
+      console.warn(`${aiPlatform} execution failed for ${workerId}, using fallback`)
       return await executeFallbackTask(workerId, taskId)
     }
 
@@ -60,6 +85,7 @@ export async function executeTask(
       success: true,
       data: {
         agentName: agentConfig.name,
+        aiPlatform: aiPlatform,
         result: response.content,
         usage: response.usage,
         timestamp: new Date().toISOString()

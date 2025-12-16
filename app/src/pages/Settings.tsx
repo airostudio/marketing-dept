@@ -10,8 +10,9 @@ export default function Settings() {
   const [showResetConfirm, setShowResetConfirm] = useState(false)
 
   const platforms = [
-    { id: 'openAI', name: 'OpenAI (ChatGPT)', worker: 'All Agents', description: 'Powers all AI agents with GPT-4' },
-    { id: 'jasperAi', name: 'Jasper AI', worker: 'Jasper' },
+    { id: 'gemini', name: 'Google Gemini', worker: 'Creative Agents', description: 'Powers Scotty, Jasper, Casey, Sage, Dynamo, Surfy, Chatty' },
+    { id: 'deepseek', name: 'DeepSeek AI', worker: 'Technical Agents', description: 'Powers Zoey, Hunter, Smarta, Analyzer, Heatley' },
+    { id: 'jasperAi', name: 'Jasper AI', worker: 'Jasper (legacy)' },
     { id: 'zoomInfo', name: 'ZoomInfo', worker: 'Zoey' },
     { id: 'seventhSense', name: 'Seventh Sense', worker: 'Sage' },
     { id: 'smartlyIo', name: 'Smartly.io', worker: 'Smarta' },
