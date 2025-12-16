@@ -1,7 +1,12 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { Workflow } from '../types/workflow'
+import { geminiService } from '../services/gemini'
+import { deepseekService } from '../services/deepseek'
 
 export interface ApiCredentials {
+  gemini?: string
+  deepseek?: string
   jasperAi?: string
   copyAi?: string
   zoomInfo?: string
@@ -54,6 +59,10 @@ interface Store {
   // Tasks
   tasks: Task[]
 
+  // Workflows
+  workflows: Workflow[]
+  activeWorkflowId?: string
+
   // Actions
   setApiCredential: (platform: string, key: string) => void
   verifyApi: (platform: string) => Promise<boolean>
@@ -66,6 +75,11 @@ interface Store {
 
   updateWorkerStatus: (workerId: string, status: Worker['status']) => void
   updateWorkerMetrics: (workerId: string, metrics: Record<string, any>) => void
+
+  addWorkflow: (workflow: Workflow) => void
+  updateWorkflow: (id: string, updates: Partial<Workflow>) => void
+  deleteWorkflow: (id: string) => void
+  setActiveWorkflow: (id: string | undefined) => void
 }
 
 export const useStore = create<Store>()(
@@ -77,12 +91,22 @@ export const useStore = create<Store>()(
       verifiedApis: [],
       workers: [
         {
+          id: 'scotty',
+          name: 'Scotty',
+          emoji: '🎯',
+          role: 'VP of Sales & Marketing',
+          department: 'Executive Leadership',
+          platform: 'Google Gemini',
+          status: 'active',
+          metrics: {}
+        },
+        {
           id: 'jasper',
           name: 'Jasper',
           emoji: '✍️',
           role: 'Content Creation Lead',
           department: 'Content Creation',
-          platform: 'Jasper AI',
+          platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
@@ -92,7 +116,7 @@ export const useStore = create<Store>()(
           emoji: '📝',
           role: 'AI Copywriter',
           department: 'Content Creation',
-          platform: 'Copy.ai',
+          platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
@@ -102,7 +126,7 @@ export const useStore = create<Store>()(
           emoji: '🔍',
           role: 'Lead Prospecting Specialist',
           department: 'Lead Generation',
-          platform: 'ZoomInfo',
+          platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
@@ -112,7 +136,7 @@ export const useStore = create<Store>()(
           emoji: '🎯',
           role: 'Email Finder Specialist',
           department: 'Lead Generation',
-          platform: 'Hunter.io',
+          platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
@@ -122,7 +146,7 @@ export const useStore = create<Store>()(
           emoji: '⏰',
           role: 'Email Campaign Manager',
           department: 'Email Marketing',
-          platform: 'Mailchimp',
+          platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
@@ -132,7 +156,7 @@ export const useStore = create<Store>()(
           emoji: '🎯',
           role: 'Social Advertising Manager',
           department: 'Social Media',
-          platform: 'Smartly.io',
+          platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
@@ -142,7 +166,7 @@ export const useStore = create<Store>()(
           emoji: '🎨',
           role: 'Experience Optimization Lead',
           department: 'Personalization',
-          platform: 'Dynamic Yield',
+          platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
@@ -152,7 +176,7 @@ export const useStore = create<Store>()(
           emoji: '📊',
           role: 'Data Analytics Specialist',
           department: 'Analytics',
-          platform: 'Google Analytics',
+          platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
@@ -162,7 +186,7 @@ export const useStore = create<Store>()(
           emoji: '🔥',
           role: 'User Experience Analyst',
           department: 'Analytics',
-          platform: 'Hotjar',
+          platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
@@ -172,7 +196,7 @@ export const useStore = create<Store>()(
           emoji: '🏄',
           role: 'SEO Optimization Specialist',
           department: 'SEO',
-          platform: 'Surfer SEO',
+          platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
@@ -182,12 +206,14 @@ export const useStore = create<Store>()(
           emoji: '💬',
           role: 'Customer Support Specialist',
           department: 'Customer Support',
-          platform: 'Intercom',
+          platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
       ],
       tasks: [],
+      workflows: [],
+      activeWorkflowId: undefined,
 
       // Actions
       setApiCredential: (platform, key) => {
@@ -197,6 +223,13 @@ export const useStore = create<Store>()(
             [platform]: key,
           },
         }))
+
+        // Initialize AI services when API keys are set
+        if (platform === 'gemini' && key) {
+          geminiService.initialize(key)
+        } else if (platform === 'deepseek' && key) {
+          deepseekService.initialize(key)
+        }
       },
 
       verifyApi: async (platform) => {
@@ -272,6 +305,31 @@ export const useStore = create<Store>()(
               : worker
           ),
         }))
+      },
+
+      addWorkflow: (workflow) => {
+        set((state) => ({
+          workflows: [workflow, ...state.workflows],
+        }))
+      },
+
+      updateWorkflow: (id, updates) => {
+        set((state) => ({
+          workflows: state.workflows.map((workflow) =>
+            workflow.id === id ? { ...workflow, ...updates } : workflow
+          ),
+        }))
+      },
+
+      deleteWorkflow: (id) => {
+        set((state) => ({
+          workflows: state.workflows.filter((workflow) => workflow.id !== id),
+          activeWorkflowId: state.activeWorkflowId === id ? undefined : state.activeWorkflowId,
+        }))
+      },
+
+      setActiveWorkflow: (id) => {
+        set({ activeWorkflowId: id })
       },
     }),
     {

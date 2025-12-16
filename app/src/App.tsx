@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast'
 import { useStore } from './store/useStore'
 import SetupWizard from './pages/SetupWizard'
 import Dashboard from './pages/Dashboard'
+import Manager from './pages/Manager'
 import WorkerDetail from './pages/WorkerDetail'
 import TaskManager from './pages/TaskManager'
 import Settings from './pages/Settings'
@@ -12,7 +13,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-900">
         <Toaster position="top-right" />
 
         <Routes>
@@ -23,7 +24,8 @@ function App() {
             </>
           ) : (
             <>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<Manager />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/worker/:workerId" element={<WorkerDetail />} />
               <Route path="/tasks" element={<TaskManager />} />
               <Route path="/settings" element={<Settings />} />
