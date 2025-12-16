@@ -53,15 +53,67 @@ export async function analyzeTaskWithScotty(
 - Project scoping and complexity assessment
 - Marketing technology and automation
 - Cross-functional leadership
+- Modern marketing terminology and best practices (2025)
 
-Your role is to analyze incoming tasks and determine:
+Your role is to analyze incoming tasks using LATEST marketing & sales terminology and determine:
 1. Task complexity (simple/moderate/complex/enterprise)
-2. Which agents are needed (select from available team)
+2. Which agents are needed (select from available team based on their SPECIFIC expertise)
 3. How they should work together (sequential/parallel/hybrid)
 4. Estimated timeline
 5. Whether this needs executive summary from EA agent
 
 You have a team of 35+ specialized agents, each with 7+ years expertise in their domain.
+
+=== AGENT EXPERTISE MAPPING ===
+Use this to intelligently match tasks to the RIGHT agents:
+
+LEAD GENERATION & PROSPECTING:
+- Sarah Chen (Lead Gen): lead generation, prospecting, outbound, lead magnets, list building, contact enrichment, data scraping, database building, finding prospects, compiling lists, Google Maps extraction, LinkedIn scraping, business directories, contact discovery, ICP development, buyer personas
+- Zoey (Prospecting): B2B prospecting, company research, decision-maker identification, contact discovery, account research, prospect qualification
+- Hunter (Email Finding): email finding, email verification, contact discovery, email validation, deliverability
+
+CONTENT & CREATIVE:
+- Marcus Hayes (Content): content strategy, editorial calendar, thought leadership, brand voice, storytelling, content pillars, blog strategy, white papers, case studies, long-form content
+- Casey (Copywriting): ad copy, landing pages, CTAs, headlines, microcopy, conversion copy, product descriptions, email copy, short-form content
+
+EMAIL MARKETING:
+- Emma Wilson (Email): email campaigns, drip campaigns, nurture sequences, email automation, lifecycle marketing
+- Sage (Email Strategy): A/B testing, subject lines, send-time optimization, deliverability, inbox placement
+
+PAID ADVERTISING:
+- Alex Rodriguez (Social Ads): paid social, Facebook ads, Instagram ads, LinkedIn ads, Twitter ads, TikTok ads, paid acquisition, social PPC
+- Smarta (Ad Optimization): ROAS, CPA, CPM, CTR, ad creative testing, audience segmentation, lookalike audiences, retargeting
+
+SEO & ORGANIC:
+- Ryan Mitchell (SEO): SEO, keyword research, on-page SEO, technical SEO, backlinks, link building, organic traffic, Core Web Vitals
+- Surfy (SEO Strategy): content SEO, E-E-A-T, topical authority, content clusters, schema markup
+
+ANALYTICS & DATA:
+- David Kim (Analytics): analytics, GA4, attribution modeling, conversion tracking, funnel analysis, KPI dashboards, data visualization
+- Analyzer (Data Intelligence): business intelligence, predictive analytics, behavioral analytics, trend analysis
+
+CONVERSION & OPTIMIZATION:
+- Oliver Grant (CRO): conversion rate optimization, A/B testing, landing page optimization, funnel optimization, heatmaps
+- Dynamo (Personalization): personalization, dynamic content, 1:1 marketing, recommendation engines, website personalization
+
+SPECIALIZED:
+- Victor Stone (Video): video marketing, YouTube, video ads, TikTok, Reels, Shorts, webinars
+- Natalie Brooks (Influencer): influencer marketing, creator partnerships, sponsored content, micro-influencers
+- Nathan Cross (Competitive Intel): competitive analysis, market research, competitive intelligence, SWOT analysis
+- Ava Martinez (ABM): account-based marketing, target account lists, account engagement, enterprise sales
+- Robert Davis (Revenue Ops): revenue operations, sales enablement, pipeline management, forecasting
+- Sophie Anderson (Support): customer support, chatbots, knowledge base, help desk, CSAT
+- Oscar Wright (Operations): project management, workflow automation, process optimization
+
+=== MATCHING EXAMPLES ===
+- "Scrape Google Maps" / "compile list of plumbers" / "find 50 businesses" → Sarah Chen
+- "Create Facebook ads" / "run Instagram campaign" → Alex Rodriguez
+- "Write blog post" / "content strategy" → Marcus Hayes
+- "Find email addresses" / "verify emails" → Hunter
+- "Set up email automation" / "drip campaign" → Emma Wilson
+- "Improve conversion rate" / "optimize landing page" → Oliver Grant
+- "Keyword research" / "SEO audit" → Ryan Mitchell
+- "Competitive analysis" / "market research" → Nathan Cross
 
 Guidelines:
 - Simple tasks: 1 agent, <4 hours, straightforward execution
@@ -69,7 +121,7 @@ Guidelines:
 - Complex tasks: 4-6 agents, 1-2 weeks, multi-phase execution
 - Enterprise tasks: 7+ agents, 1+ months, strategic initiatives
 
-Always prioritize the right agents for the job based on their expertise.`;
+CRITICAL: Match tasks to agents based on ACTUAL expertise and modern marketing understanding, not just surface keywords.`;
 
   const userPrompt = `Task Description:
 "${taskDescription}"
@@ -269,18 +321,124 @@ function createFallbackAnalysis(
   const lowerTask = taskDescription.toLowerCase();
   const requiredAgents: string[] = [];
 
-  // Simple keyword matching as fallback
+  // Enhanced keyword matching with modern marketing terminology
   const keywords = {
-    'marcus-hayes': ['content', 'blog', 'article', 'write', 'strategy'],
-    'sarah-chen': ['lead', 'prospect', 'generation', 'outreach'],
-    'emma-wilson': ['email', 'newsletter', 'campaign'],
-    'alex-rodriguez': ['ad', 'social', 'facebook', 'instagram', 'linkedin'],
-    'ryan-mitchell': ['seo', 'search', 'google', 'ranking', 'keywords'],
-    'david-kim': ['analytics', 'data', 'metrics', 'report', 'dashboard'],
-    'victor-stone': ['video', 'youtube', 'production'],
-    'oliver-grant': ['conversion', 'cro', 'optimize', 'landing page'],
-    'nathan-cross': ['competitor', 'competitive', 'analysis', 'research'],
-    'maya-patel': ['personalization', 'segment', 'customize']
+    'sarah-chen': [
+      // Lead generation & prospecting
+      'lead', 'leads', 'prospect', 'prospects', 'prospecting', 'generation', 'outreach',
+      'list building', 'compile list', 'find businesses', 'find companies', 'scrape',
+      'google maps', 'linkedin', 'extract', 'database', 'contact list', 'business list',
+      'plumbers', 'lawyers', 'dentists', 'contractors', 'real estate', 'agents',
+      'b2b leads', 'cold outreach', 'icp', 'buyer persona', 'lead magnet',
+      'contact enrichment', 'data enrichment', 'lead scoring', 'demand gen'
+    ],
+    'marcus-hayes': [
+      // Content strategy
+      'content', 'blog', 'article', 'write', 'writing', 'strategy', 'editorial',
+      'thought leadership', 'brand voice', 'storytelling', 'white paper', 'case study',
+      'long-form', 'pillar content', 'topic cluster', 'content calendar', 'content plan'
+    ],
+    'casey': [
+      // Copywriting
+      'copy', 'copywriting', 'ad copy', 'landing page copy', 'cta', 'headline',
+      'microcopy', 'product description', 'conversion copy', 'persuasive', 'short-form'
+    ],
+    'emma-wilson': [
+      // Email marketing
+      'email', 'emails', 'newsletter', 'campaign', 'drip', 'nurture', 'sequence',
+      'automation', 'lifecycle', 'trigger', 'transactional', 'welcome series'
+    ],
+    'sage': [
+      // Email strategy
+      'email strategy', 'a/b test', 'subject line', 'send time', 'deliverability',
+      'inbox placement', 'esp', 'email optimization'
+    ],
+    'alex-rodriguez': [
+      // Paid social advertising
+      'ad', 'ads', 'social ad', 'facebook', 'instagram', 'linkedin', 'twitter', 'tiktok',
+      'paid social', 'social advertising', 'paid acquisition', 'ppc', 'sponsored post'
+    ],
+    'smarta': [
+      // Ad optimization
+      'roas', 'cpa', 'cpm', 'ctr', 'ad optimization', 'audience', 'lookalike',
+      'retargeting', 'remarketing', 'creative testing', 'ad performance'
+    ],
+    'ryan-mitchell': [
+      // SEO
+      'seo', 'search', 'google', 'ranking', 'keywords', 'backlink', 'link building',
+      'organic', 'serp', 'on-page', 'technical seo', 'core web vitals', 'indexing'
+    ],
+    'surfy': [
+      // SEO strategy
+      'seo strategy', 'e-e-a-t', 'topical authority', 'content cluster', 'schema',
+      'semantic search', 'internal linking'
+    ],
+    'david-kim': [
+      // Analytics
+      'analytics', 'data', 'metrics', 'report', 'reporting', 'dashboard', 'kpi',
+      'ga4', 'google analytics', 'attribution', 'conversion tracking', 'funnel',
+      'cohort', 'visualization'
+    ],
+    'analyzer': [
+      // Business intelligence
+      'business intelligence', 'bi', 'predictive', 'behavioral analytics',
+      'trend analysis', 'data mining', 'insights'
+    ],
+    'oliver-grant': [
+      // CRO
+      'conversion', 'cro', 'optimize', 'optimization', 'landing page', 'a/b test',
+      'multivariate', 'funnel optimization', 'heatmap', 'session recording', 'ux'
+    ],
+    'dynamo': [
+      // Personalization
+      'personalization', 'personalize', 'dynamic content', '1:1 marketing',
+      'recommendation', 'behavioral targeting', 'adaptive content', 'segment'
+    ],
+    'victor-stone': [
+      // Video marketing
+      'video', 'youtube', 'production', 'tiktok', 'reels', 'shorts', 'webinar',
+      'video marketing', 'video ad', 'video content'
+    ],
+    'natalie-brooks': [
+      // Influencer marketing
+      'influencer', 'creator', 'partnership', 'sponsored', 'micro-influencer',
+      'brand partnership', 'affiliate'
+    ],
+    'nathan-cross': [
+      // Competitive intelligence
+      'competitor', 'competitive', 'competition', 'market research', 'swot',
+      'competitive analysis', 'market positioning', 'competitor research'
+    ],
+    'maya-patel': [
+      // Marketing automation
+      'automation', 'martech', 'marketing automation', 'cdp', 'customer data platform',
+      'marketing technology'
+    ],
+    'ava-martinez': [
+      // ABM
+      'abm', 'account-based', 'target account', 'account engagement', 'enterprise sales',
+      'account intelligence'
+    ],
+    'robert-davis': [
+      // Revenue operations
+      'revenue', 'revops', 'sales enablement', 'pipeline', 'forecasting',
+      'revenue intelligence', 'revenue operations'
+    ],
+    'sophie-anderson': [
+      // Customer support
+      'support', 'customer support', 'chatbot', 'help desk', 'knowledge base',
+      'customer success', 'csat', 'nps'
+    ],
+    'hunter': [
+      // Email finding
+      'email finding', 'find email', 'verify email', 'email verification',
+      'contact discovery', 'email validation'
+    ],
+    'zoey': [
+      // B2B prospecting
+      'b2b prospect', 'company research', 'decision maker', 'org chart',
+      'account research', 'prospect qualification'
+    ]
   };
 
   for (const [agentId, terms] of Object.entries(keywords)) {
