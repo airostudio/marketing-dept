@@ -82,12 +82,39 @@ interface Store {
   setActiveWorkflow: (id: string | undefined) => void
 }
 
+// Auto-initialize from environment variables
+function initializeFromEnv() {
+  const geminiKey = import.meta.env.VITE_GEMINI_API_KEY
+  const deepseekKey = import.meta.env.VITE_DEEPSEEK_API_KEY
+
+  const credentials: ApiCredentials = {}
+
+  if (geminiKey) {
+    credentials.gemini = geminiKey
+    geminiService.initialize(geminiKey)
+    console.log('✅ Gemini API initialized from environment')
+  }
+
+  if (deepseekKey) {
+    credentials.deepseek = deepseekKey
+    deepseekService.initialize(deepseekKey)
+    console.log('✅ DeepSeek API initialized from environment')
+  }
+
+  return {
+    credentials,
+    isSetupComplete: !!(geminiKey || deepseekKey)
+  }
+}
+
+const envInit = initializeFromEnv()
+
 export const useStore = create<Store>()(
   persist(
     (set, get) => ({
-      // Initial state
-      isSetupComplete: false,
-      apiCredentials: {},
+      // Initial state - with environment variable credentials if available
+      isSetupComplete: envInit.isSetupComplete,
+      apiCredentials: envInit.credentials,
       verifiedApis: [],
       workers: [
         {
