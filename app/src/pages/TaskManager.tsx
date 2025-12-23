@@ -312,10 +312,31 @@ export default function TaskManager() {
 
                 {/* Result */}
                 {task.result && (
-                  <div className="mt-3 p-3 bg-green-50 rounded-lg border border-green-200">
-                    <p className="text-sm text-green-800">
-                      <strong>Result:</strong> {JSON.stringify(task.result, null, 2)}
-                    </p>
+                  <div className="mt-3 p-4 bg-green-50 rounded-lg border border-green-200">
+                    <div className="flex items-start gap-2 mb-2">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <div className="flex-1">
+                        <p className="text-sm font-semibold text-green-900 mb-2">Task Completed Successfully</p>
+                        {task.result.data && (
+                          <div className="space-y-2 text-sm text-green-800">
+                            {task.result.data.agentName && (
+                              <p><strong>Completed by:</strong> {task.result.data.agentName}</p>
+                            )}
+                            {task.result.data.result && (
+                              <div className="mt-2">
+                                <p className="font-medium mb-1">Output:</p>
+                                <div className="bg-white/50 rounded p-2 max-h-32 overflow-y-auto whitespace-pre-wrap text-xs">
+                                  {typeof task.result.data.result === 'string'
+                                    ? task.result.data.result.substring(0, 500) + (task.result.data.result.length > 500 ? '...' : '')
+                                    : JSON.stringify(task.result.data.result, null, 2)
+                                  }
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 )}
               </motion.div>
