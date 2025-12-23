@@ -7,6 +7,7 @@ import Manager from './pages/Manager'
 import WorkerDetail from './pages/WorkerDetail'
 import TaskManager from './pages/TaskManager'
 import Settings from './pages/Settings'
+import ProductionValidator from './components/ProductionValidator'
 
 function App() {
   const isSetupComplete = useStore((state) => state.isSetupComplete)
@@ -15,6 +16,7 @@ function App() {
     <Router>
       <div className="min-h-screen bg-gray-900">
         <Toaster position="top-right" />
+        <ProductionValidator />
 
         <Routes>
           {!isSetupComplete ? (

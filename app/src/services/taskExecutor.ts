@@ -1,4 +1,5 @@
-// Task Executor - Handles execution of tasks through real AI integrations
+// Task Executor - Production-Grade AI Task Execution
+// NO FALLBACKS - Real AI execution only
 import { geminiService } from './gemini'
 import { deepseekService } from './deepseek'
 import { getAgentConfig, getAgentSystemPrompt, getAgentAIPlatform } from './agentLoader'
@@ -24,24 +25,9 @@ interface TaskContext {
 }
 
 /**
- * Helper to simulate realistic work progress with activity logging
+ * Execute task with real AI - NO SIMULATION FALLBACK
+ * This is a production system that requires valid API keys
  */
-async function simulateWorkProgress(
-  agentId: string,
-  agentName: string,
-  taskId: string,
-  steps: string[],
-  durationMs: number = 3000
-): Promise<void> {
-  const stepDelay = durationMs / steps.length;
-
-  for (let i = 0; i < steps.length; i++) {
-    const progress = Math.round(((i + 1) / steps.length) * 100);
-    logProgress(agentId, agentName, taskId, steps[i], progress);
-    await new Promise(resolve => setTimeout(resolve, stepDelay));
-  }
-}
-
 export async function executeTask(
   taskId: string,
   workerId: string,
@@ -50,50 +36,74 @@ export async function executeTask(
   // Get agent configuration
   const agentConfig = getAgentConfig(workerId)
   if (!agentConfig) {
+    const error = `Agent ${workerId} not found in system configuration`
+    console.error(error)
     return {
       success: false,
-      error: `Agent ${workerId} not found`
+      error
     }
   }
 
-  const agentName = agentConfig.name;
-  const userTask = taskContext?.description || taskContext?.action || 'Execute assigned task';
+  const agentName = agentConfig.name
+  const userTask = taskContext?.description || taskContext?.action || 'Execute assigned task'
 
   try {
     // Log task started
-    logTaskStarted(workerId, agentName, taskId, userTask);
+    logTaskStarted(workerId, agentName, taskId, userTask)
 
     // Get agent's system prompt
     const systemPrompt = getAgentSystemPrompt(workerId)
     if (!systemPrompt) {
-      logFailed(workerId, agentName, taskId, 'No system prompt configured');
+      const error = `No system prompt configured for ${agentName}. Agent cannot operate without instructions.`
+      logFailed(workerId, agentName, taskId, error)
       return {
         success: false,
-        error: `No system prompt configured for ${workerId}`
+        error
       }
     }
 
     // Get agent's AI platform
     const aiPlatform = getAgentAIPlatform(workerId)
     if (!aiPlatform) {
-      logFailed(workerId, agentName, taskId, 'No AI platform assigned');
+      const error = `No AI platform assigned for ${agentName}. Agent requires either Gemini or DeepSeek.`
+      logFailed(workerId, agentName, taskId, error)
       return {
         success: false,
-        error: `No AI platform assigned for ${workerId}`
+        error
+      }
+    }
+
+    // Verify AI service is configured
+    if (aiPlatform === 'Gemini' && !geminiService.isConfigured()) {
+      const error = 'Google Gemini API key not configured. Add VITE_GEMINI_API_KEY to .env file.'
+      logFailed(workerId, agentName, taskId, error)
+      return {
+        success: false,
+        error
+      }
+    }
+
+    if (aiPlatform === 'DeepSeek' && !deepseekService.isConfigured()) {
+      const error = 'DeepSeek API key not configured. Add VITE_DEEPSEEK_API_KEY to .env file.'
+      logFailed(workerId, agentName, taskId, error)
+      return {
+        success: false,
+        error
       }
     }
 
     // Log thinking phase
-    logThinking(workerId, agentName, taskId, 'Analyzing task requirements and planning approach');
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    logThinking(workerId, agentName, taskId, 'Analyzing task requirements and formulating execution strategy')
+    await new Promise(resolve => setTimeout(resolve, 800))
 
     // Log execution start
-    logExecuting(workerId, agentName, taskId, `Connecting to ${aiPlatform} AI`);
+    logExecuting(workerId, agentName, taskId, `Connecting to ${aiPlatform} AI service`)
+    logProgress(workerId, agentName, taskId, 'Establishing secure connection', 10)
 
     // Route to appropriate AI service
-    let response;
+    let response
     if (aiPlatform === 'Gemini') {
-      logProgress(workerId, agentName, taskId, 'Sending request to Google Gemini', 20);
+      logProgress(workerId, agentName, taskId, 'Sending task to Google Gemini with agent context', 20)
       response = await geminiService.executeAgentTask(
         agentConfig.name,
         systemPrompt,
@@ -101,7 +111,7 @@ export async function executeTask(
         taskContext?.context
       )
     } else if (aiPlatform === 'DeepSeek') {
-      logProgress(workerId, agentName, taskId, 'Sending request to DeepSeek AI', 20);
+      logProgress(workerId, agentName, taskId, 'Sending task to DeepSeek AI with agent context', 20)
       response = await deepseekService.executeAgentTask(
         agentConfig.name,
         systemPrompt,
@@ -109,276 +119,127 @@ export async function executeTask(
         taskContext?.context
       )
     } else {
-      logFailed(workerId, agentName, taskId, `Unknown AI platform: ${aiPlatform}`);
+      const error = `Unknown AI platform: ${aiPlatform}. Agent cannot execute.`
+      logFailed(workerId, agentName, taskId, error)
       return {
         success: false,
-        error: `Unknown AI platform: ${aiPlatform}`
+        error
       }
     }
 
+    // Handle AI execution failure - NO FALLBACK
     if (!response.success) {
-      // Fallback to simulated execution if AI fails
-      console.warn(`${aiPlatform} execution failed for ${workerId}, using fallback`)
-      logProgress(workerId, agentName, taskId, 'AI service unavailable, using enhanced simulation', 30);
-      return await executeFallbackTask(workerId, taskId, agentName, userTask)
+      const errorMessage = response.error || 'AI service returned an error'
+      logFailed(workerId, agentName, taskId, errorMessage)
+
+      // Log detailed error for debugging
+      console.error(`[${agentName}] AI Execution Failed:`, {
+        platform: aiPlatform,
+        error: errorMessage,
+        taskId,
+        workerId
+      })
+
+      return {
+        success: false,
+        error: `${aiPlatform} execution failed: ${errorMessage}`
+      }
+    }
+
+    // Verify we got actual content
+    if (!response.content || typeof response.content !== 'string' || response.content.trim().length === 0) {
+      const error = `${aiPlatform} returned empty response. The AI model may be overloaded or experiencing issues.`
+      logFailed(workerId, agentName, taskId, error)
+      return {
+        success: false,
+        error
+      }
     }
 
     // Log processing response
-    logProgress(workerId, agentName, taskId, 'Processing AI response', 80);
-    await new Promise(resolve => setTimeout(resolve, 500));
+    logProgress(workerId, agentName, taskId, 'Received AI response, processing results', 70)
+    await new Promise(resolve => setTimeout(resolve, 400))
 
-    logProgress(workerId, agentName, taskId, 'Finalizing results', 90);
-    await new Promise(resolve => setTimeout(resolve, 500));
+    logProgress(workerId, agentName, taskId, 'Structuring deliverable format', 85)
+    await new Promise(resolve => setTimeout(resolve, 300))
 
-    // Extract summary for activity log
-    const summary = typeof response.content === 'string' ?
-      response.content.substring(0, 200) + (response.content.length > 200 ? '...' : '') :
-      'Task completed successfully';
+    logProgress(workerId, agentName, taskId, 'Finalizing output and validating quality', 95)
+    await new Promise(resolve => setTimeout(resolve, 200))
 
-    logCompleted(workerId, agentName, taskId, summary);
+    // Extract summary for activity log (first 200 chars)
+    const summary = response.content.length > 200
+      ? response.content.substring(0, 200) + '...'
+      : response.content
 
-    // Parse and structure the AI response
+    logCompleted(workerId, agentName, taskId, summary)
+
+    // Return structured result
     return {
       success: true,
       data: {
+        agentId: workerId,
         agentName: agentConfig.name,
+        agentRole: agentConfig.role,
         aiPlatform: aiPlatform,
         result: response.content,
         usage: response.usage,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        taskId: taskId
       }
     }
   } catch (error) {
-    console.error('Task execution error:', error)
-    const errorMsg = error instanceof Error ? error.message : 'Unknown error';
-    logFailed(workerId, agentName, taskId, errorMsg);
+    // Production error handling - NO FALLBACK
+    const errorMsg = error instanceof Error ? error.message : 'Unknown system error'
 
-    // Fallback to simulated execution
-    logProgress(workerId, agentName, taskId, 'Using fallback execution mode', 30);
-    return await executeFallbackTask(workerId, taskId, agentName, userTask)
+    console.error(`[${agentName}] Critical Error:`, {
+      error: errorMsg,
+      stack: error instanceof Error ? error.stack : undefined,
+      taskId,
+      workerId
+    })
+
+    logFailed(workerId, agentName, taskId, `Critical error: ${errorMsg}`)
+
+    return {
+      success: false,
+      error: `Task execution failed: ${errorMsg}`
+    }
   }
 }
 
-// Fallback simulated execution when AI is unavailable
-async function executeFallbackTask(workerId: string, taskId: string, agentName: string, taskDescription: string): Promise<TaskResult> {
-  // Determine agent-specific workflow steps
-  const workflowSteps = getAgentWorkflowSteps(workerId, taskDescription);
+/**
+ * Validate that system is properly configured for production use
+ */
+export function validateSystemConfiguration(): {
+  isValid: boolean
+  errors: string[]
+  warnings: string[]
+} {
+  const errors: string[] = []
+  const warnings: string[] = []
 
-  // Simulate work with progress updates
-  await simulateWorkProgress(workerId, agentName, taskId, workflowSteps, 4000);
+  // Check if at least one AI service is configured
+  const hasGemini = geminiService.isConfigured()
+  const hasDeepSeek = deepseekService.isConfigured()
 
-  // Generate appropriate result based on agent type
-  const result = generateAgentResult(workerId, taskDescription);
+  if (!hasGemini && !hasDeepSeek) {
+    errors.push('No AI services configured. System cannot operate without API keys.')
+    errors.push('Add VITE_GEMINI_API_KEY or VITE_DEEPSEEK_API_KEY to .env file.')
+  }
 
-  const summary = typeof result === 'string' ? result.substring(0, 200) : 'Task completed with simulated results';
-  logCompleted(workerId, agentName, taskId, summary);
+  if (!hasGemini) {
+    warnings.push('Google Gemini not configured. Gemini-based agents will not work.')
+    warnings.push('Get free API key: https://aistudio.google.com/app/apikey')
+  }
+
+  if (!hasDeepSeek) {
+    warnings.push('DeepSeek not configured. DeepSeek-based agents will not work.')
+    warnings.push('Get API key: https://platform.deepseek.com/api_keys')
+  }
 
   return {
-    success: true,
-    data: {
-      agentName,
-      result,
-      simulated: true,
-      timestamp: new Date().toISOString()
-    }
-  };
-}
-
-/**
- * Get workflow steps for each agent type
- */
-function getAgentWorkflowSteps(workerId: string, task: string): string[] {
-  const workflows: Record<string, string[]> = {
-    'scotty': [
-      'Analyzing campaign objectives',
-      'Identifying key stakeholders',
-      'Defining success metrics',
-      'Creating strategic roadmap',
-      'Preparing recommendations'
-    ],
-    'jasper': [
-      'Researching topic and audience',
-      'Outlining content structure',
-      'Writing engaging introduction',
-      'Developing main content body',
-      'Optimizing for SEO',
-      'Adding compelling CTA'
-    ],
-    'marcus-hayes': [
-      'Analyzing content strategy requirements',
-      'Researching target audience',
-      'Planning content calendar',
-      'Creating content frameworks',
-      'Finalizing strategy document'
-    ],
-    'casey': [
-      'Analyzing target audience',
-      'Researching competitor messaging',
-      'Crafting headline variations',
-      'Writing persuasive copy',
-      'Optimizing for conversions'
-    ],
-    'sarah-chen': [
-      'Defining ICP criteria',
-      'Searching lead databases',
-      'Qualifying prospects',
-      'Enriching contact data',
-      'Scoring leads by fit and intent'
-    ],
-    'zoey': [
-      'Identifying target companies',
-      'Finding decision makers',
-      'Validating contact information',
-      'Enriching prospect profiles',
-      'Prioritizing outreach list'
-    ],
-    'emma-wilson': [
-      'Segmenting email list',
-      'Crafting subject lines',
-      'Writing email copy',
-      'Designing email template',
-      'Setting up automation triggers'
-    ],
-    'hunter': [
-      'Analyzing company domains',
-      'Finding email patterns',
-      'Verifying email addresses',
-      'Checking deliverability',
-      'Compiling verified contacts'
-    ],
-    'sage': [
-      'Planning campaign flow',
-      'Segmenting audience',
-      'Writing email sequences',
-      'Optimizing send times',
-      'Setting up A/B tests'
-    ],
-    'alex-rodriguez': [
-      'Researching target audiences',
-      'Creating ad copy variations',
-      'Designing ad creatives',
-      'Setting up targeting parameters',
-      'Configuring campaign budget'
-    ],
-    'smarta': [
-      'Analyzing campaign performance',
-      'Testing ad creative variants',
-      'Optimizing audience targeting',
-      'Adjusting bid strategy',
-      'Maximizing ROAS'
-    ],
-    'ryan-mitchell': [
-      'Conducting keyword research',
-      'Analyzing competitors',
-      'Auditing technical SEO',
-      'Optimizing on-page elements',
-      'Creating optimization recommendations'
-    ],
-    'david-kim': [
-      'Collecting data from sources',
-      'Analyzing key metrics',
-      'Identifying trends and patterns',
-      'Creating visualizations',
-      'Generating actionable insights'
-    ],
-    'oliver-grant': [
-      'Analyzing conversion funnels',
-      'Identifying friction points',
-      'Designing A/B test variations',
-      'Creating optimization plan',
-      'Prioritizing improvements'
-    ],
-    'victor-stone': [
-      'Planning video concept',
-      'Writing video script',
-      'Storyboarding scenes',
-      'Planning production schedule',
-      'Finalizing creative brief'
-    ],
-    'dynamo': [
-      'Mapping user segments',
-      'Designing personalized experiences',
-      'Creating dynamic content rules',
-      'Setting up behavioral triggers',
-      'Configuring recommendations'
-    ],
-    'analyzer': [
-      'Connecting data sources',
-      'Running analytics queries',
-      'Detecting anomalies',
-      'Calculating key metrics',
-      'Compiling insights report'
-    ],
-    'surfy': [
-      'Auditing page SEO',
-      'Researching keywords',
-      'Analyzing backlink profile',
-      'Optimizing meta data',
-      'Creating SEO roadmap'
-    ],
-    'chatty': [
-      'Analyzing support tickets',
-      'Creating response templates',
-      'Setting up automation rules',
-      'Training chatbot responses',
-      'Optimizing CSAT scores'
-    ]
-  };
-
-  return workflows[workerId] || [
-    'Analyzing task requirements',
-    'Gathering necessary data',
-    'Processing information',
-    'Generating results',
-    'Finalizing deliverables'
-  ];
-}
-
-/**
- * Generate appropriate result based on agent type
- */
-function generateAgentResult(workerId: string, task: string): any {
-  const baseResult = {
-    task,
-    completedAt: new Date().toISOString(),
-    note: 'This is a simulated result. Real execution requires API keys for Gemini/DeepSeek.'
-  };
-
-  const specificResults: Record<string, any> = {
-    'marcus-hayes': {
-      ...baseResult,
-      contentStrategy: 'Comprehensive content strategy developed',
-      deliverables: ['Content calendar', 'Topic clusters', 'SEO keywords', 'Distribution plan'],
-      nextSteps: ['Review strategy', 'Assign content creation', 'Schedule publication']
-    },
-    'sarah-chen': {
-      ...baseResult,
-      leadsGenerated: 47,
-      qualifiedLeads: 32,
-      topProspects: ['Enterprise Co A', 'Enterprise Co B', 'Enterprise Co C'],
-      averageLeadScore: 78
-    },
-    'emma-wilson': {
-      ...baseResult,
-      campaign: 'Email campaign created',
-      segments: 3,
-      sequences: 5,
-      estimatedReach: 2500
-    },
-    'ryan-mitchell': {
-      ...baseResult,
-      keywords: 25,
-      targetKeywords: 8,
-      seoScore: 82,
-      recommendations: 12
-    },
-    'david-kim': {
-      ...baseResult,
-      insights: 7,
-      metrics: ['Traffic: +15%', 'Conversions: +8%', 'Bounce Rate: -5%'],
-      anomalies: 2
-    }
-  };
-
-  return specificResults[workerId] || baseResult;
+    isValid: errors.length === 0,
+    errors,
+    warnings
+  }
 }

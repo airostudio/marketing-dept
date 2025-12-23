@@ -141,10 +141,14 @@ Respond in JSON format:
     };
 
   } catch (error) {
-    console.error('EA collation failed:', error);
+    console.error('EA collation failed - Production system requires valid API keys:', error);
 
-    // Fallback: basic compilation
-    return createFallbackDeliverable(taskDescription, agentOutputs, complexity);
+    // Re-throw the error - NO FALLBACK in production
+    throw new Error(
+      error instanceof Error
+        ? `EA deliverable creation failed: ${error.message}`
+        : 'EA deliverable creation failed: Unknown error'
+    );
   }
 }
 
@@ -314,57 +318,6 @@ export function formatDeliverableAsHTML(deliverable: EADeliverable): string {
   </div>
 </body>
 </html>`;
-}
-
-/**
- * Fallback deliverable creation if AI fails
- */
-function createFallbackDeliverable(
-  taskDescription: string,
-  agentOutputs: AgentOutput[],
-  complexity: string
-): EADeliverable {
-  return {
-    executiveSummary: `This deliverable represents the collaborative work of ${agentOutputs.length} specialized marketing agents working on: "${taskDescription}". Each agent brought their expertise to deliver comprehensive results across multiple marketing disciplines.`,
-    keyFindings: agentOutputs.slice(0, 5).map(output =>
-      `${output.agentName} completed ${output.agentRole} deliverables`
-    ),
-    agentContributions: agentOutputs.map(output => ({
-      agentName: output.agentName,
-      contribution: output.output.substring(0, 200) + '...',
-      highlights: [
-        'Completed assigned tasks',
-        'Delivered professional results',
-        'Met quality standards'
-      ]
-    })),
-    recommendations: [
-      'Review all agent outputs in detail',
-      'Implement suggested strategies',
-      'Monitor results and iterate',
-      'Schedule follow-up review'
-    ],
-    nextSteps: [
-      'Review complete deliverable',
-      'Prioritize recommendations',
-      'Assign implementation tasks',
-      'Set success metrics',
-      'Schedule check-in meetings'
-    ],
-    fullReport: agentOutputs.map(output => `
-## ${output.agentName} - ${output.agentRole}
-
-${output.output}
-
----
-    `).join('\n'),
-    metadata: {
-      taskDescription,
-      completedAt: new Date().toISOString(),
-      totalAgents: agentOutputs.length,
-      complexity
-    }
-  };
 }
 
 /**
