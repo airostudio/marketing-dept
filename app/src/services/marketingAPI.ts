@@ -57,18 +57,24 @@ export class MarketingAPI {
   }
 
   /**
-   * Initialize available agents
+   * Initialize available agents - Production System
    */
   private async initializeAgents(): Promise<void> {
     try {
       // Load all agent configurations
       const agents = await loadAgentConfigs();
+      if (!agents || agents.length === 0) {
+        throw new Error('No agent configurations found. System cannot operate without agents.');
+      }
       this.availableAgents = agents;
-      console.log(`✅ Loaded ${agents.length} marketing agents`);
+      console.log(`✅ Loaded ${agents.length} marketing agents ready for production`);
     } catch (error) {
-      console.error('Failed to load agents:', error);
-      // Use fallback agents
-      this.availableAgents = this.getFallbackAgents();
+      console.error('❌ CRITICAL: Failed to load agents - System cannot start:', error);
+      throw new Error(
+        error instanceof Error
+          ? `Agent initialization failed: ${error.message}`
+          : 'Agent initialization failed: Unknown error'
+      );
     }
   }
 
@@ -257,103 +263,6 @@ export class MarketingAPI {
     };
   }
 
-  /**
-   * Fallback agents if loading fails
-   */
-  private getFallbackAgents(): Worker[] {
-    return [
-      {
-        id: 'scotty-the-vp',
-        name: 'Scotty',
-        role: 'VP of Sales & Marketing',
-        emoji: '🎯',
-        status: 'active',
-        department: 'executive',
-        capabilities: ['strategy', 'orchestration', 'leadership'],
-        aiPlatform: { name: 'Gemini', model: 'gemini-2.0-flash-exp' }
-      },
-      {
-        id: 'marcus-hayes',
-        name: 'Marcus Hayes',
-        role: 'Senior Content Strategist',
-        emoji: '✍️',
-        status: 'active',
-        department: 'content-creation',
-        capabilities: ['content', 'blogging', 'strategy'],
-        aiPlatform: { name: 'Gemini', model: 'gemini-2.0-flash-exp' }
-      },
-      {
-        id: 'sarah-chen',
-        name: 'Sarah Chen',
-        role: 'Lead Generation Specialist',
-        emoji: '🎯',
-        status: 'active',
-        department: 'lead-generation',
-        capabilities: ['leads', 'prospecting', 'outreach'],
-        aiPlatform: { name: 'DeepSeek', model: 'deepseek-chat' }
-      },
-      {
-        id: 'emma-wilson',
-        name: 'Emma Wilson',
-        role: 'Email Marketing Manager',
-        emoji: '📧',
-        status: 'active',
-        department: 'email-marketing',
-        capabilities: ['email', 'campaigns', 'automation'],
-        aiPlatform: { name: 'DeepSeek', model: 'deepseek-chat' }
-      },
-      {
-        id: 'alex-rodriguez',
-        name: 'Alex Rodriguez',
-        role: 'Social Media Advertising Manager',
-        emoji: '📱',
-        status: 'active',
-        department: 'social-media',
-        capabilities: ['social', 'ads', 'targeting'],
-        aiPlatform: { name: 'DeepSeek', model: 'deepseek-chat' }
-      },
-      {
-        id: 'ryan-mitchell',
-        name: 'Ryan Mitchell',
-        role: 'SEO Specialist',
-        emoji: '🔍',
-        status: 'active',
-        department: 'seo',
-        capabilities: ['seo', 'keywords', 'optimization'],
-        aiPlatform: { name: 'DeepSeek', model: 'deepseek-chat' }
-      },
-      {
-        id: 'david-kim',
-        name: 'David Kim',
-        role: 'Analytics Director',
-        emoji: '📊',
-        status: 'active',
-        department: 'analytics',
-        capabilities: ['analytics', 'reporting', 'insights'],
-        aiPlatform: { name: 'DeepSeek', model: 'deepseek-chat' }
-      },
-      {
-        id: 'oliver-grant',
-        name: 'Oliver Grant',
-        role: 'CRO Specialist',
-        emoji: '🎨',
-        status: 'active',
-        department: 'conversion-optimization',
-        capabilities: ['conversion', 'optimization', 'testing'],
-        aiPlatform: { name: 'Gemini', model: 'gemini-2.0-flash-exp' }
-      },
-      {
-        id: 'oscar-wright',
-        name: 'Oscar Wright',
-        role: 'Operations Coordinator',
-        emoji: '⚙️',
-        status: 'active',
-        department: 'orchestration',
-        capabilities: ['operations', 'coordination', 'management'],
-        aiPlatform: { name: 'Gemini', model: 'gemini-2.0-flash-exp' }
-      }
-    ];
-  }
 }
 
 // Export singleton instance for easy importing

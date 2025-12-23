@@ -148,3 +148,30 @@ class GeminiService {
 
 // Export singleton instance
 export const geminiService = new GeminiService();
+
+/**
+ * Convenience function for simple Gemini API calls
+ */
+export async function callGemini(systemPrompt: string, userPrompt: string): Promise<string> {
+  const response = await geminiService.generate({
+    contents: [
+      {
+        role: 'user',
+        parts: [{ text: userPrompt }]
+      }
+    ],
+    systemInstruction: {
+      parts: [{ text: systemPrompt }]
+    },
+    generationConfig: {
+      temperature: 0.7,
+      maxOutputTokens: 2048
+    }
+  });
+
+  if (!response.success || !response.content) {
+    throw new Error(response.error || 'Gemini API call failed');
+  }
+
+  return response.content;
+}
