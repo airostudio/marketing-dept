@@ -40,7 +40,7 @@ export default function Manager() {
       setAgentWindows((prev) => {
         const existing = prev.find((w) => w.agentId === activity.agentId);
 
-        if (activity.type === 'started') {
+        if (activity.activityType === 'started') {
           if (!existing) {
             return [
               ...prev,
@@ -60,7 +60,7 @@ export default function Manager() {
           );
         }
 
-        if (activity.type === 'progress' && existing) {
+        if (activity.activityType === 'progress' && existing) {
           return prev.map((w) =>
             w.agentId === activity.agentId
               ? { ...w, currentActivity: activity.message, progress: activity.progress || 0 }
@@ -68,7 +68,7 @@ export default function Manager() {
           );
         }
 
-        if (activity.type === 'completed' && existing) {
+        if (activity.activityType === 'completed' && existing) {
           return prev.map((w) =>
             w.agentId === activity.agentId
               ? { ...w, status: 'completed', currentActivity: 'Completed', progress: 100 }
@@ -76,7 +76,7 @@ export default function Manager() {
           );
         }
 
-        if (activity.type === 'failed' && existing) {
+        if (activity.activityType === 'failed' && existing) {
           return prev.map((w) =>
             w.agentId === activity.agentId
               ? { ...w, status: 'failed', currentActivity: `Failed: ${activity.message}`, progress: 0 }
