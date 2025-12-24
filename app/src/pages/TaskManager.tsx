@@ -34,11 +34,21 @@ export default function TaskManager() {
       progress: 0,
     }
 
+    // Add task to store
     addTask(task)
+
+    // Get the task we just created (Zustand updates synchronously)
+    const createdTask = useStore.getState().tasks[0]
+
+    if (!createdTask) {
+      toast.error('Failed to create task')
+      return
+    }
+
     toast.success('Task created successfully!')
 
-    // Execute task
-    executeTaskAsync(tasks.length.toString(), newTask.workerId)
+    // Execute task with correct ID and description
+    await executeTaskAsync(createdTask.id, newTask.workerId, newTask.title, newTask.description)
 
     setShowNewTask(false)
     setNewTask({
@@ -50,11 +60,14 @@ export default function TaskManager() {
     })
   }
 
-  const executeTaskAsync = async (taskId: string, workerId: string) => {
+  const executeTaskAsync = async (taskId: string, workerId: string, title: string, description: string) => {
     try {
       updateTask(taskId, { status: 'in_progress', progress: 0 })
 
-      const result = await executeTask(taskId, workerId)
+      const result = await executeTask(taskId, workerId, {
+        action: title,
+        description: description || title,
+      })
 
       if (result.success) {
         updateTask(taskId, {
