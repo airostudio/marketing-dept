@@ -11,14 +11,22 @@ export const campaignTemplates: CampaignTemplate[] = [
     category: 'campaign',
     estimatedTime: '2-3 hours',
     difficulty: 'advanced',
-    requiredWorkers: ['surfy', 'analyzer', 'jasper', 'dynamo', 'sage', 'smarta', 'zoey'],
-    successMetrics: ['Content published', 'Email campaign sent', 'Leads generated', 'Conversions tracked'],
+    requiredWorkers: ['scotty', 'surfy', 'analyzer', 'jasper', 'dynamo', 'sage', 'smarta', 'zoey'],
+    successMetrics: ['Strategy approved', 'Content published', 'Email campaign sent', 'Leads generated', 'Conversions tracked'],
     steps: [
+      {
+        workerId: 'scotty',
+        workerName: 'Scotty',
+        action: 'strategic_planning',
+        description: 'Analyze campaign objective, define success metrics, create execution strategy, and coordinate team assignments',
+        estimatedDuration: 300,
+      },
       {
         workerId: 'surfy',
         workerName: 'Surfy',
         action: 'keyword_research',
         description: 'Research target keywords and content opportunities',
+        dependencies: ['scotty'],
         estimatedDuration: 300,
       },
       {
@@ -26,7 +34,7 @@ export const campaignTemplates: CampaignTemplate[] = [
         workerName: 'Analyzer',
         action: 'audience_analysis',
         description: 'Analyze audience behavior and preferences',
-        dependencies: [],
+        dependencies: ['scotty'],
         estimatedDuration: 240,
       },
       {
@@ -87,14 +95,22 @@ export const campaignTemplates: CampaignTemplate[] = [
     category: 'lead-generation',
     estimatedTime: '1-2 hours',
     difficulty: 'intermediate',
-    requiredWorkers: ['zoey', 'hunter', 'casey', 'sage'],
-    successMetrics: ['Prospects discovered', 'Emails verified', 'Outreach campaigns sent', 'Responses tracked'],
+    requiredWorkers: ['scotty', 'zoey', 'hunter', 'casey', 'sage'],
+    successMetrics: ['Strategy approved', 'Prospects discovered', 'Emails verified', 'Outreach campaigns sent', 'Responses tracked'],
     steps: [
+      {
+        workerId: 'scotty',
+        workerName: 'Scotty',
+        action: 'strategic_planning',
+        description: 'Define ideal customer profile, set pipeline targets, create outreach strategy, and coordinate lead generation workflow',
+        estimatedDuration: 240,
+      },
       {
         workerId: 'zoey',
         workerName: 'Zoey',
         action: 'prospect_discovery',
         description: 'Find target companies and decision makers',
+        dependencies: ['scotty'],
         estimatedDuration: 360,
       },
       {
@@ -139,14 +155,22 @@ export const campaignTemplates: CampaignTemplate[] = [
     category: 'content',
     estimatedTime: '45-60 minutes',
     difficulty: 'beginner',
-    requiredWorkers: ['surfy', 'jasper', 'sage', 'smarta'],
-    successMetrics: ['Content created', 'SEO optimized', 'Multi-channel distribution'],
+    requiredWorkers: ['scotty', 'surfy', 'jasper', 'sage', 'smarta'],
+    successMetrics: ['Strategy approved', 'Content created', 'SEO optimized', 'Multi-channel distribution'],
     steps: [
+      {
+        workerId: 'scotty',
+        workerName: 'Scotty',
+        action: 'strategic_planning',
+        description: 'Define content objectives, target audience, key messages, and distribution strategy',
+        estimatedDuration: 180,
+      },
       {
         workerId: 'surfy',
         workerName: 'Surfy',
         action: 'topic_research',
         description: 'Research trending topics and keywords',
+        dependencies: ['scotty'],
         estimatedDuration: 180,
       },
       {
@@ -191,14 +215,22 @@ export const campaignTemplates: CampaignTemplate[] = [
     category: 'analytics',
     estimatedTime: '30-45 minutes',
     difficulty: 'beginner',
-    requiredWorkers: ['analyzer', 'heatley', 'surfy'],
-    successMetrics: ['Traffic analyzed', 'UX insights gathered', 'SEO audit completed', 'Recommendations provided'],
+    requiredWorkers: ['scotty', 'analyzer', 'heatley', 'surfy'],
+    successMetrics: ['Analysis framework defined', 'Traffic analyzed', 'UX insights gathered', 'SEO audit completed', 'Recommendations provided'],
     steps: [
+      {
+        workerId: 'scotty',
+        workerName: 'Scotty',
+        action: 'strategic_planning',
+        description: 'Define performance analysis objectives, key metrics to review, and prioritize optimization opportunities',
+        estimatedDuration: 180,
+      },
       {
         workerId: 'analyzer',
         workerName: 'Analyzer',
         action: 'traffic_analysis',
         description: 'Analyze traffic sources and conversion funnel',
+        dependencies: ['scotty'],
         estimatedDuration: 240,
       },
       {
@@ -206,6 +238,7 @@ export const campaignTemplates: CampaignTemplate[] = [
         workerName: 'Heatley',
         action: 'ux_analysis',
         description: 'Analyze user behavior with heatmaps',
+        dependencies: ['scotty'],
         estimatedDuration: 300,
       },
       {
@@ -213,6 +246,7 @@ export const campaignTemplates: CampaignTemplate[] = [
         workerName: 'Surfy',
         action: 'seo_audit',
         description: 'Audit SEO performance and identify issues',
+        dependencies: ['scotty'],
         estimatedDuration: 360,
       },
       {
@@ -233,14 +267,22 @@ export const campaignTemplates: CampaignTemplate[] = [
     category: 'campaign',
     estimatedTime: '3-4 hours',
     difficulty: 'advanced',
-    requiredWorkers: ['jasper', 'casey', 'dynamo', 'sage', 'smarta', 'zoey', 'analyzer'],
-    successMetrics: ['Launch content created', 'Multi-channel campaigns live', 'Leads captured', 'Performance tracked'],
+    requiredWorkers: ['scotty', 'jasper', 'casey', 'dynamo', 'sage', 'smarta', 'zoey', 'analyzer'],
+    successMetrics: ['Launch strategy defined', 'Launch content created', 'Multi-channel campaigns live', 'Leads captured', 'Performance tracked'],
     steps: [
+      {
+        workerId: 'scotty',
+        workerName: 'Scotty',
+        action: 'strategic_planning',
+        description: 'Define product positioning, launch goals, target segments, messaging framework, and multi-channel strategy',
+        estimatedDuration: 360,
+      },
       {
         workerId: 'jasper',
         workerName: 'Jasper',
         action: 'launch_content',
         description: 'Create product launch content (landing page, blog, email)',
+        dependencies: ['scotty'],
         estimatedDuration: 600,
       },
       {
@@ -301,14 +343,22 @@ export const campaignTemplates: CampaignTemplate[] = [
     category: 'campaign',
     estimatedTime: '20-30 minutes',
     difficulty: 'beginner',
-    requiredWorkers: ['casey', 'smarta'],
-    successMetrics: ['Social content created', 'Campaigns scheduled', 'Performance monitored'],
+    requiredWorkers: ['scotty', 'casey', 'smarta'],
+    successMetrics: ['Campaign strategy approved', 'Social content created', 'Campaigns scheduled', 'Performance monitored'],
     steps: [
+      {
+        workerId: 'scotty',
+        workerName: 'Scotty',
+        action: 'strategic_planning',
+        description: 'Define social media objectives, target platforms, key messages, and success metrics',
+        estimatedDuration: 120,
+      },
       {
         workerId: 'casey',
         workerName: 'Casey',
         action: 'social_content',
         description: 'Create engaging social media content',
+        dependencies: ['scotty'],
         estimatedDuration: 300,
       },
       {
