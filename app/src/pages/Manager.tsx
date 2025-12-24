@@ -4,7 +4,6 @@ import {
   Send,
   Loader2,
   Download,
-  FileText,
   CheckCircle,
   XCircle,
   Clock,
@@ -415,7 +414,7 @@ export default function Manager() {
                     <div>
                       <p className="text-gray-600">Agents Used</p>
                       <p className="font-semibold text-gray-900">
-                        {completedExecution.agentResults.length}
+                        {completedExecution.stepResults.size}
                       </p>
                     </div>
                     <div>
