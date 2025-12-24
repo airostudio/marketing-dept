@@ -2,10 +2,16 @@
 
 import { Workflow, WorkflowStep, WorkflowExecution } from '../types/workflow';
 import { executeTask } from './taskExecutor';
+import { useStore } from '../store/useStore';
 
 class WorkflowEngine {
   private activeExecutions: Map<string, WorkflowExecution> = new Map();
   private listeners: Map<string, ((workflow: Workflow) => void)[]> = new Map();
+
+  // Store reference for adding/updating tasks
+  private getStore() {
+    return useStore.getState();
+  }
 
   /**
    * Subscribe to workflow updates
@@ -138,11 +144,29 @@ class WorkflowEngine {
   ): Promise<{ success: boolean; data?: any; error?: string }> {
     // Create a task for this step
     const taskId = `task-${step.id}-${Date.now()}`;
+    const store = this.getStore();
+
+    // Add task to store for real-time monitoring
+    store.addTask({
+      title: step.description,
+      description: step.description,
+      department: step.workerName,
+      workerId: step.workerId,
+      status: 'in_progress',
+      priority: 'medium',
+      progress: 0,
+    });
+
+    // Get the actual task ID from the store (it generates one)
+    const actualTask = store.tasks[0]; // Most recent task
+    const actualTaskId = actualTask.id;
 
     // Simulate progress updates
     const progressInterval = setInterval(() => {
       if (step.progress < 90) {
-        onProgress(Math.min(step.progress + 10, 90));
+        const newProgress = Math.min(step.progress + 10, 90);
+        onProgress(newProgress);
+        store.updateTask(actualTaskId, { progress: newProgress });
       }
     }, 200);
 
@@ -156,9 +180,31 @@ class WorkflowEngine {
 
       clearInterval(progressInterval);
       onProgress(100);
+
+      // Update task as completed
+      store.updateTask(actualTaskId, {
+        status: 'completed',
+        progress: 100,
+        completedAt: new Date().toISOString(),
+        result: result.data,
+      });
+
+      // Update worker status back to idle
+      store.updateWorkerStatus(step.workerId, 'idle');
+
       return result;
     } catch (error) {
       clearInterval(progressInterval);
+
+      // Update task as failed
+      store.updateTask(actualTaskId, {
+        status: 'failed',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      });
+
+      // Update worker status back to idle
+      store.updateWorkerStatus(step.workerId, 'idle');
+
       throw error;
     }
   }
