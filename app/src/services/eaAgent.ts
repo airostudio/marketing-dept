@@ -13,7 +13,6 @@
  */
 
 import { callGemini } from './gemini';
-import { WorkflowStep } from '../types/workflow';
 
 export interface AgentOutput {
   agentId: string;
