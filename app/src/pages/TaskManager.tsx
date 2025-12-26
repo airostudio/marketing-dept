@@ -4,6 +4,7 @@ import { Plus, X, Loader, CheckCircle, XCircle, Clock } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import Layout from '../components/Layout'
 import LiveTaskMonitor from '../components/LiveTaskMonitor'
+import AgentQuestionDialog from '../components/AgentQuestionDialog'
 import { useTaskNotifications } from '../hooks/useTaskNotifications'
 import toast from 'react-hot-toast'
 import { executeTask } from '../services/taskExecutor'
@@ -11,6 +12,14 @@ import { executeTask } from '../services/taskExecutor'
 export default function TaskManager() {
   const { workers, tasks, addTask, updateTask, deleteTask } = useStore()
   const [showNewTask, setShowNewTask] = useState(false)
+  const [showQuestionDialog, setShowQuestionDialog] = useState(false)
+  const [pendingTask, setPendingTask] = useState<{
+    title: string
+    description: string
+    department: string
+    workerId: string
+    priority: 'low' | 'medium' | 'high'
+  } | null>(null)
   const [newTask, setNewTask] = useState({
     title: '',
     description: '',
@@ -22,14 +31,25 @@ export default function TaskManager() {
   // Enable task notifications
   useTaskNotifications()
 
-  const handleCreateTask = async () => {
+  const handleCreateTask = () => {
     if (!newTask.title || !newTask.workerId) {
       toast.error('Please fill in all required fields')
       return
     }
 
+    // Store the task details and show question dialog
+    setPendingTask({ ...newTask })
+    setShowNewTask(false)
+    setShowQuestionDialog(true)
+  }
+
+  const handleQuestionsSubmit = async (answers: Record<string, string>) => {
+    if (!pendingTask) return
+
+    setShowQuestionDialog(false)
+
     const task = {
-      ...newTask,
+      ...pendingTask,
       status: 'pending' as const,
       progress: 0,
     }
@@ -47,10 +67,22 @@ export default function TaskManager() {
 
     toast.success('Task created successfully!')
 
-    // Execute task with correct ID and description
-    await executeTaskAsync(createdTask.id, newTask.workerId, newTask.title, newTask.description)
+    // Build enriched description with question answers
+    const enrichedDescription = buildEnrichedDescription(
+      pendingTask.description,
+      answers
+    )
 
-    setShowNewTask(false)
+    // Execute task with correct ID and enriched description
+    await executeTaskAsync(
+      createdTask.id,
+      pendingTask.workerId,
+      pendingTask.title,
+      enrichedDescription
+    )
+
+    // Reset state
+    setPendingTask(null)
     setNewTask({
       title: '',
       description: '',
@@ -58,6 +90,82 @@ export default function TaskManager() {
       workerId: '',
       priority: 'medium',
     })
+  }
+
+  const handleQuestionsSkip = async () => {
+    if (!pendingTask) return
+
+    setShowQuestionDialog(false)
+
+    const task = {
+      ...pendingTask,
+      status: 'pending' as const,
+      progress: 0,
+    }
+
+    // Add task to store
+    addTask(task)
+
+    // Get the task we just created (Zustand updates synchronously)
+    const createdTask = useStore.getState().tasks[0]
+
+    if (!createdTask) {
+      toast.error('Failed to create task')
+      return
+    }
+
+    toast.success('Task created successfully!')
+
+    // Execute task without enriched context
+    await executeTaskAsync(
+      createdTask.id,
+      pendingTask.workerId,
+      pendingTask.title,
+      pendingTask.description
+    )
+
+    // Reset state
+    setPendingTask(null)
+    setNewTask({
+      title: '',
+      description: '',
+      department: '',
+      workerId: '',
+      priority: 'medium',
+    })
+  }
+
+  const handleQuestionDialogCancel = () => {
+    setShowQuestionDialog(false)
+    setPendingTask(null)
+    setShowNewTask(true) // Return to task creation form
+  }
+
+  const buildEnrichedDescription = (
+    originalDescription: string,
+    answers: Record<string, string>
+  ): string => {
+    const answeredQuestions = Object.entries(answers)
+      .filter(([_, answer]) => answer.trim())
+      .map(([id, answer]) => {
+        // Convert question ID to readable format
+        const label = id
+          .split('_')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ')
+        return `**${label}:** ${answer}`
+      })
+      .join('\n')
+
+    if (!answeredQuestions) {
+      return originalDescription || 'Execute assigned task'
+    }
+
+    return `${originalDescription || 'Execute assigned task'}
+
+## Context from Discovery Questions:
+
+${answeredQuestions}`
   }
 
   const executeTaskAsync = async (taskId: string, workerId: string, title: string, description: string) => {
@@ -235,6 +343,18 @@ export default function TaskManager() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Agent Question Dialog */}
+      {showQuestionDialog && pendingTask && (
+        <AgentQuestionDialog
+          worker={workers.find(w => w.id === pendingTask.workerId)!}
+          taskTitle={pendingTask.title}
+          taskDescription={pendingTask.description}
+          onSubmit={handleQuestionsSubmit}
+          onSkip={handleQuestionsSkip}
+          onCancel={handleQuestionDialogCancel}
+        />
+      )}
 
       {/* Tasks List */}
       <div className="space-y-4">
