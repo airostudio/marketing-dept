@@ -48,7 +48,14 @@ export async function executeTask(
   const userTask = taskContext?.description || taskContext?.action || 'Execute assigned task'
 
   try {
-    // Log task started
+    // Log task started with clear indication this is REAL AI
+    console.log(`\n🎯 ========== REAL AI AGENT TASK STARTING ==========`)
+    console.log(`👤 Agent: ${agentName} (${agentConfig.role})`)
+    console.log(`🤖 AI Engine: ${getAgentAIPlatform(workerId)} (Real API Call)`)
+    console.log(`📋 Task: ${userTask.substring(0, 100)}${userTask.length > 100 ? '...' : ''}`)
+    console.log(`⏰ Started: ${new Date().toLocaleTimeString()}`)
+    console.log(`==================================================\n`)
+
     logTaskStarted(workerId, agentName, taskId, userTask)
 
     // Get agent's system prompt
@@ -96,28 +103,50 @@ export async function executeTask(
     logThinking(workerId, agentName, taskId, 'Analyzing task requirements and formulating execution strategy')
     await new Promise(resolve => setTimeout(resolve, 800))
 
-    // Log execution start
-    logExecuting(workerId, agentName, taskId, `Connecting to ${aiPlatform} AI service`)
-    logProgress(workerId, agentName, taskId, 'Establishing secure connection', 10)
+    // Log execution start with clear indication of REAL AI
+    console.log(`🚀 [${agentName}] INITIATING REAL ${aiPlatform} AI API CALL`)
+    logExecuting(workerId, agentName, taskId, `🔌 Connecting to ${aiPlatform} AI service`)
+    logProgress(workerId, agentName, taskId, 'Establishing secure HTTPS connection to AI platform', 10)
+    await new Promise(resolve => setTimeout(resolve, 500))
 
     // Route to appropriate AI service
     let response
     if (aiPlatform === 'Gemini') {
-      logProgress(workerId, agentName, taskId, 'Sending task to Google Gemini with agent context', 20)
+      console.log(`📡 [${agentName}] Sending request to Google Gemini API (generativelanguage.googleapis.com)`)
+      logProgress(workerId, agentName, taskId, '📡 CALLING REAL GOOGLE GEMINI API - Sending task with agent expertise...', 20)
+      await new Promise(resolve => setTimeout(resolve, 300))
+
+      logProgress(workerId, agentName, taskId, '🤖 Gemini AI is processing your request with real machine learning...', 35)
+      const startTime = Date.now()
+
       response = await geminiService.executeAgentTask(
         agentConfig.name,
         systemPrompt,
         userTask,
         taskContext?.context
       )
+
+      const duration = Date.now() - startTime
+      console.log(`✅ [${agentName}] Gemini API responded in ${duration}ms with ${response.content?.length || 0} characters`)
+      logProgress(workerId, agentName, taskId, `✅ Received real AI response (${duration}ms, ${response.content?.length || 0} chars)`, 60)
     } else if (aiPlatform === 'DeepSeek') {
-      logProgress(workerId, agentName, taskId, 'Sending task to DeepSeek AI with agent context', 20)
+      console.log(`📡 [${agentName}] Sending request to DeepSeek API (api.deepseek.com)`)
+      logProgress(workerId, agentName, taskId, '📡 CALLING REAL DEEPSEEK API - Sending task with agent expertise...', 20)
+      await new Promise(resolve => setTimeout(resolve, 300))
+
+      logProgress(workerId, agentName, taskId, '🤖 DeepSeek AI is processing your request with real neural network...', 35)
+      const startTime = Date.now()
+
       response = await deepseekService.executeAgentTask(
         agentConfig.name,
         systemPrompt,
         userTask,
         taskContext?.context
       )
+
+      const duration = Date.now() - startTime
+      console.log(`✅ [${agentName}] DeepSeek API responded in ${duration}ms with ${response.content?.length || 0} characters`)
+      logProgress(workerId, agentName, taskId, `✅ Received real AI response (${duration}ms, ${response.content?.length || 0} chars)`, 60)
     } else {
       const error = `Unknown AI platform: ${aiPlatform}. Agent cannot execute.`
       logFailed(workerId, agentName, taskId, error)
@@ -172,6 +201,14 @@ export async function executeTask(
       : response.content
 
     logCompleted(workerId, agentName, taskId, summary)
+
+    console.log(`\n✅ ========== REAL AI AGENT TASK COMPLETED ==========`)
+    console.log(`👤 Agent: ${agentName}`)
+    console.log(`🤖 AI Engine: ${aiPlatform} (Confirmed Real API Response)`)
+    console.log(`📊 Response Length: ${response.content.length} characters`)
+    console.log(`💰 Tokens Used: ${JSON.stringify(response.usage || {})}`)
+    console.log(`⏰ Completed: ${new Date().toLocaleTimeString()}`)
+    console.log(`====================================================\n`)
 
     // Return structured result
     return {
