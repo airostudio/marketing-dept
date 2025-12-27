@@ -1,0 +1,337 @@
+{
+  "version": "1.0",
+  "description": "Real AI Agent Execution System - Production Architecture",
+  "lastUpdated": "2025-12-05",
+
+  "systemArchitecture": {
+    "overview": "Each of the 15 marketing agents is a REAL AI-powered specialist that executes tasks autonomously using OpenAI's GPT-4 Turbo or GPT-3.5 Turbo APIs. Agents receive tasks from Scotty, execute them using their specialized prompts, and deliver real, usable outputs.",
+
+    "executionFlow": [
+      "1. User submits task to Scotty",
+      "2. Scotty routes task to appropriate agent(s) using intelligent routing",
+      "3. Agent receives task with context and requirements",
+      "4. Agent executes task using OpenAI API with expert system prompt",
+      "5. Agent delivers output (content, data, analysis, campaign)",
+      "6. Output is stored, tracked, and presented to user",
+      "7. Agent updates project status and metrics"
+    ],
+
+    "aiProviderAllocation": {
+      "premiumAgents": {
+        "model": "gpt-4-turbo",
+        "costPerRequest": "$0.045",
+        "agents": ["marcus-hayes", "robert-davis", "oscar-wright"],
+        "rationale": "Strategic work requiring top-tier reasoning and creativity"
+      },
+      "midTierAgents": {
+        "model": "gpt-3.5-turbo",
+        "costPerRequest": "$0.0075",
+        "agents": ["alex-rodriguez", "victor-stone", "natalie-brooks", "maya-patel", "ava-martinez"],
+        "rationale": "Creative tasks needing good quality at balanced cost"
+      },
+      "budgetAgents": {
+        "model": "gpt-3.5-turbo",
+        "costPerRequest": "$0.0075",
+        "agents": ["sarah-chen", "emma-wilson", "ryan-mitchell", "david-kim", "sophie-anderson", "nathan-cross", "oliver-grant"],
+        "rationale": "High-volume tasks where cost efficiency is critical"
+      }
+    }
+  },
+
+  "agentCapabilities": {
+    "whatAgentsCanDo": {
+      "marcus-hayes": [
+        "Write complete blog posts (500-3000 words)",
+        "Create whitepapers and eBooks",
+        "Develop case studies with ROI calculations",
+        "Write thought leadership articles",
+        "Create content calendars (30-90 days)",
+        "Perform content audits with recommendations",
+        "Develop messaging and positioning frameworks",
+        "Write sales collateral and pitch decks",
+        "Create SEO-optimized content",
+        "Generate meta descriptions and title tags"
+      ],
+      "sarah-chen": [
+        "Build targeted prospect lists (ICP-matched)",
+        "Write cold email sequences (5-15 emails)",
+        "Create LinkedIn outreach messages",
+        "Develop lead scoring models",
+        "Generate ideal customer profiles (ICP)",
+        "Write lead qualification questions",
+        "Create lead magnet concepts",
+        "Design lead nurture workflows",
+        "Analyze lead data and provide insights",
+        "Generate account-based targeting lists"
+      ],
+      "emma-wilson": [
+        "Write email campaigns (promotional, newsletter, nurture)",
+        "Create drip/automation sequences (7-15 emails)",
+        "Design email templates (HTML structure)",
+        "Write subject lines and preview text",
+        "Create A/B test variations",
+        "Develop segmentation strategies",
+        "Write re-engagement campaigns",
+        "Create welcome series",
+        "Design preference center copy",
+        "Generate email performance reports"
+      ],
+      "alex-rodriguez": [
+        "Write Facebook/Instagram ad copy (10-20 variations)",
+        "Create LinkedIn ad campaigns",
+        "Develop audience targeting strategies",
+        "Write ad headlines and descriptions",
+        "Create UTM tracking structures",
+        "Design campaign optimization plans",
+        "Generate A/B test hypotheses",
+        "Write landing page copy for ads",
+        "Create retargeting campaign strategies",
+        "Analyze ad performance and provide recommendations"
+      ],
+      "ryan-mitchell": [
+        "Perform technical SEO audits",
+        "Conduct keyword research (100-500 keywords)",
+        "Create on-page optimization recommendations",
+        "Develop link building strategies",
+        "Write meta titles and descriptions",
+        "Create schema markup recommendations",
+        "Analyze competitor SEO strategies",
+        "Generate content gap analyses",
+        "Create internal linking strategies",
+        "Write SEO-friendly content briefs"
+      ],
+      "victor-stone": [
+        "Write video scripts (30 seconds to 10 minutes)",
+        "Create storyboards and shot lists",
+        "Develop video marketing strategies",
+        "Write YouTube descriptions and tags",
+        "Create video thumbnail concepts",
+        "Design video content calendars",
+        "Write video ads scripts",
+        "Create explainer video scripts",
+        "Develop video SEO strategies",
+        "Generate video performance analyses"
+      ],
+      "david-kim": [
+        "Create marketing analytics reports",
+        "Develop KPI dashboards (structure and metrics)",
+        "Perform attribution analysis",
+        "Generate campaign performance insights",
+        "Create data visualization recommendations",
+        "Analyze funnel performance",
+        "Forecast marketing metrics",
+        "Build cohort analysis frameworks",
+        "Create ROI calculations",
+        "Generate executive summaries"
+      ],
+      "natalie-brooks": [
+        "Research and identify influencers",
+        "Write influencer outreach templates",
+        "Create partnership proposal decks",
+        "Develop campaign briefs for influencers",
+        "Write content guidelines",
+        "Create performance tracking frameworks",
+        "Analyze influencer authenticity and fit",
+        "Develop contract negotiation strategies",
+        "Create influencer marketing strategies",
+        "Generate campaign performance reports"
+      ],
+      "oliver-grant": [
+        "Perform conversion rate audits",
+        "Design A/B test hypotheses",
+        "Create landing page optimization recommendations",
+        "Analyze user behavior patterns",
+        "Develop experimentation roadmaps",
+        "Write high-converting copy variations",
+        "Create form optimization strategies",
+        "Design checkout flow improvements",
+        "Generate heatmap analysis insights",
+        "Create CRO implementation plans"
+      ],
+      "nathan-cross": [
+        "Conduct competitive analysis (5-20 competitors)",
+        "Create SWOT analyses",
+        "Monitor competitor campaigns",
+        "Analyze competitor positioning",
+        "Research pricing strategies",
+        "Track competitor content strategies",
+        "Generate market intelligence reports",
+        "Identify competitive advantages/gaps",
+        "Create competitive response strategies",
+        "Monitor industry trends"
+      ],
+      "maya-patel": [
+        "Create customer segmentation strategies",
+        "Develop personalization rules",
+        "Design dynamic content frameworks",
+        "Create behavioral targeting logic",
+        "Write personalized message variations",
+        "Develop recommendation engine strategies",
+        "Design customer journey maps",
+        "Create lifecycle marketing programs",
+        "Analyze engagement patterns",
+        "Generate personalization roadmaps"
+      ],
+      "sophie-anderson": [
+        "Write help documentation (FAQs, guides)",
+        "Create chatbot conversation flows",
+        "Design knowledge base structures",
+        "Write support email templates",
+        "Create onboarding materials",
+        "Develop troubleshooting guides",
+        "Write product documentation",
+        "Create customer success playbooks",
+        "Design support ticket macros",
+        "Generate customer feedback analyses"
+      ],
+      "ava-martinez": [
+        "Create ABM account strategies",
+        "Develop personalized campaigns for target accounts",
+        "Write executive-level content",
+        "Create account research briefings",
+        "Design multi-touch ABM sequences",
+        "Write account-specific value propositions",
+        "Create buying committee analysis",
+        "Develop account penetration strategies",
+        "Write C-level outreach messages",
+        "Generate ABM performance reports"
+      ],
+      "robert-davis": [
+        "Create revenue forecasts",
+        "Perform pipeline health analysis",
+        "Develop pricing strategies",
+        "Analyze deal scoring models",
+        "Forecast churn and expansion",
+        "Create revenue attribution models",
+        "Analyze customer lifetime value",
+        "Design upsell/cross-sell strategies",
+        "Generate revenue intelligence reports",
+        "Create financial models for marketing ROI"
+      ],
+      "oscar-wright": [
+        "Audit marketing technology stacks",
+        "Create workflow automation designs",
+        "Develop integration strategies",
+        "Design process optimization plans",
+        "Create SOP documentation",
+        "Analyze martech performance",
+        "Develop data governance frameworks",
+        "Create team enablement materials",
+        "Design system architecture diagrams",
+        "Generate operational efficiency reports"
+      ]
+    }
+  },
+
+  "outputFormats": {
+    "description": "Agents deliver outputs in various formats based on task type",
+    "formats": {
+      "text": ["markdown", "plain text", "HTML", "JSON"],
+      "documents": ["Google Docs", "Word", "PDF"],
+      "spreadsheets": ["CSV", "Excel", "Google Sheets"],
+      "presentations": ["Slide outlines", "Deck structures"],
+      "code": ["HTML/CSS", "JSON configs", "API requests"],
+      "data": ["Structured data", "Lists", "Tables"]
+    }
+  },
+
+  "qualityAssurance": {
+    "checks": [
+      "Output completeness (meets all requirements)",
+      "Factual accuracy (no hallucinations for data-driven tasks)",
+      "Brand voice consistency",
+      "Grammar and spelling",
+      "SEO optimization (when applicable)",
+      "Actionability (clear next steps)",
+      "Format correctness"
+    ],
+    "humanReview": {
+      "optional": true,
+      "recommended": "For mission-critical outputs or external-facing content"
+    }
+  },
+
+  "integrationPoints": {
+    "inputSources": [
+      "Scotty dashboard (natural language commands)",
+      "Individual agent pages (task forms)",
+      "API requests (programmatic task submission)",
+      "Automation workflows (triggered tasks)",
+      "Slack commands (conversational task creation)"
+    ],
+    "outputDestinations": [
+      "Marketing Department UI (displayed to user)",
+      "Google Drive (documents and files)",
+      "CRM systems (HubSpot, Salesforce)",
+      "Email platforms (Mailchimp, HubSpot)",
+      "Social media platforms (via scheduling)",
+      "Analytics platforms (reports and insights)",
+      "Project management tools",
+      "Slack notifications"
+    ]
+  },
+
+  "exampleExecution": {
+    "task": "Write a 1500-word blog post about AI in B2B marketing",
+    "agent": "marcus-hayes",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Receive task from Scotty with requirements",
+        "input": {
+          "task": "blog_post",
+          "topic": "AI in B2B marketing",
+          "wordCount": 1500,
+          "tone": "professional",
+          "includeKeywords": ["AI marketing", "B2B automation", "marketing AI tools"],
+          "targetAudience": "B2B marketing directors"
+        }
+      },
+      {
+        "step": 2,
+        "action": "Construct OpenAI API request",
+        "systemPrompt": "Marcus Hayes world-class expert prompt",
+        "userPrompt": "Write a 1500-word blog post about AI in B2B marketing...",
+        "temperature": 0.7,
+        "maxTokens": 3000
+      },
+      {
+        "step": 3,
+        "action": "Receive and parse OpenAI response",
+        "output": "Complete 1500-word blog post in markdown"
+      },
+      {
+        "step": 4,
+        "action": "Quality check output",
+        "checks": ["word count", "keyword inclusion", "readability", "structure"]
+      },
+      {
+        "step": 5,
+        "action": "Deliver output to user",
+        "format": "markdown",
+        "location": "project deliverables",
+        "notification": "Slack + email"
+      },
+      {
+        "step": 6,
+        "action": "Update project metrics",
+        "metrics": {
+          "tasksCompleted": 143,
+          "aiCost": "$0.12",
+          "timeToComplete": "45 seconds"
+        }
+      }
+    ],
+    "output": {
+      "content": "# How AI is Transforming B2B Marketing in 2025\n\n[1500-word blog post content]\n\n## Conclusion\n[Summary and CTA]",
+      "metadata": {
+        "wordCount": 1502,
+        "readingTime": "6 minutes",
+        "seoScore": 92,
+        "keywordsUsed": ["AI marketing", "B2B automation", "marketing AI tools"],
+        "suggestedTitle": "How AI is Transforming B2B Marketing in 2025",
+        "suggestedMetaDescription": "Discover how AI is revolutionizing B2B marketing through automation, personalization, and data-driven insights. Learn implementation strategies."
+      }
+    }
+  }
+}

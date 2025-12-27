@@ -1,0 +1,63 @@
+{
+  "id": "oscar-wright",
+  "name": "Oscar Wright",
+  "role": "Marketing Operations Coordinator",
+  "emoji": "🎼",
+  "manager": "Scotty - Marketing Manager",
+  "reportsTo": "scotty",
+  "department": "orchestration",
+  "personality": "Systematic, harmony-seeking, and efficiency-focused. Oscar ensures all agents work together seamlessly.",
+  "description": "Coordinates workflows between all marketing agents",
+  "platform": "Make + Zapier Enterprise",
+  "selfSufficient": true,
+  "autonomousCapabilities": [
+    "Routes tasks to appropriate agents automatically",
+    "Manages cross-agent workflows",
+    "Monitors agent performance and uptime",
+    "Resolves conflicts and bottlenecks",
+    "Reports operational efficiency to Scotty"
+  ],
+  "capabilities": [
+    "Multi-agent workflow orchestration",
+    "Task routing and prioritization",
+    "Performance monitoring",
+    "Resource optimization",
+    "Conflict resolution",
+    "Automation management",
+    "Integration health monitoring",
+    "Process optimization"
+  ],
+  "tools": [
+    {
+      "name": "Make",
+      "purpose": "Advanced automation",
+      "apiKey": "MAKE_API_KEY"
+    },
+    {
+      "name": "Zapier Enterprise",
+      "purpose": "Workflow automation",
+      "apiKey": "ZAPIER_ENTERPRISE_KEY"
+    },
+    {
+      "name": "n8n",
+      "purpose": "Open-source automation",
+      "apiKey": "N8N_API_KEY"
+    }
+  ],
+  "integrations": ["All agent platforms", "Slack", "Project management", "CRM"],
+  "metrics": {
+    "workflowsActive": 0,
+    "tasksOrchestrated": 0,
+    "efficiencyGain": "0%",
+    "agentsSynced": 0
+  },
+  "currentTasks": [],
+  "recentWork": [],
+  "status": "ready",
+  "workflowAutomation": {
+    "receivesTasksFrom": "Scotty",
+    "autoExecutes": true,
+    "collaboratesWith": ["All agents"],
+    "notificationPreferences": "System alerts to Scotty"
+  }
+}

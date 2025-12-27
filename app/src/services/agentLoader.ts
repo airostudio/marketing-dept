@@ -291,3 +291,43 @@ export function getAgentSystemPrompt(agentId: string): string | undefined {
 export function getAgentAIPlatform(agentId: string): 'Gemini' | 'DeepSeek' | undefined {
   return agentConfigs[agentId]?.aiPlatform?.name;
 }
+
+/**
+ * Load agent configurations from JSON files
+ * This function loads all agents from the agents/workers/ directory
+ */
+export async function loadAgentConfigs(): Promise<any[]> {
+  try {
+    // Try to dynamically load agent catalog
+    const response = await fetch('/agents/agent-catalog.json');
+    if (response.ok) {
+      const catalog = await response.json();
+      if (catalog.tools && Array.isArray(catalog.tools)) {
+        return catalog.tools.map((tool: any) => ({
+          id: tool.id,
+          name: tool.name,
+          role: tool.role,
+          emoji: tool.emoji,
+          status: 'active',
+          department: tool.department,
+          capabilities: tool.capabilities || [],
+          aiPlatform: tool.aiPlatform || { name: 'Gemini', model: 'gemini-2.0-flash-exp' }
+        }));
+      }
+    }
+  } catch (error) {
+    console.warn('Could not load agent catalog, using built-in configs:', error);
+  }
+
+  // Fallback to built-in configurations
+  return Object.values(agentConfigs).map(config => ({
+    id: config.id,
+    name: config.name,
+    role: config.role,
+    emoji: config.emoji,
+    status: config.status,
+    department: config.department,
+    capabilities: config.capabilities,
+    aiPlatform: config.aiPlatform
+  }));
+}

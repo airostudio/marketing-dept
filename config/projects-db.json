@@ -1,0 +1,224 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2025-12-05",
+  "projectStatuses": {
+    "pipeline": "Proposed or planned projects awaiting approval",
+    "active": "Currently being worked on by agents",
+    "completed": "Finished projects delivered to client",
+    "on_hold": "Temporarily paused projects",
+    "cancelled": "Cancelled before completion"
+  },
+  "projects": {
+    "proj_001": {
+      "id": "proj_001",
+      "title": "Q1 2025 Content Strategy Overhaul",
+      "description": "Complete content audit and new strategy for blog, whitepapers, and case studies",
+      "status": "active",
+      "assignedAgents": ["marcus-hayes", "ryan-mitchell", "sarah-chen"],
+      "primaryAgent": "marcus-hayes",
+      "createdDate": "2025-11-15",
+      "startDate": "2025-11-20",
+      "targetCompletionDate": "2025-12-31",
+      "actualCompletionDate": null,
+      "budget": 8500,
+      "actualCost": 3240,
+      "estimatedAgencyCost": 45000,
+      "savings": 41760,
+      "savingsPercentage": 92.8,
+      "deliverables": [
+        {
+          "name": "Content Audit Report",
+          "status": "completed",
+          "completedDate": "2025-11-25"
+        },
+        {
+          "name": "New Content Strategy Document",
+          "status": "active",
+          "progress": 75
+        },
+        {
+          "name": "6-Month Editorial Calendar",
+          "status": "pipeline",
+          "progress": 0
+        }
+      ],
+      "tags": ["content", "strategy", "SEO"]
+    },
+    "proj_002": {
+      "id": "proj_002",
+      "title": "Lead Generation Campaign - Enterprise SaaS",
+      "description": "Multi-channel lead gen campaign targeting Fortune 500 CIOs and CTOs",
+      "status": "active",
+      "assignedAgents": ["sarah-chen", "emma-wilson", "alex-rodriguez", "ava-martinez"],
+      "primaryAgent": "sarah-chen",
+      "createdDate": "2025-11-01",
+      "startDate": "2025-11-10",
+      "targetCompletionDate": "2026-01-31",
+      "actualCompletionDate": null,
+      "budget": 12000,
+      "actualCost": 5890,
+      "estimatedAgencyCost": 85000,
+      "savings": 79110,
+      "savingsPercentage": 93.1,
+      "deliverables": [
+        {
+          "name": "ICP & Account List",
+          "status": "completed",
+          "completedDate": "2025-11-12"
+        },
+        {
+          "name": "Email Drip Campaigns",
+          "status": "completed",
+          "completedDate": "2025-11-28"
+        },
+        {
+          "name": "LinkedIn Ad Campaign",
+          "status": "active",
+          "progress": 60
+        },
+        {
+          "name": "ABM Personalized Outreach",
+          "status": "active",
+          "progress": 45
+        }
+      ],
+      "tags": ["lead-generation", "ABM", "email", "social-ads"]
+    },
+    "proj_003": {
+      "id": "proj_003",
+      "title": "Complete Website SEO Optimization",
+      "description": "Technical SEO audit, on-page optimization, and link building strategy",
+      "status": "completed",
+      "assignedAgents": ["ryan-mitchell", "marcus-hayes", "david-kim"],
+      "primaryAgent": "ryan-mitchell",
+      "createdDate": "2025-10-01",
+      "startDate": "2025-10-05",
+      "targetCompletionDate": "2025-11-15",
+      "actualCompletionDate": "2025-11-12",
+      "budget": 6500,
+      "actualCost": 6200,
+      "estimatedAgencyCost": 35000,
+      "savings": 28800,
+      "savingsPercentage": 82.3,
+      "deliverables": [
+        {
+          "name": "Technical SEO Audit",
+          "status": "completed",
+          "completedDate": "2025-10-10"
+        },
+        {
+          "name": "On-Page Optimization (50 pages)",
+          "status": "completed",
+          "completedDate": "2025-10-28"
+        },
+        {
+          "name": "Link Building Strategy",
+          "status": "completed",
+          "completedDate": "2025-11-08"
+        },
+        {
+          "name": "SEO Performance Report",
+          "status": "completed",
+          "completedDate": "2025-11-12"
+        }
+      ],
+      "tags": ["SEO", "technical", "analytics"]
+    },
+    "proj_004": {
+      "id": "proj_004",
+      "title": "Product Launch Campaign - AI Platform",
+      "description": "Full-funnel marketing campaign for new AI product launch",
+      "status": "pipeline",
+      "assignedAgents": ["marcus-hayes", "alex-rodriguez", "victor-stone", "natalie-brooks", "robert-davis"],
+      "primaryAgent": "marcus-hayes",
+      "createdDate": "2025-12-01",
+      "startDate": null,
+      "targetCompletionDate": "2026-03-15",
+      "actualCompletionDate": null,
+      "budget": 25000,
+      "actualCost": 0,
+      "estimatedAgencyCost": 175000,
+      "savings": 150000,
+      "savingsPercentage": 85.7,
+      "deliverables": [
+        {
+          "name": "Product Messaging & Positioning",
+          "status": "pipeline",
+          "progress": 0
+        },
+        {
+          "name": "Launch Video Series",
+          "status": "pipeline",
+          "progress": 0
+        },
+        {
+          "name": "Paid Social Campaigns",
+          "status": "pipeline",
+          "progress": 0
+        },
+        {
+          "name": "Influencer Partnerships",
+          "status": "pipeline",
+          "progress": 0
+        },
+        {
+          "name": "Revenue Forecasting Model",
+          "status": "pipeline",
+          "progress": 0
+        }
+      ],
+      "tags": ["product-launch", "video", "social-ads", "influencer", "revenue"]
+    },
+    "proj_005": {
+      "id": "proj_005",
+      "title": "Email Marketing Automation Rebuild",
+      "description": "Redesign all email workflows, segmentation, and personalization",
+      "status": "active",
+      "assignedAgents": ["emma-wilson", "maya-patel", "david-kim"],
+      "primaryAgent": "emma-wilson",
+      "createdDate": "2025-11-20",
+      "startDate": "2025-11-25",
+      "targetCompletionDate": "2025-12-20",
+      "actualCompletionDate": null,
+      "budget": 4800,
+      "actualCost": 2100,
+      "estimatedAgencyCost": 28000,
+      "savings": 25900,
+      "savingsPercentage": 92.5,
+      "deliverables": [
+        {
+          "name": "Audience Segmentation Strategy",
+          "status": "completed",
+          "completedDate": "2025-11-28"
+        },
+        {
+          "name": "Welcome Series Rebuild",
+          "status": "active",
+          "progress": 80
+        },
+        {
+          "name": "Nurture Campaign Workflows",
+          "status": "active",
+          "progress": 50
+        },
+        {
+          "name": "Personalization Rules Engine",
+          "status": "active",
+          "progress": 35
+        }
+      ],
+      "tags": ["email", "automation", "personalization", "analytics"]
+    }
+  },
+  "statistics": {
+    "totalProjects": 5,
+    "pipelineCount": 1,
+    "activeCount": 3,
+    "completedCount": 1,
+    "totalBudget": 56800,
+    "totalSpent": 17430,
+    "totalEstimatedAgencyCost": 368000,
+    "totalSavings": 350570,
+    "averageSavingsPercentage": 89.3
+  }
+}

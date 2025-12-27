@@ -1,0 +1,244 @@
+{
+  "version": "1.0",
+  "description": "Billing configuration with Stripe integration",
+  "lastUpdated": "2025-12-05",
+
+  "stripeConfiguration": {
+    "mode": "test",
+    "publishableKey": "pk_test_XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "secretKey": "sk_test_XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "webhookSecret": "whsec_XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "apiVersion": "2023-10-16",
+    "connected": false
+  },
+
+  "pricingPlans": {
+    "starter": {
+      "name": "Starter Plan",
+      "price": 299,
+      "currency": "usd",
+      "interval": "month",
+      "stripePriceId": "price_starter_monthly",
+      "features": [
+        "5 Active Agents",
+        "1,000 AI Requests/month",
+        "Basic Integrations (HubSpot, Salesforce, Google Analytics)",
+        "Email Support",
+        "Standard Reporting"
+      ],
+      "limits": {
+        "agents": 5,
+        "aiRequests": 1000,
+        "projects": 10,
+        "teamMembers": 3,
+        "integrations": "basic"
+      }
+    },
+    "professional": {
+      "name": "Professional Plan",
+      "price": 799,
+      "currency": "usd",
+      "interval": "month",
+      "stripePriceId": "price_professional_monthly",
+      "features": [
+        "10 Active Agents",
+        "5,000 AI Requests/month",
+        "All Integrations",
+        "Priority Support",
+        "Advanced Reporting & Analytics",
+        "Custom Workflows",
+        "API Access"
+      ],
+      "limits": {
+        "agents": 10,
+        "aiRequests": 5000,
+        "projects": 50,
+        "teamMembers": 10,
+        "integrations": "all"
+      },
+      "popular": true
+    },
+    "enterprise": {
+      "name": "Enterprise Plan",
+      "price": 1999,
+      "currency": "usd",
+      "interval": "month",
+      "stripePriceId": "price_enterprise_monthly",
+      "features": [
+        "All 15 Agents",
+        "Unlimited AI Requests",
+        "All Integrations + Custom",
+        "Dedicated Support",
+        "Advanced Analytics & BI",
+        "Custom AI Model Training",
+        "SLA Guarantee",
+        "White-label Option",
+        "Dedicated Account Manager"
+      ],
+      "limits": {
+        "agents": 15,
+        "aiRequests": "unlimited",
+        "projects": "unlimited",
+        "teamMembers": "unlimited",
+        "integrations": "unlimited"
+      }
+    },
+    "custom": {
+      "name": "Custom Plan",
+      "price": null,
+      "description": "Tailored solution for large enterprises",
+      "contact": "sales@marketing-dept.com"
+    }
+  },
+
+  "addOns": {
+    "extraAgents": {
+      "name": "Additional Agent",
+      "price": 99,
+      "interval": "month",
+      "stripePriceId": "price_addon_agent",
+      "description": "Add one more agent to your plan"
+    },
+    "extraRequests": {
+      "name": "Extra AI Requests (1,000)",
+      "price": 49,
+      "interval": "month",
+      "stripePriceId": "price_addon_requests_1k",
+      "description": "1,000 additional AI requests"
+    },
+    "prioritySupport": {
+      "name": "Priority Support",
+      "price": 199,
+      "interval": "month",
+      "stripePriceId": "price_addon_support",
+      "description": "24/7 priority support with <1hr response time"
+    },
+    "customIntegration": {
+      "name": "Custom Integration Development",
+      "price": 499,
+      "interval": "one_time",
+      "stripePriceId": "price_addon_custom_integration",
+      "description": "Build a custom integration for your specific needs"
+    }
+  },
+
+  "currentSubscription": {
+    "plan": "professional",
+    "status": "active",
+    "currentPeriodStart": "2025-12-01",
+    "currentPeriodEnd": "2026-01-01",
+    "cancelAtPeriodEnd": false,
+    "stripeSubscriptionId": "sub_XXXXXXXXXXXX",
+    "stripeCustomerId": "cus_XXXXXXXXXXXX",
+    "addOns": ["extraAgents"],
+    "totalMonthlyPrice": 898
+  },
+
+  "billingHistory": [
+    {
+      "id": "inv_001",
+      "date": "2025-12-01",
+      "description": "Professional Plan - December 2025",
+      "amount": 898,
+      "status": "paid",
+      "stripeInvoiceId": "in_XXXXXXXXXXXX",
+      "pdfUrl": "https://invoices.stripe.com/XXXXX"
+    },
+    {
+      "id": "inv_002",
+      "date": "2025-11-01",
+      "description": "Professional Plan - November 2025",
+      "amount": 799,
+      "status": "paid",
+      "stripeInvoiceId": "in_YYYYYYYYYYYY",
+      "pdfUrl": "https://invoices.stripe.com/YYYYY"
+    }
+  ],
+
+  "paymentMethods": [
+    {
+      "id": "pm_001",
+      "type": "card",
+      "brand": "visa",
+      "last4": "4242",
+      "expMonth": 12,
+      "expYear": 2026,
+      "isDefault": true,
+      "stripePaymentMethodId": "pm_XXXXXXXXXXXX"
+    }
+  ],
+
+  "usageMetrics": {
+    "currentPeriod": {
+      "start": "2025-12-01",
+      "end": "2026-01-01",
+      "aiRequestsUsed": 3247,
+      "aiRequestsLimit": 5000,
+      "percentageUsed": 64.9,
+      "agentsActive": 10,
+      "agentsLimit": 10,
+      "projectsActive": 28,
+      "projectsLimit": 50
+    },
+    "historicalUsage": [
+      {
+        "month": "2025-11",
+        "aiRequests": 4856,
+        "averageCostPerRequest": 0.0037
+      },
+      {
+        "month": "2025-10",
+        "aiRequests": 4123,
+        "averageCostPerRequest": 0.0039
+      }
+    ]
+  },
+
+  "billingSettings": {
+    "autoCharge": true,
+    "sendInvoiceEmail": true,
+    "invoiceEmailRecipients": ["billing@company.com"],
+    "billingCycle": "monthly",
+    "billingDayOfMonth": 1,
+    "currency": "usd",
+    "taxId": "",
+    "taxExempt": false
+  },
+
+  "upgradePaths": {
+    "fromStarter": {
+      "recommended": "professional",
+      "reason": "You're approaching your agent and request limits",
+      "savings": "Save $99/month with annual billing"
+    },
+    "fromProfessional": {
+      "recommended": "enterprise",
+      "reason": "Unlock all 15 agents and unlimited requests",
+      "benefits": ["Dedicated support", "SLA guarantee", "Custom AI training"]
+    }
+  },
+
+  "discounts": {
+    "annual": {
+      "description": "Save 20% with annual billing",
+      "discount": 0.20,
+      "stripeCouponId": "annual_20_off"
+    },
+    "referral": {
+      "description": "Refer a friend, get $100 credit",
+      "creditAmount": 100,
+      "referralCode": "REFER_XXXX"
+    }
+  },
+
+  "invoiceCustomization": {
+    "companyName": "Your Company Inc.",
+    "companyAddress": "123 Main St, Suite 100",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94102",
+    "country": "US",
+    "taxId": "",
+    "logo": "https://yourcompany.com/logo.png"
+  }
+}

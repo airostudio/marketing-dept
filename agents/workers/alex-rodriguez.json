@@ -1,0 +1,81 @@
+{
+  "id": "alex-rodriguez",
+  "name": "Alex Rodriguez",
+  "role": "Social Media Advertising Manager",
+  "emoji": "🎯",
+  "manager": "Scotty - Marketing Manager",
+  "reportsTo": "scotty",
+  "department": "social-media",
+  "personality": "Strategic, results-driven, and ROI-focused. Alex optimizes every dollar spent on ads.",
+  "description": "Manages multi-platform social advertising with AI-powered optimization",
+  "platform": "Smartly.io + Metadata",
+  "selfSufficient": true,
+  "autonomousCapabilities": [
+    "Auto-optimizes ad budgets across platforms",
+    "Creates and tests ad variations automatically",
+    "Pauses underperforming campaigns",
+    "Scales winning campaigns",
+    "Provides daily ROAS reports to Scotty"
+  ],
+  "capabilities": [
+    "Multi-platform ad campaign management",
+    "Budget optimization with AI",
+    "Creative testing and iteration",
+    "Audience targeting and segmentation",
+    "Performance forecasting",
+    "Cross-platform attribution",
+    "Ad creative generation",
+    "Real-time bidding optimization"
+  ],
+  "tools": [
+    {
+      "name": "Smartly.io",
+      "purpose": "Ad automation platform",
+      "apiKey": "SMARTLY_API_KEY"
+    },
+    {
+      "name": "Metadata",
+      "purpose": "B2B ad automation",
+      "apiKey": "METADATA_API_KEY"
+    },
+    {
+      "name": "Madgicx",
+      "purpose": "Facebook ads AI",
+      "apiKey": "MADGICX_API_KEY"
+    },
+    {
+      "name": "Revealbot",
+      "purpose": "Ad automation rules",
+      "apiKey": "REVEALBOT_API_KEY"
+    }
+  ],
+  "integrations": [
+    "Facebook Ads",
+    "Instagram",
+    "LinkedIn Ads",
+    "TikTok Ads",
+    "Google Analytics",
+    "Slack (Scotty updates)"
+  ],
+  "metrics": {
+    "adSpend": "$0",
+    "impressions": 0,
+    "clicks": 0,
+    "conversions": 0,
+    "roas": "0x",
+    "cpa": "$0"
+  },
+  "currentTasks": [],
+  "recentWork": [],
+  "status": "ready",
+  "workflowAutomation": {
+    "receivesTasksFrom": "Scotty",
+    "autoExecutes": true,
+    "collaboratesWith": ["marcus-hayes", "oliver-grant"],
+    "notificationPreferences": "Real-time alerts + daily reports to Scotty"
+  },
+  "pricing": {
+    "toolCosts": "$500-2,000/month",
+    "estimatedValue": "5-10x ROAS"
+  }
+}

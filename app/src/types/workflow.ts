@@ -1,5 +1,36 @@
 // Workflow types for multi-agent orchestration
 
+export interface Worker {
+  id: string;
+  name: string;
+  role: string;
+  emoji: string;
+  status: 'active' | 'idle' | 'error';
+  department: string;
+  capabilities?: string[];
+  aiPlatform?: {
+    name: string;
+    model: string;
+  };
+  currentTask?: string;
+  metrics?: Record<string, any>;
+}
+
+export interface Task {
+  id: string;
+  title: string;
+  description: string;
+  department: string;
+  workerId: string;
+  status: 'pending' | 'in_progress' | 'completed' | 'failed';
+  priority: 'low' | 'medium' | 'high';
+  progress: number;
+  createdAt: string;
+  completedAt?: string;
+  result?: any;
+  error?: string;
+}
+
 export interface WorkflowStep {
   id: string;
   workerId: string;

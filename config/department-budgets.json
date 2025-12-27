@@ -1,0 +1,292 @@
+{
+  "version": "1.0",
+  "description": "Department budget allocation and tracking",
+  "lastUpdated": "2025-12-05",
+
+  "totalMarketingBudget": {
+    "monthly": 50000,
+    "quarterly": 150000,
+    "annual": 600000,
+    "currency": "USD",
+    "fiscalYearStart": "2025-01-01"
+  },
+
+  "departmentAllocations": {
+    "contentMarketing": {
+      "name": "Content Marketing",
+      "owner": "marcus-hayes",
+      "monthlyBudget": 12000,
+      "percentageOfTotal": 24,
+      "agents": ["marcus-hayes"],
+      "currentSpend": 8450,
+      "remainingBudget": 3550,
+      "burnRate": "70.4%",
+      "topExpenses": [
+        {
+          "category": "AI Content Generation",
+          "amount": 4200,
+          "percentage": 49.7
+        },
+        {
+          "category": "Stock Images & Graphics",
+          "amount": 2100,
+          "percentage": 24.9
+        },
+        {
+          "category": "Content Distribution",
+          "amount": 1450,
+          "percentage": 17.2
+        },
+        {
+          "category": "Tools & Software",
+          "amount": 700,
+          "percentage": 8.3
+        }
+      ],
+      "forecastedSpend": 11500,
+      "pacing": "on_track"
+    },
+
+    "leadGeneration": {
+      "name": "Lead Generation",
+      "owner": "sarah-chen",
+      "monthlyBudget": 15000,
+      "percentageOfTotal": 30,
+      "agents": ["sarah-chen", "ava-martinez"],
+      "currentSpend": 11230,
+      "remainingBudget": 3770,
+      "burnRate": "74.9%",
+      "topExpenses": [
+        {
+          "category": "Data & List Building",
+          "amount": 4500,
+          "percentage": 40.1
+        },
+        {
+          "category": "Email Platform Costs",
+          "amount": 3200,
+          "percentage": 28.5
+        },
+        {
+          "category": "AI Lead Scoring",
+          "amount": 2100,
+          "percentage": 18.7
+        },
+        {
+          "category": "CRM Integration",
+          "amount": 1430,
+          "percentage": 12.7
+        }
+      ],
+      "forecastedSpend": 14200,
+      "pacing": "slightly_under"
+    },
+
+    "paidAdvertising": {
+      "name": "Paid Advertising",
+      "owner": "alex-rodriguez",
+      "monthlyBudget": 18000,
+      "percentageOfTotal": 36,
+      "agents": ["alex-rodriguez"],
+      "currentSpend": 15678,
+      "remainingBudget": 2322,
+      "burnRate": "87.1%",
+      "topExpenses": [
+        {
+          "category": "Facebook/Instagram Ads",
+          "amount": 6800,
+          "percentage": 43.4
+        },
+        {
+          "category": "LinkedIn Ads",
+          "amount": 5200,
+          "percentage": 33.2
+        },
+        {
+          "category": "Google Ads",
+          "amount": 2878,
+          "percentage": 18.4
+        },
+        {
+          "category": "Ad Creative Production",
+          "amount": 800,
+          "percentage": 5.1
+        }
+      ],
+      "forecastedSpend": 18500,
+      "pacing": "over_pacing",
+      "alert": "You're spending faster than planned. Consider reallocating or adjusting targets."
+    },
+
+    "emailMarketing": {
+      "name": "Email Marketing",
+      "owner": "emma-wilson",
+      "monthlyBudget": 3000,
+      "percentageOfTotal": 6,
+      "agents": ["emma-wilson"],
+      "currentSpend": 1890,
+      "remainingBudget": 1110,
+      "burnRate": "63.0%",
+      "topExpenses": [
+        {
+          "category": "Email Platform (HubSpot)",
+          "amount": 1200,
+          "percentage": 63.5
+        },
+        {
+          "category": "AI Email Copywriting",
+          "amount": 450,
+          "percentage": 23.8
+        },
+        {
+          "category": "Email Templates",
+          "amount": 240,
+          "percentage": 12.7
+        }
+      ],
+      "forecastedSpend": 2800,
+      "pacing": "under_budget"
+    },
+
+    "analytics": {
+      "name": "Analytics & Reporting",
+      "owner": "david-kim",
+      "monthlyBudget": 2000,
+      "percentageOfTotal": 4,
+      "agents": ["david-kim"],
+      "currentSpend": 1456,
+      "remainingBudget": 544,
+      "burnRate": "72.8%",
+      "topExpenses": [
+        {
+          "category": "Analytics Platforms",
+          "amount": 800,
+          "percentage": 54.9
+        },
+        {
+          "category": "Dashboard Tools",
+          "amount": 456,
+          "percentage": 31.3
+        },
+        {
+          "category": "AI Data Analysis",
+          "amount": 200,
+          "percentage": 13.7
+        }
+      ],
+      "forecastedSpend": 1950,
+      "pacing": "on_track"
+    }
+  },
+
+  "budgetAlerts": [
+    {
+      "department": "paidAdvertising",
+      "severity": "warning",
+      "message": "Paid Advertising is at 87% of monthly budget with 10 days remaining",
+      "recommendation": "Consider pausing low-performing campaigns or shifting budget from under-pacing departments",
+      "timestamp": "2025-12-05T10:00:00Z"
+    },
+    {
+      "department": "emailMarketing",
+      "severity": "info",
+      "message": "Email Marketing is trending under budget. Opportunity to increase send volume.",
+      "recommendation": "Consider additional campaigns or A/B tests to utilize remaining budget",
+      "timestamp": "2025-12-04T15:30:00Z"
+    }
+  },
+
+  "budgetOptimization": {
+    "recommendations": [
+      {
+        "action": "reallocate_budget",
+        "from": "emailMarketing",
+        "to": "paidAdvertising",
+        "amount": 500,
+        "reason": "Email is under-pacing while Paid Ads is over-pacing",
+        "expectedImpact": "Maintain ad performance without overspend"
+      },
+      {
+        "action": "increase_efficiency",
+        "department": "contentMarketing",
+        "suggestion": "Batch similar content to reduce per-piece AI costs",
+        "potentialSavings": 800
+      }
+    ]
+  },
+
+  "roi": {
+    "byDepartment": [
+      {
+        "department": "leadGeneration",
+        "spend": 11230,
+        "revenue": 89400,
+        "roi": 696,
+        "costPerLead": 45,
+        "leadsGenerated": 249
+      },
+      {
+        "department": "paidAdvertising",
+        "spend": 15678,
+        "revenue": 65846,
+        "roi": 320,
+        "costPerMQL": 65,
+        "mqlsGenerated": 241
+      },
+      {
+        "department": "contentMarketing",
+        "spend": 8450,
+        "revenue": 42250,
+        "roi": 400,
+        "contentPieces": 28,
+        "leads": 187
+      }
+    ]
+  },
+
+  "quarterlyComparison": {
+    "Q4_2025": {
+      "planned": 150000,
+      "actual": 112356,
+      "variance": -37644,
+      "percentageUsed": 74.9
+    },
+    "Q3_2025": {
+      "planned": 150000,
+      "actual": 148923,
+      "variance": -1077,
+      "percentageUsed": 99.3
+    }
+  },
+
+  "budgetRules": {
+    "autoApproval": {
+      "threshold": 500,
+      "description": "Expenses under $500 are auto-approved"
+    },
+    "requiresApproval": {
+      "threshold": 5000,
+      "approvers": ["marketing_director", "cfo"]
+    },
+    "overspendProtection": {
+      "enabled": true,
+      "blockAtPercentage": 95,
+      "alertAtPercentage": 80
+    }
+  },
+
+  "budgetForecasting": {
+    "nextQuarter": {
+      "recommended": 155000,
+      "reasoning": "3.3% increase based on pipeline growth and seasonal trends",
+      "breakdown": {
+        "contentMarketing": 13000,
+        "leadGeneration": 16000,
+        "paidAdvertising": 19000,
+        "emailMarketing": 3200,
+        "analytics": 2100,
+        "contingency": 3700
+      }
+    }
+  }
+}

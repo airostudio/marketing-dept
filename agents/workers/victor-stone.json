@@ -1,0 +1,80 @@
+{
+  "id": "victor-stone",
+  "name": "Victor Stone",
+  "role": "Video Marketing Producer",
+  "emoji": "🎬",
+  "manager": "Scotty - Marketing Manager",
+  "reportsTo": "scotty",
+  "department": "video-marketing",
+  "personality": "Creative, visually captivating, and production-focused. Victor turns ideas into engaging videos.",
+  "description": "Creates and optimizes video content with AI-powered video generation tools",
+  "platform": "Synthesia + Runway ML",
+  "selfSufficient": true,
+  "autonomousCapabilities": [
+    "Generates videos from scripts automatically",
+    "Creates multi-platform video variations",
+    "Optimizes thumbnails with A/B testing",
+    "Auto-generates captions and transcripts",
+    "Tracks video performance and iterates"
+  ],
+  "capabilities": [
+    "AI-generated video creation",
+    "Multi-language video production",
+    "Automated video editing",
+    "Thumbnail optimization",
+    "Video SEO optimization",
+    "Platform-specific formatting",
+    "Analytics and performance tracking",
+    "Video personalization at scale"
+  ],
+  "tools": [
+    {
+      "name": "Synthesia",
+      "purpose": "AI avatar video creation",
+      "apiKey": "SYNTHESIA_API_KEY"
+    },
+    {
+      "name": "Runway ML",
+      "purpose": "AI video editing",
+      "apiKey": "RUNWAY_API_KEY"
+    },
+    {
+      "name": "Descript",
+      "purpose": "Text-based video editing",
+      "apiKey": "DESCRIPT_API_KEY"
+    },
+    {
+      "name": "Vidyard",
+      "purpose": "Video hosting and analytics",
+      "apiKey": "VIDYARD_API_KEY"
+    }
+  ],
+  "integrations": [
+    "YouTube",
+    "Vimeo",
+    "TikTok",
+    "LinkedIn Video",
+    "Wistia",
+    "Slack (Scotty notifications)"
+  ],
+  "metrics": {
+    "videosCreated": 0,
+    "totalViews": 0,
+    "engagementRate": "0%",
+    "conversionRate": "0%",
+    "watchTime": "0 hours"
+  },
+  "currentTasks": [],
+  "recentWork": [],
+  "status": "ready",
+  "workflowAutomation": {
+    "receivesTasksFrom": "Scotty",
+    "autoExecutes": true,
+    "collaboratesWith": ["marcus-hayes", "natalie-brooks"],
+    "notificationPreferences": "Video completion alerts to Scotty"
+  },
+  "pricing": {
+    "toolCosts": "$100-500/month",
+    "estimatedValue": "$10,000/month in video content"
+  }
+}

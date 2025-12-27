@@ -1,0 +1,360 @@
+{
+  "version": "1.0",
+  "description": "Marketing automation workflows and templates",
+  "lastUpdated": "2025-12-05",
+
+  "workflowCategories": {
+    "leadNurturing": {
+      "name": "Lead Nurturing",
+      "description": "Automated sequences to nurture leads through the funnel",
+      "workflows": [
+        {
+          "id": "wf_001",
+          "name": "Welcome Series",
+          "description": "7-day onboarding sequence for new leads",
+          "trigger": "lead.created",
+          "status": "active",
+          "agents": ["emma-wilson", "sarah-chen"],
+          "steps": [
+            {
+              "day": 0,
+              "action": "send_email",
+              "template": "welcome_email_1",
+              "subject": "Welcome to [Company Name]!",
+              "agent": "emma-wilson"
+            },
+            {
+              "day": 2,
+              "action": "send_email",
+              "template": "value_proposition",
+              "subject": "Here's how we can help you...",
+              "agent": "emma-wilson"
+            },
+            {
+              "day": 4,
+              "action": "send_email",
+              "template": "case_study",
+              "subject": "See how [Customer] achieved [Result]",
+              "agent": "marcus-hayes"
+            },
+            {
+              "day": 7,
+              "action": "assign_to_sales",
+              "condition": "engagement_score > 50",
+              "agent": "sarah-chen"
+            }
+          ],
+          "metrics": {
+            "enrolled": 1247,
+            "completed": 892,
+            "converted": 156,
+            "conversionRate": 12.5
+          }
+        },
+        {
+          "id": "wf_002",
+          "name": "Re-engagement Campaign",
+          "description": "Win back inactive leads",
+          "trigger": "lead.inactive_30_days",
+          "status": "active",
+          "agents": ["emma-wilson"],
+          "steps": [
+            {
+              "day": 0,
+              "action": "send_email",
+              "template": "we_miss_you",
+              "subject": "We noticed you've been away..."
+            },
+            {
+              "day": 3,
+              "action": "send_special_offer",
+              "template": "exclusive_offer",
+              "discount": "20%"
+            },
+            {
+              "day": 7,
+              "action": "final_attempt",
+              "template": "last_chance"
+            },
+            {
+              "day": 10,
+              "action": "mark_as_cold",
+              "condition": "no_engagement"
+            }
+          ],
+          "metrics": {
+            "enrolled": 456,
+            "reactivated": 89,
+            "reactivationRate": 19.5
+          }
+        }
+      ]
+    },
+
+    "campaignAutomation": {
+      "name": "Campaign Automation",
+      "description": "Automated campaign workflows",
+      "workflows": [
+        {
+          "id": "wf_010",
+          "name": "Content Distribution",
+          "description": "Automatically distribute new content across channels",
+          "trigger": "content.published",
+          "status": "active",
+          "agents": ["marcus-hayes", "alex-rodriguez", "emma-wilson"],
+          "steps": [
+            {
+              "step": 1,
+              "action": "extract_metadata",
+              "description": "AI extracts title, summary, keywords",
+              "agent": "marcus-hayes"
+            },
+            {
+              "step": 2,
+              "action": "create_social_posts",
+              "description": "Generate platform-specific posts",
+              "platforms": ["linkedin", "twitter", "facebook"],
+              "agent": "alex-rodriguez"
+            },
+            {
+              "step": 3,
+              "action": "schedule_posts",
+              "description": "Schedule for optimal times",
+              "agent": "alex-rodriguez"
+            },
+            {
+              "step": 4,
+              "action": "send_newsletter",
+              "description": "Include in next newsletter",
+              "agent": "emma-wilson"
+            },
+            {
+              "step": 5,
+              "action": "notify_sales",
+              "description": "Alert sales team about new content",
+              "agent": "sarah-chen"
+            }
+          ]
+        },
+        {
+          "id": "wf_011",
+          "name": "Product Launch Sequence",
+          "description": "Complete product launch automation",
+          "trigger": "manual",
+          "status": "template",
+          "agents": ["marcus-hayes", "alex-rodriguez", "victor-stone", "emma-wilson", "robert-davis"],
+          "phases": [
+            {
+              "phase": "Pre-Launch (Week -4 to -1)",
+              "tasks": [
+                "Create messaging and positioning (Marcus)",
+                "Develop video content (Victor)",
+                "Build email sequences (Emma)",
+                "Set up ad campaigns (Alex)",
+                "Create revenue forecast (Robert)"
+              ]
+            },
+            {
+              "phase": "Launch (Day 0)",
+              "tasks": [
+                "Publish launch content (Marcus)",
+                "Activate ad campaigns (Alex)",
+                "Send launch emails (Emma)",
+                "Post social announcements (Alex)",
+                "Monitor performance (David)"
+              ]
+            },
+            {
+              "phase": "Post-Launch (Week +1 to +4)",
+              "tasks": [
+                "Analyze results (David)",
+                "Optimize campaigns (Alex)",
+                "Nurture leads (Emma)",
+                "Gather feedback (Sophie)",
+                "Update forecast (Robert)"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    "dataSync": {
+      "name": "Data Synchronization",
+      "description": "Keep data in sync across platforms",
+      "workflows": [
+        {
+          "id": "wf_020",
+          "name": "CRM Contact Sync",
+          "description": "Bidirectional sync between Marketing Dept and CRM",
+          "trigger": "realtime",
+          "status": "active",
+          "frequency": "realtime",
+          "systems": ["marketing-dept", "hubspot", "salesforce"],
+          "syncRules": [
+            {
+              "field": "email",
+              "direction": "bidirectional",
+              "conflictResolution": "latest_update"
+            },
+            {
+              "field": "lead_score",
+              "direction": "marketing-dept_to_crm",
+              "updateFrequency": "hourly"
+            },
+            {
+              "field": "deal_stage",
+              "direction": "crm_to_marketing-dept",
+              "updateFrequency": "realtime"
+            }
+          ],
+          "metrics": {
+            "recordsSynced": 45678,
+            "syncErrors": 23,
+            "lastSync": "2025-12-05T10:30:00Z"
+          }
+        }
+      ]
+    },
+
+    "reporting": {
+      "name": "Automated Reporting",
+      "description": "Scheduled reports and dashboards",
+      "workflows": [
+        {
+          "id": "wf_030",
+          "name": "Daily Performance Report",
+          "description": "Morning digest of key metrics",
+          "trigger": "schedule",
+          "schedule": {
+            "frequency": "daily",
+            "time": "09:00",
+            "timezone": "America/New_York",
+            "daysOfWeek": ["Mon", "Tue", "Wed", "Thu", "Fri"]
+          },
+          "status": "active",
+          "agents": ["david-kim"],
+          "deliverTo": ["slack:#analytics-reports", "email:team@company.com"],
+          "includes": [
+            "leads_generated_yesterday",
+            "campaigns_active",
+            "email_performance",
+            "ad_spend_and_roas",
+            "top_performing_content",
+            "budget_remaining"
+          ]
+        },
+        {
+          "id": "wf_031",
+          "name": "Weekly Executive Summary",
+          "description": "Comprehensive weekly report for leadership",
+          "trigger": "schedule",
+          "schedule": {
+            "frequency": "weekly",
+            "day": "Monday",
+            "time": "08:00"
+          },
+          "status": "active",
+          "agents": ["david-kim", "robert-davis"],
+          "deliverTo": ["email:exec@company.com"],
+          "includes": [
+            "week_over_week_growth",
+            "pipeline_health",
+            "campaign_roi",
+            "channel_performance",
+            "competitive_insights",
+            "revenue_forecast",
+            "recommendations"
+          ]
+        }
+      ]
+    },
+
+    "intelligentAutomation": {
+      "name": "AI-Powered Automation",
+      "description": "Smart workflows that adapt based on data",
+      "workflows": [
+        {
+          "id": "wf_040",
+          "name": "Smart Lead Routing",
+          "description": "AI determines best agent for each lead",
+          "trigger": "lead.created",
+          "status": "active",
+          "agent": "sarah-chen",
+          "aiLogic": {
+            "model": "gpt-4-turbo",
+            "decisionFactors": [
+              "lead_source",
+              "company_size",
+              "industry",
+              "engagement_history",
+              "buying_signals"
+            ],
+            "routingOptions": [
+              "high_value_leads → ava-martinez (ABM)",
+              "technical_leads → marcus-hayes (Content)",
+              "bulk_leads → sarah-chen (Lead Gen)"
+            ]
+          }
+        },
+        {
+          "id": "wf_041",
+          "name": "Dynamic Content Personalization",
+          "description": "AI personalizes content for each visitor",
+          "trigger": "page.visit",
+          "status": "active",
+          "agent": "maya-patel",
+          "personalizationRules": [
+            {
+              "segment": "first_time_visitor",
+              "show": "introductory_content"
+            },
+            {
+              "segment": "return_visitor_high_engagement",
+              "show": "demo_cta"
+            },
+            {
+              "segment": "industry=healthcare",
+              "show": "healthcare_case_studies"
+            }
+          ]
+        },
+        {
+          "id": "wf_042",
+          "name": "Budget Optimizer",
+          "description": "Automatically reallocate budget to top-performing channels",
+          "trigger": "schedule",
+          "schedule": {
+            "frequency": "weekly",
+            "day": "Friday"
+          },
+          "status": "active",
+          "agent": "alex-rodriguez",
+          "optimizationLogic": {
+            "moveFrom": "channels_below_target_roas",
+            "moveTo": "channels_above_target_roas",
+            "maxShift": "20%_per_week",
+            "minimumDataPoints": 100
+          }
+        }
+      ]
+    }
+  },
+
+  "workflowTemplates": {
+    "description": "Pre-built templates for common scenarios",
+    "categories": ["lead_nurturing", "customer_onboarding", "event_marketing", "product_launch", "seasonal_campaigns"],
+    "count": 25
+  },
+
+  "workflowBuilder": {
+    "dragAndDrop": true,
+    "visualEditor": true,
+    "conditionalLogic": true,
+    "multipleTrigg
+
+ers": true,
+    "ABtesting": true,
+    "rollback": true
+  }
+}

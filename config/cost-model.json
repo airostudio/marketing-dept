@@ -1,0 +1,445 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2025-12-05",
+  "description": "Real-world cost comparison model based on 2024-2025 market research",
+  "sources": [
+    "https://hawksem.com/blog/marketing-agency-pricing/",
+    "https://altitudemarketing.com/blog/b2b-content-marketing-cost/",
+    "https://www.upwork.com/hire/seo-experts/cost/",
+    "https://www.salary.com/research/salary/benchmark/email-marketing-specialist-salary",
+    "https://www.glassdoor.com/Salaries/social-media-marketing-manager-salary-SRCH_KO0,30.htm"
+  ],
+  "agentCostModel": {
+    "marcus-hayes": {
+      "name": "Marcus Hayes",
+      "role": "Content Strategist",
+      "tier": "premium",
+      "aiProvider": "gpt-4-turbo",
+      "costStructure": {
+        "aiCostPerRequest": 0.045,
+        "avgRequestsPerHour": 25,
+        "aiCostPerHour": 1.13,
+        "platformOverhead": 0.37,
+        "totalCostPerHour": 1.50
+      },
+      "marketComparison": {
+        "agencyHourlyRate": 175,
+        "freelancerHourlyRate": 125,
+        "fullTimeSalaryEquivalent": 95000,
+        "fullTimeHourlyEquivalent": 45.67,
+        "savingsVsAgency": 99.1,
+        "savingsVsFreelancer": 98.8,
+        "savingsVsFullTime": 96.7
+      },
+      "serviceRates": {
+        "blogPost": {
+          "agencyCost": 1500,
+          "ourCost": 12,
+          "savings": 99.2
+        },
+        "whitepaper": {
+          "agencyCost": 5000,
+          "ourCost": 45,
+          "savings": 99.1
+        },
+        "caseStudy": {
+          "agencyCost": 3500,
+          "ourCost": 28,
+          "savings": 99.2
+        },
+        "monthlyContentStrategy": {
+          "agencyCost": 8500,
+          "ourCost": 85,
+          "savings": 99.0
+        }
+      }
+    },
+    "sarah-chen": {
+      "name": "Sarah Chen",
+      "role": "Lead Generation Specialist",
+      "tier": "budget",
+      "aiProvider": "deepseek-chat",
+      "costStructure": {
+        "aiCostPerRequest": 0.0018,
+        "avgRequestsPerHour": 80,
+        "aiCostPerHour": 0.14,
+        "platformOverhead": 0.11,
+        "totalCostPerHour": 0.25
+      },
+      "marketComparison": {
+        "agencyHourlyRate": 150,
+        "freelancerHourlyRate": 85,
+        "fullTimeSalaryEquivalent": 72000,
+        "fullTimeHourlyEquivalent": 34.62,
+        "savingsVsAgency": 99.8,
+        "savingsVsFreelancer": 99.7,
+        "savingsVsFullTime": 99.3
+      },
+      "serviceRates": {
+        "leadListBuilding": {
+          "agencyCost": 2500,
+          "ourCost": 5,
+          "savings": 99.8
+        },
+        "coldEmailCampaign": {
+          "agencyCost": 4000,
+          "ourCost": 8,
+          "savings": 99.8
+        },
+        "leadScoringModel": {
+          "agencyCost": 3000,
+          "ourCost": 6,
+          "savings": 99.8
+        },
+        "monthlyLeadGenRetainer": {
+          "agencyCost": 7500,
+          "ourCost": 45,
+          "savings": 99.4
+        }
+      }
+    },
+    "emma-wilson": {
+      "name": "Emma Wilson",
+      "role": "Email Marketing Specialist",
+      "tier": "budget",
+      "aiProvider": "deepseek-chat",
+      "costStructure": {
+        "aiCostPerRequest": 0.0018,
+        "avgRequestsPerHour": 60,
+        "aiCostPerHour": 0.11,
+        "platformOverhead": 0.09,
+        "totalCostPerHour": 0.20
+      },
+      "marketComparison": {
+        "agencyHourlyRate": 135,
+        "freelancerHourlyRate": 75,
+        "fullTimeSalaryEquivalent": 76000,
+        "fullTimeHourlyEquivalent": 36.54,
+        "savingsVsAgency": 99.9,
+        "savingsVsFreelancer": 99.7,
+        "savingsVsFullTime": 99.5
+      },
+      "serviceRates": {
+        "emailTemplate": {
+          "agencyCost": 800,
+          "ourCost": 2,
+          "savings": 99.8
+        },
+        "automationWorkflow": {
+          "agencyCost": 2500,
+          "ourCost": 5,
+          "savings": 99.8
+        },
+        "monthlyEmailCampaigns": {
+          "agencyCost": 4500,
+          "ourCost": 18,
+          "savings": 99.6
+        },
+        "emailStrategyAudit": {
+          "agencyCost": 3000,
+          "ourCost": 8,
+          "savings": 99.7
+        }
+      }
+    },
+    "alex-rodriguez": {
+      "name": "Alex Rodriguez",
+      "role": "Social Media Advertising Specialist",
+      "tier": "mid-tier",
+      "aiProvider": "gpt-3.5-turbo",
+      "costStructure": {
+        "aiCostPerRequest": 0.0075,
+        "avgRequestsPerHour": 45,
+        "aiCostPerHour": 0.34,
+        "platformOverhead": 0.16,
+        "totalCostPerHour": 0.50
+      },
+      "marketComparison": {
+        "agencyHourlyRate": 165,
+        "freelancerHourlyRate": 95,
+        "fullTimeSalaryEquivalent": 81000,
+        "fullTimeHourlyEquivalent": 38.94,
+        "savingsVsAgency": 99.7,
+        "savingsVsFreelancer": 99.5,
+        "savingsVsFullTime": 98.7
+      },
+      "serviceRates": {
+        "adCampaignSetup": {
+          "agencyCost": 2000,
+          "ourCost": 8,
+          "savings": 99.6
+        },
+        "adCreativeSet": {
+          "agencyCost": 1500,
+          "ourCost": 6,
+          "savings": 99.6
+        },
+        "monthlyAdManagement": {
+          "agencyCost": 5500,
+          "ourCost": 35,
+          "savings": 99.4
+        },
+        "audienceResearch": {
+          "agencyCost": 1800,
+          "ourCost": 5,
+          "savings": 99.7
+        }
+      }
+    },
+    "ryan-mitchell": {
+      "name": "Ryan Mitchell",
+      "role": "SEO Specialist",
+      "tier": "budget",
+      "aiProvider": "deepseek-chat",
+      "costStructure": {
+        "aiCostPerRequest": 0.0018,
+        "avgRequestsPerHour": 50,
+        "aiCostPerHour": 0.09,
+        "platformOverhead": 0.11,
+        "totalCostPerHour": 0.20
+      },
+      "marketComparison": {
+        "agencyHourlyRate": 145,
+        "freelancerHourlyRate": 85,
+        "fullTimeSalaryEquivalent": 67000,
+        "fullTimeHourlyEquivalent": 32.21,
+        "savingsVsAgency": 99.9,
+        "savingsVsFreelancer": 99.8,
+        "savingsVsFullTime": 99.4
+      },
+      "serviceRates": {
+        "technicalSEOAudit": {
+          "agencyCost": 4000,
+          "ourCost": 12,
+          "savings": 99.7
+        },
+        "keywordResearch": {
+          "agencyCost": 1500,
+          "ourCost": 4,
+          "savings": 99.7
+        },
+        "onPageOptimization": {
+          "agencyCost": 2500,
+          "ourCost": 8,
+          "savings": 99.7
+        },
+        "monthlySEORetainer": {
+          "agencyCost": 6000,
+          "ourCost": 40,
+          "savings": 99.3
+        }
+      }
+    },
+    "victor-stone": {
+      "name": "Victor Stone",
+      "role": "Video Marketing Specialist",
+      "tier": "mid-tier",
+      "aiProvider": "gpt-3.5-turbo",
+      "costStructure": {
+        "aiCostPerRequest": 0.0075,
+        "avgRequestsPerHour": 35,
+        "aiCostPerHour": 0.26,
+        "platformOverhead": 0.24,
+        "totalCostPerHour": 0.50
+      },
+      "marketComparison": {
+        "agencyHourlyRate": 185,
+        "freelancerHourlyRate": 125,
+        "fullTimeSalaryEquivalent": 88000,
+        "fullTimeHourlyEquivalent": 42.31,
+        "savingsVsAgency": 99.7,
+        "savingsVsFreelancer": 99.6,
+        "savingsVsFullTime": 98.8
+      },
+      "serviceRates": {
+        "videoScript": {
+          "agencyCost": 2000,
+          "ourCost": 8,
+          "savings": 99.6
+        },
+        "videoProductionPlan": {
+          "agencyCost": 3500,
+          "ourCost": 12,
+          "savings": 99.7
+        },
+        "videoDistributionStrategy": {
+          "agencyCost": 2500,
+          "ourCost": 10,
+          "savings": 99.6
+        },
+        "monthlyVideoStrategy": {
+          "agencyCost": 8000,
+          "ourCost": 55,
+          "savings": 99.3
+        }
+      }
+    },
+    "david-kim": {
+      "name": "David Kim",
+      "role": "Marketing Analytics Specialist",
+      "tier": "budget",
+      "aiProvider": "deepseek-chat",
+      "costStructure": {
+        "aiCostPerRequest": 0.0018,
+        "avgRequestsPerHour": 70,
+        "aiCostPerHour": 0.13,
+        "platformOverhead": 0.12,
+        "totalCostPerHour": 0.25
+      },
+      "marketComparison": {
+        "agencyHourlyRate": 155,
+        "freelancerHourlyRate": 95,
+        "fullTimeSalaryEquivalent": 79000,
+        "fullTimeHourlyEquivalent": 37.98,
+        "savingsVsAgency": 99.8,
+        "savingsVsFreelancer": 99.7,
+        "savingsVsFullTime": 99.3
+      },
+      "serviceRates": {
+        "customDashboard": {
+          "agencyCost": 3500,
+          "ourCost": 10,
+          "savings": 99.7
+        },
+        "analyticsAudit": {
+          "agencyCost": 2500,
+          "ourCost": 8,
+          "savings": 99.7
+        },
+        "performanceReport": {
+          "agencyCost": 1500,
+          "ourCost": 5,
+          "savings": 99.7
+        },
+        "monthlyAnalyticsRetainer": {
+          "agencyCost": 5500,
+          "ourCost": 35,
+          "savings": 99.4
+        }
+      }
+    },
+    "robert-davis": {
+      "name": "Robert Davis",
+      "role": "Revenue Intelligence Specialist",
+      "tier": "premium",
+      "aiProvider": "gpt-4-turbo",
+      "costStructure": {
+        "aiCostPerRequest": 0.045,
+        "avgRequestsPerHour": 30,
+        "aiCostPerHour": 1.35,
+        "platformOverhead": 0.40,
+        "totalCostPerHour": 1.75
+      },
+      "marketComparison": {
+        "agencyHourlyRate": 225,
+        "freelancerHourlyRate": 165,
+        "fullTimeSalaryEquivalent": 115000,
+        "fullTimeHourlyEquivalent": 55.29,
+        "savingsVsAgency": 99.2,
+        "savingsVsFreelancer": 98.9,
+        "savingsVsFullTime": 96.8
+      },
+      "serviceRates": {
+        "revenueForecasting": {
+          "agencyCost": 8000,
+          "ourCost": 45,
+          "savings": 99.4
+        },
+        "pipelineAnalysis": {
+          "agencyCost": 5000,
+          "ourCost": 28,
+          "savings": 99.4
+        },
+        "pricingStrategy": {
+          "agencyCost": 10000,
+          "ourCost": 55,
+          "savings": 99.5
+        },
+        "monthlyRevenueIntel": {
+          "agencyCost": 12000,
+          "ourCost": 95,
+          "savings": 99.2
+        }
+      }
+    },
+    "oscar-wright": {
+      "name": "Oscar Wright",
+      "role": "Marketing Operations Specialist",
+      "tier": "premium",
+      "aiProvider": "gpt-4-turbo",
+      "costStructure": {
+        "aiCostPerRequest": 0.045,
+        "avgRequestsPerHour": 28,
+        "aiCostPerHour": 1.26,
+        "platformOverhead": 0.39,
+        "totalCostPerHour": 1.65
+      },
+      "marketComparison": {
+        "agencyHourlyRate": 195,
+        "freelancerHourlyRate": 145,
+        "fullTimeSalaryEquivalent": 98000,
+        "fullTimeHourlyEquivalent": 47.12,
+        "savingsVsAgency": 99.2,
+        "savingsVsFreelancer": 98.9,
+        "savingsVsFullTime": 96.5
+      },
+      "serviceRates": {
+        "marTechAudit": {
+          "agencyCost": 6000,
+          "ourCost": 35,
+          "savings": 99.4
+        },
+        "processOptimization": {
+          "agencyCost": 4500,
+          "ourCost": 25,
+          "savings": 99.4
+        },
+        "integrationSetup": {
+          "agencyCost": 5500,
+          "ourCost": 30,
+          "savings": 99.5
+        },
+        "monthlyMarOpsRetainer": {
+          "agencyCost": 9500,
+          "ourCost": 85,
+          "savings": 99.1
+        }
+      }
+    }
+  },
+  "aggregatedSavings": {
+    "description": "Total savings across all 15 agents compared to traditional agencies",
+    "averageSavingsPercentage": 99.3,
+    "typicalMonthlyAgencyCost": 35000,
+    "typicalMonthlyMarketingDeptCost": 450,
+    "monthlySavings": 34550,
+    "annualSavings": 414600,
+    "threeYearSavings": 1243800,
+    "fiveYearSavings": 2073000
+  },
+  "realWorldComparisons": {
+    "fullMarketingTeam": {
+      "description": "15 full-time specialists",
+      "annualCost": 1275000,
+      "marketingDeptAnnualCost": 5400,
+      "savings": 1269600,
+      "savingsPercentage": 99.6
+    },
+    "b2bRocketComparison": {
+      "description": "B2B Rocket AI agent platform (5 agents)",
+      "monthlyMinCost": 2450,
+      "monthlyMaxCost": 4199,
+      "marketingDeptCost": 165,
+      "agentCount": 15,
+      "avgSavingsPercentage": 94.2
+    },
+    "traditionalAgency": {
+      "description": "Full-service B2B marketing agency",
+      "monthlyRetainer": 25000,
+      "marketingDeptCost": 450,
+      "savings": 24550,
+      "savingsPercentage": 98.2,
+      "annualSavings": 294600
+    }
+  }
+}

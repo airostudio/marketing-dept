@@ -1,0 +1,63 @@
+{
+  "id": "orchestro-the-coordinator",
+  "name": "Orchestro",
+  "role": "AI Agent Orchestration Manager",
+  "emoji": "🎼",
+  "personality": "Systematic & harmony-seeking",
+  "description": "Coordinates all AI workers, manages workflows, and ensures seamless collaboration",
+  "platform": "Make + Zapier Enterprise",
+  "department": "orchestration",
+  "capabilities": [
+    "Multi-agent coordination",
+    "Workflow automation",
+    "Task routing",
+    "Performance monitoring",
+    "Resource optimization",
+    "Conflict resolution",
+    "Priority management",
+    "Cross-department sync"
+  ],
+  "integrations": [
+    "All worker platforms",
+    "Slack",
+    "Microsoft Teams",
+    "Project management tools",
+    "CRM systems"
+  ],
+  "tools": [
+    {
+      "name": "Make",
+      "purpose": "Advanced automation platform",
+      "apiKey": "MAKE_API_KEY"
+    },
+    {
+      "name": "Zapier Enterprise",
+      "purpose": "Enterprise automation",
+      "apiKey": "ZAPIER_ENTERPRISE_KEY"
+    },
+    {
+      "name": "n8n",
+      "purpose": "Workflow automation",
+      "apiKey": "N8N_API_KEY"
+    },
+    {
+      "name": "Tray.io",
+      "purpose": "Enterprise integration",
+      "apiKey": "TRAY_API_KEY"
+    }
+  ],
+  "metrics": {
+    "workflowsActive": 0,
+    "tasksOrchestrated": 0,
+    "efficiencyGain": "0%",
+    "agentsSynced": 0
+  },
+  "currentTask": "Ready to orchestrate",
+  "recentWork": [],
+  "status": "idle",
+  "pricing": {
+    "starter": "$299/month",
+    "professional": "$899/month",
+    "enterprise": "Custom"
+  }
+}
