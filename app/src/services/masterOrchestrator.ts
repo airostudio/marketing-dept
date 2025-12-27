@@ -12,7 +12,7 @@
 import { analyzeTaskWithScotty, createOrchestrationPlan, OrchestrationPlan } from './scottyOrchestrator';
 import { collateWithEA, AgentOutput, EADeliverable, formatDeliverableAsMarkdown } from './eaAgent';
 import { executeTask } from './taskExecutor';
-import { Worker, WorkflowStep, Task } from '../types/workflow';
+import { Worker, WorkflowStep } from '../types/workflow';
 
 export interface WorkflowExecution {
   taskId: string;
