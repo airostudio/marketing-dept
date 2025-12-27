@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ListTodo, Settings as SettingsIcon, LogOut, Sparkles, LayoutDashboard, Users } from 'lucide-react'
+import { ListTodo, Settings as SettingsIcon, LogOut, Sparkles, LayoutDashboard, Users, FileText } from 'lucide-react'
 import { useStore } from '../store/useStore'
 
 interface LayoutProps {
@@ -15,6 +15,7 @@ export default function Layout({ children }: LayoutProps) {
     { name: 'Manager', path: '/', icon: Sparkles },
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Team', path: '/team', icon: Users },
+    { name: 'Deliverables', path: '/deliverables', icon: FileText },
     { name: 'Tasks', path: '/tasks', icon: ListTodo },
     { name: 'Settings', path: '/settings', icon: SettingsIcon },
   ]

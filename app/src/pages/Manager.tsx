@@ -14,6 +14,7 @@ import Layout from '../components/Layout';
 import { marketingAPI, TaskProgress } from '../services/marketingAPI';
 import { WorkflowExecution } from '../services/masterOrchestrator';
 import { activityTracker } from '../services/activityTracker';
+import { useStore } from '../store/useStore';
 import toast from 'react-hot-toast';
 
 interface AgentActivityWindow {
@@ -25,6 +26,7 @@ interface AgentActivityWindow {
 }
 
 export default function Manager() {
+  const addDeliverable = useStore((state) => state.addDeliverable);
   const [taskInput, setTaskInput] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [currentProgress, setCurrentProgress] = useState<TaskProgress | null>(null);
@@ -118,6 +120,30 @@ export default function Manager() {
           setDeliverableContent(execution.finalDeliverable);
         } else if (execution.finalDeliverable.fullReport) {
           setDeliverableContent(execution.finalDeliverable.fullReport);
+
+          // Save deliverable to store for permanent access
+          addDeliverable({
+            id: `deliverable-${execution.taskId}`,
+            taskId: execution.taskId,
+            status: 'completed',
+            executiveSummary: execution.finalDeliverable.executiveSummary || '',
+            keyFindings: execution.finalDeliverable.keyFindings || [],
+            agentContributions: execution.finalDeliverable.agentContributions || [],
+            recommendations: execution.finalDeliverable.recommendations || [],
+            nextSteps: execution.finalDeliverable.nextSteps || [],
+            fullReport: execution.finalDeliverable.fullReport,
+            metadata: execution.finalDeliverable.metadata || {
+              taskDescription: execution.taskDescription,
+              completedAt: execution.completedAt || new Date().toISOString(),
+              totalAgents: execution.stepResults.size,
+              complexity: execution.orchestrationPlan?.analysis.complexity || 'moderate'
+            },
+            completedAt: execution.completedAt || new Date().toISOString(),
+            createdBy: 'EA (Executive Assistant)'
+          });
+
+          console.log('📦 Deliverable saved to store and available in Deliverables page');
+          toast.success('Deliverable ready! View it in the Deliverables page.');
         } else {
           setDeliverableContent(JSON.stringify(execution.finalDeliverable, null, 2));
         }

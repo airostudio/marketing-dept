@@ -9,6 +9,7 @@ import TaskManager from './pages/TaskManager'
 import Settings from './pages/Settings'
 import Team from './pages/Team'
 import AgentProfile from './pages/AgentProfile'
+import Deliverables from './pages/Deliverables'
 import ProductionValidator from './components/ProductionValidator'
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/team" element={<Team />} />
               <Route path="/agents/:agentId" element={<AgentProfile />} />
+              <Route path="/deliverables" element={<Deliverables />} />
               <Route path="/worker/:workerId" element={<WorkerDetail />} />
               <Route path="/tasks" element={<TaskManager />} />
               <Route path="/settings" element={<Settings />} />

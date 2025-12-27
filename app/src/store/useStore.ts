@@ -47,6 +47,30 @@ export interface Task {
   error?: string
 }
 
+export interface Deliverable {
+  id: string
+  taskId: string
+  status: 'completed' | 'in_progress'
+  executiveSummary: string
+  keyFindings: string[]
+  agentContributions: {
+    agentName: string
+    contribution: string
+    highlights: string[]
+  }[]
+  recommendations: string[]
+  nextSteps: string[]
+  fullReport: string
+  metadata: {
+    taskDescription: string
+    completedAt: string
+    totalAgents: number
+    complexity: string
+  }
+  completedAt: string
+  createdBy: string
+}
+
 interface Store {
   // Setup
   isSetupComplete: boolean
@@ -62,6 +86,9 @@ interface Store {
   // Workflows
   workflows: Workflow[]
   activeWorkflowId?: string
+
+  // Deliverables
+  deliverables: Deliverable[]
 
   // Actions
   setApiCredential: (platform: string, key: string) => void
@@ -80,6 +107,9 @@ interface Store {
   updateWorkflow: (id: string, updates: Partial<Workflow>) => void
   deleteWorkflow: (id: string) => void
   setActiveWorkflow: (id: string | undefined) => void
+
+  addDeliverable: (deliverable: Deliverable) => void
+  deleteDeliverable: (id: string) => void
 }
 
 // Auto-initialize from environment variables
@@ -241,6 +271,7 @@ export const useStore = create<Store>()(
       tasks: [],
       workflows: [],
       activeWorkflowId: undefined,
+      deliverables: [],
 
       // Actions
       setApiCredential: (platform, key) => {
@@ -399,6 +430,18 @@ export const useStore = create<Store>()(
 
       setActiveWorkflow: (id) => {
         set({ activeWorkflowId: id })
+      },
+
+      addDeliverable: (deliverable) => {
+        set((state) => ({
+          deliverables: [deliverable, ...state.deliverables],
+        }))
+      },
+
+      deleteDeliverable: (id) => {
+        set((state) => ({
+          deliverables: state.deliverables.filter((d) => d.id !== id),
+        }))
       },
     }),
     {
