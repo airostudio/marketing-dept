@@ -12,9 +12,7 @@ export interface APIRequirement {
   setupUrl: string;
   docsUrl: string;
   pricingUrl?: string;
-  freeT
-
-ier: boolean;
+  freeTier?: boolean;
   estimatedCost?: string;
 }
 
@@ -351,7 +349,7 @@ function generateSetupInstructions(required: APIRequirement[], optional: APIRequ
 /**
  * Calculate estimated total cost
  */
-function calculateTotalCost(required: APIRequirement[], optional: APIRequirement[]): string {
+function calculateTotalCost(required: APIRequirement[], _optional: APIRequirement[]): string {
   const costs: string[] = [];
 
   required.forEach(api => {

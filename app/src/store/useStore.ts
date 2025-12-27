@@ -123,117 +123,117 @@ export const useStore = create<Store>()(
           emoji: '🎯',
           role: 'VP of Sales & Marketing',
           department: 'Executive Leadership',
-          platform: 'Google Gemini',
+          platform: 'Gemini',
           status: 'active',
           metrics: {}
         },
         {
-          id: 'jasper',
-          name: 'Jasper',
+          id: 'marcus-hayes',
+          name: 'Marcus Hayes',
           emoji: '✍️',
-          role: 'Content Creation Lead',
+          role: 'Content Strategist & Editorial Director',
           department: 'Content Creation',
-          platform: 'Google Gemini',
+          platform: 'Gemini',
           status: 'idle',
           metrics: {}
         },
         {
-          id: 'casey',
-          name: 'Casey',
+          id: 'emma-thompson',
+          name: 'Emma Thompson',
           emoji: '📝',
-          role: 'AI Copywriter',
+          role: 'Direct Response Copywriter',
           department: 'Content Creation',
-          platform: 'Google Gemini',
+          platform: 'Gemini',
           status: 'idle',
           metrics: {}
         },
         {
-          id: 'zoey',
-          name: 'Zoey',
+          id: 'sarah-chen',
+          name: 'Sarah Chen',
           emoji: '🔍',
-          role: 'Lead Prospecting Specialist',
+          role: 'Lead Generation & Demand Gen Specialist',
           department: 'Lead Generation',
           platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
         {
-          id: 'hunter',
-          name: 'Hunter',
+          id: 'david-kim',
+          name: 'David Kim',
           emoji: '🎯',
-          role: 'Email Finder Specialist',
+          role: 'Email Finding & Data Enrichment Specialist',
           department: 'Lead Generation',
           platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
         {
-          id: 'sage',
-          name: 'Sage',
-          emoji: '⏰',
-          role: 'Email Campaign Manager',
+          id: 'emma-wilson',
+          name: 'Emma Wilson',
+          emoji: '📧',
+          role: 'Email Marketing & Automation Architect',
           department: 'Email Marketing',
-          platform: 'Google Gemini',
+          platform: 'Gemini',
           status: 'idle',
           metrics: {}
         },
         {
-          id: 'smarta',
-          name: 'Smarta',
-          emoji: '🎯',
-          role: 'Social Advertising Manager',
-          department: 'Social Media',
+          id: 'alex-rodriguez',
+          name: 'Alex Rodriguez',
+          emoji: '📱',
+          role: 'Paid Social & Performance Marketing Expert',
+          department: 'Paid Advertising',
           platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
         {
-          id: 'dynamo',
-          name: 'Dynamo',
+          id: 'maya-patel',
+          name: 'Maya Patel',
           emoji: '🎨',
-          role: 'Experience Optimization Lead',
-          department: 'Personalization',
-          platform: 'Google Gemini',
+          role: 'Personalization & CRO Expert',
+          department: 'Conversion Optimization',
+          platform: 'Gemini',
           status: 'idle',
           metrics: {}
         },
         {
-          id: 'analyzer',
-          name: 'Analyzer',
+          id: 'ryan-mitchell',
+          name: 'Ryan Mitchell',
           emoji: '📊',
-          role: 'Data Analytics Specialist',
+          role: 'Marketing Analytics & BI Expert',
           department: 'Analytics',
           platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
         {
-          id: 'heatley',
-          name: 'Heatley',
+          id: 'sophia-anderson',
+          name: 'Sophia Anderson',
           emoji: '🔥',
-          role: 'User Experience Analyst',
-          department: 'Analytics',
+          role: 'UX Research & CRO Specialist',
+          department: 'User Experience',
           platform: 'DeepSeek',
           status: 'idle',
           metrics: {}
         },
         {
-          id: 'surfy',
-          name: 'Surfy',
-          emoji: '🏄',
-          role: 'SEO Optimization Specialist',
+          id: 'oscar-wright',
+          name: 'Oscar Wright',
+          emoji: '🔍',
+          role: 'Technical SEO & Organic Growth Strategist',
           department: 'SEO',
-          platform: 'Google Gemini',
+          platform: 'Gemini',
           status: 'idle',
           metrics: {}
         },
         {
-          id: 'chatty',
-          name: 'Chatty',
+          id: 'natalie-brooks',
+          name: 'Natalie Brooks',
           emoji: '💬',
-          role: 'Customer Support Specialist',
+          role: 'Customer Support & CX Specialist',
           department: 'Customer Support',
-          platform: 'Google Gemini',
+          platform: 'Gemini',
           status: 'idle',
           metrics: {}
         },
@@ -265,15 +265,57 @@ export const useStore = create<Store>()(
 
         if (!apiKey) return false
 
-        // TODO: Implement actual API verification
-        // For now, simulate verification
-        await new Promise(resolve => setTimeout(resolve, 1000))
+        try {
+          // Actually test the API key with a real API call
+          if (platform === 'gemini') {
+            const response = await fetch(
+              `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
+              {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  contents: [{ parts: [{ text: 'test' }] }],
+                }),
+              }
+            )
 
-        set((state) => ({
-          verifiedApis: [...state.verifiedApis, platform],
-        }))
+            if (!response.ok) {
+              console.error('Gemini API verification failed:', await response.text())
+              return false
+            }
 
-        return true
+            geminiService.initialize(apiKey)
+          } else if (platform === 'deepseek') {
+            const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${apiKey}`,
+              },
+              body: JSON.stringify({
+                model: 'deepseek-chat',
+                messages: [{ role: 'user', content: 'test' }],
+                max_tokens: 10,
+              }),
+            })
+
+            if (!response.ok) {
+              console.error('DeepSeek API verification failed:', await response.text())
+              return false
+            }
+
+            deepseekService.initialize(apiKey)
+          }
+
+          set((state) => ({
+            verifiedApis: [...state.verifiedApis.filter((p) => p !== platform), platform],
+          }))
+
+          return true
+        } catch (error) {
+          console.error(`API verification failed for ${platform}:`, error)
+          return false
+        }
       },
 
       completeSetup: () => {

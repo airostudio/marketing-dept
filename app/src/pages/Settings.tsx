@@ -5,25 +5,51 @@ import Layout from '../components/Layout'
 import toast from 'react-hot-toast'
 
 export default function Settings() {
-  const { apiCredentials, setApiCredential, resetSetup } = useStore()
+  const { apiCredentials, setApiCredential, verifyApi, resetSetup } = useStore()
   const [showKeys, setShowKeys] = useState<Record<string, boolean>>({})
   const [showResetConfirm, setShowResetConfirm] = useState(false)
+  const [verifying, setVerifying] = useState<Record<string, boolean>>({})
 
   const platforms = [
-    { id: 'gemini', name: 'Google Gemini', worker: 'Creative Agents', description: 'Powers Scotty, Jasper, Casey, Sage, Dynamo, Surfy, Chatty' },
-    { id: 'deepseek', name: 'DeepSeek AI', worker: 'Technical Agents', description: 'Powers Zoey, Hunter, Smarta, Analyzer, Heatley' },
-    { id: 'jasperAi', name: 'Jasper AI', worker: 'Jasper (legacy)' },
-    { id: 'zoomInfo', name: 'ZoomInfo', worker: 'Zoey' },
-    { id: 'seventhSense', name: 'Seventh Sense', worker: 'Sage' },
-    { id: 'smartlyIo', name: 'Smartly.io', worker: 'Smarta' },
-    { id: 'dynamicYield', name: 'Dynamic Yield', worker: 'Dynamo' },
-    { id: 'googleAnalytics', name: 'Google Analytics', worker: 'Analyzer' },
-    { id: 'surferSeo', name: 'Surfer SEO', worker: 'Surfy' },
-    { id: 'intercom', name: 'Intercom', worker: 'Chatty' },
+    {
+      id: 'gemini',
+      name: 'Google Gemini',
+      description: 'Powers 7 creative agents: Scotty, Marcus Hayes, Emma Thompson, Emma Wilson, Maya Patel, Oscar Wright, Natalie Brooks',
+      isPrimary: true,
+      docs: 'https://ai.google.dev/gemini-api/docs/api-key'
+    },
+    {
+      id: 'deepseek',
+      name: 'DeepSeek AI',
+      description: 'Powers 5 technical agents: Sarah Chen, David Kim, Alex Rodriguez, Ryan Mitchell, Sophia Anderson',
+      isPrimary: true,
+      docs: 'https://platform.deepseek.com/api-docs/'
+    },
   ]
 
-  const handleSave = (platformId: string) => {
-    toast.success(`${platformId} credentials saved`)
+  const handleSave = async (platformId: string) => {
+    const apiKey = apiCredentials[platformId as keyof typeof apiCredentials]
+
+    if (!apiKey || !apiKey.trim()) {
+      toast.error('Please enter an API key first')
+      return
+    }
+
+    setVerifying({ ...verifying, [platformId]: true })
+
+    try {
+      const isValid = await verifyApi(platformId)
+
+      if (isValid) {
+        toast.success(`${platformId} API key verified and saved!`)
+      } else {
+        toast.error(`${platformId} API key validation failed. Please check your key.`)
+      }
+    } catch (error) {
+      toast.error(`Failed to verify ${platformId} API key: ${error instanceof Error ? error.message : 'Unknown error'}`)
+    } finally {
+      setVerifying({ ...verifying, [platformId]: false })
+    }
   }
 
   const toggleShowKey = (platformId: string) => {
@@ -55,14 +81,26 @@ export default function Settings() {
               return (
                 <div key={platform.id} className="pb-6 border-b border-gray-200 last:border-0 last:pb-0">
                   <div className="flex items-center justify-between mb-3">
-                    <div>
-                      <h3 className="font-semibold text-gray-900">{platform.name}</h3>
-                      <p className="text-sm text-gray-600">Powers: {platform.worker}</p>
-                    </div>
-                    <div className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      currentKey ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                    }`}>
-                      {currentKey ? 'Connected' : 'Not Connected'}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="font-semibold text-gray-900">{platform.name}</h3>
+                        <div className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                          currentKey ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800'
+                        }`}>
+                          {currentKey ? 'Connected' : 'Setup Required'}
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-1">{platform.description}</p>
+                      {platform.docs && (
+                        <a
+                          href={platform.docs}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs text-blue-600 hover:text-blue-800 hover:underline"
+                        >
+                          Get API Key →
+                        </a>
+                      )}
                     </div>
                   </div>
 
@@ -85,10 +123,20 @@ export default function Settings() {
                     </div>
                     <button
                       onClick={() => handleSave(platform.id)}
-                      className="btn-secondary flex items-center gap-2"
+                      disabled={verifying[platform.id]}
+                      className="btn-secondary flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      <Save className="w-4 h-4" />
-                      Save
+                      {verifying[platform.id] ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
+                          Verifying...
+                        </>
+                      ) : (
+                        <>
+                          <Save className="w-4 h-4" />
+                          Verify & Save
+                        </>
+                      )}
                     </button>
                   </div>
                 </div>
