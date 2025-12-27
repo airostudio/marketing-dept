@@ -7,6 +7,7 @@ import Manager from './pages/Manager'
 import WorkerDetail from './pages/WorkerDetail'
 import TaskManager from './pages/TaskManager'
 import Settings from './pages/Settings'
+import Agents from './pages/Agents'
 import ProductionValidator from './components/ProductionValidator'
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <>
               <Route path="/" element={<Manager />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/agents" element={<Agents />} />
               <Route path="/worker/:workerId" element={<WorkerDetail />} />
               <Route path="/tasks" element={<TaskManager />} />
               <Route path="/settings" element={<Settings />} />

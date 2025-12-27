@@ -3,10 +3,12 @@ import { persist } from 'zustand/middleware'
 import { Workflow } from '../types/workflow'
 import { geminiService } from '../services/gemini'
 import { deepseekService } from '../services/deepseek'
+import { openaiService } from '../services/openai'
 
 export interface ApiCredentials {
   gemini?: string
   deepseek?: string
+  openai?: string
   jasperAi?: string
   copyAi?: string
   zoomInfo?: string
@@ -86,6 +88,7 @@ interface Store {
 function initializeFromEnv() {
   const geminiKey = import.meta.env.VITE_GEMINI_API_KEY
   const deepseekKey = import.meta.env.VITE_DEEPSEEK_API_KEY
+  const openaiKey = import.meta.env.VITE_OPENAI_API_KEY
 
   const credentials: ApiCredentials = {}
 
@@ -101,9 +104,15 @@ function initializeFromEnv() {
     console.log('✅ DeepSeek API initialized from environment')
   }
 
+  if (openaiKey) {
+    credentials.openai = openaiKey
+    openaiService.initialize(openaiKey)
+    console.log('✅ OpenAI (ChatGPT) API initialized from environment')
+  }
+
   return {
     credentials,
-    isSetupComplete: !!(geminiKey || deepseekKey)
+    isSetupComplete: !!(geminiKey || deepseekKey || openaiKey)
   }
 }
 
@@ -119,21 +128,31 @@ export const useStore = create<Store>()(
       workers: [
         {
           id: 'scotty',
-          name: 'Scotty',
-          emoji: '🎯',
+          name: 'Scott Morrison',
+          emoji: '👔',
           role: 'VP of Sales & Marketing',
           department: 'Executive Leadership',
-          platform: 'Google Gemini',
+          platform: 'OpenAI GPT-4',
+          status: 'active',
+          metrics: {}
+        },
+        {
+          id: 'madison',
+          name: 'Madison Clarke',
+          emoji: '📋',
+          role: 'Executive Assistant',
+          department: 'Executive Leadership',
+          platform: 'OpenAI GPT-4',
           status: 'active',
           metrics: {}
         },
         {
           id: 'jasper',
-          name: 'Jasper',
+          name: 'James Parker',
           emoji: '✍️',
-          role: 'Content Creation Lead',
+          role: 'Senior Content Writer',
           department: 'Content Creation',
-          platform: 'Google Gemini',
+          platform: 'OpenAI GPT-4',
           status: 'idle',
           metrics: {}
         },
@@ -143,23 +162,23 @@ export const useStore = create<Store>()(
           emoji: '📚',
           role: 'Senior Content Strategist & SEO Lead',
           department: 'Content Strategy',
-          platform: 'Google Gemini',
+          platform: 'OpenAI GPT-4',
           status: 'idle',
           metrics: {}
         },
         {
           id: 'casey',
-          name: 'Casey',
+          name: 'Casey Rodriguez',
           emoji: '📝',
-          role: 'AI Copywriter',
+          role: 'Senior Copywriter',
           department: 'Content Creation',
-          platform: 'Google Gemini',
+          platform: 'OpenAI GPT-4',
           status: 'idle',
           metrics: {}
         },
         {
           id: 'zoey',
-          name: 'Zoey',
+          name: 'Zoe Mitchell',
           emoji: '🔍',
           role: 'Lead Prospecting Specialist',
           department: 'Lead Generation',
@@ -169,9 +188,9 @@ export const useStore = create<Store>()(
         },
         {
           id: 'hunter',
-          name: 'Hunter',
+          name: 'Hunter Brooks',
           emoji: '🎯',
-          role: 'Email Finder Specialist',
+          role: 'Email Finder & Verification Specialist',
           department: 'Lead Generation',
           platform: 'DeepSeek',
           status: 'idle',
@@ -179,39 +198,39 @@ export const useStore = create<Store>()(
         },
         {
           id: 'sage',
-          name: 'Sage',
-          emoji: '⏰',
-          role: 'Email Campaign Manager',
+          name: 'Sarah Gibson',
+          emoji: '📧',
+          role: 'Email Marketing Manager',
           department: 'Email Marketing',
-          platform: 'Google Gemini',
+          platform: 'OpenAI GPT-4',
           status: 'idle',
           metrics: {}
         },
         {
           id: 'smarta',
-          name: 'Smarta',
-          emoji: '🎯',
-          role: 'Social Advertising Manager',
+          name: 'Samuel Martinez',
+          emoji: '📱',
+          role: 'Paid Social Media Manager',
           department: 'Social Media',
-          platform: 'DeepSeek',
-          status: 'idle',
-          metrics: {}
-        },
-        {
-          id: 'dynamo',
-          name: 'Dynamo',
-          emoji: '🎨',
-          role: 'Experience Optimization Lead',
-          department: 'Personalization',
           platform: 'Google Gemini',
           status: 'idle',
           metrics: {}
         },
         {
+          id: 'dynamo',
+          name: 'Diana Morrison',
+          emoji: '🎨',
+          role: 'CRO & Personalization Lead',
+          department: 'Personalization',
+          platform: 'OpenAI GPT-4',
+          status: 'idle',
+          metrics: {}
+        },
+        {
           id: 'analyzer',
-          name: 'Analyzer',
+          name: 'Alex Chen',
           emoji: '📊',
-          role: 'Data Analytics Specialist',
+          role: 'Senior Data Analyst',
           department: 'Analytics',
           platform: 'DeepSeek',
           status: 'idle',
@@ -219,9 +238,9 @@ export const useStore = create<Store>()(
         },
         {
           id: 'heatley',
-          name: 'Heatley',
+          name: 'Hannah Lee',
           emoji: '🔥',
-          role: 'User Experience Analyst',
+          role: 'UX Research Analyst',
           department: 'Analytics',
           platform: 'DeepSeek',
           status: 'idle',
@@ -229,9 +248,9 @@ export const useStore = create<Store>()(
         },
         {
           id: 'surfy',
-          name: 'Surfy',
+          name: 'Steven Foster',
           emoji: '🏄',
-          role: 'SEO Optimization Specialist',
+          role: 'SEO Specialist',
           department: 'SEO',
           platform: 'Google Gemini',
           status: 'idle',
@@ -239,11 +258,11 @@ export const useStore = create<Store>()(
         },
         {
           id: 'chatty',
-          name: 'Chatty',
+          name: 'Charlotte Adams',
           emoji: '💬',
-          role: 'Customer Support Specialist',
+          role: 'Customer Success Manager',
           department: 'Customer Support',
-          platform: 'Google Gemini',
+          platform: 'OpenAI GPT-4',
           status: 'idle',
           metrics: {}
         },
@@ -266,6 +285,8 @@ export const useStore = create<Store>()(
           geminiService.initialize(key)
         } else if (platform === 'deepseek' && key) {
           deepseekService.initialize(key)
+        } else if (platform === 'openai' && key) {
+          openaiService.initialize(key)
         }
       },
 

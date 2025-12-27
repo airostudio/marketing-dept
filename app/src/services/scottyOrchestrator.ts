@@ -7,7 +7,7 @@
  */
 
 import { callGemini } from './gemini';
-import { Worker, Task, WorkflowStep } from '../types/workflow';
+import { Worker, WorkflowStep } from '../types/workflow';
 import { detectRequiredAPIs, TaskAPIRequirements } from './apiDetector';
 
 export interface TaskAnalysis {

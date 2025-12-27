@@ -2,6 +2,7 @@
 // NO FALLBACKS - Real AI execution only
 import { geminiService } from './gemini'
 import { deepseekService } from './deepseek'
+import { openaiService } from './openai'
 import { getAgentConfig, getAgentSystemPrompt, getAgentAIPlatform } from './agentLoader'
 import {
   logTaskStarted,
@@ -74,6 +75,15 @@ export async function executeTask(
     }
 
     // Verify AI service is configured
+    if (aiPlatform === 'OpenAI' && !openaiService.isConfigured()) {
+      const error = 'OpenAI API key not configured. Add VITE_OPENAI_API_KEY to .env file.'
+      logFailed(workerId, agentName, taskId, error)
+      return {
+        success: false,
+        error
+      }
+    }
+
     if (aiPlatform === 'Gemini' && !geminiService.isConfigured()) {
       const error = 'Google Gemini API key not configured. Add VITE_GEMINI_API_KEY to .env file.'
       logFailed(workerId, agentName, taskId, error)
@@ -102,7 +112,15 @@ export async function executeTask(
 
     // Route to appropriate AI service
     let response
-    if (aiPlatform === 'Gemini') {
+    if (aiPlatform === 'OpenAI') {
+      logProgress(workerId, agentName, taskId, 'Sending task to OpenAI GPT-4 with agent context', 20)
+      response = await openaiService.executeAgentTask(
+        agentConfig.name,
+        systemPrompt,
+        userTask,
+        taskContext?.context
+      )
+    } else if (aiPlatform === 'Gemini') {
       logProgress(workerId, agentName, taskId, 'Sending task to Google Gemini with agent context', 20)
       response = await geminiService.executeAgentTask(
         agentConfig.name,
@@ -219,12 +237,18 @@ export function validateSystemConfiguration(): {
   const warnings: string[] = []
 
   // Check if at least one AI service is configured
+  const hasOpenAI = openaiService.isConfigured()
   const hasGemini = geminiService.isConfigured()
   const hasDeepSeek = deepseekService.isConfigured()
 
-  if (!hasGemini && !hasDeepSeek) {
+  if (!hasOpenAI && !hasGemini && !hasDeepSeek) {
     errors.push('No AI services configured. System cannot operate without API keys.')
-    errors.push('Add VITE_GEMINI_API_KEY or VITE_DEEPSEEK_API_KEY to .env file.')
+    errors.push('Add VITE_OPENAI_API_KEY, VITE_GEMINI_API_KEY, or VITE_DEEPSEEK_API_KEY to .env file.')
+  }
+
+  if (!hasOpenAI) {
+    warnings.push('OpenAI not configured. Most agents require OpenAI GPT-4.')
+    warnings.push('Get API key: https://platform.openai.com/api-keys')
   }
 
   if (!hasGemini) {
