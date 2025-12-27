@@ -138,6 +138,16 @@ export const useStore = create<Store>()(
           metrics: {}
         },
         {
+          id: 'marcus',
+          name: 'Marcus Hayes',
+          emoji: '📚',
+          role: 'Senior Content Strategist & SEO Lead',
+          department: 'Content Strategy',
+          platform: 'Google Gemini',
+          status: 'idle',
+          metrics: {}
+        },
+        {
           id: 'casey',
           name: 'Casey',
           emoji: '📝',

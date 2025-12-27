@@ -147,6 +147,7 @@ class WorkflowEngine {
     const store = this.getStore();
 
     // Add task to store for real-time monitoring
+    const taskTimestamp = Date.now();
     store.addTask({
       title: step.description,
       description: step.description,
@@ -157,8 +158,20 @@ class WorkflowEngine {
       progress: 0,
     });
 
-    // Get the actual task ID from the store (it generates one)
-    const actualTask = store.tasks[0]; // Most recent task
+    // Find the task we just added (prevent race condition with parallel workflows)
+    // We match on workerId, description, and find the most recent one without completion
+    const actualTask = store.tasks.find(t =>
+      t.workerId === step.workerId &&
+      t.description === step.description &&
+      t.status === 'in_progress' &&
+      !t.completedAt &&
+      new Date(t.createdAt).getTime() >= taskTimestamp
+    );
+
+    if (!actualTask) {
+      throw new Error(`Failed to create monitoring task for workflow step: ${step.id}`);
+    }
+
     const actualTaskId = actualTask.id;
 
     // Simulate progress updates
